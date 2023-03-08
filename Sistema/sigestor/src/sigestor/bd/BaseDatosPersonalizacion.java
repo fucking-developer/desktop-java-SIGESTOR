@@ -7,16 +7,16 @@ import sigestor.dominio.*;
 import sigestor.excepcion.*;
 
 /**
- * Sirve para insertar y actualizar los datos de personalización en la base de
+ * Sirve para insertar y actualizar los datos de personalizaciï¿½n en la base de
  * datos.
  * 
  * @version 12/06/2022
  * 
  * @author Ricky Didier Peralta Reyes
  * @author Uriel Romeo Cruz Cortes
- * @author Jennifer Cortés Pérez
- * @author Beatriz Andrea Jiménez Ríos
- * @author Victor Triste Pérez
+ * @author Jennifer Cortï¿½s Pï¿½rez
+ * @author Beatriz Andrea Jimï¿½nez Rï¿½os
+ * @author Victor Triste Pï¿½rez
  */
 public class BaseDatosPersonalizacion extends BaseDatos {
 
@@ -30,12 +30,12 @@ public class BaseDatosPersonalizacion extends BaseDatos {
 	}
 
 	/**
-	 * Inserta los datos de personalización a la base de datos.
+	 * Inserta los datos de personalizaciï¿½n a la base de datos.
 	 * 
-	 * @param personalizacion Contiene los datos de personalización.
-	 * @throws ExcepcionBaseDatos                Lanza la excepción sí no se pudo
-	 *                                           realizar la conexión.
-	 * @throws ExcepcionBaseDatosPersonalizacion Lanza la excepción si no se
+	 * @param personalizacion Contiene los datos de personalizaciï¿½n.
+	 * @throws ExcepcionBaseDatos                Lanza la excepciï¿½n sï¿½ no se pudo
+	 *                                           realizar la conexiï¿½n.
+	 * @throws ExcepcionBaseDatosPersonalizacion Lanza la excepciï¿½n si no se
 	 *                                           pudieron insertar los datos a la
 	 *                                           tabla <code>personalizacion</code>
 	 *                                           de la base de datos.
@@ -68,12 +68,12 @@ public class BaseDatosPersonalizacion extends BaseDatos {
 	}
 
 	/**
-	 * Actualiza los datos de personalización guardados en la base de datos.
+	 * Actualiza los datos de personalizaciï¿½n guardados en la base de datos.
 	 * 
-	 * @param personalizacion Contiene los datos de personalización.
-	 * @throws ExcepcionBaseDatos                Lanza la excepción sí no se pudo
-	 *                                           realizar la conexión.
-	 * @throws ExcepcionBaseDatosPersonalizacion Lanza la excepción sí no se pudo
+	 * @param personalizacion Contiene los datos de personalizaciï¿½n.
+	 * @throws ExcepcionBaseDatos                Lanza la excepciï¿½n sï¿½ no se pudo
+	 *                                           realizar la conexiï¿½n.
+	 * @throws ExcepcionBaseDatosPersonalizacion Lanza la excepciï¿½n sï¿½ no se pudo
 	 *                                           actualizar los datos de la tabla
 	 *                                           <code>personalizacion</code> de la
 	 *                                           base de datos.
@@ -109,18 +109,18 @@ public class BaseDatosPersonalizacion extends BaseDatos {
 	}
 
 	/**
-	 * Obtiene de la base de datos los datos de personalización del torneo.
+	 * Obtiene de la base de datos los datos de personalizaciï¿½n del torneo.
 	 * 
 	 * @return regresa un objeto de tipo <code>Personalizacion.</code>
-	 * @throws ExcepcionBaseDatos                Lanza la excepción sí no se pudo
-	 *                                           realizar la conexión.
-	 * @throws ExcepcionBaseDatosPersonalizacion Lanza la excepción si ocurre un
+	 * @throws ExcepcionBaseDatos                Lanza la excepciï¿½n sï¿½ no se pudo
+	 *                                           realizar la conexiï¿½n.
+	 * @throws ExcepcionBaseDatosPersonalizacion Lanza la excepciï¿½n si ocurre un
 	 *                                           error al obtener los datos de
 	 *                                           personalizacion de la tabla
 	 *                                           <code>personalizacion</code> de la
 	 *                                           base de datos.
 	 */
-	public Personalizacion obtenerPersonalización() throws ExcepcionBaseDatos, ExcepcionBaseDatosPersonalizacion {
+	public Personalizacion obtenerPersonalizacion() throws ExcepcionBaseDatos, ExcepcionBaseDatosPersonalizacion {
 		try {
 			realizarConexion();
 			Personalizacion personalizacion = new Personalizacion();
