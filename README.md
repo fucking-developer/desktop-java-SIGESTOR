@@ -1,9 +1,3 @@
-IngSoftware-II
-
-Este es un respaldo de las entregas de ingeniería de software.
-
-
-
 <br><br>#PASO 1 -- CONFIGURAR GIT CON SU NOMBRE DE USUARIO DE GIT Y CORREO
 
 git config --global user.name "[name]"
