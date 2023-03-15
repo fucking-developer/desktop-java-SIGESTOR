@@ -2,6 +2,7 @@
 
 
 /* ESTE ES UN COMENTARIO DE PRUEBA */
+/* ESTE ES UN SEGUN COMENTARIO DE PRUEBA*/
 
 package sigestor.gui;
 
