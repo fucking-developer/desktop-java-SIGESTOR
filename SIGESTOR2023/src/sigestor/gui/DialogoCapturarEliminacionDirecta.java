@@ -1,8 +1,6 @@
 
 
-
-/* ESTE ES UN COMENTARIO DE PRUEBA */
-/* ESTE ES UN SEGUN COMENTARIO DE PRUEBA*/
+/**ESTA CLASE SE VA A ELIMINAR**/
 
 package sigestor.gui;
 
