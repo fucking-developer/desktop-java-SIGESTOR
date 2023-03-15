@@ -1,6 +1,7 @@
 
 
-/**ESTA CLASE SE VA A ELIMINAR**/
+/**ESTA CLASE SE VA A ELIMINAR MENSAJE MODIFICADOS**/
+
 
 package sigestor.gui;
 
