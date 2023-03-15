@@ -1,3 +1,8 @@
+
+
+
+/* ESTE ES UN COMENTARIO DE PRUEBA */
+
 package sigestor.gui;
 
 import java.awt.BorderLayout;
@@ -119,45 +124,45 @@ public class DialogoCapturarEliminacionDirecta extends JDialog implements Window
 
 	// Inferior-----------------------------------------------------
 	/**
-	 * Botón <code>Guardar</code>.
+	 * Botï¿½n <code>Guardar</code>.
 	 * 
 	 * @see #accionBtnGuardar()
 	 */
 	private JButton botonGuardar;
 
 	/**
-	 * Botón <code>Mostrar Reporte</code>.
+	 * Botï¿½n <code>Mostrar Reporte</code>.
 	 * 
 	 * @see #accionBtnMostrarReporte()
 	 */
 	private JButton botonMostrarReporte;
 
 	/**
-	 * Botón <code>Modificar resultados</code>.
+	 * Botï¿½n <code>Modificar resultados</code>.
 	 * 
 	 * @see #accionBtnModificarResultados()
 	 */
 	private JButton botonModificarResultados;
 
 	/**
-	 * Botón <code>Cancelar ciclo</code>.
+	 * Botï¿½n <code>Cancelar ciclo</code>.
 	 * 
 	 * @see #accionBtnCancelarRonda()
 	 * 
-	 *      El botón será personalizable en ciclo, por que dependerá del nombre
+	 *      El botï¿½n serï¿½ personalizable en ciclo, por que dependerï¿½ del nombre
 	 *      asignado.
 	 */
 	private JButton botonCancelarCiclo;
 
 	/**
-	 * Botón <code>Salir</code>.
+	 * Botï¿½n <code>Salir</code>.
 	 * 
 	 * @see #accionBtnSalir()
 	 */
 	private JButton botonSalir;
 
 	/**
-	 * Arreglo de etiquetas para los números que identificarán a los participantes
+	 * Arreglo de etiquetas para los nï¿½meros que identificarï¿½n a los participantes
 	 * iniciales.
 	 */
 	private JLabel[] etiquetaNumeroInicial;
@@ -168,7 +173,7 @@ public class DialogoCapturarEliminacionDirecta extends JDialog implements Window
 	private JLabel[] etiquetaParticipanteInicial;
 
 	/**
-	 * Arreglo de etiquetas para los números que identificarán a los participantes
+	 * Arreglo de etiquetas para los nï¿½meros que identificarï¿½n a los participantes
 	 * no iniciales.
 	 */
 	private JLabel[] etiquetaNumeroFinal;
@@ -204,17 +209,17 @@ public class DialogoCapturarEliminacionDirecta extends JDialog implements Window
 	private int numeroPartidas;
 
 	/**
-	 * Variable temporal que indicará si se activaron los marcadores o no.
+	 * Variable temporal que indicarï¿½ si se activaron los marcadores o no.
 	 */
 	private boolean validacionMarcadores;
 
 	/**
-	 * Variable que llevará el control si se modifican los resultados del ciclo.
+	 * Variable que llevarï¿½ el control si se modifican los resultados del ciclo.
 	 */
 	private boolean estadoModificar = false;
 
 	/**
-	 * Constructor en el que se inicializa el diálogo. .
+	 * Constructor en el que se inicializa el diï¿½logo. .
 	 * 
 	 * @param principal
 	 *            Recibe un objeto de tipo ventanaPrincipal el cual contiene el
@@ -281,7 +286,7 @@ public class DialogoCapturarEliminacionDirecta extends JDialog implements Window
 		 */
 		panelAuxSup.setLayout(new FlowLayout(-1));
 
-		JLabel etiquetaTipoTorneo = new JLabel("Eliminación Directa");
+		JLabel etiquetaTipoTorneo = new JLabel("Eliminaciï¿½n Directa");
 		etiquetaTipoTorneo.setFont(
 				new Font(etiquetaTipoTorneo.getFont().getFontName(), etiquetaTipoTorneo.getFont().getStyle(), 30));
 		auxPanel = new JPanel();
@@ -332,7 +337,7 @@ public class DialogoCapturarEliminacionDirecta extends JDialog implements Window
 		auxPanel.setPreferredSize(new Dimension(350, 50));
 		panelAuxSup.add(auxPanel);
 
-		// JLabel etiquetaCicloActual = new JLabel("Eliminación");
+		// JLabel etiquetaCicloActual = new JLabel("Eliminaciï¿½n");
 		// etiquetaCicloActual.setPreferredSize(new Dimension(150, 25));
 		//
 		// auxPanel = new JPanel();
@@ -363,7 +368,7 @@ public class DialogoCapturarEliminacionDirecta extends JDialog implements Window
 		auxPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		panelAuxSup.add(auxPanel);
 
-		campoOrganizador = new JTextField("Manuel Alejandro Valdéz Marrero");
+		campoOrganizador = new JTextField("Manuel Alejandro Valdï¿½z Marrero");
 		campoOrganizador.setPreferredSize(new Dimension(230, 25));
 		campoOrganizador.setEditable(false);
 		auxPanel = new JPanel();
@@ -416,7 +421,7 @@ public class DialogoCapturarEliminacionDirecta extends JDialog implements Window
 			public void actionPerformed(ActionEvent e) {
 				// accionComboSeleccionarCiclo();//FIXME
 				etiquetaTituloTabla.setText("Tabla de resultados de <Ciclo> #");
-				etiquetaElegirCiclo.setText("Personalización" + " actual: " + "ciclo");
+				etiquetaElegirCiclo.setText("Personalizaciï¿½n" + " actual: " + "ciclo");
 				// habilitarBotones();
 
 			}
@@ -439,7 +444,7 @@ public class DialogoCapturarEliminacionDirecta extends JDialog implements Window
 		tituloTabla.add(auxPanel);
 		panelSuperiorCentral.add(tituloTabla);
 
-		JLabel etiquetaTitulosTabla = new JLabel("Núm.");
+		JLabel etiquetaTitulosTabla = new JLabel("Nï¿½m.");
 		auxPanel = new JPanel();
 		auxPanel.setPreferredSize(new Dimension(50, altoTitulos));
 		auxPanel.add(etiquetaTitulosTabla);
@@ -482,7 +487,7 @@ public class DialogoCapturarEliminacionDirecta extends JDialog implements Window
 		panelResultados.setBorder(BorderFactory.createCompoundBorder(borde, borde));
 		panelEncabezados.add(panelResultados);
 
-		etiquetaTitulosTabla = new JLabel("Núm.");
+		etiquetaTitulosTabla = new JLabel("Nï¿½m.");
 		auxPanel = new JPanel();
 		auxPanel.setPreferredSize(new Dimension(50, altoTitulos));
 		auxPanel.add(etiquetaTitulosTabla);
@@ -665,7 +670,7 @@ public class DialogoCapturarEliminacionDirecta extends JDialog implements Window
 		accionGuardar.putValue(Action.MNEMONIC_KEY, KeyEvent.VK_G);
 		accionGuardar.putValue(Action.ACCELERATOR_KEY,
 				KeyStroke.getKeyStroke(KeyEvent.VK_G, InputEvent.CTRL_DOWN_MASK));
-		accionGuardar.putValue(Action.SHORT_DESCRIPTION,"Guarda el resultado de cada partida.Deshabilita la edición de los resultados capturados");
+		accionGuardar.putValue(Action.SHORT_DESCRIPTION,"Guarda el resultado de cada partida.Deshabilita la ediciï¿½n de los resultados capturados");
 		// if (validacionMarcadores) {
 		// accionGuardar.putValue(Action.SHORT_DESCRIPTION,
 		// "Guarda " +
@@ -673,13 +678,13 @@ public class DialogoCapturarEliminacionDirecta extends JDialog implements Window
 		// + " y el resultado de cada "
 		// +
 		// this.ventanaPrincipal.getTorneoActual().getDatosPersonalizacion().getNombreEncuentro(2)
-		// + ". " + "Deshabilita la edición de los resultados capturados");
+		// + ". " + "Deshabilita la ediciï¿½n de los resultados capturados");
 		// } else {
 		// accionGuardar.putValue(Action.SHORT_DESCRIPTION,
 		// "Guarda el resultado de cada "
 		// +
 		// this.ventanaPrincipal.getTorneoActual().getDatosPersonalizacion().getNombreEncuentro(2)
-		// + ". " + "Deshabilita la edición de los resultados capturados");
+		// + ". " + "Deshabilita la ediciï¿½n de los resultados capturados");
 		// }
 		botonGuardar = new JButton(accionGuardar);
 		botonGuardar.getActionMap().put("guardar", accionGuardar);
@@ -786,7 +791,7 @@ public class DialogoCapturarEliminacionDirecta extends JDialog implements Window
 		};
 		accionSalir.putValue(Action.MNEMONIC_KEY, KeyEvent.VK_S);
 		accionSalir.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK));
-		accionSalir.putValue(Action.SHORT_DESCRIPTION, "Cierra la ventana y regresa al menú principal");
+		accionSalir.putValue(Action.SHORT_DESCRIPTION, "Cierra la ventana y regresa al menï¿½ principal");
 		
 		botonSalir = new JButton(accionSalir);
 		botonSalir.getActionMap().put("salir", accionSalir);
@@ -817,7 +822,7 @@ public class DialogoCapturarEliminacionDirecta extends JDialog implements Window
 	}
 
 	/**
-	 * Establece el tamaño, la posición y el no redimensionamiento al ejecutarse la
+	 * Establece el tamaï¿½o, la posiciï¿½n y el no redimensionamiento al ejecutarse la
 	 * ventana.
 	 */
 	private void inicializarVentana() {
@@ -829,7 +834,7 @@ public class DialogoCapturarEliminacionDirecta extends JDialog implements Window
 	}
 
 	/**
-	 * Obtiene toda la información de un ciclo al ser seleccionado en el combo.
+	 * Obtiene toda la informaciï¿½n de un ciclo al ser seleccionado en el combo.
 	 */
 	private void accionComboSeleccionarCiclo() {
 
@@ -857,7 +862,7 @@ public class DialogoCapturarEliminacionDirecta extends JDialog implements Window
 
 	/**
 	 * Permite habilitar los botones de <code>Modificar resultados</code> y
-	 * <code>Cancelar ciclo</code> únicamente si se encuentra en el ciclo actual
+	 * <code>Cancelar ciclo</code> ï¿½nicamente si se encuentra en el ciclo actual
 	 */
 	private void habilitarBotones() {
 		if (this.torneo.getTipoTorneo().contains("Eliminancion Directa")) {
@@ -881,7 +886,7 @@ public class DialogoCapturarEliminacionDirecta extends JDialog implements Window
 	}
 
 	/**
-	 * Obtiene toda la información almacena en un ciclo.
+	 * Obtiene toda la informaciï¿½n almacena en un ciclo.
 	 * 
 	 * @param listaEncuentros
 	 *            Recibe la lista de los encuentros de un ciclo.
@@ -990,7 +995,7 @@ public class DialogoCapturarEliminacionDirecta extends JDialog implements Window
 	 * superior de la pantalla en su respectivo componente.
 	 * 
 	 * @param torneo
-	 *            Recibe el objeto <code>Torneo</code> con la información del
+	 *            Recibe el objeto <code>Torneo</code> con la informaciï¿½n del
 	 *            torneo.
 	 */
 	private void mostrarDatosGenerales(Torneo torneo) {
@@ -1004,7 +1009,7 @@ public class DialogoCapturarEliminacionDirecta extends JDialog implements Window
 
 	/**
 	 * Permite mantener desabilitados los campos de marcadores y resultado de la
-	 * ventana <code>Capturar resultados</code> al presionar el botón
+	 * ventana <code>Capturar resultados</code> al presionar el botï¿½n
 	 * <code>Guardar</code>.
 	 */
 	private void deshabilitarTabla() {
@@ -1021,7 +1026,7 @@ public class DialogoCapturarEliminacionDirecta extends JDialog implements Window
 
 	/**
 	 * Habilita los campos de marcadores y radios de la ventana
-	 * <code>Capturar resultados</code> al presionar el botón
+	 * <code>Capturar resultados</code> al presionar el botï¿½n
 	 * <code>Modificar resultados</code>.
 	 */
 	private void habilitarTabla() {
@@ -1042,10 +1047,10 @@ public class DialogoCapturarEliminacionDirecta extends JDialog implements Window
 	 */
 	private void salir() {
 		if (estadoModificar) {
-			String[] valores = { "Sí", "Guardar y salir", "Cancelar" };
+			String[] valores = { "Sï¿½", "Guardar y salir", "Cancelar" };
 			int opcion = JOptionPane.showOptionDialog(this,
-					"Los resultados no han sido guardados.\nToda la información ingresada se perderá."
-							+ "\n ¿Está seguro que desea salir?",
+					"Los resultados no han sido guardados.\nToda la informaciï¿½n ingresada se perderï¿½."
+							+ "\n ï¿½Estï¿½ seguro que desea salir?",
 					"Capturar resultados", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, valores,
 					valores[1]);
 			if (opcion == 0) {
@@ -1068,12 +1073,12 @@ public class DialogoCapturarEliminacionDirecta extends JDialog implements Window
 	}
 
 	/**
-	 * Permite mostrar mensajes al usuario al presionar el botón
+	 * Permite mostrar mensajes al usuario al presionar el botï¿½n
 	 * <code>Modificar resultados</code>.
 	 */
 	private void accionBtnModificarResultados() {
-		Object[] opciones = { "Sí", "No" };
-		int respuesta = JOptionPane.showOptionDialog(null, "¿Está seguro(a) de que desea modificar los resultados?",
+		Object[] opciones = { "Sï¿½", "No" };
+		int respuesta = JOptionPane.showOptionDialog(null, "ï¿½Estï¿½ seguro(a) de que desea modificar los resultados?",
 				"Modificar resultados", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones,
 				opciones[1]);
 		if (respuesta == JOptionPane.YES_OPTION) {
@@ -1083,19 +1088,19 @@ public class DialogoCapturarEliminacionDirecta extends JDialog implements Window
 	}
 
 	/**
-	 * Permite mostrar mensajes al usuario al presionar el botón
-	 * <code>Cancelar ciclo</code> advirtiendo lo que sucederá al decidir cancelar
+	 * Permite mostrar mensajes al usuario al presionar el botï¿½n
+	 * <code>Cancelar ciclo</code> advirtiendo lo que sucederï¿½ al decidir cancelar
 	 * el ciclo del torneo.
 	 */
 	private void accionBtnCancelarRonda() {
 
-		Object[] opciones = { "Sí", "No" };
-		int respuesta1 = JOptionPane.showOptionDialog(null, "¿Está seguro de cancelar " + "?", "Cancelar",
+		Object[] opciones = { "Sï¿½", "No" };
+		int respuesta1 = JOptionPane.showOptionDialog(null, "ï¿½Estï¿½ seguro de cancelar " + "?", "Cancelar",
 				JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[1]);
 		if (respuesta1 == JOptionPane.YES_OPTION) {
 			int respuesta2 = JOptionPane.showOptionDialog(null,
-					"Si se cancela se perderán todos los resultados \n incluyendo " + "."
-							+ "\n ¿Está realmente seguro de cancelar " + "?",
+					"Si se cancela se perderï¿½n todos los resultados \n incluyendo " + "."
+							+ "\n ï¿½Estï¿½ realmente seguro de cancelar " + "?",
 					"Cancelar", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, opciones, opciones[1]);
 			if (respuesta2 == JOptionPane.YES_OPTION) {
 				JOptionPane.showMessageDialog(null, "" + "El(la)" + " se ha cancelado.", "Cancelar",
@@ -1106,7 +1111,7 @@ public class DialogoCapturarEliminacionDirecta extends JDialog implements Window
 	}
 
 	/**
-	 * Elimina el ciclo y los encuentros que están en él, tambien actualiza el
+	 * Elimina el ciclo y los encuentros que estï¿½n en ï¿½l, tambien actualiza el
 	 * marcador y el puntaje acumulado de los participantes.
 	 */
 	private void eliminarCiclo() {
@@ -1187,7 +1192,7 @@ public class DialogoCapturarEliminacionDirecta extends JDialog implements Window
 	}
 
 	/**
-	 * Permite salir de la ventana con el botón <code>Salir</code>.
+	 * Permite salir de la ventana con el botï¿½n <code>Salir</code>.
 	 */
 	private void accionBtnSalir() {
 		salir();
