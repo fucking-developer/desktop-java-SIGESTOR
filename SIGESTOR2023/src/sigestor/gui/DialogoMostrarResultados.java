@@ -150,7 +150,7 @@ public class DialogoMostrarResultados extends JDialog {
 	 * iniciales.
 	 */
 	
-	private JDateChooser etiquetaFechaEncuentros;
+	private JTextField etiquetaFechaEncuentros;
 	
 	private JLabel[] etiquetaNumeroInicial;
 
@@ -229,10 +229,15 @@ public class DialogoMostrarResultados extends JDialog {
 		ventanaPrincipal = principal;
 
 		this.indiceMostrarResultados = indiceMostrarResultados;
-		numeroPartidas = this.ventanaPrincipal.getTorneoActual().getAlgoritmoTorneo().getCiclos()
-				.get(this.ventanaPrincipal.getTorneoActual().getCicloActual() - 1).getEncuentroParticipantes().size();
+		
 		torneo = principal.getTorneoActual();
 		participantes = torneo.getListaParticipantes();
+		//FIXME
+		if(!torneo.getTipoTorneo().equals("Eliminación directa")) {
+			numeroPartidas = this.ventanaPrincipal.getTorneoActual().getAlgoritmoTorneo().getCiclos()
+				.get(this.ventanaPrincipal.getTorneoActual().getCicloActual() - 1).getEncuentroParticipantes().size();
+		
+		}
 		personalizacion = torneo.getDatosPersonalizacion();
 		this.validacionMarcadores = ventanaPrincipal.getTorneoActual().getDatosPersonalizacion().isExistenciaMarcador();
 
@@ -280,7 +285,7 @@ public class DialogoMostrarResultados extends JDialog {
 				new Font(etiquetaTipoTorneo.getFont().getFontName(), etiquetaTipoTorneo.getFont().getStyle(), 30));
 		auxPanel = new JPanel();
 		auxPanel.add(etiquetaTipoTorneo);
-		auxPanel.setPreferredSize(new Dimension(350, 50));
+		auxPanel.setPreferredSize(new Dimension(450, 50));
 		auxPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 		panelAuxSup.add(auxPanel);
 
@@ -288,7 +293,7 @@ public class DialogoMostrarResultados extends JDialog {
 		etiquetaTorneo.setPreferredSize(new Dimension(90, 25));
 		auxPanel = new JPanel();
 		auxPanel.add(etiquetaTorneo);
-		auxPanel.setPreferredSize(new Dimension(100, 50));
+		auxPanel.setPreferredSize(new Dimension(82, 50));
 		auxPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		panelAuxSup.add(auxPanel);
 
@@ -297,7 +302,7 @@ public class DialogoMostrarResultados extends JDialog {
 		campoTorneo.setEditable(false);
 		auxPanel = new JPanel();
 		auxPanel.add(campoTorneo);
-		auxPanel.setPreferredSize(new Dimension(350, 50));
+		auxPanel.setPreferredSize(new Dimension(300, 50));
 		auxPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		panelAuxSup.add(auxPanel);
 
@@ -305,16 +310,16 @@ public class DialogoMostrarResultados extends JDialog {
 		etiquetaFechaInicio.setPreferredSize(new Dimension(90, 25));
 		auxPanel = new JPanel();
 		auxPanel.add(etiquetaFechaInicio);
-		auxPanel.setPreferredSize(new Dimension(100, 50));
+		auxPanel.setPreferredSize(new Dimension(95, 50));
 		auxPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		panelAuxSup.add(auxPanel);
 
 		campoFechaInicio = new JTextField();
-		campoFechaInicio.setPreferredSize(new Dimension(220, 25));
+		campoFechaInicio.setPreferredSize(new Dimension(180, 25));
 		campoFechaInicio.setEditable(false);
 		auxPanel = new JPanel();
 		auxPanel.add(campoFechaInicio);
-		auxPanel.setPreferredSize(new Dimension(250, 50));
+		auxPanel.setPreferredSize(new Dimension(202, 50));
 		auxPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		panelAuxSup.add(auxPanel);
 
@@ -336,7 +341,7 @@ public class DialogoMostrarResultados extends JDialog {
 		etiquetaCicloActual.setPreferredSize(new Dimension(150, 25));
 		auxPanel = new JPanel();
 		auxPanel.add(etiquetaCicloActual);
-		auxPanel.setPreferredSize(new Dimension(277, 50));
+		auxPanel.setPreferredSize(new Dimension(377, 50));
 		auxPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		panelAuxSup.add(auxPanel);
 		Action accionAyuda = new AbstractAction("Ayuda") {
@@ -356,7 +361,7 @@ public class DialogoMostrarResultados extends JDialog {
 		etiquetaOrganizador.setPreferredSize(new Dimension(90, 25));
 		auxPanel = new JPanel();
 		auxPanel.add(etiquetaOrganizador);
-		auxPanel.setPreferredSize(new Dimension(100, 50));
+		auxPanel.setPreferredSize(new Dimension(80, 50));
 		auxPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		panelAuxSup.add(auxPanel);
 
@@ -365,7 +370,7 @@ public class DialogoMostrarResultados extends JDialog {
 		campoOrganizador.setEditable(false);
 		auxPanel = new JPanel();
 		auxPanel.add(campoOrganizador);
-		auxPanel.setPreferredSize(new Dimension(350, 50));
+		auxPanel.setPreferredSize(new Dimension(300, 50));
 		auxPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		panelAuxSup.add(auxPanel);
 
@@ -373,16 +378,16 @@ public class DialogoMostrarResultados extends JDialog {
 		etiquetaFechaFin.setPreferredSize(new Dimension(90, 25));
 		auxPanel = new JPanel();
 		auxPanel.add(etiquetaFechaFin);
-		auxPanel.setPreferredSize(new Dimension(100, 50));
+		auxPanel.setPreferredSize(new Dimension(95, 50));
 		auxPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		panelAuxSup.add(auxPanel);
 
 		campoFechaFin = new JTextField();
-		campoFechaFin.setPreferredSize(new Dimension(220, 25));
+		campoFechaFin.setPreferredSize(new Dimension(180, 25));
 		campoFechaFin.setEditable(false);
 		auxPanel = new JPanel();
 		auxPanel.add(campoFechaFin);
-		auxPanel.setPreferredSize(new Dimension(250, 50));
+		auxPanel.setPreferredSize(new Dimension(202, 50));
 		auxPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		panelAuxSup.add(auxPanel);
 
@@ -396,8 +401,14 @@ public class DialogoMostrarResultados extends JDialog {
 		tituloTabla.setLayout(new GridLayout(2, 1));
 
 		JLabel etiquetaElegirCiclo;
-		etiquetaElegirCiclo = new JLabel(
+		//FIXME
+		if(!torneo.getTipoTorneo().equals("Eliminación directa")) {
+			etiquetaElegirCiclo = new JLabel(
 				"Elegir " + this.ventanaPrincipal.getTorneoActual().getDatosPersonalizacion().getNombreCiclo(1) + ": ");
+		}else {
+			etiquetaElegirCiclo = new JLabel();
+		}
+		
 		// etiquetaElegirCiclo.setDisplayedMnemonic(KeyEvent.VK_C);
 		JLabel etiquetaTituloTabla = new JLabel();
 		auxPanel = new JPanel();
@@ -519,7 +530,10 @@ public class DialogoMostrarResultados extends JDialog {
 		etiquetaParticipanteFinal = new JLabel[numeroPartidas + auxImpar];
 		campoMarcadorFinal = new JTextField[numeroPartidas + auxImpar];
 		etiquetaResultado = new JLabel[numeroPartidas + auxImpar];
-
+		//FIXME
+		if(!torneo.getTipoTorneo().equals("Eliminación directa")) {
+			
+		
 		for (int i = 0; i < numeroPartidas + auxImpar; i++) {
 			panelFilasTabla[i] = new JPanel();
 			panelFilasTabla[i].setLayout(new FlowLayout(1));
@@ -580,9 +594,10 @@ public class DialogoMostrarResultados extends JDialog {
 				panelFilasTabla[i].add(auxPanel);
 				
 			}		
-			
-			etiquetaFechaEncuentros = new JDateChooser(new Date());
+		
+			etiquetaFechaEncuentros = new JTextField(new Date().toString());
 			etiquetaFechaEncuentros.setPreferredSize(new Dimension(150, 25));
+			etiquetaFechaEncuentros.setEditable(false);
 			auxPanel = new JPanel();
 			auxPanel.add(etiquetaFechaEncuentros);
 			auxPanel.setPreferredSize(new Dimension(200, 30));
@@ -596,7 +611,7 @@ public class DialogoMostrarResultados extends JDialog {
 			panelCentralCentral.add(panelFilasTabla[i]);
 
 		}
-
+		}
 		if (participantes.size() % 2 != 0) {
 			etiquetaNumeroInicial[numeroPartidas]
 					.setText(participantes.get(participantes.size() - 1).getNumeroParticipante() + "");
@@ -694,12 +709,18 @@ public class DialogoMostrarResultados extends JDialog {
 	 * Permite obtener los datos para mostrar en un ciclo.
 	 */
 	private void accionComboSeleccionarCiclo() {
+		
+		//FIXME
+		if(!torneo.getTipoTorneo().equals("Eliminación directa")) {
+			
+		
 		Torneo torneo = this.ventanaPrincipal.getTorneoActual();
 		ArrayList<Ciclo> listaCiclos = torneo.getAlgoritmoTorneo().getCiclos();
 		ArrayList<Participante> listaParticipantes = torneo.getListaParticipantes();
 		Ciclo ciclo = listaCiclos.get(comboSeleccionarCiclo.getSelectedIndex());
 		ArrayList<Encuentro> listaEncuentros = ciclo.getEncuentroParticipantes();
 		obtenerResultadosCiclo(listaEncuentros, listaParticipantes);
+		}
 	}
 
 	/**
@@ -707,19 +728,23 @@ public class DialogoMostrarResultados extends JDialog {
 	 * contenido.
 	 */
 	private void inicializar() {
-		Torneo torneo = this.ventanaPrincipal.getTorneoActual();
-		ArrayList<Ciclo> listaCiclos = torneo.getAlgoritmoTorneo().getCiclos();
-		ArrayList<Participante> listaParticipantes = torneo.getListaParticipantes();
-		mostrarDatosGenerales(torneo);
+		//FIXME
+		if(!torneo.getTipoTorneo().equals("Eliminación directa")) {
+				Torneo torneo = this.ventanaPrincipal.getTorneoActual();
+			ArrayList<Ciclo> listaCiclos = torneo.getAlgoritmoTorneo().getCiclos();
+			ArrayList<Participante> listaParticipantes = torneo.getListaParticipantes();
+			mostrarDatosGenerales(torneo);
+	
+			for (Ciclo c : listaCiclos) {
+				this.comboSeleccionarCiclo.addItem(c);
+			}
+			this.comboSeleccionarCiclo.setSelectedIndex(this.indiceMostrarResultados);
+			Ciclo ciclo = comboSeleccionarCiclo.getItemAt(this.indiceMostrarResultados);
+			ArrayList<Encuentro> listaEncuentros = ciclo.getEncuentroParticipantes();
+			obtenerResultadosCiclo(listaEncuentros, listaParticipantes);
 
-		for (Ciclo c : listaCiclos) {
-			this.comboSeleccionarCiclo.addItem(c);
 		}
-		this.comboSeleccionarCiclo.setSelectedIndex(this.indiceMostrarResultados);
-		Ciclo ciclo = comboSeleccionarCiclo.getItemAt(this.indiceMostrarResultados);
-		ArrayList<Encuentro> listaEncuentros = ciclo.getEncuentroParticipantes();
-		obtenerResultadosCiclo(listaEncuentros, listaParticipantes);
-	}
+		}
 
 	/**
 	 * Obtiene de la base de datos la información correspondiente de cada

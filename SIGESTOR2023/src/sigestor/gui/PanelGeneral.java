@@ -102,7 +102,7 @@ public class PanelGeneral extends JPanel {
 
 		JPanel panelAux = new JPanel();
 
-		String[] arregloTipoTorneo = { "Suizo", "Round Robin" , "Eliminacion Directa"};
+		String[] arregloTipoTorneo = { "Suizo", "Round Robin" , "Eliminación directa"};
 		panelAux.add(etiquetaTipoTorneo);
 		comboTipoTorneo = new JComboBox<String>(arregloTipoTorneo);
 		comboTipoTorneo.setPreferredSize(new Dimension(130, 30));

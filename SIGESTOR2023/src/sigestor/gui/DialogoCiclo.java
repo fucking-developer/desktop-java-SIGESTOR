@@ -81,6 +81,7 @@ import sigestor.excepcion.ExcepcionUtilerias;
  * @author Victor Triste Pérez
  */
 public class DialogoCiclo extends JDialog {
+	
 
 	/**
 	 * Sirve para definir un id que sera usado por la virtual machine cuando
@@ -256,28 +257,24 @@ public class DialogoCiclo extends JDialog {
 
 		torneo = principal.getTorneoActual();
 
-		numeroPartidas = this.torneo.getAlgoritmoTorneo().getCiclos().get(this.torneo.getCicloActual() - 1)
-				.getEncuentroParticipantes().size();
-
-		float sumar = 0;
 		
-		for (Participante l : this.torneo.getListaParticipantes())
-			sumar += l.getPuntajeAcumuladoParticipante();
-		
-		if (sumar > 0) {
-			if (!Participante.isPuntajeAcumulado())
-				Participante.setPuntajeAcumulado(true);
-			
-			Collections.sort(this.torneo.getListaParticipantes());
+		//FIXME
+		if(!torneo.getTipoTorneo().equals("Eliminación directa")) {
+			numeroPartidas = this.torneo.getAlgoritmoTorneo().getCiclos().get(this.torneo.getCicloActual() - 1)
+					.getEncuentroParticipantes().size();
+			float sumar = 0;
+			for (Participante l : this.torneo.getListaParticipantes())
+				sumar += l.getPuntajeAcumuladoParticipante();
+			if (sumar > 0) {
+				if (!Participante.isPuntajeAcumulado())
+					Participante.setPuntajeAcumulado(true);	
+				Collections.sort(this.torneo.getListaParticipantes());
+			}
+			listaParticipantes = torneo.getListaParticipantes();
+			listaCiclos = torneo.getAlgoritmoTorneo().getCiclos();
 		}
 		
-	
-		listaParticipantes = torneo.getListaParticipantes();
-
-	
-
-		listaCiclos = torneo.getAlgoritmoTorneo().getCiclos();
-
+		
 		etiquetaNumeroInicial = new JLabel[numeroPartidas];
 		etiquetaParticipanteInicial = new JLabel[numeroPartidas];
 		encararVS = new JLabel[numeroPartidas];
@@ -299,13 +296,22 @@ public class DialogoCiclo extends JDialog {
 		JPanel panelCentralCentral = new JPanel();
 
 		JLabel etiquetaCicloActual = new JLabel();
-		if (this.torneo.getAlgoritmoTorneo().verificarResultadosCompletos()) { // FIXME
-			etiquetaCicloActual.setText("Torneo finalizado");
-		} else {
-			etiquetaCicloActual
-					.setText(torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MAYUSCULA_SINGULAR)
-							+ " actual: " + torneo.getCicloActual());
+		etiquetaCicloActual.setText("Torneo pendiente");
+		
+		if(torneo.getTipoTorneo().equals("Eliminación directa")) {
+			
+			
+			if (this.torneo.getAlgoritmoTorneo().verificarResultadosCompletos()) { // FIXME
+				etiquetaCicloActual.setText("Torneo finalizado");
+			} else {
+				etiquetaCicloActual
+						.setText(torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MAYUSCULA_SINGULAR)
+								+ " actual: " + torneo.getCicloActual());
+			}
+			
+			
 		}
+		
 
 		etiquetaCicloActual.setFont(new Font(fuente.getFontName(), fuente.getStyle(), 20));
 		etiquetaCicloActual.setBounds(50, 60, 500, 50);
@@ -326,39 +332,38 @@ public class DialogoCiclo extends JDialog {
 				.put((KeyStroke) accionAyuda.getValue(Action.ACCELERATOR_KEY), "ayuda");
 
 		JLabel etiquetaTorneo = new JLabel("Torneo: ");
-		etiquetaTorneo.setBounds(380, 20, 50, 25);
+		etiquetaTorneo.setBounds(465, 20, 50, 25);
 		panelNorte.add(etiquetaTorneo);
 		campoNombreTorneo = new JTextField(torneo.getNombreTorneo());
 		campoNombreTorneo.setEditable(false);
-		campoNombreTorneo.setBounds(470, 20, 230, 25);
+		campoNombreTorneo.setBounds(545, 20, 230, 25);
 		panelNorte.add(campoNombreTorneo);
 
 		JLabel etiquetaOrganizador = new JLabel("Organizador: ");
-		etiquetaOrganizador.setBounds(380, 60, 100, 25);
+		etiquetaOrganizador.setBounds(465, 60, 100, 25);
 		panelNorte.add(etiquetaOrganizador);
 		campoNombreOrganizador = new JTextField(torneo.getNombreOrganizador());
 		campoNombreOrganizador.setEditable(false);
-		campoNombreOrganizador.setBounds(470, 60, 230, 25);
+		campoNombreOrganizador.setBounds(545, 60, 230, 25);
 		panelNorte.add(campoNombreOrganizador);
 
 		JLabel etiquetaFechaInicio = new JLabel("Fecha de inicio: ");
-		etiquetaFechaInicio.setBounds(790, 20, 100, 25);
+		etiquetaFechaInicio.setBounds(810, 20, 100, 25);
 		panelNorte.add(etiquetaFechaInicio);
 
 		DateFormat formato = DateFormat.getDateInstance(DateFormat.FULL);
 
 		campoFechaInicio = new JTextField(formato.format(torneo.getFechaInicioTorneo()));
 		campoFechaInicio.setEditable(false);
-		campoFechaInicio.setBounds(905, 20, 220, 25);
+		campoFechaInicio.setBounds(915, 20, 220, 25);
 		panelNorte.add(campoFechaInicio);
 
 		JLabel etiquetaFechaFin = new JLabel("Fecha de fin: ");
-		etiquetaFechaFin.setBounds(790, 60, 100, 25);
+		etiquetaFechaFin.setBounds(810, 60, 100, 25);
 		panelNorte.add(etiquetaFechaFin);
-
 		campoFechaFinalizacion = new JTextField(formato.format(torneo.getFechaFinalTorneo()));
 		campoFechaFinalizacion.setEditable(false);
-		campoFechaFinalizacion.setBounds(905, 60, 220, 25);
+		campoFechaFinalizacion.setBounds(915, 60, 220, 25);
 		panelNorte.add(campoFechaFinalizacion);
 
 		tablaListaParticipantes = new JTable();
@@ -384,15 +389,18 @@ public class DialogoCiclo extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				accionBotonHacer();
-				etiquetaCicloActual
-						.setText(torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MAYUSCULA_SINGULAR)
-								+ " actual: " + torneo.getCicloActual());
+				//FIXME
+				if (!torneo.getTipoTorneo().equals("Eliminación directa")) {
+					accionBotonHacer();
+					etiquetaCicloActual
+							.setText(torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MAYUSCULA_SINGULAR)
+									+ " actual: " + torneo.getCicloActual());
 
-				if (getCicloSeleccionado() == torneo.getCicloActual() - 1 && torneo.getTipoTorneo().contains("Round Robin")) {
-					//actualizarCombo();
-				} else {
-					actualizarCombo();
+					if (getCicloSeleccionado() == torneo.getCicloActual() - 1 && torneo.getTipoTorneo().contains("Round Robin")) {
+						//actualizarCombo();
+					} else {
+						actualizarCombo();
+					}
 				}
 			}
 		};
@@ -433,21 +441,24 @@ public class DialogoCiclo extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				//FIXME
+				if (!torneo.getTipoTorneo().equals("Eliminación directa")) {
+					setCicloSeleccionado(comboSeleccionarCiclo.getSelectedIndex() + 1);
+					if (getCicloSeleccionado() == torneo.getCicloActual()) {
+						etiquetaCicloActual2
+								.setText(torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MAYUSCULA_SINGULAR)
+										+ " " + torneo.getCicloActual() + " - Actual");
+					} else {
+						etiquetaCicloActual2
+								.setText(torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MAYUSCULA_SINGULAR)
+										+ " " + getCicloSeleccionado());
+					}
 
-				setCicloSeleccionado(comboSeleccionarCiclo.getSelectedIndex() + 1);
-				if (getCicloSeleccionado() == torneo.getCicloActual()) {
-					etiquetaCicloActual2
-							.setText(torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MAYUSCULA_SINGULAR)
-									+ " " + torneo.getCicloActual() + " - Actual");
-				} else {
-					etiquetaCicloActual2
-							.setText(torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MAYUSCULA_SINGULAR)
-									+ " " + getCicloSeleccionado());
+					if (comboSeleccionarCiclo.getSelectedIndex() >= 0 && torneo.getCicloActual() > 0) {
+						accionComboSeleccionarCiclo();
+					}
 				}
-
-				if (comboSeleccionarCiclo.getSelectedIndex() >= 0 && torneo.getCicloActual() > 0) {
-					accionComboSeleccionarCiclo();
-				}
+				
 			}
 		};
 		comboSeleccionarCiclo.setAction(accionSeleccionarCiclo);
@@ -546,11 +557,18 @@ public class DialogoCiclo extends JDialog {
 		this.add(panelSur, BorderLayout.SOUTH);
 		this.add(panelNorte);
 
-		activarDesactivarBotonHacer();
+		//FIXME
+		if(!torneo.getTipoTorneo().equals("Eliminación directa")) {
+			activarDesactivarBotonHacer();
+		}
 		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/imagenes/icono.png")));
 		this.setSize(1200, 600);
 		this.setResizable(false);
-		inicializarDialogo();
+		
+		//FIXME
+		
+			inicializarDialogo();
+		
 		this.setLocationRelativeTo(principal);
 		this.setVisible(true);
 	}
@@ -562,7 +580,10 @@ public class DialogoCiclo extends JDialog {
 	private void inicializarDialogo() {
 
 		llenarTablaParticipantes();
-		this.actualizarCombo();
+		//FIXME
+		if(!torneo.getTipoTorneo().equals("Eliminación directa")) {
+			this.actualizarCombo();
+		}
 	}
 
 	/**
@@ -586,6 +607,7 @@ public class DialogoCiclo extends JDialog {
 
 		modelo.addColumn("Núm.");
 		modelo.addColumn("Nombre");
+		
 		if (torneo.getDatosPersonalizacion().isExistenciaMarcador()) {
 			modelo.addColumn(torneo.getDatosPersonalizacion().getNombreMarcador(Personalizacion.MAYUSCULA_SINGULAR)
 					+ " a favor");
@@ -594,22 +616,25 @@ public class DialogoCiclo extends JDialog {
 		}
 		modelo.addColumn("Puntaje");
 
-		for (int i = 0; i < torneo.getListaParticipantes().size(); i++) {
-			if (!this.listaParticipantes.get(i).getNombreParticipante().equals(this.torneo.getAlgoritmoTorneo()
-					.getTorneo().getDatosPersonalizacion().getNombreParticipanteSinEncuentro())) {
-
-				if (torneo.getDatosPersonalizacion().isExistenciaMarcador()) {
-					Object[] fila = { this.listaParticipantes.get(i).getNumeroParticipante(),
-							this.listaParticipantes.get(i).toString(),
-							this.listaParticipantes.get(i).getMarcadorFavor(),
-							this.listaParticipantes.get(i).getMarcadorContra(),
-							this.listaParticipantes.get(i).getPuntajeAcumuladoParticipante() };
-					modelo.addRow(fila);
-				} else {
-					Object[] fila = { this.listaParticipantes.get(i).getNumeroParticipante(),
-							this.listaParticipantes.get(i).toString(),
-							this.listaParticipantes.get(i).getPuntajeAcumuladoParticipante() };
-					modelo.addRow(fila);
+		//FIXME
+		if(!torneo.getTipoTorneo().equals("Eliminación directa")) {
+			for (int i = 0; i < torneo.getListaParticipantes().size(); i++) {
+				if (!this.listaParticipantes.get(i).getNombreParticipante().equals(this.torneo.getAlgoritmoTorneo()
+						.getTorneo().getDatosPersonalizacion().getNombreParticipanteSinEncuentro())) {
+	
+					if (torneo.getDatosPersonalizacion().isExistenciaMarcador()) {
+						Object[] fila = { this.listaParticipantes.get(i).getNumeroParticipante(),
+								this.listaParticipantes.get(i).toString(),
+								this.listaParticipantes.get(i).getMarcadorFavor(),
+								this.listaParticipantes.get(i).getMarcadorContra(),
+								this.listaParticipantes.get(i).getPuntajeAcumuladoParticipante() };
+						modelo.addRow(fila);
+					} else {
+						Object[] fila = { this.listaParticipantes.get(i).getNumeroParticipante(),
+								this.listaParticipantes.get(i).toString(),
+								this.listaParticipantes.get(i).getPuntajeAcumuladoParticipante() };
+						modelo.addRow(fila);
+					}
 				}
 			}
 		}

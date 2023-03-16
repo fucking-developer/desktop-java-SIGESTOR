@@ -7,6 +7,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import sigestor.dominio.Participante;
 import sigestor.dominio.Personalizacion;
+import sigestor.dominio.Torneo;
 import sigestor.dominio.TorneoRoundRobin;
 import sigestor.dominio.TorneoSuizo;
 import sigestor.excepcion.ExcepcionUtilerias;
@@ -131,6 +132,7 @@ public class DialogoResultadosFinales extends JDialog implements ActionListener 
 		super(principal, "Resultados finales");
 
 		ventanaPrincipal = principal;
+		
 
 		JPanel panelBase = new JPanel();
 		JPanel panelAuxiliar = new JPanel();
@@ -191,7 +193,7 @@ public class DialogoResultadosFinales extends JDialog implements ActionListener 
 
 		campoFechaInicio = new JTextField(
 				formato.format(this.ventanaPrincipal.getTorneoActual().getFechaInicioTorneo()));
-		campoFechaInicio.setBounds(740, 40, 150, 20);
+		campoFechaInicio.setBounds(740, 40, 200, 20);
 		campoFechaInicio.setEditable(false);
 		panelAuxiliar.add(campoFechaInicio);
 		panelBase.add(panelAuxiliar);
@@ -213,7 +215,7 @@ public class DialogoResultadosFinales extends JDialog implements ActionListener 
 		panelBase.add(panelAuxiliar);
 
 		campoFechaFin = new JTextField(formato.format(this.ventanaPrincipal.getTorneoActual().getFechaFinalTorneo()));
-		campoFechaFin.setBounds(740, 80, 150, 20);
+		campoFechaFin.setBounds(740, 80, 200, 20);
 		campoFechaFin.setEditable(false);
 		panelAuxiliar.add(campoFechaFin);
 		panelBase.add(panelAuxiliar);
@@ -223,7 +225,12 @@ public class DialogoResultadosFinales extends JDialog implements ActionListener 
 		panelAuxiliar.add(etiquetaGanador);
 		panelBase.add(panelAuxiliar);
 
-		campoNombreGanador = new JTextField(this.listaParticipantes.get(0).getNombreParticipante());
+		if(!ventanaPrincipal.getTorneoActual().getTipoTorneo().equals("Eliminacion Directa")) {
+			campoNombreGanador = new JTextField(this.listaParticipantes.get(0).getNombreParticipante());
+		}else {
+			campoNombreGanador = new JTextField();
+		}
+		
 		campoNombreGanador.setBounds(560, 120, 150, 20);
 		campoNombreGanador.setEditable(false);
 		panelAuxiliar.add(campoNombreGanador);
@@ -322,24 +329,26 @@ public class DialogoResultadosFinales extends JDialog implements ActionListener 
 					.getNombreMarcador(Personalizacion.MAYUSCULA_SINGULAR) + " en contra");
 		}
 		modelo.addColumn("Puntaje");
-
-		for (int i = 0; i < this.ventanaPrincipal.getTorneoActual().getListaParticipantes().size(); i++) {
-			if (!this.listaParticipantes.get(i).getNombreParticipante().equals(this.ventanaPrincipal.getTorneoActual()
-					.getDatosPersonalizacion().getNombreParticipanteSinEncuentro())) {
-				if (this.ventanaPrincipal.getTorneoActual().getDatosPersonalizacion().isExistenciaMarcador()) {
-					Object[] fila = { this.listaParticipantes.get(i).getLugarParticipante(),
-							this.listaParticipantes.get(i).getNumeroParticipante(),
-							this.listaParticipantes.get(i).toString(),
-							this.listaParticipantes.get(i).getMarcadorFavor(),
-							this.listaParticipantes.get(i).getMarcadorContra(),
-							this.listaParticipantes.get(i).getPuntajeAcumuladoParticipante() };
-					modelo.addRow(fila);
-				} else {
-					Object[] fila = { this.listaParticipantes.get(i).getLugarParticipante(),
-							this.listaParticipantes.get(i).getNumeroParticipante(),
-							this.listaParticipantes.get(i).getNombreParticipante(),
-							this.listaParticipantes.get(i).getPuntajeAcumuladoParticipante() };
-					modelo.addRow(fila);
+		//FIXME
+			if(!ventanaPrincipal.getTorneoActual().getTipoTorneo().equals("Eliminación directa")) {
+				for (int i = 0; i < this.ventanaPrincipal.getTorneoActual().getListaParticipantes().size(); i++) {
+				if (!this.listaParticipantes.get(i).getNombreParticipante().equals(this.ventanaPrincipal.getTorneoActual()
+						.getDatosPersonalizacion().getNombreParticipanteSinEncuentro())) {
+					if (this.ventanaPrincipal.getTorneoActual().getDatosPersonalizacion().isExistenciaMarcador()) {
+						Object[] fila = { this.listaParticipantes.get(i).getLugarParticipante(),
+								this.listaParticipantes.get(i).getNumeroParticipante(),
+								this.listaParticipantes.get(i).toString(),
+								this.listaParticipantes.get(i).getMarcadorFavor(),
+								this.listaParticipantes.get(i).getMarcadorContra(),
+								this.listaParticipantes.get(i).getPuntajeAcumuladoParticipante() };
+						modelo.addRow(fila);
+					} else {
+						Object[] fila = { this.listaParticipantes.get(i).getLugarParticipante(),
+								this.listaParticipantes.get(i).getNumeroParticipante(),
+								this.listaParticipantes.get(i).getNombreParticipante(),
+								this.listaParticipantes.get(i).getPuntajeAcumuladoParticipante() };
+						modelo.addRow(fila);
+					}
 				}
 			}
 		}

@@ -357,8 +357,10 @@ public class VentanaPrincipal extends JFrame implements ActionListener, WindowLi
 		/*-------------------------------------------------------------*/
 		menuTorneoEliminacionDirecta = new JMenu("Torneo Eliminacion Directa");
 		menuTorneoEliminacionDirecta.setIcon(new ImageIcon(getClass().getResource("/imagenes/eliminaciondirecta.png")));// FIXME
+		
+		
 		// lo activé en true, debe de ser false
-		menuTorneoEliminacionDirecta.setEnabled(true);
+		menuTorneoEliminacionDirecta.setEnabled(false);
 		menuTorneoEliminacionDirecta.setMnemonic(KeyEvent.VK_D);
 		menuTorneoEliminacionDirecta.setToolTipText("Tipo de sistema en el que se basará el torneo");
 		submenuConsultarCiclosEliminacionDirecta = new JMenuItem("Consultar ciclos");
@@ -474,11 +476,11 @@ public class VentanaPrincipal extends JFrame implements ActionListener, WindowLi
 			
 			
 		} else if (e.getSource().equals(submenuConsultarCiclosEliminacionDirecta)) {
-			new DialogoCicloEliminacionDirectaMarcadores(this);
+			new DialogoCiclo(this);
 		} else if (e.getSource().equals(submenuResultadosEliminacionDirecta)) {
-			new DialogoCapturarEliminacionDirectaMarcadores(this);
+			new DialogoCapturarResultados(this);
 		} else if (e.getSource().equals(submenuResultadosFinalesEliminacionDirecta)) {
-			new DialogoResultadosFinalesEliminacionDirecta(this);
+			new DialogoResultadosFinales(this);
 			
 			
 		} else if (e.getSource().equals(submenuConsultarCiclosRoundRobin)) {
@@ -540,9 +542,12 @@ public class VentanaPrincipal extends JFrame implements ActionListener, WindowLi
 				} catch (ExcepcionBaseDatosPersonalizacion e) {
 					JOptionPane.showMessageDialog(null, e.getMessage(), "Cancelar torneo", JOptionPane.ERROR_MESSAGE);
 				}
+				
+				
 				this.submenuResultadosEliminacionDirecta.setText("Capturar resultados");
 				this.submenuResultadosSuizo.setText("Capturar resultados");
 				this.submenuResultadosRoundRobin.setText("Capturar resultados");
+				
 				submenuAdministrarTorneo.setEnabled(true);
 				submenuIniciarTorneo.setEnabled(true);
 				submenuCancelarTorneo.setEnabled(false);
@@ -666,10 +671,12 @@ public class VentanaPrincipal extends JFrame implements ActionListener, WindowLi
 
 				JOptionPane.showMessageDialog(null, "El archivo ha sido abierto exitosamente.", "Torneo Abierto",
 						JOptionPane.INFORMATION_MESSAGE);
+				
 				submenuAbrirTorneo.setEnabled(false);
 				menuOperaciones.setEnabled(true);
 				submenuCerrarTorneo.setEnabled(true);
 				submenuCrearTorneo.setEnabled(false);
+				
 				if (getTorneoActual().getCicloActual() > 0) {
 					submenuAdministrarTorneo.setEnabled(false);
 					submenuIniciarTorneo.setEnabled(false);
@@ -827,11 +834,10 @@ public class VentanaPrincipal extends JFrame implements ActionListener, WindowLi
 						submenuAdministrarTorneo.setEnabled(false);
 						submenuIniciarTorneo.setEnabled(false);
 						submenuCancelarTorneo.setEnabled(true);
-						submenuConsultarCiclosRoundRobin
-								.setText("Consultar " + getTorneoActual().getDatosPersonalizacion().getNombreCiclo(1));
+						submenuConsultarCiclosRoundRobin.setText("Consultar " + getTorneoActual().getDatosPersonalizacion().getNombreCiclo(1));
 					}
 				}
-			} else {
+			} else if (getTorneoActual().getTipoTorneo().equals("Suizo")) {
 				TorneoSuizo suizo = new TorneoSuizo(this.torneoActual);
 
 				JPanel contenido = new JPanel();
@@ -869,12 +875,14 @@ public class VentanaPrincipal extends JFrame implements ActionListener, WindowLi
 						JOptionPane.showMessageDialog(null,
 								"El torneo " + getTorneoActual().getNombreTorneo() + " se ha iniciado correctamente.",
 								"Iniciar torneo Suizo", JOptionPane.INFORMATION_MESSAGE);
+						
 						menuTorneoSuizo.setEnabled(true);
+						
 						submenuAdministrarTorneo.setEnabled(false);
 						submenuIniciarTorneo.setEnabled(false);
 						submenuCancelarTorneo.setEnabled(true);
-						submenuConsultarCiclosSuizo
-								.setText("Consultar " + getTorneoActual().getDatosPersonalizacion().getNombreCiclo(1));
+						
+						submenuConsultarCiclosSuizo.setText("Consultar " + getTorneoActual().getDatosPersonalizacion().getNombreCiclo(1));
 
 					} catch (ExcepcionBaseDatosTorneo e) {
 						JOptionPane.showMessageDialog(null, e.getMessage(), "Iniciar torneo",
@@ -883,8 +891,25 @@ public class VentanaPrincipal extends JFrame implements ActionListener, WindowLi
 
 				}
 
+			} else if(getTorneoActual().getTipoTorneo().equals("Eliminación directa")) {
+					//TorneoEliminacionDirecta eliminacionDirecta= new TorneoEliminacionDirecta(this.torneoActual);
+				
+					JOptionPane.showMessageDialog(null,
+						"El torneo " + getTorneoActual().getNombreTorneo() + " se ha iniciado correctamente.",
+						"Iniciar torneo Eliminación directa", JOptionPane.INFORMATION_MESSAGE);
+				
+					this.menuTorneoEliminacionDirecta.setEnabled(true);
+					submenuAdministrarTorneo.setEnabled(false);
+					submenuIniciarTorneo.setEnabled(false);
+					submenuCancelarTorneo.setEnabled(true);
+					
+					this.submenuConsultarCiclosEliminacionDirecta.setText("Consular "+ getTorneoActual().getDatosPersonalizacion().getNombreCiclo(1));
+					
+					
+				
 			}
 
+			
 		} catch (ExcepcionTorneo e) {
 			JOptionPane.showMessageDialog(null, e.getMessage(), "Iniciar torneo", JOptionPane.ERROR_MESSAGE);
 		} catch (ExcepcionPersonalizacion e) {
@@ -924,6 +949,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener, WindowLi
 				&& this.getTorneoActual().getCicloActual() == this.getTorneoActual().getAlgoritmoTorneo()
 						.getNumeroCiclos()
 				&& this.getTorneoActual().getListaParticipantes().get(1).getLugarParticipante() > 0) {
+			
 			this.submenuResultadosRoundRobin.setText("Reporte de resultados");
 			this.submenuResultadosSuizo.setText("Reporte de resultados");
 			this.submenuResultadosEliminacionDirecta.setText("Reporte de resultados");

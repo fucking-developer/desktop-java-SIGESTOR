@@ -24,13 +24,13 @@ import sigestor.excepcion.ExcepcionParticipante;
 import sigestor.excepcion.ExcepcionTorneo;
 
 /**
- * Sirve para guardar y validar la informaciï¿½n ingresada en el
+ * Sirve para guardar y validar la información ingresada en el
  * <code>PanelGeneral</code>.
  * <p>
- * Las caracterï¿½sticas de la clase <code>Torneo</code> son:
+ * Las características de la clase <code>Torneo</code> son:
  * <ul>
  * <li><code>datosPersonalizacion</code> Para almacenar los datos de
- * personalizaciï¿½n.</li>
+ * personalización.</li>
  * <li><code>listaParticipantes</code> Para almacenar la lista de los
  * participantes del torneo.</li>
  * <li><code>criteriosDesempate</code> Para almacenar los criterios de desempate
@@ -38,16 +38,16 @@ import sigestor.excepcion.ExcepcionTorneo;
  * <li><code>baseDatos</code> Para almacenar la base de datos del torneo.</li>
  * <li><code>nombreTorneo</code> Para almacenar el nombre del torneo.</li>
  * <li><code>tipoTorneo</code> Para almacenar el tipo de torneo que se
- * iniciarï¿½.</li>
+ * iniciará.</li>
  * <li><code>nombreOrganizador</code>Para almacenar el nombre del organizador
  * del torneo.</li>
- * <li><code>fechaInicioTorneo</code> Para almacenar la fecha en que se iniciarï¿½
+ * <li><code>fechaInicioTorneo</code> Para almacenar la fecha en que se iniciará
  * el torneo.</li>
- * <li><code>fechaFinalTorneo</code> Para almacenar la fecha en que finalizarï¿½
+ * <li><code>fechaFinalTorneo</code> Para almacenar la fecha en que finalizará
  * el torneo.</li>
  * <li><code>cicloActual</code> Para almacenar el ciclo en que se encuentra el
  * torneo.</li>
- * <li><code>algoritmoTorneo</code> Para almacenar el algoritmo con que podrï¿½
+ * <li><code>algoritmoTorneo</code> Para almacenar el algoritmo con que podrá
  * avanzar el torneo.</li>
  * </ul>
  * 
@@ -55,8 +55,8 @@ import sigestor.excepcion.ExcepcionTorneo;
  * 
  * @author Ricky Didier Peralta Reyes
  * @author Uriel Romeo Cruz Cortes
- * @author Jennifer Cortï¿½s Pï¿½rez
- * @author Beatriz Andrea Jimï¿½nez Rï¿½os
+ * @author Jennifer Cortés Pérez
+ * @author Beatriz Andrea Jiménez Ríos
  * 
  */
 public class Torneo {
@@ -70,7 +70,7 @@ public class Torneo {
 	 */
 	private ArrayList<Participante> listaParticipantes;
 	/**
-	 * Criterios de desempate que se utilizarï¿½n en el torneo.
+	 * Criterios de desempate que se utilizarán en el torneo.
 	 */
 	private CriteriosDesempate criteriosDesempate;
 	/**
@@ -82,7 +82,7 @@ public class Torneo {
 	 */
 	private String nombreTorneo;
 	/**
-	 * Tipo de torneo que se llevarï¿½ a cabo.
+	 * Tipo de torneo que se llevará a cabo.
 	 */
 	private String tipoTorneo;
 	/**
@@ -90,7 +90,7 @@ public class Torneo {
 	 */
 	private String nombreOrganizador;
 	/**
-	 * Descripciï¿½n del torneo.
+	 * Descripción del torneo.
 	 */
 	private String descripcionTorneo;
 	/**
@@ -98,7 +98,7 @@ public class Torneo {
 	 */
 	private Date fechaInicioTorneo;
 	/**
-	 * Fecha en que finalizarï¿½ el torneo.
+	 * Fecha en que finalizará el torneo.
 	 */
 	private Date fechaFinalTorneo;
 	/**
@@ -108,7 +108,7 @@ public class Torneo {
 	private int cicloActual;
 
 	/**
-	 * Algoritmo que se utilizarï¿½ para el avance del torneo.
+	 * Algoritmo que se utilizará para el avance del torneo.
 	 */
 	private AlgoritmoTorneo algoritmoTorneo;
 
@@ -132,7 +132,7 @@ public class Torneo {
 	}
 
 	/**
-	 * Mï¿½todo que sirver para devolver el valor de la variable <code>nombreArchivo</code>
+	 * Método que sirver para devolver el valor de la variable <code>nombreArchivo</code>
 	 * 
 	 * @return NombreArchivo 
 	 */
@@ -141,16 +141,16 @@ public class Torneo {
 	}
 
 	/**
-	 * Mï¿½todo que sirve para recibir el valor de la variable <code>nombreArchivo</code>
+	 * Método que sirve para recibir el valor de la variable <code>nombreArchivo</code>
 	 * 
-	 * @param nombreArchivo El nombre del archivo que contendrï¿½ el torneo.
+	 * @param nombreArchivo El nombre del archivo que contendrá el torneo.
 	 */
 	public void setNombreArchivo(String nombreArchivo) {
 		this.nombreArchivo = nombreArchivo;
 	}
 
 	/**
-	 * Devuelve los datos de personalizaciï¿½n del torneo.
+	 * Devuelve los datos de personalización del torneo.
 	 * 
 	 * @return Regresa el objeto de tipo <code>Personalizacion</code>.
 	 * @see Personalizacion
@@ -160,7 +160,7 @@ public class Torneo {
 	}
 
 	/**
-	 * Asigna el parï¿½metro recibido a la variable
+	 * Asigna el parámetro recibido a la variable
 	 * <code>datosPersonalizacion</code>.
 	 * 
 	 * @param datosPersonalizacion
@@ -181,7 +181,7 @@ public class Torneo {
 	}
 
 	/**
-	 * Asigna el parï¿½metro recibido a la lista <code>listaParticipantes</code>.
+	 * Asigna el parámetro recibido a la lista <code>listaParticipantes</code>.
 	 * 
 	 * @param listaParticipantes
 	 *            Recibe la lista de los participantes del torneo.
@@ -201,7 +201,7 @@ public class Torneo {
 	}
 
 	/**
-	 * Asigna el parï¿½metro recibido a la variable
+	 * Asigna el parámetro recibido a la variable
 	 * <code>criteriosDesempate</code>.
 	 * 
 	 * @param criteriosDesempate
@@ -222,7 +222,7 @@ public class Torneo {
 	}
 
 	/**
-	 * Asigna el parï¿½metro recibido a la variable <code>nombreTorneo</code> y
+	 * Asigna el parámetro recibido a la variable <code>nombreTorneo</code> y
 	 * elimina espacios si existen al inicio y al final de la cadena.
 	 * 
 	 * @param nombreTorneo
@@ -244,7 +244,7 @@ public class Torneo {
 	}
 
 	/**
-	 * Asigna el parï¿½metro recibido a la variable <code>tipoTorneo</code> y
+	 * Asigna el parámetro recibido a la variable <code>tipoTorneo</code> y
 	 * elimina espacios si existen al inicio y al final de la cadena.
 	 * 
 	 * @param tipoTorneo
@@ -268,7 +268,7 @@ public class Torneo {
 	}
 
 	/**
-	 * Asigna el parï¿½metro recibido a la variable <code>nombreOrganizador</code>
+	 * Asigna el parámetro recibido a la variable <code>nombreOrganizador</code>
 	 * y elimina espacios si existen al inicio y al final de la cadena.
 	 * 
 	 * @param nombreOrganizador
@@ -290,11 +290,11 @@ public class Torneo {
 	}
 
 	/**
-	 * Asigna el parï¿½metro recibido a la variable
+	 * Asigna el parámetro recibido a la variable
 	 * <code>fechaInicioTorneo</code>.
 	 * 
 	 * @param fechaInicioTorneo
-	 *            Recibe la fecha en que iniciarï¿½ el torneo.
+	 *            Recibe la fecha en que iniciará el torneo.
 	 */
 
 	public void setFechaInicioTorneo(Date fechaInicioTorneo) {
@@ -302,9 +302,9 @@ public class Torneo {
 	}
 
 	/**
-	 * Devuelve la fecha en que finalizarï¿½ el torneo.
+	 * Devuelve la fecha en que finalizará el torneo.
 	 * 
-	 * @return Regresa la fecha en que finalizarï¿½ el torneo.
+	 * @return Regresa la fecha en que finalizará el torneo.
 	 */
 
 	public Date getFechaFinalTorneo() {
@@ -312,10 +312,10 @@ public class Torneo {
 	}
 
 	/**
-	 * Asigna el parï¿½metro recibido a la variable <code>fechaFinalTorneo</code>.
+	 * Asigna el parámetro recibido a la variable <code>fechaFinalTorneo</code>.
 	 * 
 	 * @param fechaFinalTorneo
-	 *            Recibe la fecha en que finalizarï¿½ el torneo.
+	 *            Recibe la fecha en que finalizará el torneo.
 	 */
 	public void setFechaFinalTorneo(Date fechaFinalTorneo) {
 		this.fechaFinalTorneo = fechaFinalTorneo;
@@ -333,7 +333,7 @@ public class Torneo {
 	}
 
 	/**
-	 * Asigna el parï¿½metro recibido a la variable <code>cicloActual</code>.
+	 * Asigna el parámetro recibido a la variable <code>cicloActual</code>.
 	 * 
 	 * @param cicloActual
 	 *            Recibe el ciclo actual del torneo.
@@ -344,20 +344,20 @@ public class Torneo {
 	}
 
 	/**
-	 * Devuelve una descripciï¿½n del torneo.
+	 * Devuelve una descripción del torneo.
 	 * 
-	 * @return Regresa la descripciï¿½n del torneo.
+	 * @return Regresa la descripción del torneo.
 	 */
 	public String getDescripcionTorneo() {
 		return descripcionTorneo;
 	}
 
 	/**
-	 * Asigna el parï¿½metro recibido a la variable <code>descripcionTorneo</code>
+	 * Asigna el parámetro recibido a la variable <code>descripcionTorneo</code>
 	 * y elimina espacios si existen al inicio o al final de la cadena.
 	 * 
 	 * @param descripcionTorneo
-	 *            Recibe la descripciï¿½n del torneo.
+	 *            Recibe la descripción del torneo.
 	 */
 
 	public void setDescripcionTorneo(String descripcionTorneo) {
@@ -375,7 +375,7 @@ public class Torneo {
 	}
 
 	/**
-	 * Asigna el parï¿½metro recibido a la variable <code>algoritmoTorneo</code>.
+	 * Asigna el parámetro recibido a la variable <code>algoritmoTorneo</code>.
 	 * 
 	 * @param algoritmoTorneo
 	 *            Recibe el algoritmo del torneo.
@@ -396,19 +396,19 @@ public class Torneo {
 	 * Inicia el torneo dependiendo el tipo de torneo que es.
 	 * 
 
-	 * @param torneoRoundRobin Recibe el torneo <code>Round Robï¿½n</code> si es el caso.
+	 * @param torneoRoundRobin Recibe el torneo <code>Round Robín</code> si es el caso.
 	 * @param torneoSuizo Recibe el torneo <code>Suizo</code> si es el caso.
-	 * @throws ExcepcionBaseDatosCiclo        Lanza la excepciï¿½n sï¿½ ocurre un error
+	 * @throws ExcepcionBaseDatosCiclo        Lanza la excepción sí ocurre un error
 	 *                                        en <code>BaseDatosCiclo</code>.
-	 * @throws ExcepcionBaseDatosEncuentro    Lanza la excepciï¿½n sï¿½ ocurre un error
+	 * @throws ExcepcionBaseDatosEncuentro    Lanza la excepción sí ocurre un error
 	 *                                        en <code>BaseDatosEncuentro</code>.
-	 * @throws ExcepcionBaseDatos             Lanza la excepciï¿½n sï¿½ ocurre un error
+	 * @throws ExcepcionBaseDatos             Lanza la excepción sí ocurre un error
 	 *                                        en <code>BaseDatos</code>.
-	 * @throws ExcepcionBaseDatosTorneo       Lanza la excepciï¿½n sï¿½ ocurre un error
+	 * @throws ExcepcionBaseDatosTorneo       Lanza la excepción sí ocurre un error
 	 *                                        en <code>BaseDatosTorneo</code>.
-	 * @throws ExcepcionBaseDatosParticipante Lanza la excepciï¿½n sï¿½ ocurre un error
+	 * @throws ExcepcionBaseDatosParticipante Lanza la excepción sí ocurre un error
 	 *                                        en <code>BaseDatosParticipante</code>.
-	 * @throws ExcepcionCapturarResultados    Lanza la excepciï¿½n si ocurre un error
+	 * @throws ExcepcionCapturarResultados    Lanza la excepción si ocurre un error
 	 *                                        al crear el objeto
 	 *                                        <code>Encuentro</code>.
 
@@ -424,6 +424,7 @@ public class Torneo {
 		} else {
 			torneoRoundRobin.iniciarTorneo();
 		}
+		
 
 	}
 
@@ -431,10 +432,10 @@ public class Torneo {
 	 * Permite validar los datos ingresados en el <code>PanelGeneral</code>.
 	 * 
 	 * @throws ExcepcionTorneo
-	 *             Lanza la excepciï¿½n si la variable <code>nombreTorneo</code>
-	 *             se encuentra vacï¿½a. Lanza la excepciï¿½n si la variable
-	 *             <code>nombreOrganizador</code> se encuentra vacï¿½a. Lanza la
-	 *             excepciï¿½n si la variable <code>fechaFinalTorneo</code> es
+	 *             Lanza la excepción si la variable <code>nombreTorneo</code>
+	 *             se encuentra vacía. Lanza la excepción si la variable
+	 *             <code>nombreOrganizador</code> se encuentra vacía. Lanza la
+	 *             excepción si la variable <code>fechaFinalTorneo</code> es
 	 *             menor que la variable <code>fechaInicialTorneo</code>.
 	 */
 	public void validarTorneo() throws ExcepcionTorneo {
@@ -476,22 +477,22 @@ public class Torneo {
 	 * objeto <code>Torneo</code>.
 	 * 
 	 * @throws ExcepcionBaseDatos
-	 *             Lanza la excepciï¿½n sï¿½ ocurre un error en
+	 *             Lanza la excepción sí ocurre un error en
 	 *             <code>BaseDatos</code>.
 	 * @throws ExcepcionBaseDatosTorneo
-	 *             Lanza la excepciï¿½n sï¿½ ocurre un error en
+	 *             Lanza la excepción sí ocurre un error en
 	 *             <code>BaseDatosTorneo</code>.
 	 * @throws ExcepcionBaseDatosCriteriosDesempate
-	 *             Lanza la excepciï¿½n sï¿½ ocurre un error en
+	 *             Lanza la excepción sí ocurre un error en
 	 *             <code>BaseDatosCriteriosDesempate</code>.
 	 * @throws ExcepcionBaseDatosParticipante
-	 *             Lanza la excepciï¿½n sï¿½ ocurre un error en
+	 *             Lanza la excepción sí ocurre un error en
 	 *             <code>BaseDatosParticipante</code>.
 	 * @throws ExcepcionCapturarResultados
-	 *             Lanza la excepciï¿½n sï¿½ ocurre un error al capturar los
+	 *             Lanza la excepción sí ocurre un error al capturar los
 	 *             resultados.
 	 * @throws ExcepcionBaseDatosPersonalizacion 
-	 * 			   Lanza la excepciï¿½n sï¿½ ocurre un error en
+	 * 			   Lanza la excepción sí ocurre un error en
 	 *             <code>BaseDatosPersonalizacion</code>.
 	 */
 	public void recuperarTorneo()
@@ -509,7 +510,7 @@ public class Torneo {
 		setFechaFinalTorneo(baseDatosTorneo.obtenerDatosGenerales().getFechaFinalTorneo());
 		setCicloActual(baseDatosTorneo.obtenerDatosGenerales().getCicloActual());
 		this.setCriteriosDesempate(bc.obtenerCriteriosDesempate());
-		this.setDatosPersonalizacion(bdPersonalizacion.obtenerPersonalizacion());
+		this.setDatosPersonalizacion(bdPersonalizacion.obtenerPersonalización());
 		this.setListaParticipantes(participantes.obtenerParticipante());
 		// ----------------------------------------------------------------------------------
 		if (getTipoTorneo().contains("Suizo")) {
@@ -537,19 +538,19 @@ public class Torneo {
 	 * <code>Torneo</code>.
 	 * 
 	 * @throws ExcepcionBaseDatos
-	 *             Lanza la excepciï¿½n sï¿½ ocurre un error en
+	 *             Lanza la excepción sí ocurre un error en
 	 *             <code>BaseDatos</code>.
 	 * @throws ExcepcionBaseDatosTorneo
-	 *             Lanza la excepciï¿½n sï¿½ ocurre un error en
+	 *             Lanza la excepción sí ocurre un error en
 	 *             <code>BaseDatosTorneo</code>.
 	 * @throws ExcepcionBaseDatosCriteriosDesempate
-	 *             Lanza la excepciï¿½n sï¿½ ocurre un error en
+	 *             Lanza la excepción sí ocurre un error en
 	 *             <code>BaseDatosCriteriosDesempate</code>.
 	 * @throws ExcepcionBaseDatosPersonalizacion
-	 *             Lanza la excepciï¿½n sï¿½ ocurre un error en
+	 *             Lanza la excepción sí ocurre un error en
 	 *             <code>BaseDatosPersonalizacion</code>.
 	 * @throws ExcepcionBaseDatosParticipante
-	 *             Lanza la excepciï¿½n sï¿½ ocurre un error en
+	 *             Lanza la excepción sí ocurre un error en
 	 *             <code>BaseDatosParticipante</code>.
 	 */
 	public void guardarTorneo() throws ExcepcionBaseDatos, ExcepcionBaseDatosTorneo,
@@ -569,19 +570,19 @@ public class Torneo {
 	 * objeto <code>Torneo</code>.
 	 * 
 	 * @throws ExcepcionBaseDatos
-	 *             Lanza la excepciï¿½n sï¿½ ocurre un error en
+	 *             Lanza la excepción sí ocurre un error en
 	 *             <code>BaseDatos</code>.
 	 * @throws ExcepcionBaseDatosTorneo
-	 *             Lanza la excepciï¿½n sï¿½ ocurre un error en
+	 *             Lanza la excepción sí ocurre un error en
 	 *             <code>BaseDatosTorneo</code>.
 	 * @throws ExcepcionBaseDatosCriteriosDesempate
-	 *             Lanza la excepciï¿½n sï¿½ ocurre un error en
+	 *             Lanza la excepción sí ocurre un error en
 	 *             <code>BaseDatosCriteriosDesempate</code>.
 	 * @throws ExcepcionBaseDatosPersonalizacion
-	 *             Lanza la excepciï¿½n sï¿½ ocurre un error en
+	 *             Lanza la excepción sí ocurre un error en
 	 *             <code>BaseDatosPersonalizacion</code>.
 	 * @throws ExcepcionBaseDatosParticipante
-	 *             Lanza la excepciï¿½n sï¿½ ocurre un error en
+	 *             Lanza la excepción sí ocurre un error en
 	 *             <code>BaseDatosParticipante</code>.
 	 */
 	public void actualizarTorneo() throws ExcepcionBaseDatos, ExcepcionBaseDatosTorneo,
@@ -603,28 +604,28 @@ public class Torneo {
 	 * objeto <code>Torneo</code>.
 	 * 
 	 * @throws ExcepcionBaseDatos
-	 *             Lanza la excepciï¿½n sï¿½ ocurre un error en
+	 *             Lanza la excepción sí ocurre un error en
 	 *             <code>BaseDatos</code>.
 	 * @throws ExcepcionBaseDatosParticipante
-	 *             Lanza la excepciï¿½n sï¿½ ocurre un error en
+	 *             Lanza la excepción sí ocurre un error en
 	 *             <code>BaseDatosParticipante</code>.
 	 * @throws ExcepcionBaseDatosTorneo
-	 *             Lanza la excepciï¿½n sï¿½ ocurre un error en
+	 *             Lanza la excepción sí ocurre un error en
 	 *             <code>BaseDatosTorneo</code>.
 	 * @throws ExcepcionBaseDatosCiclo
-	 *             Lanza la excepciï¿½n sï¿½ ocurre un error en
+	 *             Lanza la excepción sí ocurre un error en
 	 *             <code>BaseDatosCiclo</code>.
 	 * @throws ExcepcionBaseDatosEncuentro
-	 *             Lanza la excepciï¿½n sï¿½ ocurre un error en
+	 *             Lanza la excepción sí ocurre un error en
 	 *             <code>BaseDatosEncuentro</code>.
 	 * @throws ExcepcionBaseDatosCriteriosDesempate
-	 *             Lanza la excepciï¿½n sï¿½ ocurre un error en
+	 *             Lanza la excepción sí ocurre un error en
 	 *             <code>BaseDatosCriteriosDesempate</code>.
 	 * @throws ExcepcionCapturarResultados
-	 *             Lanza la excepciï¿½n sï¿½ ocurre un error al capturar los
+	 *             Lanza la excepción sí ocurre un error al capturar los
 	 *             resultados.
 	 * @throws ExcepcionBaseDatosPersonalizacion
-	 *             Lanza la excepciï¿½n sï¿½ ocurre un error en
+	 *             Lanza la excepción sí ocurre un error en
 	 *             <code>BaseDatosPersonalizacion</code>.
 	 */
 	public void cancelarTorneo() throws ExcepcionBaseDatos, ExcepcionBaseDatosParticipante, ExcepcionBaseDatosTorneo,
