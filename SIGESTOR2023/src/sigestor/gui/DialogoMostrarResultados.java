@@ -18,9 +18,6 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
-import com.toedter.calendar.JDateChooser;
-
 import sigestor.dominio.Ciclo;
 import sigestor.dominio.Encuentro;
 import sigestor.dominio.Participante;
@@ -55,6 +52,7 @@ import java.util.Date;
  * volver a la ventana Capturar resultados.</li>
  * <li><code>botonExportarResultados</code> para exportar los resultados
  * obtenidos en el ciclo.</li>
+ * <li><code>etiquetaFechaEncuentros</code> Para mostrar las fechas de los encuentros</li>
  * <li><code>etiquetaNumeroInicial</code> Para mostrar el número que representa
  * al participante inicial.</li>
  * <li><code>etiquetaParticipanteInicial</code> Para asignar el marcador que
@@ -79,12 +77,13 @@ import java.util.Date;
  * <li><code>serialVersionUID</code> Para el número de versión de la clase.</li>
  * </ul>
  * 
- * @version 22/05/2022
+ * @version 16/03/2023
  * 
  * @author Alicia Adriana Clemente Hernandez
  * @author Luis Fernando de la Cruz López
  * @author Luis Antonio Ruiz Sierra
  * @author Victor Triste Pérez
+ * @author Vasquez Policarpo Erik
  *
  */
 public class DialogoMostrarResultados extends JDialog {
@@ -95,7 +94,6 @@ public class DialogoMostrarResultados extends JDialog {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	// Superior-----------------------------------------------------
 	/**
 	 * Lista desplegable para seleccionar el ciclo.
 	 */
@@ -120,7 +118,14 @@ public class DialogoMostrarResultados extends JDialog {
 	 * Campo para la fecha de fin.
 	 */
 	private JTextField campoFechaFin;
+	
 	// Central-----------------------------------------------------
+	/**
+	 * Arreglo de campos para las fechas de los encuentros.
+	 */
+	
+	private JTextField[] etiquetaFechaEncuentros;
+	
 	/**
 	 * Arreglo de campos para los marcadores de participantes iniciales.
 	 */
@@ -150,10 +155,8 @@ public class DialogoMostrarResultados extends JDialog {
 	 * iniciales.
 	 */
 	
-	private JTextField etiquetaFechaEncuentros;
-	
 	private JLabel[] etiquetaNumeroInicial;
-
+	
 	/**
 	 * Arreglo de etiquetas para los nombres de los participantes iniciales.
 	 */
@@ -349,7 +352,7 @@ public class DialogoMostrarResultados extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ventanaPrincipal.cargarManual();
+				ventanaPrincipal.accionCargarManual();
 			}
 		};
 		accionAyuda.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0));
@@ -530,6 +533,8 @@ public class DialogoMostrarResultados extends JDialog {
 		etiquetaParticipanteFinal = new JLabel[numeroPartidas + auxImpar];
 		campoMarcadorFinal = new JTextField[numeroPartidas + auxImpar];
 		etiquetaResultado = new JLabel[numeroPartidas + auxImpar];
+		etiquetaFechaEncuentros = new JTextField[numeroPartidas + auxImpar];
+		
 		//FIXME
 		if(!torneo.getTipoTorneo().equals("Eliminación directa")) {
 			
@@ -593,13 +598,15 @@ public class DialogoMostrarResultados extends JDialog {
 				
 				panelFilasTabla[i].add(auxPanel);
 				
-			}		
-		
-			etiquetaFechaEncuentros = new JTextField(new Date().toString());
-			etiquetaFechaEncuentros.setPreferredSize(new Dimension(150, 25));
-			etiquetaFechaEncuentros.setEditable(false);
+			}
+			
+			// FIXME
+			DateFormat formato = DateFormat.getDateInstance(DateFormat.LONG);
+			etiquetaFechaEncuentros[i] = new JTextField(formato.format(new Date()));
+			etiquetaFechaEncuentros[i].setPreferredSize(new Dimension(170, 25));
+			etiquetaFechaEncuentros[i].setEditable(false);
 			auxPanel = new JPanel();
-			auxPanel.add(etiquetaFechaEncuentros);
+			auxPanel.add(etiquetaFechaEncuentros[i]);
 			auxPanel.setPreferredSize(new Dimension(200, 30));
 			panelFilasTabla[i].add(auxPanel);
 

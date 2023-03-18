@@ -16,7 +16,9 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 
@@ -85,6 +87,8 @@ import sigestor.excepcion.ExcepcionCapturarResultados;
  * participante no inicial.</li>
  * <li><code>etiquetaParticipanteFinal</code> Para asignar el marcador que
  * obtendrá el participante no inicial.</li>
+ * <li><code>etiquetaFechaEncuentros</code> Para asignar la fecha a los
+ * encuentros</li>
  * <li><code>torneo</code> Para almacenar toda la información contenida del
  * torneo.</li>
  * <li><code>participantes</code> Para obtener a todos los participantes del
@@ -102,12 +106,13 @@ import sigestor.excepcion.ExcepcionCapturarResultados;
  * <li><code>serialVersionUID</code> Para el número de versión de la clase.</li>
  * </ul>
  * 
- * @version 11/06/2022
+ * @version 16/03/2023
  * 
  * @author Alicia Adriana Clemente Hernandez
  * @author Luis Fernando de la Cruz López
  * @author Luis Antonio Ruiz Sierra
  * @author Victor Triste Pérez
+ * @author Eder Euclides Dionisio Diaz
  *
  */
 
@@ -151,8 +156,6 @@ public class DialogoCapturarResultados extends JDialog implements WindowListener
 	 * Arreglo de campos para los marcadores de participantes iniciales.
 	 */
 	private JTextField[] campoMarcadorInicial;
-
-	private JTextField etiquetaFechaEncuentros;
 
 	/**
 	 * Arreglo de radios para participantes iniciales ganadores.
@@ -239,6 +242,11 @@ public class DialogoCapturarResultados extends JDialog implements WindowListener
 	 * Arreglo de etiquetas para los nombres de los participantes no iniciales.
 	 */
 	private JLabel[] etiquetaParticipanteFinal;
+
+	/**
+	 * Arreglo de campos para las fechas de los encuentros.
+	 */
+	private JTextField[] etiquetaFechaEncuentros;
 
 	/**
 	 * Sirve para acceder a los datos que tenga almacenado el torneo.
@@ -407,7 +415,7 @@ public class DialogoCapturarResultados extends JDialog implements WindowListener
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ventanaPrincipal.cargarManual();
+				ventanaPrincipal.accionCargarManual();
 			}
 		};
 		accionAyuda.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0));
@@ -476,7 +484,7 @@ public class DialogoCapturarResultados extends JDialog implements WindowListener
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//FIXME
+				// FIXME
 				if (!torneo.getTipoTorneo().equals("Eliminación directa")) {
 					accionComboSeleccionarCiclo();
 					etiquetaTituloTabla.setText("Tabla de resultados de "
@@ -602,8 +610,9 @@ public class DialogoCapturarResultados extends JDialog implements WindowListener
 		etiquetaNumeroFinal = new JLabel[numeroPartidas + auxImpar];
 		etiquetaParticipanteFinal = new JLabel[numeroPartidas + auxImpar];
 		campoMarcadorFinal = new JTextField[numeroPartidas + auxImpar];
-		
-		//FIXME
+		etiquetaFechaEncuentros = new JTextField[numeroPartidas + auxImpar];
+
+		// FIXME
 		if (!torneo.getAlgoritmoTorneo().equals("Eliminación directa")) {
 
 			for (int i = 0; i < numeroPartidas + auxImpar; i++) {
@@ -698,13 +707,14 @@ public class DialogoCapturarResultados extends JDialog implements WindowListener
 
 				}
 
-				//FIXME
-				etiquetaFechaEncuentros = new JTextField( new Date().toString());
-				etiquetaFechaEncuentros.setPreferredSize(new Dimension(150, 25));
-				etiquetaFechaEncuentros.setEditable(false);
-				
+				// FIXME
+				DateFormat f = DateFormat.getDateInstance(DateFormat.LONG);
+				etiquetaFechaEncuentros[i] = new JTextField(f.format(new Date()));
+				etiquetaFechaEncuentros[i].setPreferredSize(new Dimension(170, 25));
+				etiquetaFechaEncuentros[i].setEditable(false);
+
 				auxPanel = new JPanel();
-				auxPanel.add(etiquetaFechaEncuentros);
+				auxPanel.add(etiquetaFechaEncuentros[i]);
 				auxPanel.setPreferredSize(new Dimension(200, 30));
 				panelFilasTabla[i].add(auxPanel);
 

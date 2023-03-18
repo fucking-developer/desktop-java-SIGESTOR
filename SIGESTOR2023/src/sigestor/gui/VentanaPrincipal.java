@@ -3,7 +3,6 @@ package sigestor.gui;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
-import java.io.IOException;
 import javax.swing.*;
 import javax.swing.filechooser.*;
 import sigestor.dominio.*;
@@ -70,8 +69,9 @@ import sigestor.excepcion.*;
  * <li><code>serialVersionUID</code> Para el número de versión de la clase.</li>
  * </ul>
  * 
- * @version 12/06/2022
+ * @version 17/03/2023
  * 
+ * @author Jonathan Eduardo Ibarra Martínez
  * @author Ricky Didier Peralta Reyes
  * @author Uriel Romeo Cruz Cortes
  * @author Jennifer Cortés Pérez
@@ -357,8 +357,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener, WindowLi
 		/*-------------------------------------------------------------*/
 		menuTorneoEliminacionDirecta = new JMenu("Torneo Eliminacion Directa");
 		menuTorneoEliminacionDirecta.setIcon(new ImageIcon(getClass().getResource("/imagenes/eliminaciondirecta.png")));// FIXME
-		
-		
+
 		// lo activé en true, debe de ser false
 		menuTorneoEliminacionDirecta.setEnabled(false);
 		menuTorneoEliminacionDirecta.setMnemonic(KeyEvent.VK_D);
@@ -462,38 +461,55 @@ public class VentanaPrincipal extends JFrame implements ActionListener, WindowLi
 		} else if (e.getSource().equals(submenuSalir)) {
 			accionSalir();
 		} else if (e.getSource().equals(submenuAdministrarTorneo)) {
-			new DialogoAdministarTorneo(this);
+			accionAdministrarTorneo();
 		} else if (e.getSource().equals(submenuIniciarTorneo)) {
 			accionIniciarTorneo();
 		} else if (e.getSource().equals(submenuCancelarTorneo)) {
 			accionCancelarTorneo();
 		} else if (e.getSource().equals(submenuConsultarCiclosSuizo)) {
-			new DialogoCiclo(this);
+			accionAbrirCiclo();
 		} else if (e.getSource().equals(submenuResultadosSuizo)) {
-			new DialogoCapturarResultados(this);
+			accionAbrirCapturarResultados();
 		} else if (e.getSource().equals(submenuResultadosFinalesSuizo)) {
 			accionAbrirResultadosFinales();
-			
-			
 		} else if (e.getSource().equals(submenuConsultarCiclosEliminacionDirecta)) {
-			new DialogoCiclo(this);
+			accionAbrirCiclo();
 		} else if (e.getSource().equals(submenuResultadosEliminacionDirecta)) {
-			new DialogoCapturarResultados(this);
+			accionAbrirCapturarResultados();
 		} else if (e.getSource().equals(submenuResultadosFinalesEliminacionDirecta)) {
-			new DialogoResultadosFinales(this);
-			
-			
+			accionAbrirResultadosFinales();
 		} else if (e.getSource().equals(submenuConsultarCiclosRoundRobin)) {
-			new DialogoCiclo(this);
+			accionAbrirCiclo();
 		} else if (e.getSource().equals(submenuResultadosRoundRobin)) {
-			new DialogoCapturarResultados(this);
+			accionAbrirCapturarResultados();
 		} else if (e.getSource().equals(submenuResultadosFinalesRoundRobin)) {
 			accionAbrirResultadosFinales();
 		} else if (e.getSource().equals(submenuManual)) {
-			cargarManual();
+			accionCargarManual();
 		} else if (e.getSource().equals(submenuAcercaDe)) {
-			acercaDe();
+			accionAbrirAcercaDe();
 		}
+	}
+
+	/**
+	 * Encargado de abrir <code>DialogoAdministrarTorneo</code>.
+	 */
+	private void accionAdministrarTorneo() {
+		new DialogoAdministarTorneo(this);
+	}
+
+	/**
+	 * Encargado de abrir <code>DialogoCapturarResultados</code>.
+	 */
+	private void accionAbrirCapturarResultados() {
+		new DialogoCapturarResultados(this);
+	}
+
+	/**
+	 * Encargado de abrir <code>DialogoCiclo</code>.
+	 */
+	private void accionAbrirCiclo() {
+		new DialogoCiclo(this);
 	}
 
 	/**
@@ -501,9 +517,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener, WindowLi
 	 * caso de seleccionar sí.
 	 */
 	private void accionSalir() {
-
 		System.exit(0);
-
 	}
 
 	/**
@@ -542,12 +556,11 @@ public class VentanaPrincipal extends JFrame implements ActionListener, WindowLi
 				} catch (ExcepcionBaseDatosPersonalizacion e) {
 					JOptionPane.showMessageDialog(null, e.getMessage(), "Cancelar torneo", JOptionPane.ERROR_MESSAGE);
 				}
-				
-				
+
 				this.submenuResultadosEliminacionDirecta.setText("Capturar resultados");
 				this.submenuResultadosSuizo.setText("Capturar resultados");
 				this.submenuResultadosRoundRobin.setText("Capturar resultados");
-				
+
 				submenuAdministrarTorneo.setEnabled(true);
 				submenuIniciarTorneo.setEnabled(true);
 				submenuCancelarTorneo.setEnabled(false);
@@ -598,7 +611,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener, WindowLi
 	 * Muestra en una ventana al director del proyecto y sus colaboradores con la
 	 * opción <code>Acerca de...</code>.
 	 */
-	public void acercaDe() {
+	private void accionAbrirAcercaDe() {
 		JOptionPane.showMessageDialog(this, "Sistema gestor de torneos v.1.0\n\n" + "\nDirector del proyecto"
 				+ "\nM.C. Manuel Alejandro Valdés Marrero\n" + "\n\nColaboradores: "
 				+ "\nClemente Hernández Alicia Adriana" + "\nCortés Pérez Jennifer" + "\nCruz Cortes Uriel Romeo"
@@ -611,16 +624,25 @@ public class VentanaPrincipal extends JFrame implements ActionListener, WindowLi
 	}
 
 	/**
-	 * Muestra un archivo PDF al usuario con información reduntante del proyecto con
-	 * la opción <code>Ayuda</code>.
+	 * Encargado de mostrar un archivo PDF al usuario con información redundante de
+	 * como utilizar el sistema.
 	 */
-	public void cargarManual() {
+	private void accionCargarManual() {
 		File archivo = new File("MANUAL SIGESTOR.pdf");
-		try {
-			Desktop.getDesktop().open(archivo);
-		} catch (IOException e) {
-
+		if (archivo.exists()) {
+			try {
+				Desktop.getDesktop().open(archivo);
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(this,
+						"El sistema no pudo abrir el manual, favor de contactar con soporte técnico",
+						"Error al abrir el manual", JOptionPane.ERROR_MESSAGE);
+			}
+		} else {
+			JOptionPane.showMessageDialog(this,
+					"El sistema no pudo encontrar el manual, favor de contactar con soporte técnico",
+					"Error al encontrar el manual", JOptionPane.ERROR_MESSAGE);
 		}
+
 	}
 
 	/**
@@ -671,12 +693,12 @@ public class VentanaPrincipal extends JFrame implements ActionListener, WindowLi
 
 				JOptionPane.showMessageDialog(null, "El archivo ha sido abierto exitosamente.", "Torneo Abierto",
 						JOptionPane.INFORMATION_MESSAGE);
-				
+
 				submenuAbrirTorneo.setEnabled(false);
 				menuOperaciones.setEnabled(true);
 				submenuCerrarTorneo.setEnabled(true);
 				submenuCrearTorneo.setEnabled(false);
-				
+
 				if (getTorneoActual().getCicloActual() > 0) {
 					submenuAdministrarTorneo.setEnabled(false);
 					submenuIniciarTorneo.setEnabled(false);
@@ -834,7 +856,8 @@ public class VentanaPrincipal extends JFrame implements ActionListener, WindowLi
 						submenuAdministrarTorneo.setEnabled(false);
 						submenuIniciarTorneo.setEnabled(false);
 						submenuCancelarTorneo.setEnabled(true);
-						submenuConsultarCiclosRoundRobin.setText("Consultar " + getTorneoActual().getDatosPersonalizacion().getNombreCiclo(1));
+						submenuConsultarCiclosRoundRobin
+								.setText("Consultar " + getTorneoActual().getDatosPersonalizacion().getNombreCiclo(1));
 					}
 				}
 			} else if (getTorneoActual().getTipoTorneo().equals("Suizo")) {
@@ -875,14 +898,15 @@ public class VentanaPrincipal extends JFrame implements ActionListener, WindowLi
 						JOptionPane.showMessageDialog(null,
 								"El torneo " + getTorneoActual().getNombreTorneo() + " se ha iniciado correctamente.",
 								"Iniciar torneo Suizo", JOptionPane.INFORMATION_MESSAGE);
-						
+
 						menuTorneoSuizo.setEnabled(true);
-						
+
 						submenuAdministrarTorneo.setEnabled(false);
 						submenuIniciarTorneo.setEnabled(false);
 						submenuCancelarTorneo.setEnabled(true);
-						
-						submenuConsultarCiclosSuizo.setText("Consultar " + getTorneoActual().getDatosPersonalizacion().getNombreCiclo(1));
+
+						submenuConsultarCiclosSuizo
+								.setText("Consultar " + getTorneoActual().getDatosPersonalizacion().getNombreCiclo(1));
 
 					} catch (ExcepcionBaseDatosTorneo e) {
 						JOptionPane.showMessageDialog(null, e.getMessage(), "Iniciar torneo",
@@ -891,25 +915,24 @@ public class VentanaPrincipal extends JFrame implements ActionListener, WindowLi
 
 				}
 
-			} else if(getTorneoActual().getTipoTorneo().equals("Eliminación directa")) {
-					//TorneoEliminacionDirecta eliminacionDirecta= new TorneoEliminacionDirecta(this.torneoActual);
-				
-					JOptionPane.showMessageDialog(null,
+			} else if (getTorneoActual().getTipoTorneo().equals("Eliminación directa")) {
+				// TorneoEliminacionDirecta eliminacionDirecta= new
+				// TorneoEliminacionDirecta(this.torneoActual);
+
+				JOptionPane.showMessageDialog(null,
 						"El torneo " + getTorneoActual().getNombreTorneo() + " se ha iniciado correctamente.",
 						"Iniciar torneo Eliminación directa", JOptionPane.INFORMATION_MESSAGE);
-				
-					this.menuTorneoEliminacionDirecta.setEnabled(true);
-					submenuAdministrarTorneo.setEnabled(false);
-					submenuIniciarTorneo.setEnabled(false);
-					submenuCancelarTorneo.setEnabled(true);
-					
-					this.submenuConsultarCiclosEliminacionDirecta.setText("Consular "+ getTorneoActual().getDatosPersonalizacion().getNombreCiclo(1));
-					
-					
-				
+
+				this.menuTorneoEliminacionDirecta.setEnabled(true);
+				submenuAdministrarTorneo.setEnabled(false);
+				submenuIniciarTorneo.setEnabled(false);
+				submenuCancelarTorneo.setEnabled(true);
+
+				this.submenuConsultarCiclosEliminacionDirecta
+						.setText("Consular " + getTorneoActual().getDatosPersonalizacion().getNombreCiclo(1));
+
 			}
 
-			
 		} catch (ExcepcionTorneo e) {
 			JOptionPane.showMessageDialog(null, e.getMessage(), "Iniciar torneo", JOptionPane.ERROR_MESSAGE);
 		} catch (ExcepcionPersonalizacion e) {
@@ -949,7 +972,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener, WindowLi
 				&& this.getTorneoActual().getCicloActual() == this.getTorneoActual().getAlgoritmoTorneo()
 						.getNumeroCiclos()
 				&& this.getTorneoActual().getListaParticipantes().get(1).getLugarParticipante() > 0) {
-			
+
 			this.submenuResultadosRoundRobin.setText("Reporte de resultados");
 			this.submenuResultadosSuizo.setText("Reporte de resultados");
 			this.submenuResultadosEliminacionDirecta.setText("Reporte de resultados");

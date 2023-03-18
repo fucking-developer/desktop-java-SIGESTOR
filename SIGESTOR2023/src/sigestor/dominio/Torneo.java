@@ -51,12 +51,13 @@ import sigestor.excepcion.ExcepcionTorneo;
  * avanzar el torneo.</li>
  * </ul>
  * 
- * @version 12/06/2022
+ * @version 16/03/2023
  * 
  * @author Ricky Didier Peralta Reyes
  * @author Uriel Romeo Cruz Cortes
  * @author Jennifer Cortés Pérez
  * @author Beatriz Andrea Jiménez Ríos
+ * @author Lopez Aragon Hernan Sesai
  * 
  */
 public class Torneo {
@@ -236,7 +237,9 @@ public class Torneo {
 	 * Devuelve el tipo de torneo.
 	 * 
 	 * @return Regresa el tipo de torneo, <tt>"Suizo"</tt> en caso de el torneo
-	 *         sea Suizo, <tt>"Round Robin"</tt> en caso de ser Round Robin.
+	 *         sea Suizo, <tt>"Round Robin"</tt> en caso de ser Round Robin,
+	 *         <tt>"Eliminación directa"</tt> en caso de que el torneo 
+	 *         sea Eliminación directa.
 	 */
 
 	public String getTipoTorneo() {
@@ -250,7 +253,8 @@ public class Torneo {
 	 * @param tipoTorneo
 	 *            Recibe el tipo de torneo, <tt>"Suizo"</tt> en caso de que el
 	 *            torneo sea Suizo, <tt>"Round Robin"</tt> en caso de ser Round
-	 *            Robin.
+	 *            Robin,<tt>"Eliminación directa"</tt> en caso de que el torneo
+	 *            sea Eliminación directa.
 	 */
 
 	public void setTipoTorneo(String tipoTorneo) {

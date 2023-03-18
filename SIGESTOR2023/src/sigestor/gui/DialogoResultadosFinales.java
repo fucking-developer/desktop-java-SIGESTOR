@@ -164,7 +164,7 @@ public class DialogoResultadosFinales extends JDialog implements ActionListener 
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ventanaPrincipal.cargarManual();
+				ventanaPrincipal.accionCargarManual();
 			}
 		};
 		accionAyuda.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0));

@@ -33,17 +33,28 @@ package sigestor.excepcion;
  * del error al no poder crear el torneo Suizo en la base de datos.</li>
  * <li><code>MENSAJE_EXCEPCION_ELIMINA_TORNEO_SUIZO</code> para mostrar la causa
  * del error al no poder eliminar el torneo Suizo en la base de datos.</li>
+ * <li><code>MENSAJE_EXCEPCION_INSERTA_TORNEO_ELIMINACION_DIRECTA</code> para
+ * mostrar la causa del error al no poder crear el torneo Eliminación directa en
+ * la base de datos.</li>
+ * <li><code>MENSAJE_EXCEPCION_ELIMINA_TORNEO_ELIMINACION_DIRECTA</code> para
+ * mostrar la causa del error al no poder eliminar el torneo Eliminación directa
+ * en la base de datos.</li>
+ * <li><code>MENSAJE_EXCEPCION_CONSULTA_TORNEO</code> para indicar que no ha
+ * sido posible consultar los datos del torneo.</li>
+ * <li><code> MENSAJE_EXCEPCION_CONSULTA_CICLO_SUIZO</code> para indicar que no
+ * ha sido posible obtener los ciclos del torneo Suizo.</li>
  * <li><code>MENSAJE_EXCEPCION_SOLUCION </code> para mostrar la solución del
  * error presentado.</li>
  * </ul>
  * 
- * @version 20/04/2022
+ * @version 17/03/2023
  * 
+ * @author Jennifer Cortés Pérez
  * @author Beatriz Andrea Jiménez Ríos
  * @author Victor Triste Pérez
  */
 public class ExcepcionBaseDatosTorneo extends Exception {
-	
+
 	/**
 	 * Sirve para definir un id que sera usado por la virtual machine cuando
 	 * serializa y deserealiza el applet.
@@ -106,6 +117,16 @@ public class ExcepcionBaseDatosTorneo extends Exception {
 	 */
 	public static final String MENSAJE_EXCEPCION_ELIMINA_TORNEO_SUIZO = "No se ha conseguido cancelar el torneo Suizo";
 	/**
+	 * Primera parte del mensaje que indica que no ha sido posible crear el torneo
+	 * Eliminación directa en la base de datos.
+	 */
+	public static final String MENSAJE_EXCEPCION_INSERTA_TORNEO_ELIMINACION_DIRECTA = "No se ha conseguido crear el torneo Eliminación directa";
+	/**
+	 * Primera parte del mensaje que indica que no ha sido posible eliminar el
+	 * torneo Eliminación directa en la base de datos.
+	 */
+	public static final String MENSAJE_EXCEPCION_ELIMINA_TORNEO_ELIMINACION_DIRECTA = "No se ha conseguido cancelar el torneo Eliminación directa";
+	/**
 	 * Primera parte del mensaje que indica que no ha sido posible consultar los
 	 * datos del torneo en la base de datos.
 	 */
@@ -125,8 +146,9 @@ public class ExcepcionBaseDatosTorneo extends Exception {
 	 * Permite mostrar un mensaje de acuerdo a las constantes declaradas en esta
 	 * clase.
 	 * 
-	 * @param mensaje Recibe la constante declarada en la clase
-	 *                <code>ExcepcionBaseDatosTorneo</code>.
+	 * @param mensaje
+	 *            Recibe la constante declarada en la clase
+	 *            <code>ExcepcionBaseDatosTorneo</code>.
 	 */
 	public ExcepcionBaseDatosTorneo(String mensaje) {
 		super(mensaje);

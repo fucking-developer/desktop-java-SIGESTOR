@@ -45,20 +45,18 @@ import sigestor.dominio.Participante;
  * <li><code>botonNuevo</code> para añadir un nuevo participante.</li>
  * <li><code>botonModificar</code> para modificar un participante.</li>
  * <li><code>botonEliminar</code> para eliminar un participante.</li>
- * <li><code>checkPuntaje</code> para ordenar los participantes por
- * puntaje.</li>
- * <li><code>opcionAlfabetico</code> para ordenar los participantes por orden
- * alfabético.</li>
- * <li><code>opcionAleatorio</code> para ordenar los participantes por orden
- * aleatorio.</li>
+ * <li><code>botonImportar</code> para importar los participantes.</li>
+ * <li><code>botonDescargarPlantilla</code> para descargar la plantilla de los participantes.</li>
+ * <li><code>checkPuntaje</code> para ordenar los participantes por puntaje.</li>
+ * <li><code>opcionAlfabetico</code> para ordenar los participantes por orden alfabético.</li>
+ * <li><code>opcionAleatorio</code> para ordenar los participantes por orden aleatorio.</li>
  * <li><code>model</code> para ayudar a manejar la lista de participantes.</li>
- * <li><code>listaDeParticipantes</code> para guardar la lista de participantes
- * de tipo <code>Participante</code>.</li>
+ * <li><code>listaDeParticipantes</code> para guardar la lista de participantes de tipo <code>Participante</code>.</li>
  * <li><code>ventanaPrincipal</code> para hacer referencia a la clase
  * <code>VentanaPrincipal</code>.</li>
  * </ul>
  * 
- * @version 05/06/2022
+ * @version 16/03/2023
  * 
  * @author Ricky Didier Peralta Reyes
  * @author Uriel Romeo Cruz Cortes
@@ -248,8 +246,17 @@ public class PanelAdministrarParticipantes extends JPanel {
 		
 		panelAux3=new JPanel();
 
-		botonImportar=new JButton("Importar");
-		botonImportar.setIcon(new ImageIcon(getClass().getResource("/imagenes/importar.png")));
+		
+		imagenBoton = new ImageIcon(getClass().getResource("/imagenes/importar.png"));
+		icono = imagenBoton.getImage().getScaledInstance(20, 20, Image.SCALE_AREA_AVERAGING);
+		Action accionBotonImportar = new AbstractAction("Importar", new ImageIcon(icono)) {
+			private static final long serialVersionUID = 1L;
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				accionImportarParticipantes();
+			}
+		};
+		botonImportar=new JButton(accionBotonImportar);
 		botonImportar.setPreferredSize(new Dimension (130,30));
 		botonImportar.setMnemonic(KeyEvent.VK_P);
 		botonImportar.setToolTipText("Permite importar una lista de participantes");
@@ -259,8 +266,17 @@ public class PanelAdministrarParticipantes extends JPanel {
 		panelAux.add(panelAux3);
 		
 		panelAux3=new JPanel();
-		botonDescargarPlantilla=new JButton("Descargar plantilla");
-		botonDescargarPlantilla.setIcon(new ImageIcon(getClass().getResource("/imagenes/descargarPlantilla.png")));
+		
+		imagenBoton = new ImageIcon(getClass().getResource("/imagenes/descargarPlantilla.png"));
+		icono = imagenBoton.getImage().getScaledInstance(20, 20, Image.SCALE_AREA_AVERAGING);
+		Action accionBotonDescargarPlantilla = new AbstractAction("Descargar plantilla", new ImageIcon(icono)) {
+			private static final long serialVersionUID = 1L;
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				accionDescargarPlantilla();
+			}
+		};
+		botonDescargarPlantilla=new JButton(accionBotonDescargarPlantilla);
 		botonDescargarPlantilla.setPreferredSize(new Dimension (170,30));
 		botonDescargarPlantilla.setToolTipText("Permite descargar la plantilla de  participantes");
 		botonDescargarPlantilla.setMnemonic(KeyEvent.VK_S);
@@ -550,6 +566,20 @@ public class PanelAdministrarParticipantes extends JPanel {
 	 */
 	public void ocultarPanel() {
 		this.setVisible(false);
+	}
+	
+	/**
+	 * 
+	 */
+	private void accionImportarParticipantes() {
+		
+	}
+	
+	/**
+	 * 
+	 */
+	private void accionDescargarPlantilla() {
+		
 	}
 
 }

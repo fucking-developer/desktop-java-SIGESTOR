@@ -1,6 +1,7 @@
 package sigestor.dominio;
 
 import sigestor.excepcion.ExcepcionCapturarResultados;
+import java.util.Date;
 
 /**
  * Sirve para guardar un encuentro de un ciclo con todos sus datos.
@@ -19,9 +20,10 @@ import sigestor.excepcion.ExcepcionCapturarResultados;
  * segundo participante.</li>
  * <li><code>resutladoEncuentro</code> para el resultado del encuentro con sus
  * dos participantes.</li>
+ * <li><code>fechaEncuentro</code> para la fecha en que se realiza el encuentro.</li>
  * </ul>
  * 
- * @version 24/05/2022
+ * @version 16/03/2023
  * 
  * @author Alicia Adriana Clemente Hernandez
  * @author Luis Fernando de la Cruz López
@@ -32,7 +34,8 @@ import sigestor.excepcion.ExcepcionCapturarResultados;
  * @author Francisco Samuel Reyes Cortes
  */
 public class Encuentro {
-
+	
+	
 	/**
 	 * Identificador del objeto <code>Encuentro</code>.
 	 */
@@ -75,6 +78,12 @@ public class Encuentro {
 	private int resultadoEncuentro;
 
 	/**
+	 * Identificador de la fecha del encuentro <code>Encuentro</code>.
+	 * 
+	 */
+	private Date fechaEncuentro;
+	
+	/**
 	 * Resultado del objeto <code>Encuentro</code> en caso de ser ganador el
 	 * participante inicial.
 	 */
@@ -104,13 +113,10 @@ public class Encuentro {
 	 */
 	public static final int DESCANSO = 3;
 
-	/**
-	 * Inicializa todas las variables del objeto <code>Encuentro</code> con valores
-	 * por defecto.
-	 * 
-	 * @throws ExcepcionCapturarResultados Si ocurre un error al inicializar las
-	 *                                     variables con los valores recibidos.
-	 */
+	
+	
+	
+
 	public Encuentro() throws ExcepcionCapturarResultados {
 		this(0, 0, 0);
 	}
@@ -178,52 +184,13 @@ public class Encuentro {
 		setMarcadorParticipanteFinal(marcadorParticipanteFinal);
 		setResultadoEncuentro(resultadoEncuentro);
 	}
-
-	/**
-	 * Obtiene el resultado del objeto <code>Encuentro</code>.
-	 * 
-	 * @return Regresa el resultado del encuentro. Existen tres valores posibles:
-	 *         <ul>
-	 *         <li>constante <code>GANADOR_INICIAL</code> si es ganador el
-	 *         participante inicial.</li>
-	 *         <li>constante <code>EMPATE</code> en caso de empatar ambos
-	 *         participantes.</li>
-	 *         <li>constante <code>GANADOR_FINAL</code> si es ganador el
-	 *         participante final.</li>
-	 *         </ul>
-	 */
-	public int getResultadoEncuentro() {
-		return resultadoEncuentro;
-	}
-
-	/**
-	 * Inicializa el resultado del objeto <code>Encuentro</code> con el valor
-	 * recibido.
-	 * 
-	 * @param resultadoEncuentro Recibe ell resultado del encuentro. Puede contener
-	 *                           los valores siguientes:
-	 *                           <ul>
-	 *                           <li>constante <code>GANADOR_INICIAL</code> si es
-	 *                           ganador el participante inicial.</li>
-	 *                           <li>constante <code>EMPATE</code> en caso de
-	 *                           empatar ambos participantes.</li>
-	 *                           <li>constante <code>GANADOR_FINAL</code> si es
-	 *                           ganador el participante final.</li>
-	 *                           <li>constante <code>SIN_JUGAR</code> si el
-	 *                           encuentro no se ha jugado.</li>
-	 *                           <li>constante <code>DESCANSO</code> si el jugador
-	 *                           tiene descanso.</li>
-	 *                           </ul>
-	 */
-	public void setResultadoEncuentro(int resultadoEncuentro) {
-		this.resultadoEncuentro = resultadoEncuentro;
-	}
-
+	
 	/**
 	 * Obtiene el identificador del objeto <code>Encuentro</code>.
 	 * 
 	 * @return Regresa el identificador del encuentro.
 	 */
+	
 	public int getNumeroEncuentro() {
 		return numeroEncuentro;
 	}
@@ -378,6 +345,65 @@ public class Encuentro {
 		} else {
 			throw new ExcepcionCapturarResultados(ExcepcionCapturarResultados.MENSAJE_EXCEPCION_MARCADOR_VACIO);
 		}
+	}
+	
+	/**
+	 * Obtiene el resultado del objeto <code>Encuentro</code>.
+	 * 
+	 * @return Regresa el resultado del encuentro. Existen tres valores posibles:
+	 *         <ul>
+	 *         <li>constante <code>GANADOR_INICIAL</code> si es ganador el
+	 *         participante inicial.</li>
+	 *         <li>constante <code>EMPATE</code> en caso de empatar ambos
+	 *         participantes.</li>
+	 *         <li>constante <code>GANADOR_FINAL</code> si es ganador el
+	 *         participante final.</li>
+	 *         </ul>
+	 */
+	public int getResultadoEncuentro() {
+		return resultadoEncuentro;
+	}
+
+	/**
+	 * Inicializa el resultado del objeto <code>Encuentro</code> con el valor
+	 * recibido.
+	 * 
+	 * @param resultadoEncuentro Recibe ell resultado del encuentro. Puede contener
+	 *                           los valores siguientes:
+	 *                           <ul>
+	 *                           <li>constante <code>GANADOR_INICIAL</code> si es
+	 *                           ganador el participante inicial.</li>
+	 *                           <li>constante <code>EMPATE</code> en caso de
+	 *                           empatar ambos participantes.</li>
+	 *                           <li>constante <code>GANADOR_FINAL</code> si es
+	 *                           ganador el participante final.</li>
+	 *                           <li>constante <code>SIN_JUGAR</code> si el
+	 *                           encuentro no se ha jugado.</li>
+	 *                           <li>constante <code>DESCANSO</code> si el jugador
+	 *                           tiene descanso.</li>
+	 *                           </ul>
+	 */
+	public void setResultadoEncuentro(int resultadoEncuentro) {
+		this.resultadoEncuentro = resultadoEncuentro;
+	}
+	
+	/**
+	 * Obtiene la  fecha del encuentro <code>Encuentro</code>.
+	 * 
+	 * @return Regresa el valor de la fecha  del encuentro.
+	 */
+	public Date getFechaEncuentro() {
+		return fechaEncuentro;
+	}
+	
+	/**
+	 * Inicializa el identificador del objeto <code>Encuentro</code> con el valor
+	 * recibido.
+	 * 
+	 * @param fechaEncuentro Recibe la fecha del encuentro.
+	 */
+	public void setFechaEncuentro(Date fechaEncuentro) {
+		this.fechaEncuentro = fechaEncuentro;
 	}
 
 	/**
