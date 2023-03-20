@@ -159,9 +159,10 @@ public class DialogoResultadosFinales extends JDialog implements ActionListener 
 		etiquetaTitulo.setBounds(400, 0, 400, 30);
 		panelAuxiliar.add(etiquetaTitulo);
 		panelBase.add(panelAuxiliar);
+		
+		
 		Action accionAyuda = new AbstractAction("Reporte de resultados finales del torneo", null) {
 			private static final long serialVersionUID = 1L;
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ventanaPrincipal.accionCargarManual();

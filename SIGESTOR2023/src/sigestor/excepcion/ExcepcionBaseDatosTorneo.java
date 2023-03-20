@@ -110,22 +110,22 @@ public class ExcepcionBaseDatosTorneo extends Exception {
 	 * Primera parte del mensaje que indica que no ha sido posible crear el torneo
 	 * Suizo en la base de datos.
 	 */
-	public static final String MENSAJE_EXCEPCION_INSERTA_TORNEO_SUIZO = "No se ha conseguido crear el torneo Suizo";
+	public static final String MENSAJE_EXCEPCION_INSERTA_TORNEO_SUIZO = "No se ha conseguido guardar los datos del torneo Suizo";
 	/**
 	 * Primera parte del mensaje que indica que no ha sido posible eliminar el
 	 * torneo Suizo en la base de datos.
 	 */
-	public static final String MENSAJE_EXCEPCION_ELIMINA_TORNEO_SUIZO = "No se ha conseguido cancelar el torneo Suizo";
+	public static final String MENSAJE_EXCEPCION_ELIMINA_TORNEO_SUIZO = "No se ha conseguido eliminar los datos del torneo Suizo";
 	/**
 	 * Primera parte del mensaje que indica que no ha sido posible crear el torneo
 	 * Eliminación directa en la base de datos.
 	 */
-	public static final String MENSAJE_EXCEPCION_INSERTA_TORNEO_ELIMINACION_DIRECTA = "No se ha conseguido crear el torneo Eliminación directa";
+	public static final String MENSAJE_EXCEPCION_INSERTA_TORNEO_ELIMINACION_DIRECTA = "No se ha conseguido guardar los datos del torneo Eliminación directa";
 	/**
 	 * Primera parte del mensaje que indica que no ha sido posible eliminar el
 	 * torneo Eliminación directa en la base de datos.
 	 */
-	public static final String MENSAJE_EXCEPCION_ELIMINA_TORNEO_ELIMINACION_DIRECTA = "No se ha conseguido cancelar el torneo Eliminación directa";
+	public static final String MENSAJE_EXCEPCION_ELIMINA_TORNEO_ELIMINACION_DIRECTA = "No se ha conseguido eliminar los datos del torneo Eliminación directa";
 	/**
 	 * Primera parte del mensaje que indica que no ha sido posible consultar los
 	 * datos del torneo en la base de datos.

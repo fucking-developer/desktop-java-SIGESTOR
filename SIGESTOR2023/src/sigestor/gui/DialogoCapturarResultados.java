@@ -415,7 +415,7 @@ public class DialogoCapturarResultados extends JDialog implements WindowListener
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ventanaPrincipal.accionCargarManual();
+				ventanaPrincipal.cargarManual();
 			}
 		};
 		accionAyuda.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0));

@@ -17,7 +17,7 @@ import sigestor.excepcion.*;
 /**
  * Sirve para manejar la base datos general del torneo.
  * 
- * @version 12/06/2022
+ * @version 19/03/2023
  * 
  * @author Ricky Didier Peralta Reyes
  * @author Uriel Romeo Cruz Cortes
@@ -79,10 +79,10 @@ public class BaseDatosTorneo extends BaseDatos {
 							+ " REAL DEFAULT 0.0, puntajeEmpatar REAL DEFAULT 0.0, puntajePerder REAL DEFAULT 0.0, ordenPuntaje BOOLEAN DEFAULT false, ordenAlfabetico BOOLEAN DEFAULT false, ordenAleatorio BOOLEAN DEFAULT false)");
 			realizarAccion("CREATE TABLE ciclo(numeroCiclo INTEGER DEFAULT 0 PRIMARY KEY)");
 			realizarAccion(
-					"CREATE TABLE encuentro(numeroEncuentro INTEGER DEFAULT 0, idParticipanteInicial INTEGER DEFAULT 0, idParticipanteFinal INTEGER DEFAULT 0, marcadorParticipanteInicial INTEGER DEFAULT 0, marcadorParticipanteFinal INTEGER DEFAULT 0, resultado INTEGER DEFAULT 0, numeroCiclo INTEGER DEFAULT 0)");
+					"CREATE TABLE encuentro(numeroEncuentro INTEGER DEFAULT 0, idParticipanteInicial INTEGER DEFAULT 0, idParticipanteFinal INTEGER DEFAULT 0, marcadorParticipanteInicial INTEGER DEFAULT 0, marcadorParticipanteFinal INTEGER DEFAULT 0, resultado INTEGER DEFAULT 0, numeroCiclo INTEGER DEFAULT 0, fechaDelEncuentro TEXT)");
 			realizarAccion(
 					"CREATE TABLE participante(numeroParticipante INTEGER DEFAULT 0, nombreParticipante  TEXT, puntajeParticipante REAL DEFAULT 0.0, puntajeAcumuladoParticipante REAL DEFAULT 0.0, marcadorFavor INTEGER DEFAULT 0, marcadorContra INTEGER DEFAULT 0, lugarParticipante INTEGER DEFAULT 0)");
-
+			realizarAccion("CREATE TABLE eliminacionDirecta(numeroCiclos INTEGER DEFAULT 1)");
 			cerrarConexion();
 		} catch (ExcepcionBaseDatos e) {
 
@@ -202,7 +202,7 @@ public class BaseDatosTorneo extends BaseDatos {
 		for (String e : tablas) {
 			if (e.equals("datosGenerales") || e.equals("suizo") || e.equals("roundRobin")
 					|| e.equals("criteriosDesempates") || e.equals("personalizacion") || e.equals("ciclo")
-					|| e.equals("encuentro") || e.equals("participante")) {
+					|| e.equals("encuentro") || e.equals("participante") || e.equals("eliminacionDirecta")) {
 				contador++;
 			}
 		}

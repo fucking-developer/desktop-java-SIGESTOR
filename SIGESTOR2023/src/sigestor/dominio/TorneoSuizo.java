@@ -20,8 +20,9 @@ import sigestor.excepcion.ExcepcionCapturarResultados;
  * desempatar jugadores y realizar reportes. <code>AlgoritmoTorneo</code>.
  * <p>
  * 
- * @version 04/06/2022
+ * @version 19/03/2023
  * 
+ * @author Jonathan Eduardo Ibarra Martínez
  * @author Alicia Adriana Clemente Hernandez
  * @author Luis Fernando de la Cruz López
  * @author Luis Antonio Ruiz Sierra
@@ -41,8 +42,8 @@ public class TorneoSuizo extends AlgoritmoTorneo {
 	}
 
 	/**
-	 * Obtiene la cantidad máxima de ciclos del torneo según el algoritmo
-	 * general del sistema suizo.
+	 * Obtiene la cantidad máxima de ciclos del torneo según el algoritmo general
+	 * del sistema suizo.
 	 * 
 	 * @param numeroParticipantes
 	 *            Cantidad de participantes inscritos en el torneo.
@@ -54,8 +55,8 @@ public class TorneoSuizo extends AlgoritmoTorneo {
 	}
 
 	/**
-	 * Genera inicialmente los encuentros del primer ciclo y después los
-	 * encuentros del siguiente ciclo una vez terminado el ciclo anterior.
+	 * Genera inicialmente los encuentros del primer ciclo y después los encuentros
+	 * del siguiente ciclo una vez terminado el ciclo anterior.
 	 */
 	@Override
 	public void realizarEncuentros() throws ExcepcionBaseDatos, ExcepcionBaseDatosEncuentro, ExcepcionBaseDatosCiclo {
@@ -100,93 +101,93 @@ public class TorneoSuizo extends AlgoritmoTorneo {
 			for (Participante p2 : participantes) {
 				if (p1.getPuntajeAcumuladoParticipante() == p2.getPuntajeAcumuladoParticipante()) {
 					cicloromper: {
-						for (String criterio : criterios) {
-							switch (criterio) {
-							case "Encuentro directo":
-								desempate = new DesempateEncuentroDirecto();
-								participanteGanador = desempate.desempatar(p1, p2, participantes,
-										obtenerEncuentrosTotales(), torneo);
-								if (participanteGanador != null) {
-									participantes = intercambiarPosiciones(p1.getNumeroParticipante(),
-											p2.getNumeroParticipante(), participanteGanador.getNumeroParticipante());
-									break cicloromper;
-								}
-								break;
-							case "Sistema Koya":
-								desempate = new DesempateSistemaKoya();
-								participanteGanador = desempate.desempatar(p1, p2, participantes,
-										obtenerEncuentrosTotales(), torneo);
-								if (participanteGanador != null) {
-									participantes = intercambiarPosiciones(p1.getNumeroParticipante(),
-											p2.getNumeroParticipante(), participanteGanador.getNumeroParticipante());
-									break cicloromper;
-								}
-								break;
-							case "Buchholz":
-								desempate = new DesempateBuchholz();
-								participanteGanador = desempate.desempatar(p1, p2, participantes,
-										obtenerEncuentrosTotales(), torneo);
-								if (participanteGanador != null) {
-									participantes = intercambiarPosiciones(p1.getNumeroParticipante(),
-											p2.getNumeroParticipante(), participanteGanador.getNumeroParticipante());
-									break cicloromper;
-								}
-								break;
-							case "Sonnerborn-Berger":
-								desempate = new DesempateSonnebornBerger();
-								participanteGanador = desempate.desempatar(p1, p2, participantes,
-										obtenerEncuentrosTotales(), torneo);
-								if (participanteGanador != null) {
-									participantes = intercambiarPosiciones(p1.getNumeroParticipante(),
-											p2.getNumeroParticipante(), participanteGanador.getNumeroParticipante());
-									break cicloromper;
-								}
-								break;
-							case "Encuentros ganados":
-								desempate = new DesempateEncuentrosGanados();
-								participanteGanador = desempate.desempatar(p1, p2, participantes,
-										obtenerEncuentrosTotales(), torneo);
-								if (participanteGanador != null) {
-									participantes = intercambiarPosiciones(p1.getNumeroParticipante(),
-											p2.getNumeroParticipante(), participanteGanador.getNumeroParticipante());
-									break cicloromper;
-								}
-								break;
-							case "Diferencia de marcadores":
-								desempate = new DesempateDiferenciaMarcadores();
-								participanteGanador = desempate.desempatar(p1, p2, participantes,
-										obtenerEncuentrosTotales(), torneo);
-								if (participanteGanador != null) {
-									participantes = intercambiarPosiciones(p1.getNumeroParticipante(),
-											p2.getNumeroParticipante(), participanteGanador.getNumeroParticipante());
-									break cicloromper;
-								}
-								break;
-							case "Marcador a favor":
-								desempate = new DesempateMarcadorFavor();
-								participanteGanador = desempate.desempatar(p1, p2, participantes,
-										obtenerEncuentrosTotales(), torneo);
-								if (participanteGanador != null) {
-									participantes = intercambiarPosiciones(p1.getNumeroParticipante(),
-											p2.getNumeroParticipante(), participanteGanador.getNumeroParticipante());
-									break cicloromper;
-								}
-								break;
-							case "Marcador en contra":
-								desempate = new DesempateMarcadorContra();
-								participanteGanador = desempate.desempatar(p1, p2, participantes,
-										obtenerEncuentrosTotales(), torneo);
-								if (participanteGanador != null) {
-									participantes = intercambiarPosiciones(p1.getNumeroParticipante(),
-											p2.getNumeroParticipante(), participanteGanador.getNumeroParticipante());
-									break cicloromper;
-								}
-								break;
-							default: // no se ha seleccionado ningún criterio
+					for (String criterio : criterios) {
+						switch (criterio) {
+						case "Encuentro directo":
+							desempate = new DesempateEncuentroDirecto();
+							participanteGanador = desempate.desempatar(p1, p2, participantes,
+									obtenerEncuentrosTotales(), torneo);
+							if (participanteGanador != null) {
+								participantes = intercambiarPosiciones(p1.getNumeroParticipante(),
+										p2.getNumeroParticipante(), participanteGanador.getNumeroParticipante());
+								break cicloromper;
 							}
-
+							break;
+						case "Sistema Koya":
+							desempate = new DesempateSistemaKoya();
+							participanteGanador = desempate.desempatar(p1, p2, participantes,
+									obtenerEncuentrosTotales(), torneo);
+							if (participanteGanador != null) {
+								participantes = intercambiarPosiciones(p1.getNumeroParticipante(),
+										p2.getNumeroParticipante(), participanteGanador.getNumeroParticipante());
+								break cicloromper;
+							}
+							break;
+						case "Buchholz":
+							desempate = new DesempateBuchholz();
+							participanteGanador = desempate.desempatar(p1, p2, participantes,
+									obtenerEncuentrosTotales(), torneo);
+							if (participanteGanador != null) {
+								participantes = intercambiarPosiciones(p1.getNumeroParticipante(),
+										p2.getNumeroParticipante(), participanteGanador.getNumeroParticipante());
+								break cicloromper;
+							}
+							break;
+						case "Sonnerborn-Berger":
+							desempate = new DesempateSonnebornBerger();
+							participanteGanador = desempate.desempatar(p1, p2, participantes,
+									obtenerEncuentrosTotales(), torneo);
+							if (participanteGanador != null) {
+								participantes = intercambiarPosiciones(p1.getNumeroParticipante(),
+										p2.getNumeroParticipante(), participanteGanador.getNumeroParticipante());
+								break cicloromper;
+							}
+							break;
+						case "Encuentros ganados":
+							desempate = new DesempateEncuentrosGanados();
+							participanteGanador = desempate.desempatar(p1, p2, participantes,
+									obtenerEncuentrosTotales(), torneo);
+							if (participanteGanador != null) {
+								participantes = intercambiarPosiciones(p1.getNumeroParticipante(),
+										p2.getNumeroParticipante(), participanteGanador.getNumeroParticipante());
+								break cicloromper;
+							}
+							break;
+						case "Diferencia de marcadores":
+							desempate = new DesempateDiferenciaMarcadores();
+							participanteGanador = desempate.desempatar(p1, p2, participantes,
+									obtenerEncuentrosTotales(), torneo);
+							if (participanteGanador != null) {
+								participantes = intercambiarPosiciones(p1.getNumeroParticipante(),
+										p2.getNumeroParticipante(), participanteGanador.getNumeroParticipante());
+								break cicloromper;
+							}
+							break;
+						case "Marcador a favor":
+							desempate = new DesempateMarcadorFavor();
+							participanteGanador = desempate.desempatar(p1, p2, participantes,
+									obtenerEncuentrosTotales(), torneo);
+							if (participanteGanador != null) {
+								participantes = intercambiarPosiciones(p1.getNumeroParticipante(),
+										p2.getNumeroParticipante(), participanteGanador.getNumeroParticipante());
+								break cicloromper;
+							}
+							break;
+						case "Marcador en contra":
+							desempate = new DesempateMarcadorContra();
+							participanteGanador = desempate.desempatar(p1, p2, participantes,
+									obtenerEncuentrosTotales(), torneo);
+							if (participanteGanador != null) {
+								participantes = intercambiarPosiciones(p1.getNumeroParticipante(),
+										p2.getNumeroParticipante(), participanteGanador.getNumeroParticipante());
+								break cicloromper;
+							}
+							break;
+						default: // no se ha seleccionado ningún criterio
 						}
+
 					}
+				}
 				}
 			}
 		}
@@ -235,8 +236,7 @@ public class TorneoSuizo extends AlgoritmoTorneo {
 	}
 
 	/**
-	 * Verifica si el partcipante evaluado jugó como inicial en su último
-	 * encuentro.
+	 * Verifica si el partcipante evaluado jugó como inicial en su último encuentro.
 	 * 
 	 * @param numeroParticipante
 	 *            número del participante a evaluar.
@@ -255,9 +255,9 @@ public class TorneoSuizo extends AlgoritmoTorneo {
 	}
 
 	/**
-	 * Intercambia las posiciones de 2 jugadores empatados si el ganador está
-	 * una posición abajo del jugador con quien empató, de lo contrario no
-	 * realiza ningún movimiento.
+	 * Intercambia las posiciones de 2 jugadores empatados si el ganador está una
+	 * posición abajo del jugador con quien empató, de lo contrario no realiza
+	 * ningún movimiento.
 	 * 
 	 * @param numeroP1
 	 *            Primer participante empatado.
@@ -300,16 +300,14 @@ public class TorneoSuizo extends AlgoritmoTorneo {
 	 *             Si ocurre un problema al insertar en la tabla
 	 *             <code>encuentros</code>.
 	 * @throws ExcepcionBaseDatosParticipante
-	 *             Si ocurre un problema al actualizar un participante en la
-	 *             tabla <code>participantes</code>.
+	 *             Si ocurre un problema al actualizar un participante en la tabla
+	 *             <code>participantes</code>.
 	 */
 	public void encararParticipantesPrimerCiclo(Ciclo ciclo) throws ExcepcionCapturarResultados, ExcepcionBaseDatos,
-			ExcepcionBaseDatosEncuentro, ExcepcionBaseDatosParticipante {
+	ExcepcionBaseDatosEncuentro, ExcepcionBaseDatosParticipante {
 		BaseDatosEncuentro bde = new BaseDatosEncuentro(torneo.getNombreArchivo());
 		BaseDatosParticipante bdp = new BaseDatosParticipante(torneo.getNombreArchivo());
 
-	
-		
 		int posicionDescanso = 0;
 		for (Participante p : torneo.getListaParticipantes()) {
 			if (p.getNombreParticipante()
@@ -328,9 +326,9 @@ public class TorneoSuizo extends AlgoritmoTorneo {
 
 		ArrayList<Encuentro> encuentros = new ArrayList<Encuentro>();
 		for (int i = 1; i <= mitad; i++) {
-			encuentros.add(new Encuentro(i, participantes.get(i - 1).getNumeroParticipante(), 
-					participantes.get(i - 1 + mitad).getNumeroParticipante()));
 
+			encuentros.add(new Encuentro(i, participantes.get(i - 1).getNumeroParticipante(),
+					participantes.get(i - 1 + mitad).getNumeroParticipante(), this.getTorneo().getFechaInicioTorneo()));
 			bde.insertarEncuentro(encuentros.get(i - 1), ciclo);
 			bdp.actualizarResultadoParticipante(participantes.get(i - 1), ciclo);
 			bdp.actualizarResultadoParticipante(participantes.get(i + mitad - 1), ciclo);
@@ -342,7 +340,9 @@ public class TorneoSuizo extends AlgoritmoTorneo {
 	/**
 	 * Realiza los encuentros de un ciclo posterior al primer ciclo.
 	 * 
-	 * @param ciclo Recibe el objeto <code>Ciclo</code> para guardar los encuentros a realizar.
+	 * @param ciclo
+	 *            Recibe el objeto <code>Ciclo</code> para guardar los encuentros a
+	 *            realizar.
 	 * @throws ExcepcionCapturarResultados
 	 *             Si ocurre un error con el objeto <code>Encuentros</code>.
 	 * @throws ExcepcionBaseDatos
@@ -351,11 +351,11 @@ public class TorneoSuizo extends AlgoritmoTorneo {
 	 *             Si ocurre un problema al insertar en la tabla
 	 *             <code>encuentros</code>.
 	 * @throws ExcepcionBaseDatosParticipante
-	 *             Si ocurre un problema al actualizar un participante en la
-	 *             tabla <code>participantes</code>.
+	 *             Si ocurre un problema al actualizar un participante en la tabla
+	 *             <code>participantes</code>.
 	 */
 	public void encararParticipantesCiclosPosteriores(Ciclo ciclo) throws ExcepcionCapturarResultados,
-			ExcepcionBaseDatos, ExcepcionBaseDatosEncuentro, ExcepcionBaseDatosParticipante {
+	ExcepcionBaseDatos, ExcepcionBaseDatosEncuentro, ExcepcionBaseDatosParticipante {
 		BaseDatosEncuentro bde = new BaseDatosEncuentro(torneo.getNombreArchivo());
 		BaseDatosParticipante bdp = new BaseDatosParticipante(torneo.getNombreArchivo());
 		int contador = 1;
@@ -364,21 +364,20 @@ public class TorneoSuizo extends AlgoritmoTorneo {
 
 		for (int i = 0; i < participantes.size(); i += 2) {
 			if (fueInicial(participantes.get(i).getNumeroParticipante())) {
+
 				if (participantes.get(i + 1).getNombreParticipante().compareToIgnoreCase(
 						torneo.getDatosPersonalizacion().getNombreParticipanteSinEncuentro()) == 0) {
-																										
+
 					encuentros.add(new Encuentro(contador, participantes.get(i).getNumeroParticipante(),
-							participantes.get(i + 1).getNumeroParticipante()));
+							participantes.get(i + 1).getNumeroParticipante(), this.getTorneo().getFechaInicioTorneo()));
 				} else {
 					encuentros.add(new Encuentro(contador, participantes.get(i + 1).getNumeroParticipante(),
-							participantes.get(i).getNumeroParticipante()));
+							participantes.get(i).getNumeroParticipante(), this.getTorneo().getFechaInicioTorneo()));
 				}
-
 			} else {
 				encuentros.add(new Encuentro(contador, participantes.get(i).getNumeroParticipante(),
-						participantes.get(i + 1).getNumeroParticipante()));
+						participantes.get(i + 1).getNumeroParticipante(), this.getTorneo().getFechaInicioTorneo()));
 			}
-
 			bde.insertarEncuentro(encuentros.get(contador - 1), ciclo);
 			bdp.actualizarResultadoParticipante(participantes.get(i), ciclo);
 			bdp.actualizarResultadoParticipante(participantes.get(i + 1), ciclo);
@@ -390,8 +389,8 @@ public class TorneoSuizo extends AlgoritmoTorneo {
 	/**
 	 * Verifica si se han capturado todos los encuentros del ciclo.
 	 * 
-	 * @return <tt>true</tt> Si se han capturado todos los encuentros de un
-	 *         ciclo, <tt>false</tt> de lo contrario.
+	 * @return <tt>true</tt> Si se han capturado todos los encuentros de un ciclo,
+	 *         <tt>false</tt> de lo contrario.
 	 */
 	public boolean verificarEncuentros() {
 		ArrayList<Encuentro> encuentros = torneo.getAlgoritmoTorneo().getCiclos().get(torneo.getCicloActual() - 1)
@@ -407,15 +406,16 @@ public class TorneoSuizo extends AlgoritmoTorneo {
 	/**
 	 * Inicia un torneo suizo e inserta el numero de ciclos en la tabla
 	 * <code>suizo</code>.
-	 * @param torneoSuizo Recibe el objeto <code>TorneoSuizo</code>. para iniciar el torneo.
+	 * 
+	 * @param torneoSuizo
+	 *            Recibe el objeto <code>TorneoSuizo</code>. para iniciar el torneo.
 	 * @throws ExcepcionBaseDatos
 	 *             Si ocurre un problema con la base de datos.
 	 * @throws ExcepcionBaseDatosEncuentro
 	 *             Si ocurre un problema al insertar en la tabla
 	 *             <code>encuentros</code>.
 	 * @throws ExcepcionBaseDatosCiclo
-	 *             Si ocurre un error al insertar en la tabla
-	 *             <code>ciclos</code>.
+	 *             Si ocurre un error al insertar en la tabla <code>ciclos</code>.
 	 */
 	public void iniciarTorneo(TorneoSuizo torneoSuizo)
 			throws ExcepcionBaseDatos, ExcepcionBaseDatosEncuentro, ExcepcionBaseDatosCiclo {

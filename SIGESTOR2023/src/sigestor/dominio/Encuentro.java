@@ -20,10 +20,11 @@ import java.util.Date;
  * segundo participante.</li>
  * <li><code>resutladoEncuentro</code> para el resultado del encuentro con sus
  * dos participantes.</li>
- * <li><code>fechaEncuentro</code> para la fecha en que se realiza el encuentro.</li>
+ * <li><code>fechaDelEncuentro</code> para la fecha en que se realiza el
+ * encuentro.</li>
  * </ul>
  * 
- * @version 16/03/2023
+ * @version 17/03/2023
  * 
  * @author Alicia Adriana Clemente Hernandez
  * @author Luis Fernando de la Cruz López
@@ -32,10 +33,10 @@ import java.util.Date;
  * @author Jonathan Eduardo Ibarra Martinez
  * @author Hernan Sesai Lopez Aragon
  * @author Francisco Samuel Reyes Cortes
+ * @author Eder Euclides Dionisio Diaz
  */
 public class Encuentro {
-	
-	
+
 	/**
 	 * Identificador del objeto <code>Encuentro</code>.
 	 */
@@ -81,8 +82,8 @@ public class Encuentro {
 	 * Identificador de la fecha del encuentro <code>Encuentro</code>.
 	 * 
 	 */
-	private Date fechaEncuentro;
-	
+	private Date fechaDelEncuentro;
+
 	/**
 	 * Resultado del objeto <code>Encuentro</code> en caso de ser ganador el
 	 * participante inicial.
@@ -113,29 +114,26 @@ public class Encuentro {
 	 */
 	public static final int DESCANSO = 3;
 
-	
-	
-	
-
-	public Encuentro() throws ExcepcionCapturarResultados {
-		this(0, 0, 0);
-	}
-
 	/**
 	 * Inicializa las variables de un encuentro con los valores recibidos y asigna
 	 * el resto con valores por defecto. Sirve para crear un objeto de tipo
 	 * <code>Encuentro</code> en caso de no tener aún los marcadores y el resultado.
 	 * 
-	 * @param numeroEncuentro       Recibe el identificador para el encuentro.
-	 * @param idParticipanteInicial Recibe el identificador del participante
-	 *                              inicial.
-	 * @param idParticipanteFinal   Recibe el identificador del participante final.
-	 * @throws ExcepcionCapturarResultados Si ocurre un error al inicializar las
-	 *                                     variables con los valores recibidos.
+	 * @param numeroEncuentro
+	 *            Recibe el identificador para el encuentro.
+	 * @param idParticipanteInicial
+	 *            Recibe el identificador del participante inicial.
+	 * @param idParticipanteFinal
+	 *            Recibe el identificador del participante final.
+	 * @param fechaDelEncuentro
+	 *            Recibe la fecha del encuentro.
+	 * @throws ExcepcionCapturarResultados
+	 *             Si ocurre un error al inicializar las variables con los valores
+	 *             recibidos.
 	 */
-	public Encuentro(int numeroEncuentro, int idParticipanteInicial, int idParticipanteFinal)
+	public Encuentro(int numeroEncuentro, int idParticipanteInicial, int idParticipanteFinal, Date fechaDelEncuentro)
 			throws ExcepcionCapturarResultados {
-		this(numeroEncuentro, idParticipanteInicial, idParticipanteFinal, SIN_JUGAR);
+		this(numeroEncuentro, idParticipanteInicial, idParticipanteFinal, SIN_JUGAR, fechaDelEncuentro);
 	}
 
 	/**
@@ -143,17 +141,24 @@ public class Encuentro {
 	 * los marcadores con valores por defecto. Sirve para crear un objeto de tipo
 	 * <code>Encuentro</code> sin usar marcadores.
 	 * 
-	 * @param numeroEncuentro       Recibe el identificador para el encuentro.
-	 * @param idParticipanteInicial Recibe el identidicador del participante
-	 *                              inicial.
-	 * @param idParticipanteFinal   Recibe el identificador del participante final.
-	 * @param resultadoEncuentro    Recibe el resultado del encuentro.
-	 * @throws ExcepcionCapturarResultados Si ocurre un error al inicializar las
-	 *                                     variables con los valores recibidos.
+	 * @param numeroEncuentro
+	 *            Recibe el identificador para el encuentro.
+	 * @param idParticipanteInicial
+	 *            Recibe el identidicador del participante inicial.
+	 * @param idParticipanteFinal
+	 *            Recibe el identificador del participante final.
+	 * @param resultadoEncuentro
+	 *            Recibe el resultado del encuentro.
+	 * @param fechaDelEncuentro
+	 *            Recibe la fecha del encuentro.
+	 * @throws ExcepcionCapturarResultados
+	 *             Si ocurre un error al inicializar las variables con los valores
+	 *             recibidos.
 	 */
-	public Encuentro(int numeroEncuentro, int idParticipanteInicial, int idParticipanteFinal, int resultadoEncuentro)
-			throws ExcepcionCapturarResultados {
-		this(numeroEncuentro, idParticipanteInicial, idParticipanteFinal, "0", "0", resultadoEncuentro);
+	public Encuentro(int numeroEncuentro, int idParticipanteInicial, int idParticipanteFinal, int resultadoEncuentro,
+			Date fechaDelEncuentro) throws ExcepcionCapturarResultados {
+		this(numeroEncuentro, idParticipanteInicial, idParticipanteFinal, "0", "0", resultadoEncuentro,
+				fechaDelEncuentro);
 	}
 
 	/**
@@ -161,36 +166,42 @@ public class Encuentro {
 	 * para crear un objeto de tipo <code>Encuentro</code> haciendo uso de
 	 * marcadores.
 	 * 
-	 * @param numeroEncuentro             Recibe el identificador para el encuentro.
-	 * @param idParticipanteInicial       Recibe el identificador del participante
-	 *                                    inicial.
-	 * @param idParticipanteFinal         Recibe el identificador del participante
-	 *                                    final.
-	 * @param marcadorParticipanteInicial Recibe el marcador a favor del
-	 *                                    participante inicial.
-	 * @param marcadorParticipanteFinal   Recibe el marcador a favor del
-	 *                                    participante final.
-	 * @param resultadoEncuentro          Recibe el resultado del encuentro.
-	 * @throws ExcepcionCapturarResultados Si ocurre un error al inicializar las
-	 *                                     variables con los valores recibidos.
+	 * @param numeroEncuentro
+	 *            Recibe el identificador para el encuentro.
+	 * @param idParticipanteInicial
+	 *            Recibe el identificador del participante inicial.
+	 * @param idParticipanteFinal
+	 *            Recibe el identificador del participante final.
+	 * @param marcadorParticipanteInicial
+	 *            Recibe el marcador a favor del participante inicial.
+	 * @param marcadorParticipanteFinal
+	 *            Recibe el marcador a favor del participante final.
+	 * @param resultadoEncuentro
+	 *            Recibe el resultado del encuentro.
+	 * @param fechaDelEncuentro
+	 *            Recibe la fecha del encuentro.
+	 * @throws ExcepcionCapturarResultados
+	 *             Si ocurre un error al inicializar las variables con los valores
+	 *             recibidos.
 	 */
 	public Encuentro(int numeroEncuentro, int idParticipanteInicial, int idParticipanteFinal,
-			String marcadorParticipanteInicial, String marcadorParticipanteFinal, int resultadoEncuentro)
-			throws ExcepcionCapturarResultados {
+			String marcadorParticipanteInicial, String marcadorParticipanteFinal, int resultadoEncuentro,
+			Date fechaEncuentro) throws ExcepcionCapturarResultados {
 		setNumeroEncuentro(numeroEncuentro);
 		setIdParticipanteInicial(idParticipanteInicial);
 		setIdParticipanteFinal(idParticipanteFinal);
 		setMarcadorParticipanteInicial(marcadorParticipanteInicial);
 		setMarcadorParticipanteFinal(marcadorParticipanteFinal);
 		setResultadoEncuentro(resultadoEncuentro);
+		setFechaEncuentro(fechaEncuentro);
 	}
-	
+
 	/**
 	 * Obtiene el identificador del objeto <code>Encuentro</code>.
 	 * 
 	 * @return Regresa el identificador del encuentro.
 	 */
-	
+
 	public int getNumeroEncuentro() {
 		return numeroEncuentro;
 	}
@@ -199,7 +210,8 @@ public class Encuentro {
 	 * Inicializa el identificador del objeto <code>Encuentro</code> con el valor
 	 * recibido.
 	 * 
-	 * @param numeroEncuentro Recibe el identificador del encuentro.
+	 * @param numeroEncuentro
+	 *            Recibe el identificador del encuentro.
 	 */
 	public void setNumeroEncuentro(int numeroEncuentro) {
 		this.numeroEncuentro = numeroEncuentro;
@@ -220,9 +232,9 @@ public class Encuentro {
 	 * Inicializa el identificador del participante inicial del objeto
 	 * <code>Encuentro</code> con el valor recibido.
 	 * 
-	 * @param idParticipanteInicial Recibe el valor de la variable
-	 *                              <code>numeroParticipante</code> del objeto
-	 *                              <code>Participante</code>.
+	 * @param idParticipanteInicial
+	 *            Recibe el valor de la variable <code>numeroParticipante</code> del
+	 *            objeto <code>Participante</code>.
 	 */
 	public void setIdParticipanteInicial(int idParticipanteInicial) {
 		this.idParticipanteInicial = idParticipanteInicial;
@@ -243,9 +255,9 @@ public class Encuentro {
 	 * Inicializa el identificador del participante final del objeto
 	 * <code>Encuentro</code> con el valor recibido.
 	 * 
-	 * @param idParticipanteFinal Recibe el valor de la variable
-	 *                            <code>numeroParticipante</code> del objeto
-	 *                            <code>Participante</code>.
+	 * @param idParticipanteFinal
+	 *            Recibe el valor de la variable <code>numeroParticipante</code> del
+	 *            objeto <code>Participante</code>.
 	 */
 	public void setIdParticipanteFinal(int idParticipanteFinal) {
 		this.idParticipanteFinal = idParticipanteFinal;
@@ -266,18 +278,16 @@ public class Encuentro {
 	 * <code>Encuentro</code>. Recibe el marcador en forma de cadena y verifica si
 	 * se trata de un valor válido para insertarlo en el marcador correspondiente.
 	 * 
-	 * @param marcadorParticipanteInicial Recibe el marcador del participante
-	 *                                    inicial en forma de cadena.
-	 * @throws ExcepcionCapturarResultados En caso de que el parámetro recibido
-	 *                                     contenga valores no válidos para el
-	 *                                     marcador. Los casos no válidos son:
-	 *                                     <ul>
-	 *                                     <li>Si es un número negativo.</li>
-	 *                                     <li>Si contiene caracteres no
-	 *                                     numéricos</li>
-	 *                                     <li>Si son solo espacios en blanco o se
-	 *                                     encuentra vacío.</li>
-	 *                                     </ul>
+	 * @param marcadorParticipanteInicial
+	 *            Recibe el marcador del participante inicial en forma de cadena.
+	 * @throws ExcepcionCapturarResultados
+	 *             En caso de que el parámetro recibido contenga valores no válidos
+	 *             para el marcador. Los casos no válidos son:
+	 *             <ul>
+	 *             <li>Si es un número negativo.</li>
+	 *             <li>Si contiene caracteres no numéricos</li>
+	 *             <li>Si son solo espacios en blanco o se encuentra vacío.</li>
+	 *             </ul>
 	 */
 	public void setMarcadorParticipanteInicial(String marcadorParticipanteInicial) throws ExcepcionCapturarResultados {
 		marcadorParticipanteInicial = marcadorParticipanteInicial.replaceAll(" ", "");
@@ -314,18 +324,16 @@ public class Encuentro {
 	 * <code>Encuentro</code>. Recibe el marcador en forma de cadena y verifica si
 	 * se trata de un valor válido para insertarlo en el marcador correspondiente.
 	 * 
-	 * @param marcadorParticipanteFinal Recibe el marcador del participante final en
-	 *                                  forma de cadena.
-	 * @throws ExcepcionCapturarResultados En caso de que el parámetro recibido
-	 *                                     contenga valores no válidos para el
-	 *                                     marcador. Los casos no válidos son:
-	 *                                     <ul>
-	 *                                     <li>Si es un número negativo.</li>
-	 *                                     <li>Si contiene caracteres no
-	 *                                     numéricos</li>
-	 *                                     <li>Si son solo espacios en blanco o se
-	 *                                     encuentra vacío.</li>
-	 *                                     </ul>
+	 * @param marcadorParticipanteFinal
+	 *            Recibe el marcador del participante final en forma de cadena.
+	 * @throws ExcepcionCapturarResultados
+	 *             En caso de que el parámetro recibido contenga valores no válidos
+	 *             para el marcador. Los casos no válidos son:
+	 *             <ul>
+	 *             <li>Si es un número negativo.</li>
+	 *             <li>Si contiene caracteres no numéricos</li>
+	 *             <li>Si son solo espacios en blanco o se encuentra vacío.</li>
+	 *             </ul>
 	 */
 	public void setMarcadorParticipanteFinal(String marcadorParticipanteFinal) throws ExcepcionCapturarResultados {
 		marcadorParticipanteFinal = marcadorParticipanteFinal.replaceAll(" ", "");
@@ -346,7 +354,7 @@ public class Encuentro {
 			throw new ExcepcionCapturarResultados(ExcepcionCapturarResultados.MENSAJE_EXCEPCION_MARCADOR_VACIO);
 		}
 	}
-	
+
 	/**
 	 * Obtiene el resultado del objeto <code>Encuentro</code>.
 	 * 
@@ -368,42 +376,44 @@ public class Encuentro {
 	 * Inicializa el resultado del objeto <code>Encuentro</code> con el valor
 	 * recibido.
 	 * 
-	 * @param resultadoEncuentro Recibe ell resultado del encuentro. Puede contener
-	 *                           los valores siguientes:
-	 *                           <ul>
-	 *                           <li>constante <code>GANADOR_INICIAL</code> si es
-	 *                           ganador el participante inicial.</li>
-	 *                           <li>constante <code>EMPATE</code> en caso de
-	 *                           empatar ambos participantes.</li>
-	 *                           <li>constante <code>GANADOR_FINAL</code> si es
-	 *                           ganador el participante final.</li>
-	 *                           <li>constante <code>SIN_JUGAR</code> si el
-	 *                           encuentro no se ha jugado.</li>
-	 *                           <li>constante <code>DESCANSO</code> si el jugador
-	 *                           tiene descanso.</li>
-	 *                           </ul>
+	 * @param resultadoEncuentro
+	 *            Recibe ell resultado del encuentro. Puede contener los valores
+	 *            siguientes:
+	 *            <ul>
+	 *            <li>constante <code>GANADOR_INICIAL</code> si es ganador el
+	 *            participante inicial.</li>
+	 *            <li>constante <code>EMPATE</code> en caso de empatar ambos
+	 *            participantes.</li>
+	 *            <li>constante <code>GANADOR_FINAL</code> si es ganador el
+	 *            participante final.</li>
+	 *            <li>constante <code>SIN_JUGAR</code> si el encuentro no se ha
+	 *            jugado.</li>
+	 *            <li>constante <code>DESCANSO</code> si el jugador tiene
+	 *            descanso.</li>
+	 *            </ul>
 	 */
 	public void setResultadoEncuentro(int resultadoEncuentro) {
 		this.resultadoEncuentro = resultadoEncuentro;
 	}
-	
+
 	/**
-	 * Obtiene la  fecha del encuentro <code>Encuentro</code>.
+	 * Obtiene la fecha del encuentro <code>Encuentro</code>.
 	 * 
-	 * @return Regresa el valor de la fecha  del encuentro.
+	 * @return Regresa el valor de la fecha del encuentro.
 	 */
 	public Date getFechaEncuentro() {
-		return fechaEncuentro;
+		return fechaDelEncuentro;
 	}
-	
+
 	/**
 	 * Inicializa el identificador del objeto <code>Encuentro</code> con el valor
 	 * recibido.
 	 * 
-	 * @param fechaEncuentro Recibe la fecha del encuentro.
+	 * @param fechaEncuentro
+	 *            Recibe la fecha del encuentro.
 	 */
 	public void setFechaEncuentro(Date fechaEncuentro) {
-		this.fechaEncuentro = fechaEncuentro;
+		this.fechaDelEncuentro = fechaEncuentro;
 	}
 
 	/**
