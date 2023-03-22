@@ -47,12 +47,13 @@ import sigestor.dominio.CriteriosDesempate;
  * <li><code>principal</code>Para obtener el torneo actual</li>
  * </ul>
  * 
- * @version 24/05/2022
+ * @version 17/03/2023
  * 
  * @author Beatriz Andrea Jimenez Rios
  * @author Uriel Romeo Cruz Cortes
  * @author Ricky Didier Peralta Reyes
  * @author Jennifer Cortés Pérez
+ * @author Erik Vasquez Policarpo
  *
  */
 public class PanelCriteriosDesempate extends JPanel {
@@ -141,7 +142,7 @@ public class PanelCriteriosDesempate extends JPanel {
 		gridPosicion.gridx = 0;
 		gridPosicion.gridy = 0;
 
-		JLabel etiquetaCriteriosDeDesempate = new JLabel("Criterios de desempate ");
+		JLabel etiquetaCriteriosDeDesempate = new JLabel("Criterios de desempate");
 		Font fuenteEtiqueta = etiquetaCriteriosDeDesempate.getFont();
 		etiquetaCriteriosDeDesempate.setFont(new Font(fuenteEtiqueta.getFontName(), fuenteEtiqueta.getStyle(), 20));
 		panelEtiquetaCriteriosDeDesempate.add(etiquetaCriteriosDeDesempate, gridPosicion);
@@ -168,7 +169,7 @@ public class PanelCriteriosDesempate extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				pasarASeleccionado();
+				accionPasarACriteriosSeleccionados();
 			}
 		};
 		accionBotonDesplazarDerecha.putValue(Action.MNEMONIC_KEY, KeyEvent.VK_1);
@@ -184,23 +185,23 @@ public class PanelCriteriosDesempate extends JPanel {
 
 		icon = new ImageIcon(getClass().getResource("/imagenes/izquierda.png"));
 
-		Action accionBotonDesplazarIZquierda = new AbstractAction("", icon) {
+		Action accionBotonDesplazarIzquierda = new AbstractAction("", icon) {
 			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				pasarANoSeleccionado();
+				accionPasarACriteriosNoSeleccionados();
 			}
 		};
-		accionBotonDesplazarIZquierda.putValue(Action.MNEMONIC_KEY, KeyEvent.VK_2);
-		accionBotonDesplazarIZquierda.putValue(Action.ACCELERATOR_KEY,
+		accionBotonDesplazarIzquierda.putValue(Action.MNEMONIC_KEY, KeyEvent.VK_2);
+		accionBotonDesplazarIzquierda.putValue(Action.ACCELERATOR_KEY,
 				KeyStroke.getKeyStroke(KeyEvent.VK_2, InputEvent.CTRL_DOWN_MASK));
-		accionBotonDesplazarIZquierda.putValue(Action.SHORT_DESCRIPTION,
+		accionBotonDesplazarIzquierda.putValue(Action.SHORT_DESCRIPTION,
 				"Permite regresar criterios de desempate seleccionados");
-		botonFlechaIzquierda = new JButton(accionBotonDesplazarIZquierda);
-		botonFlechaIzquierda.getActionMap().put("botonFlechaIzquierda", accionBotonDesplazarIZquierda);
+		botonFlechaIzquierda = new JButton(accionBotonDesplazarIzquierda);
+		botonFlechaIzquierda.getActionMap().put("botonFlechaIzquierda", accionBotonDesplazarIzquierda);
 		botonFlechaIzquierda.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(
-				(KeyStroke) accionBotonDesplazarIZquierda.getValue(Action.ACCELERATOR_KEY), "botonFlechaIzquierda");
+				(KeyStroke) accionBotonDesplazarIzquierda.getValue(Action.ACCELERATOR_KEY), "botonFlechaIzquierda");
 		botonFlechaIzquierda.setPreferredSize(new Dimension(30, 30));
 		panelBotonesDerechaIzquierda.add(botonFlechaIzquierda, gridPosicion);
 
@@ -228,44 +229,44 @@ public class PanelCriteriosDesempate extends JPanel {
 		panelEtiquetaCriteriosSeleccionados.add(scrollCriteriosSeleccionados, gridPosicion);
 
 		icon = new ImageIcon(getClass().getResource("/imagenes/arriba.png"));
-		Action accionbotonDesplazarArriba = new AbstractAction("", icon) {
+		Action accionBotonDesplazarArriba = new AbstractAction("", icon) {
 			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				subirPrioridad();
+				accionSubirPrioridad();
 			}
 		};
-		accionbotonDesplazarArriba.putValue(Action.MNEMONIC_KEY, KeyEvent.VK_3);
-		accionbotonDesplazarArriba.putValue(Action.ACCELERATOR_KEY,
+		accionBotonDesplazarArriba.putValue(Action.MNEMONIC_KEY, KeyEvent.VK_3);
+		accionBotonDesplazarArriba.putValue(Action.ACCELERATOR_KEY,
 				KeyStroke.getKeyStroke(KeyEvent.VK_3, InputEvent.CTRL_DOWN_MASK));
-		accionbotonDesplazarArriba.putValue(Action.SHORT_DESCRIPTION,
+		accionBotonDesplazarArriba.putValue(Action.SHORT_DESCRIPTION,
 				"Permite aumentar la prioridad al criterio de desempate seleccionado");
-		botonFlechaArriba = new JButton(accionbotonDesplazarArriba);
-		botonFlechaArriba.getActionMap().put("botonFlechaArriba", accionbotonDesplazarArriba);
+		botonFlechaArriba = new JButton(accionBotonDesplazarArriba);
+		botonFlechaArriba.getActionMap().put("botonFlechaArriba", accionBotonDesplazarArriba);
 		botonFlechaArriba.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-				.put((KeyStroke) accionbotonDesplazarArriba.getValue(Action.ACCELERATOR_KEY), "botonFlechaArriba");
+				.put((KeyStroke) accionBotonDesplazarArriba.getValue(Action.ACCELERATOR_KEY), "botonFlechaArriba");
 		botonFlechaArriba.setPreferredSize(new Dimension(30, 30));
 		panelBotonesArribaAbajo.add(botonFlechaArriba);
 
 		icon = new ImageIcon(getClass().getResource("/imagenes/abajo.png"));
-		Action accionbotonDesplazarAbajo = new AbstractAction("", icon) {
+		Action accionBotonDesplazarAbajo = new AbstractAction("", icon) {
 			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				bajarPrioridad();
+				accionBajarPrioridad();
 			}
 		};
-		accionbotonDesplazarAbajo.putValue(Action.MNEMONIC_KEY, KeyEvent.VK_4);
-		accionbotonDesplazarAbajo.putValue(Action.ACCELERATOR_KEY,
+		accionBotonDesplazarAbajo.putValue(Action.MNEMONIC_KEY, KeyEvent.VK_4);
+		accionBotonDesplazarAbajo.putValue(Action.ACCELERATOR_KEY,
 				KeyStroke.getKeyStroke(KeyEvent.VK_4, InputEvent.CTRL_DOWN_MASK));
-		accionbotonDesplazarAbajo.putValue(Action.SHORT_DESCRIPTION,
+		accionBotonDesplazarAbajo.putValue(Action.SHORT_DESCRIPTION,
 				"Permite bajar la prioridad al criterio de desempate seleccionado");
-		botonFlechaAbajo = new JButton(accionbotonDesplazarAbajo);
-		botonFlechaAbajo.getActionMap().put("botonFlechaAbajo", accionbotonDesplazarAbajo);
+		botonFlechaAbajo = new JButton(accionBotonDesplazarAbajo);
+		botonFlechaAbajo.getActionMap().put("botonFlechaAbajo", accionBotonDesplazarAbajo);
 		botonFlechaAbajo.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-				.put((KeyStroke) accionbotonDesplazarAbajo.getValue(Action.ACCELERATOR_KEY), "botonFlechaAbajo");
+				.put((KeyStroke) accionBotonDesplazarAbajo.getValue(Action.ACCELERATOR_KEY), "botonFlechaAbajo");
 		botonFlechaAbajo.setPreferredSize(new Dimension(30, 30));
 		panelBotonesArribaAbajo.add(botonFlechaAbajo);
 
@@ -297,7 +298,7 @@ public class PanelCriteriosDesempate extends JPanel {
 	 * Permite pasar a los criterios seleccionados usando
 	 * <code>botonFlechaDerecha</code>
 	 */
-	private void pasarASeleccionado() {
+	private void accionPasarACriteriosSeleccionados() {
 		if (!(listaNoSeleccionados.getSelectedIndex() == -1)) {
 			modelListaSeleccionados.addElement(listaNoSeleccionados.getSelectedValue());
 			modelListaNoSeleccionados.remove(listaNoSeleccionados.getSelectedIndex());
@@ -308,7 +309,7 @@ public class PanelCriteriosDesempate extends JPanel {
 	 * Permite pasar a los criterios no seleccionados usando
 	 * <code>botonFlechaIzquierda</code>
 	 */
-	private void pasarANoSeleccionado() {
+	private void accionPasarACriteriosNoSeleccionados() {
 		if (!(listaSeleccionados.getSelectedIndex() == -1)) {
 			modelListaNoSeleccionados.addElement(listaSeleccionados.getSelectedValue());
 			modelListaSeleccionados.remove(listaSeleccionados.getSelectedIndex());
@@ -319,7 +320,7 @@ public class PanelCriteriosDesempate extends JPanel {
 	 * Permite subir la prioridad de los criterios seleccionados usando
 	 * <code>botonFlechaArriba<code>
 	 */
-	private void subirPrioridad() {
+	private void accionSubirPrioridad() {
 		if ((listaSeleccionados.getSelectedValue() != null)) {
 			if (listaSeleccionados.getSelectedIndex() != 0) {
 				int indice = listaSeleccionados.getSelectedIndex() - 1;
@@ -335,7 +336,7 @@ public class PanelCriteriosDesempate extends JPanel {
 	 * Permite bajar la prioridad de los criterios seleccionados usando
 	 * <code>botonFlechaAbajo<code>
 	 */
-	private void bajarPrioridad() {
+	private void accionBajarPrioridad() {
 		if ((listaSeleccionados.getSelectedValue() != null)) {
 			if (listaSeleccionados.getSelectedIndex() != modelListaSeleccionados.size() - 1) {
 				int indice = listaSeleccionados.getSelectedIndex() + 1;

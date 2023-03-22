@@ -69,7 +69,7 @@ import sigestor.excepcion.*;
  * <li><code>serialVersionUID</code> Para el número de versión de la clase.</li>
  * </ul>
  * 
- * @version 17/03/2023
+ * @version 21/03/2023
  * 
  * @author Jonathan Eduardo Ibarra Martínez
  * @author Ricky Didier Peralta Reyes
@@ -513,8 +513,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener, WindowLi
 	}
 
 	/**
-	 * Pregunta al usuario si desea salir de la aplicación, cierra la aplicación en
-	 * caso de seleccionar sí.
+	 * Encargado de salir del sistema.
 	 */
 	private void accionSalir() {
 		System.exit(0);
@@ -624,10 +623,11 @@ public class VentanaPrincipal extends JFrame implements ActionListener, WindowLi
 	}
 
 	/**
-	 * Encargado de mostrar un archivo PDF al usuario con información redundante de
-	 * como utilizar el sistema.
+	 * Encargado de mostrar un archivo PDF al usuario con información relevante de
+	 * como utilizar el sistema, en caso de que no exista o no se pueda abrir el
+	 * archivo se mostrará un mensaje de error.
 	 */
-	private void accionCargarManual() {
+	public void accionCargarManual() {
 		File archivo = new File("MANUAL SIGESTOR.pdf");
 		if (archivo.exists()) {
 			try {

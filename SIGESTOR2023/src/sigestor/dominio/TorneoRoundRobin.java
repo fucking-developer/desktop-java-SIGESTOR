@@ -415,6 +415,7 @@ public class TorneoRoundRobin extends AlgoritmoTorneo {
 	 *             participante en la tabla <code>participante</code> de la base de
 	 *             datos.
 	 */
+	
 	private void posicionarParticipante(ArrayList<Participante> participantes)
 			throws ExcepcionBaseDatos, ExcepcionBaseDatosParticipante {
 		BaseDatosParticipante bdp = new BaseDatosParticipante(this.getTorneo().getNombreArchivo());

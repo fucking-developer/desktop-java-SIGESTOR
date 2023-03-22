@@ -43,11 +43,16 @@ package sigestor.excepcion;
  * sido posible consultar los datos del torneo.</li>
  * <li><code> MENSAJE_EXCEPCION_CONSULTA_CICLO_SUIZO</code> para indicar que no
  * ha sido posible obtener los ciclos del torneo Suizo.</li>
+ * <li><code> MENSAJE_EXCEPCION_CONSULTA_CICLO_ROUND_ROBIN</code> para indicar
+ * que no ha sido posible obtener los ciclos del torneo Round Robin.</li>
+ * <li><code> MENSAJE_EXCEPCION_CONSULTA_CICLO_ELIMINACION_DIRECTA</code> para
+ * indicar que no ha sido posible obtener los ciclos del torneo Eliminación
+ * directa.</li>
  * <li><code>MENSAJE_EXCEPCION_SOLUCION </code> para mostrar la solución del
  * error presentado.</li>
  * </ul>
  * 
- * @version 17/03/2023
+ * @version 21/03/2023
  * 
  * @author Jennifer Cortés Pérez
  * @author Beatriz Andrea Jiménez Ríos
@@ -133,9 +138,21 @@ public class ExcepcionBaseDatosTorneo extends Exception {
 	public static final String MENSAJE_EXCEPCION_CONSULTA_TORNEO = "No se pudo consultar los datos del torneo ";
 	/**
 	 * Primera parte del mensaje que indica que no ha sido posible obtener los
-	 * ciclos del torneo suizo en la base de datos.
+	 * ciclos del torneo Suizo en la base de datos.
 	 */
-	public static final String MENSAJE_EXCEPCION_CONSULTA_CICLO_SUIZO = "No se pudo obtener el numero de ciclos del torneo suizo";
+	public static final String MENSAJE_EXCEPCION_CONSULTA_CICLO_SUIZO = "No se pudo obtener el número de ciclos del torneo Suizo";
+
+	/**
+	 * Primera parte del mensaje que indica que no ha sido posible obtener los
+	 * ciclos del torneo Round Robin en la base de datos.
+	 */
+	public static final String MENSAJE_EXCEPCION_CONSULTA_CICLO_ROUND_ROBIN = "No se pudo obtener el número de ciclos del torneo Round Robin";
+
+	/**
+	 * Primera parte del mensaje que indica que no ha sido posible obtener los
+	 * ciclos del torneo Eliminación directa en la base de datos.
+	 */
+	public static final String MENSAJE_EXCEPCION_CONSULTA_CICLO_ELIMINACION_DIRECTA = "No se pudo obtener el número de ciclos del torneo Eliminación directa";
 
 	/**
 	 * Mensaje que indica la solución del error presentado.

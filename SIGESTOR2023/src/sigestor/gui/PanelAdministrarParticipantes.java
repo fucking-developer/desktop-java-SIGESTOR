@@ -56,13 +56,13 @@ import sigestor.dominio.Participante;
  * <code>VentanaPrincipal</code>.</li>
  * </ul>
  * 
- * @version 16/03/2023
+ * @version 21/03/2023
  * 
  * @author Ricky Didier Peralta Reyes
  * @author Uriel Romeo Cruz Cortes
  * @author Jennifer Cortés Pérez
  * @author Beatriz Andrea Jiménez Ríos
- *
+ * @author Erik Vasquez Policarpo
  */
 public class PanelAdministrarParticipantes extends JPanel {
 
@@ -174,22 +174,22 @@ public class PanelAdministrarParticipantes extends JPanel {
 
 		ImageIcon imagenBoton = new ImageIcon(getClass().getResource("/imagenes/nuevo.png"));
 		Image icono = imagenBoton.getImage().getScaledInstance(20, 20, Image.SCALE_AREA_AVERAGING);
-
-		Action accion = new AbstractAction("Nuevo", new ImageIcon(icono)) {
+		
+		Action accionBotonNuevo = new AbstractAction("Nuevo", new ImageIcon(icono)) {
 			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				agregarNuevoParticipante();
+				accionAgregarNuevoParticipante();
 			}
 		};
-		accion.putValue(Action.MNEMONIC_KEY, KeyEvent.VK_N);
-		accion.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_DOWN_MASK));
-		accion.putValue(Action.SHORT_DESCRIPTION, "Permite agregar a la lista un nuevo participante");
-		botonNuevo = new JButton(accion);
-		botonNuevo.getActionMap().put("botonNuevo", accion);
+		accionBotonNuevo.putValue(Action.MNEMONIC_KEY, KeyEvent.VK_N);
+		accionBotonNuevo.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_DOWN_MASK));
+		accionBotonNuevo.putValue(Action.SHORT_DESCRIPTION, "Permite agregar a la lista un nuevo participante");
+		botonNuevo = new JButton(accionBotonNuevo);
+		botonNuevo.getActionMap().put("botonNuevo", accionBotonNuevo);
 		botonNuevo.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-				.put((KeyStroke) accion.getValue(Action.ACCELERATOR_KEY), "botonNuevo");
+				.put((KeyStroke) accionBotonNuevo.getValue(Action.ACCELERATOR_KEY), "botonNuevo");
 		botonNuevo.setPreferredSize(new Dimension(130, 30));
 		panelAux3.add(botonNuevo);
 		panelAux.add(panelAux3);
@@ -198,22 +198,22 @@ public class PanelAdministrarParticipantes extends JPanel {
 		imagenBoton = new ImageIcon(getClass().getResource("/imagenes/modificar.png"));
 		icono = imagenBoton.getImage().getScaledInstance(20, 20, Image.SCALE_AREA_AVERAGING);
 
-		Action accionbotonModificar = new AbstractAction("Modificar", new ImageIcon(icono)) {
+		Action accionBotonModificar = new AbstractAction("Modificar", new ImageIcon(icono)) {
 			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				modificarParticipante();
+				accionModificarParticipante();
 			}
 		};
-		accionbotonModificar.putValue(Action.MNEMONIC_KEY, KeyEvent.VK_M);
-		accionbotonModificar.putValue(Action.ACCELERATOR_KEY,
+		accionBotonModificar.putValue(Action.MNEMONIC_KEY, KeyEvent.VK_M);
+		accionBotonModificar.putValue(Action.ACCELERATOR_KEY,
 				KeyStroke.getKeyStroke(KeyEvent.VK_M, InputEvent.CTRL_DOWN_MASK));
-		accionbotonModificar.putValue(Action.SHORT_DESCRIPTION, "Permite modificar de la lista a un participante");
-		botonModificar = new JButton(accionbotonModificar);
-		botonModificar.getActionMap().put("botonModificar", accionbotonModificar);
+		accionBotonModificar.putValue(Action.SHORT_DESCRIPTION, "Permite modificar de la lista a un participante");
+		botonModificar = new JButton(accionBotonModificar);
+		botonModificar.getActionMap().put("botonModificar", accionBotonModificar);
 		botonModificar.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-				.put((KeyStroke) accionbotonModificar.getValue(Action.ACCELERATOR_KEY), "botonModificar");
+				.put((KeyStroke) accionBotonModificar.getValue(Action.ACCELERATOR_KEY), "botonModificar");
 		botonModificar.setPreferredSize(new Dimension(130, 30));
 		panelAux3.add(botonModificar);
 		panelAux.add(panelAux3);
@@ -227,7 +227,7 @@ public class PanelAdministrarParticipantes extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				eliminarParticipante();
+				accionEliminarParticipante();
 			}
 		};
 		accionBotonEliminar.putValue(Action.MNEMONIC_KEY, KeyEvent.VK_L);
@@ -348,7 +348,7 @@ public class PanelAdministrarParticipantes extends JPanel {
 	 * <p>
 	 * Los datos ingresados se guardan en <code>listaDeParticipantes</code>.
 	 */
-	private void agregarNuevoParticipante() {
+	private void accionAgregarNuevoParticipante() {
 		JPanel contenido = new JPanel();
 		JPanel contenidoParticipante = new JPanel();
 		JPanel panelAux = new JPanel();
@@ -417,7 +417,7 @@ public class PanelAdministrarParticipantes extends JPanel {
 	 * <code>listaDeParticipantes</code>, primero se modifica el nombre y por último
 	 * se modifica el puntaje.
 	 */
-	private void modificarParticipante() {
+	private void accionModificarParticipante() {
 		if (listaParticipantes.getSelectedValue() != null) {
 			JPanel contenido = new JPanel();
 			JPanel contenidoParticipante = new JPanel();
@@ -492,7 +492,7 @@ public class PanelAdministrarParticipantes extends JPanel {
 	 * de <code>model</code>, antes de ello consulta al usuario sí está seguro de la
 	 * acción.
 	 */
-	private void eliminarParticipante() {
+	private void accionEliminarParticipante() {
 		if (listaParticipantes.getSelectedValue() != null) {
 			int seleccion = JOptionPane.showOptionDialog(null,
 					"Está seguro de que desea eliminar al participante "
@@ -581,5 +581,4 @@ public class PanelAdministrarParticipantes extends JPanel {
 	private void accionDescargarPlantilla() {
 		
 	}
-
 }

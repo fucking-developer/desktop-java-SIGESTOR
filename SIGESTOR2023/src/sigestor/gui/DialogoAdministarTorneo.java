@@ -72,13 +72,13 @@ import sigestor.excepcion.ExcepcionCapturarResultados;
  * 
  * </ul>
  * 
- * @version 05/06/2022
+ * @version 21/03/2023
  * 
  * @author Ricky Didier Peralta Reyes
  * @author Uriel Romeo Cruz Cortes
  * @author Jennifer Cortés Pérez
  * @author Beatriz Andrea Jiménez Ríos
- * 
+ * @author Erik Vasquez Policarpo
  */
 public class DialogoAdministarTorneo extends JDialog implements WindowListener {
 
@@ -103,10 +103,6 @@ public class DialogoAdministarTorneo extends JDialog implements WindowListener {
 	 * Botón para mostrar el panel <code>panelAdministrarParticipantes</code>
 	 */
 	private JButton botonAdministrarParticipantes;
-	/**
-	 * Botón para importar una lista de participantes.
-	 */
-	private JButton botonImportar;
 	/**
 	 * Botón para guardar los datos del torneo ingresados en los paneles.
 	 */
@@ -171,14 +167,9 @@ public class DialogoAdministarTorneo extends JDialog implements WindowListener {
 
 		Action accionBotonGeneral = new AbstractAction("General") {
 			private static final long serialVersionUID = 1L;
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				mostrarPanelGeneral();
-				panelGeneral.mostrarPanel();
-				panelCriteriosDesempate.ocultarPanel();
-				panelPersonalizacion.ocultarPanel();
-				panelAdministrarParticipantes.ocultarPanel();
+				accionMostrarPanelGeneral();
 			}
 		};
 
@@ -201,11 +192,7 @@ public class DialogoAdministarTorneo extends JDialog implements WindowListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				mostrarPanelCriteriosDesempate();
-				panelGeneral.ocultarPanel();
-				panelCriteriosDesempate.mostrarPanel();
-				panelPersonalizacion.ocultarPanel();
-				panelAdministrarParticipantes.ocultarPanel();
+				accionMostrarPanelCriterosDesemapate();
 			}
 		};
 		accionBotonCriteriosDesempate.putValue(Action.MNEMONIC_KEY, KeyEvent.VK_D);
@@ -230,11 +217,7 @@ public class DialogoAdministarTorneo extends JDialog implements WindowListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				mostrarPanelPersonalizacion();
-				panelGeneral.ocultarPanel();
-				panelCriteriosDesempate.ocultarPanel();
-				panelPersonalizacion.mostrarPanel();
-				panelAdministrarParticipantes.ocultarPanel();
+				accionMostrarPanelPersonalizacion();
 			}
 		};
 		accionBotonPersonalizacion.putValue(Action.MNEMONIC_KEY, KeyEvent.VK_R);
@@ -257,15 +240,8 @@ public class DialogoAdministarTorneo extends JDialog implements WindowListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				mostrarPanelAdministrarParticipantes();
-				panelGeneral.ocultarPanel();
-				panelCriteriosDesempate.ocultarPanel();
-				panelPersonalizacion.ocultarPanel();
-				panelAdministrarParticipantes.mostrarPanel();
-				
+				accionMostrarPanelAdministrarParticipantes();
 			}
-
-
 		};
 		
 		accionBotonAdministrarParticipante.putValue(Action.MNEMONIC_KEY, KeyEvent.VK_A);
@@ -302,8 +278,7 @@ public class DialogoAdministarTorneo extends JDialog implements WindowListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				guardarAvanceTorneo();
-
+				accionGuardarAvanceTorneo();
 			}
 		};
 		accionGuardar.putValue(Action.MNEMONIC_KEY, KeyEvent.VK_G);
@@ -323,10 +298,9 @@ public class DialogoAdministarTorneo extends JDialog implements WindowListener {
 
 		Action accionCancelar = new AbstractAction("Cancelar", new ImageIcon(icon)) {
 			private static final long serialVersionUID = 1L;
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				cancelarAvanceTorneo();
+				accionCancelarAvanceTorneo();
 			}
 
 		};
@@ -348,7 +322,7 @@ public class DialogoAdministarTorneo extends JDialog implements WindowListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ventanaPrincipal.accionCargarManual();
+				accionAyuda();
 			}
 		};
 		accionAyuda.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0));
@@ -369,22 +343,30 @@ public class DialogoAdministarTorneo extends JDialog implements WindowListener {
 	 * Metodo que permite mostrar el panel <code>panelGeneral</code> en el panel
 	 * <code>panelContenedor</code> y acultar a los demás paneles.
 	 */
-	private void mostrarPanelGeneral() {
+	private void accionMostrarPanelGeneral() {
 		botonGeneral.setBackground(new Color(153, 153, 153));
 		botonCriteriosDesempate.setBackground(new Color(204, 204, 204));
 		botonPersonalizacion.setBackground(new Color(204, 204, 204));
 		botonAdministrarParticipantes.setBackground(new Color(204, 204, 204));
+		panelGeneral.mostrarPanel();
+		panelCriteriosDesempate.ocultarPanel();
+		panelPersonalizacion.ocultarPanel();
+		panelAdministrarParticipantes.ocultarPanel();
 	}
 
 	/**
 	 * Metodo que permite mostrar el panel <code>panelCriteriosDesempate</code> en
 	 * el panel <code>panelContenedor</code> y acultar a los demás paneles.
 	 */
-	private void mostrarPanelCriteriosDesempate() {
+	private void accionMostrarPanelCriterosDesemapate() {
 		botonGeneral.setBackground(new Color(204, 204, 204));
 		botonCriteriosDesempate.setBackground(new Color(153, 153, 153));
 		botonPersonalizacion.setBackground(new Color(204, 204, 204));
 		botonAdministrarParticipantes.setBackground(new Color(204, 204, 204));
+		panelGeneral.ocultarPanel();
+		panelCriteriosDesempate.mostrarPanel();
+		panelPersonalizacion.ocultarPanel();
+		panelAdministrarParticipantes.ocultarPanel();
 	}
 
 	/**
@@ -392,30 +374,37 @@ public class DialogoAdministarTorneo extends JDialog implements WindowListener {
 	 * panel <code>panelContenedor</code> y acultar a los demás paneles.
 	 */
 
-	private void mostrarPanelPersonalizacion() {
+	private void accionMostrarPanelPersonalizacion() {
 		botonGeneral.setBackground(new Color(204, 204, 204));
 		botonCriteriosDesempate.setBackground(new Color(204, 204, 204));
 		botonPersonalizacion.setBackground(new Color(153, 153, 153));
 		botonAdministrarParticipantes.setBackground(new Color(204, 204, 204));
+		panelGeneral.ocultarPanel();
+		panelCriteriosDesempate.ocultarPanel();
+		panelPersonalizacion.mostrarPanel();
+		panelAdministrarParticipantes.ocultarPanel();
 	}
-
 	/**
 	 * Metodo que permite mostrar el panel
 	 * <code>panelAdministrarParticipantes</code> en el panel
 	 * <code>panelContenedor</code> y acultar a los demás paneles.
 	 */
-	private void mostrarPanelAdministrarParticipantes() {
+	private void accionMostrarPanelAdministrarParticipantes() {
 		botonGeneral.setBackground(new Color(204, 204, 204));
 		botonCriteriosDesempate.setBackground(new Color(204, 204, 204));
 		botonPersonalizacion.setBackground(new Color(204, 204, 204));
 		botonAdministrarParticipantes.setBackground(new Color(153, 153, 153));
+		panelGeneral.ocultarPanel();
+		panelCriteriosDesempate.ocultarPanel();
+		panelPersonalizacion.ocultarPanel();
+		panelAdministrarParticipantes.mostrarPanel();
 	}
 
 	/**
 	 * Metodo que permite guardar en la base de datos los datos ingresados en los
 	 * paneles.
 	 */
-	private void guardarAvanceTorneo() {
+	private void accionGuardarAvanceTorneo() {
 		if (ventanaPrincipal.getTorneoActual() == null) {
 			String nombreArchivo = guardarArchivo();
 			if (nombreArchivo != null) {
@@ -485,7 +474,7 @@ public class DialogoAdministarTorneo extends JDialog implements WindowListener {
 	/**
 	 * Metodo que permite cancelar el llenado de datos para el torneo.
 	 */
-	private void cancelarAvanceTorneo() {
+	private void accionCancelarAvanceTorneo() {
 		String[] valores = { "Sí", "No" };
 		int opcion = JOptionPane.showOptionDialog(this,
 				"¿Está seguro de cancelar el llenado del formulario?\nSi presiona el botón Sí el avance de sus datos se borrarán y no se podrán recuperar",
@@ -495,7 +484,13 @@ public class DialogoAdministarTorneo extends JDialog implements WindowListener {
 			dispose();
 		}
 	}
-
+	/**
+	 * Permite mostrar un archivo PDF al usuario con información redundante de
+	 * como utilizar el sistema.
+	 */
+	private void accionAyuda() {
+		ventanaPrincipal.accionCargarManual();
+	}
 	/**
 	 * Metodo que permite seleccionar un nombre de archivo cuando creamos un torneo
 	 * nuevo.
@@ -562,7 +557,7 @@ public class DialogoAdministarTorneo extends JDialog implements WindowListener {
 	 * 
 	 */
 	public void windowClosing(WindowEvent e) {
-		cancelarAvanceTorneo();
+		accionCancelarAvanceTorneo();
 	}
 
 	/**

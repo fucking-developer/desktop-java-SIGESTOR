@@ -7,12 +7,10 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import sigestor.dominio.Participante;
 import sigestor.dominio.Personalizacion;
-import sigestor.dominio.Torneo;
 import sigestor.dominio.TorneoRoundRobin;
 import sigestor.dominio.TorneoSuizo;
 import sigestor.excepcion.ExcepcionUtilerias;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.io.File;
@@ -31,8 +29,8 @@ import java.util.ArrayList;
  * torneo almacenado con aterioridad.</li>
  * <li><code>campoFechaInicio</code>Se especificara la fecha en que se inciara
  * el torneo almacenado con anterioridad.</li>
- * <li><code>campoFechaFinalizacion</code>Se especificara la fecha en que el
- * torneo termina almacenada con anterioridad.</li>
+ * <li><code>campoFechaFin</code>Se especificara la fecha en que el torneo
+ * termina almacenada con anterioridad.</li>
  * <li><code>campoNombreOrganizador</code>Se especificara el nombre que tendra
  * el organizador del torneo almacenado con anterioridad.</li>
  * <li><code>campoNombreGanador</code> Se especificara el nombre que tendra el
@@ -45,7 +43,7 @@ import java.util.ArrayList;
  * <li><code>serialVersionUID</code> Para el número de versión de la clase.</li>
  * </ul>
  * 
- * @version 03/06/2022
+ * @version 21/03/2023
  * 
  * @author Jonathan Eduardo Ibarra Martinez
  * @author Hernan Sesai Lopez Aragon
@@ -55,7 +53,7 @@ import java.util.ArrayList;
  * @author Luis Antonio Ruiz Sierra
  * @author Victor Triste Pérez
  */
-public class DialogoResultadosFinales extends JDialog implements ActionListener {
+public class DialogoResultadosFinales extends JDialog {
 
 	/**
 	 * Sirve para definir un id que sera usado por la virtual machine cuando
@@ -124,15 +122,13 @@ public class DialogoResultadosFinales extends JDialog implements ActionListener 
 	/**
 	 * Constructor en el que se inicializa el dialogo <code>principal</code>
 	 * 
-	 * @param principal
-	 *            Recibe un objeto de tipo ventanaPrincipal el cual contiene el
-	 *            objeto de tipo torneo.
+	 * @param principal Recibe un objeto de tipo ventanaPrincipal el cual contiene
+	 *                  el objeto de tipo torneo.
 	 */
 	public DialogoResultadosFinales(VentanaPrincipal principal) {
 		super(principal, "Resultados finales");
 
 		ventanaPrincipal = principal;
-		
 
 		JPanel panelBase = new JPanel();
 		JPanel panelAuxiliar = new JPanel();
@@ -159,19 +155,19 @@ public class DialogoResultadosFinales extends JDialog implements ActionListener 
 		etiquetaTitulo.setBounds(400, 0, 400, 30);
 		panelAuxiliar.add(etiquetaTitulo);
 		panelBase.add(panelAuxiliar);
-		
-		
+
 		Action accionAyuda = new AbstractAction("Reporte de resultados finales del torneo", null) {
 			private static final long serialVersionUID = 1L;
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ventanaPrincipal.accionCargarManual();
+				accionAyuda();
 			}
 		};
 		accionAyuda.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0));
 		etiquetaTitulo.getActionMap().put("ayuda", accionAyuda);
 		etiquetaTitulo.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-				.put((KeyStroke) accionAyuda.getValue(Action.ACCELERATOR_KEY), "ayuda");
+		.put((KeyStroke) accionAyuda.getValue(Action.ACCELERATOR_KEY), "ayuda");
 
 		JLabel etiquetaTorneo = new JLabel("Torneo:");
 		etiquetaTorneo.setBounds(320, 40, 50, 20);
@@ -226,12 +222,12 @@ public class DialogoResultadosFinales extends JDialog implements ActionListener 
 		panelAuxiliar.add(etiquetaGanador);
 		panelBase.add(panelAuxiliar);
 
-		if(!ventanaPrincipal.getTorneoActual().getTipoTorneo().equals("Eliminacion Directa")) {
+		if (!ventanaPrincipal.getTorneoActual().getTipoTorneo().equals("Eliminacion Directa")) {
 			campoNombreGanador = new JTextField(this.listaParticipantes.get(0).getNombreParticipante());
-		}else {
+		} else {
 			campoNombreGanador = new JTextField();
 		}
-		
+
 		campoNombreGanador.setBounds(560, 120, 150, 20);
 		campoNombreGanador.setEditable(false);
 		panelAuxiliar.add(campoNombreGanador);
@@ -269,7 +265,7 @@ public class DialogoResultadosFinales extends JDialog implements ActionListener 
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				accionBtnExportarResultados();
+				accionExportarResultados();
 			}
 		};
 		accionExportarResultados.putValue(Action.MNEMONIC_KEY, KeyEvent.VK_E);
@@ -280,7 +276,7 @@ public class DialogoResultadosFinales extends JDialog implements ActionListener 
 		botonExportar.setAction(accionExportarResultados);
 		botonExportar.getActionMap().put("exportarResultados", accionExportarResultados);
 		botonExportar.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-				.put((KeyStroke) accionExportarResultados.getValue(Action.ACCELERATOR_KEY), "exportarResultados");
+		.put((KeyStroke) accionExportarResultados.getValue(Action.ACCELERATOR_KEY), "exportarResultados");
 
 		botonSalir = new JButton("Salir");
 		botonSalir.setBounds(680, 500, 100, 30);
@@ -293,7 +289,7 @@ public class DialogoResultadosFinales extends JDialog implements ActionListener 
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				accionBtnSalir();
+				accionSalir();
 			}
 		};
 		accionSalir.putValue(Action.MNEMONIC_KEY, KeyEvent.VK_S);
@@ -302,7 +298,7 @@ public class DialogoResultadosFinales extends JDialog implements ActionListener 
 		botonSalir.setAction(accionSalir);
 		botonSalir.getActionMap().put("salir", accionSalir);
 		botonSalir.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-				.put((KeyStroke) accionSalir.getValue(Action.ACCELERATOR_KEY), "salir");
+		.put((KeyStroke) accionSalir.getValue(Action.ACCELERATOR_KEY), "salir");
 
 		this.add(panelBase);
 
@@ -330,11 +326,11 @@ public class DialogoResultadosFinales extends JDialog implements ActionListener 
 					.getNombreMarcador(Personalizacion.MAYUSCULA_SINGULAR) + " en contra");
 		}
 		modelo.addColumn("Puntaje");
-		//FIXME
-			if(!ventanaPrincipal.getTorneoActual().getTipoTorneo().equals("Eliminación directa")) {
-				for (int i = 0; i < this.ventanaPrincipal.getTorneoActual().getListaParticipantes().size(); i++) {
-				if (!this.listaParticipantes.get(i).getNombreParticipante().equals(this.ventanaPrincipal.getTorneoActual()
-						.getDatosPersonalizacion().getNombreParticipanteSinEncuentro())) {
+		// FIXME
+		if (!ventanaPrincipal.getTorneoActual().getTipoTorneo().equals("Eliminación directa")) {
+			for (int i = 0; i < this.ventanaPrincipal.getTorneoActual().getListaParticipantes().size(); i++) {
+				if (!this.listaParticipantes.get(i).getNombreParticipante().equals(this.ventanaPrincipal
+						.getTorneoActual().getDatosPersonalizacion().getNombreParticipanteSinEncuentro())) {
 					if (this.ventanaPrincipal.getTorneoActual().getDatosPersonalizacion().isExistenciaMarcador()) {
 						Object[] fila = { this.listaParticipantes.get(i).getLugarParticipante(),
 								this.listaParticipantes.get(i).getNumeroParticipante(),
@@ -357,18 +353,19 @@ public class DialogoResultadosFinales extends JDialog implements ActionListener 
 	}
 
 	/**
-	 * @param e
-	 *            valor por defecto
+	 * Permite mostrar un archivo PDF al usuario con información relevante de
+	 * como utilizar el sistema.
 	 * 
 	 */
-	public void actionPerformed(ActionEvent e) {
+	private void accionAyuda() {
+		ventanaPrincipal.accionCargarManual();
 	}
 
 	/**
 	 * Permite exportar en un archivo CSV los resultados finales que contiene el
 	 * torneo finalizado.
 	 */
-	private void accionBtnExportarResultados() {
+	private void accionExportarResultados() {
 		JFileChooser dialogo = new JFileChooser();
 		File archivo = null;
 		dialogo.setDialogTitle("Guardar como");
@@ -385,10 +382,10 @@ public class DialogoResultadosFinales extends JDialog implements ActionListener 
 				archivo = dialogo.getSelectedFile();
 				this.ventanaPrincipal.getTorneoActual().getAlgoritmoTorneo().generarReporteFinal(archivo);
 				JOptionPane
-						.showMessageDialog(null, "El archivo se ha guardado exitosamente.",
-								"Generar reporte de " + ventanaPrincipal.getTorneoActual().getDatosPersonalizacion()
-										.getNombreCiclo(Personalizacion.MAYUSCULA_SINGULAR),
-								JOptionPane.INFORMATION_MESSAGE);
+				.showMessageDialog(null, "El archivo se ha guardado exitosamente.",
+						"Generar reporte de " + ventanaPrincipal.getTorneoActual().getDatosPersonalizacion()
+						.getNombreCiclo(Personalizacion.MAYUSCULA_SINGULAR),
+						JOptionPane.INFORMATION_MESSAGE);
 			} catch (ExcepcionUtilerias e) {
 				JOptionPane.showMessageDialog(null, e.getMessage(), "Advertencia", JOptionPane.ERROR_MESSAGE);
 			}
@@ -398,7 +395,7 @@ public class DialogoResultadosFinales extends JDialog implements ActionListener 
 	/**
 	 * Permite cerrar la ventana.
 	 */
-	private void accionBtnSalir() {
+	private void accionSalir() {
 		dispose();
 	}
 }
