@@ -2,6 +2,7 @@ package sigestor.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.FileDialog;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
@@ -9,9 +10,9 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
-
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.BoxLayout;
@@ -31,8 +32,9 @@ import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.SpinnerNumberModel;
-
 import sigestor.dominio.Participante;
+import sigestor.excepcion.ExcepcionUtilerias;
+import sigestor.utilerias.UtileriasListaParticipantes;
 
 /**
  * Sirve para manejar la interfaz de administrar participantes.
@@ -46,12 +48,17 @@ import sigestor.dominio.Participante;
  * <li><code>botonModificar</code> para modificar un participante.</li>
  * <li><code>botonEliminar</code> para eliminar un participante.</li>
  * <li><code>botonImportar</code> para importar los participantes.</li>
- * <li><code>botonDescargarPlantilla</code> para descargar la plantilla de los participantes.</li>
- * <li><code>checkPuntaje</code> para ordenar los participantes por puntaje.</li>
- * <li><code>opcionAlfabetico</code> para ordenar los participantes por orden alfabético.</li>
- * <li><code>opcionAleatorio</code> para ordenar los participantes por orden aleatorio.</li>
+ * <li><code>botonDescargarPlantilla</code> para descargar la plantilla de los
+ * participantes.</li>
+ * <li><code>checkPuntaje</code> para ordenar los participantes por
+ * puntaje.</li>
+ * <li><code>opcionAlfabetico</code> para ordenar los participantes por orden
+ * alfabético.</li>
+ * <li><code>opcionAleatorio</code> para ordenar los participantes por orden
+ * aleatorio.</li>
  * <li><code>model</code> para ayudar a manejar la lista de participantes.</li>
- * <li><code>listaDeParticipantes</code> para guardar la lista de participantes de tipo <code>Participante</code>.</li>
+ * <li><code>listaDeParticipantes</code> para guardar la lista de participantes
+ * de tipo <code>Participante</code>.</li>
  * <li><code>ventanaPrincipal</code> para hacer referencia a la clase
  * <code>VentanaPrincipal</code>.</li>
  * </ul>
@@ -124,7 +131,8 @@ public class PanelAdministrarParticipantes extends JPanel {
 	 * Constructor que consiste en mostrar en pantalla el
 	 * <code>PanelAdministrarParticipantes</code> con sus respectivos componentes.
 	 * 
-	 * @param principal Referencia a la clase <code>VentanaPrincipal</code>.
+	 * @param principal
+	 *            Referencia a la clase <code>VentanaPrincipal</code>.
 	 * 
 	 */
 	public PanelAdministrarParticipantes(VentanaPrincipal principal) {
@@ -174,7 +182,7 @@ public class PanelAdministrarParticipantes extends JPanel {
 
 		ImageIcon imagenBoton = new ImageIcon(getClass().getResource("/imagenes/nuevo.png"));
 		Image icono = imagenBoton.getImage().getScaledInstance(20, 20, Image.SCALE_AREA_AVERAGING);
-		
+
 		Action accionBotonNuevo = new AbstractAction("Nuevo", new ImageIcon(icono)) {
 			private static final long serialVersionUID = 1L;
 
@@ -184,12 +192,13 @@ public class PanelAdministrarParticipantes extends JPanel {
 			}
 		};
 		accionBotonNuevo.putValue(Action.MNEMONIC_KEY, KeyEvent.VK_N);
-		accionBotonNuevo.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_DOWN_MASK));
+		accionBotonNuevo.putValue(Action.ACCELERATOR_KEY,
+				KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_DOWN_MASK));
 		accionBotonNuevo.putValue(Action.SHORT_DESCRIPTION, "Permite agregar a la lista un nuevo participante");
 		botonNuevo = new JButton(accionBotonNuevo);
 		botonNuevo.getActionMap().put("botonNuevo", accionBotonNuevo);
 		botonNuevo.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-				.put((KeyStroke) accionBotonNuevo.getValue(Action.ACCELERATOR_KEY), "botonNuevo");
+		.put((KeyStroke) accionBotonNuevo.getValue(Action.ACCELERATOR_KEY), "botonNuevo");
 		botonNuevo.setPreferredSize(new Dimension(130, 30));
 		panelAux3.add(botonNuevo);
 		panelAux.add(panelAux3);
@@ -213,7 +222,7 @@ public class PanelAdministrarParticipantes extends JPanel {
 		botonModificar = new JButton(accionBotonModificar);
 		botonModificar.getActionMap().put("botonModificar", accionBotonModificar);
 		botonModificar.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-				.put((KeyStroke) accionBotonModificar.getValue(Action.ACCELERATOR_KEY), "botonModificar");
+		.put((KeyStroke) accionBotonModificar.getValue(Action.ACCELERATOR_KEY), "botonModificar");
 		botonModificar.setPreferredSize(new Dimension(130, 30));
 		panelAux3.add(botonModificar);
 		panelAux.add(panelAux3);
@@ -237,52 +246,51 @@ public class PanelAdministrarParticipantes extends JPanel {
 		botonEliminar = new JButton(accionBotonEliminar);
 		botonEliminar.getActionMap().put("botonEliminar", accionBotonEliminar);
 		botonEliminar.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-				.put((KeyStroke) accionBotonEliminar.getValue(Action.ACCELERATOR_KEY), "botonEliminar");
+		.put((KeyStroke) accionBotonEliminar.getValue(Action.ACCELERATOR_KEY), "botonEliminar");
 		botonEliminar.setPreferredSize(new Dimension(130, 30));
 		panelAux3.add(botonEliminar);
 		panelAux.add(panelAux3);
-		
-		
-		
-		panelAux3=new JPanel();
 
-		
+		panelAux3 = new JPanel();
+
 		imagenBoton = new ImageIcon(getClass().getResource("/imagenes/importar.png"));
 		icono = imagenBoton.getImage().getScaledInstance(20, 20, Image.SCALE_AREA_AVERAGING);
 		Action accionBotonImportar = new AbstractAction("Importar", new ImageIcon(icono)) {
 			private static final long serialVersionUID = 1L;
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				accionImportarParticipantes();
 			}
 		};
-		botonImportar=new JButton(accionBotonImportar);
-		botonImportar.setPreferredSize(new Dimension (130,30));
+		botonImportar = new JButton(accionBotonImportar);
+		botonImportar.setPreferredSize(new Dimension(130, 30));
 		botonImportar.setMnemonic(KeyEvent.VK_P);
 		botonImportar.setToolTipText("Permite importar una lista de participantes");
 
 		panelAux3.add(botonImportar);
-		
+
 		panelAux.add(panelAux3);
-		
-		panelAux3=new JPanel();
-		
+
+		panelAux3 = new JPanel();
+
 		imagenBoton = new ImageIcon(getClass().getResource("/imagenes/descargarPlantilla.png"));
 		icono = imagenBoton.getImage().getScaledInstance(20, 20, Image.SCALE_AREA_AVERAGING);
 		Action accionBotonDescargarPlantilla = new AbstractAction("Descargar plantilla", new ImageIcon(icono)) {
 			private static final long serialVersionUID = 1L;
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				accionDescargarPlantilla();
 			}
 		};
-		botonDescargarPlantilla=new JButton(accionBotonDescargarPlantilla);
-		botonDescargarPlantilla.setPreferredSize(new Dimension (170,30));
+		botonDescargarPlantilla = new JButton(accionBotonDescargarPlantilla);
+		botonDescargarPlantilla.setPreferredSize(new Dimension(170, 30));
 		botonDescargarPlantilla.setToolTipText("Permite descargar la plantilla de  participantes");
 		botonDescargarPlantilla.setMnemonic(KeyEvent.VK_S);
 		panelAux3.add(botonDescargarPlantilla);
 		panelAux.add(panelAux3);
-		
+
 		// Criterios de desempates.....................
 		panelAux3 = new JPanel();
 		JLabel etiquetaCriteriosDesempate = new JLabel("Criterios de ordenación:");
@@ -405,7 +413,7 @@ public class PanelAdministrarParticipantes extends JPanel {
 				JOptionPane.showMessageDialog(null,
 						"El campo 'nombre del participante' no puede estar vacío.\n"
 								+ "Ingrese un nombre para el participante.\n" + "Ejemplo: Pedro Cortes, Pumas",
-						"Nombre participante", JOptionPane.ERROR_MESSAGE);
+								"Nombre participante", JOptionPane.ERROR_MESSAGE);
 			}
 
 		}
@@ -442,8 +450,8 @@ public class PanelAdministrarParticipantes extends JPanel {
 					JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 
 			texto = new JLabel("Seleccione el nuevo puntaje para el participante " + campoNombreParticipante.getText()
-					+ " con el puntaje "
-					+ listaDeParticipantes.get(listaParticipantes.getSelectedIndex()).getPuntajeParticipante());
+			+ " con el puntaje "
+			+ listaDeParticipantes.get(listaParticipantes.getSelectedIndex()).getPuntajeParticipante());
 
 			panelAux = new JPanel();
 			panelAux.add(texto);
@@ -455,7 +463,7 @@ public class PanelAdministrarParticipantes extends JPanel {
 			panelAux = new JPanel();
 			panelAux.add(spinner);
 			contenido.add(panelAux);
-//ESTRA 2
+			// ESTRA 2
 			if (np == 0) {
 				if (!campoNombreParticipante.getText().equals("")) {
 					int seleccion = JOptionPane.showOptionDialog(null, contenido, "Modificar participante",
@@ -466,14 +474,14 @@ public class PanelAdministrarParticipantes extends JPanel {
 						Float puntajeParticipante = (float) spinner.getValue();
 						participante = new Participante(
 								this.listaDeParticipantes.get(listaParticipantes.getSelectedIndex())
-										.getNumeroParticipante(),
+								.getNumeroParticipante(),
 								campoNombreParticipante.getText(), puntajeParticipante);
 					} else {
 						participante = new Participante(
 								this.listaDeParticipantes.get(listaParticipantes.getSelectedIndex())
-										.getNumeroParticipante(),
+								.getNumeroParticipante(),
 								campoNombreParticipante.getText(), listaDeParticipantes
-										.get(listaParticipantes.getSelectedIndex()).getPuntajeParticipante());
+								.get(listaParticipantes.getSelectedIndex()).getPuntajeParticipante());
 					}
 					model.setElementAt(participante.toString(), listaParticipantes.getSelectedIndex());
 					listaDeParticipantes.set(listaParticipantes.getSelectedIndex(), participante);
@@ -497,8 +505,8 @@ public class PanelAdministrarParticipantes extends JPanel {
 			int seleccion = JOptionPane.showOptionDialog(null,
 					"Está seguro de que desea eliminar al participante "
 							+ listaDeParticipantes.get(listaParticipantes.getSelectedIndex()).getNombreParticipante(),
-					"Eliminar participantes", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null,
-					null);
+							"Eliminar participantes", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null,
+							null);
 			if (seleccion == 0) {
 				listaDeParticipantes.remove(listaParticipantes.getSelectedIndex());
 				model.remove(listaParticipantes.getSelectedIndex());
@@ -539,7 +547,7 @@ public class PanelAdministrarParticipantes extends JPanel {
 		for (int i = 0; i < listaDeParticipantes.size() - 1; i++) {
 			if (listaDeParticipantes.get(i).getNombreParticipante().compareToIgnoreCase(this.ventanaPrincipal
 					.getTorneoActual().getDatosPersonalizacion().getNombreParticipanteSinEncuentro()) == 0) {
-		///		model.remove(i);
+				/// model.remove(i);
 				listaDeParticipantes.remove(listaDeParticipantes.get(i));
 			}
 		}
@@ -567,18 +575,42 @@ public class PanelAdministrarParticipantes extends JPanel {
 	public void ocultarPanel() {
 		this.setVisible(false);
 	}
-	
+
 	/**
-	 * 
+	 * Consiste en abrir un archivo CSV que contiene una lista de participantes.
 	 */
 	private void accionImportarParticipantes() {
-		
+		FileDialog dialog = new FileDialog((VentanaPrincipal) null, "Abrir archivo CSV", FileDialog.LOAD);
+		dialog.setFile("*.csv");
+		dialog.setVisible(true);
+		String filename = dialog.getFile();
+		if (filename != null) {
+			File file = new File(dialog.getDirectory() + filename);
+			if (file.exists() && file.getName().endsWith(".csv")) {
+				try {
+					ArrayList<Participante> participantes = UtileriasListaParticipantes
+							.leerListaParticipantes(file.getAbsolutePath());
+					for (Participante p : participantes) {
+						Participante participante = new Participante((model.size() + 1), p.getNombreParticipante(),
+								p.getPuntajeParticipante());
+						model.addElement(participante.toString());
+						listaDeParticipantes.add(participante);
+					}
+				} catch (ExcepcionUtilerias e) {
+					JOptionPane.showMessageDialog(null, e.getMessage(), "Error al abrir el archivo",
+							JOptionPane.ERROR_MESSAGE);
+				}
+			} else {
+				JOptionPane.showMessageDialog(null, "El archivo no existe o no es de tipo CSV",
+						"Error al abrir el archivo", JOptionPane.ERROR_MESSAGE);
+			}
+		}
 	}
-	
+
 	/**
 	 * 
 	 */
 	private void accionDescargarPlantilla() {
-		
+
 	}
 }
