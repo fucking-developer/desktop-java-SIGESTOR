@@ -13,6 +13,8 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.StringTokenizer;
+
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.BoxLayout;
@@ -608,9 +610,42 @@ public class PanelAdministrarParticipantes extends JPanel {
 	}
 
 	/**
-	 * 
+	 * Permite descargar una plantilla con extension .csv con un formato ya
+	 * establecido.
 	 */
 	private void accionDescargarPlantilla() {
 
+		FileDialog descargarPlantilla = new FileDialog((VentanaPrincipal) null, "Descargar plantilla", FileDialog.SAVE);
+		descargarPlantilla.setFile("Plantilla");
+		descargarPlantilla.setVisible(true);
+		String nombre = descargarPlantilla.getFile();
+		if (!nombre.endsWith(".csv") || nombre.endsWith(".CSV")) {
+			nombre = nombre.concat(".csv");
+		}
+		if (nombre != null) {
+			File plantilla = new File(descargarPlantilla.getDirectory() + nombre);
+			StringTokenizer tokenizer = new StringTokenizer(plantilla.getName(), ".");
+			if (tokenizer.countTokens() > 1) {
+				String nombrePlantilla = tokenizer.nextToken();
+				String extension = tokenizer.nextToken();
+				if (extension.equals("csv") || extension.equals("CSV")) {
+					JOptionPane.showMessageDialog(null, "¡La plantilla se ha descargado corectamente!",
+							"Descargar plantilla", JOptionPane.INFORMATION_MESSAGE);
+					try {
+						UtileriasListaParticipantes.escribirPlantilla(plantilla.getAbsolutePath());
+
+					} catch (ExcepcionUtilerias e) {
+
+						JOptionPane.showMessageDialog(null, ExcepcionUtilerias.MENSAJE_EXCEPCION_FORMATO_INCORRECTO,
+								"Descargar Plantilla", JOptionPane.ERROR_MESSAGE);
+					}
+				} else {
+					JOptionPane.showMessageDialog(null, "El nombre de la extencion no es CSV", "Descargar plantilla",
+							JOptionPane.ERROR_MESSAGE);
+				}
+			}
+
+		}
 	}
+
 }

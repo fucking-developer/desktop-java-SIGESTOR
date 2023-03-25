@@ -3,6 +3,7 @@ package sigestor.utilerias;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Reader;
 import java.io.Writer;
 import java.util.ArrayList;
 import com.csvreader.CsvReader;
@@ -47,13 +48,52 @@ public class UtileriasListaParticipantes {
 		return formatoCorrecto;
 	}
 
+	/**
+	 * Encargado de leer un archivo CSV.
+	 * 
+	 * @param rutaArchivo
+	 *            Contiene la ruta del archivo CSV.
+	 * 
+	 * @return un ArrayList con los datos de los participantes del archivo CSV
+	 */
+
 	public static ArrayList<Participante> leerListaParticipantes(String rutaArchivo) throws ExcepcionUtilerias {
-		if (validarListaParticipantes(rutaArchivo)) {
-			// TODO lanzar excepción
+		if (!validarListaParticipantes(rutaArchivo)) {
+			throw new ExcepcionUtilerias(ExcepcionUtilerias.MENSAJE_EXCEPCION_FORMATO_INCORRECTO);
 		}
-		// TODO crear un array de participantes (sin número) con los datos del archivo
-		// csv
-		return null;
+		ArrayList<Participante> listaParticipantes = new ArrayList<Participante>();
+		Participante participante;
+		Reader reader;
+		try {
+			reader = new FileReader(rutaArchivo);
+			CsvReader readerCsv = new CsvReader(reader);
+			readerCsv.readRecord();
+			while (readerCsv.readRecord()) {
+				participante = new Participante();
+
+				if (readerCsv.get(0).trim().isEmpty()) {
+					continue;
+				}
+				try {
+					participante.setNombreParticipante(readerCsv.get(0));
+					participante.setPuntajeParticipante(Float.valueOf(readerCsv.get(1)));
+
+				} catch (NumberFormatException e) {
+					if (readerCsv.get(1).trim().isEmpty()) {
+						participante.setPuntajeParticipante(0.0f);
+						listaParticipantes.add(participante);
+					}
+					continue;
+
+				}
+				listaParticipantes.add(participante);
+
+			}
+			readerCsv.close();
+			return listaParticipantes;
+		} catch (IOException e) {
+			throw new ExcepcionUtilerias(ExcepcionUtilerias.MENSAJE_EXCEPCION_LEER_ARCHIVO_CSV);
+		}
 	}
 
 	/**

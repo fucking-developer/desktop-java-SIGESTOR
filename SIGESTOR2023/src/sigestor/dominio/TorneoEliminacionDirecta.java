@@ -58,7 +58,7 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 	 * @param true = Eliminación Directa simple false = Eliminación Directa doble
 	 */
 
-	private void setTipoEliminacion(boolean tipoEliminacion) {
+	public void setTipoEliminacion(boolean tipoEliminacion) {
 		this.esSimple = tipoEliminacion;
 	}
 

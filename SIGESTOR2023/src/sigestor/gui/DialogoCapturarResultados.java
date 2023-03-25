@@ -14,7 +14,6 @@ import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.text.DateFormat;
 
 import java.util.ArrayList;
@@ -107,7 +106,7 @@ import sigestor.excepcion.ExcepcionCapturarResultados;
  * <li><code>serialVersionUID</code> Para el número de versión de la clase.</li>
  * </ul>
  * 
- * @version 21/03/2023
+ * @version 23/03/2023
  * 
  * @author Alicia Adriana Clemente Hernandez
  * @author Luis Fernando de la Cruz López
@@ -115,11 +114,10 @@ import sigestor.excepcion.ExcepcionCapturarResultados;
  * @author Victor Triste Pérez
  * @author Eder Euclides Dionisio Diaz
  * @author Hernan Sesai Lopez Aragon
- *
+ * @author Erik Vasquez Policarpo
  */
 
-public class DialogoCapturarResultados extends JDialog implements WindowListener {
-
+public class DialogoCapturarResultados extends JDialog {
 	/**
 	 * Sirve para definir un id que sera usado por la virtual machine cuando
 	 * serializa y deserealiza el applet.
@@ -304,11 +302,13 @@ public class DialogoCapturarResultados extends JDialog implements WindowListener
 	public DialogoCapturarResultados(VentanaPrincipal principal) {
 		super(principal, "Capturar resultados");
 		this.setModal(true);
+
 		this.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
 				accionSalir();
 			}
 		});
+
 		this.ventanaPrincipal = principal;
 		torneo = principal.getTorneoActual();
 		participantes = torneo.getListaParticipantes();
@@ -431,7 +431,7 @@ public class DialogoCapturarResultados extends JDialog implements WindowListener
 		accionAyuda.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0));
 		etiquetaCicloActual.getActionMap().put("ayuda", accionAyuda);
 		etiquetaCicloActual.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-		.put((KeyStroke) accionAyuda.getValue(Action.ACCELERATOR_KEY), "ayuda");
+				.put((KeyStroke) accionAyuda.getValue(Action.ACCELERATOR_KEY), "ayuda");
 
 		JLabel etiquetaOrganizador = new JLabel("Organizador:");
 		etiquetaOrganizador.setPreferredSize(new Dimension(90, 25));
@@ -500,11 +500,11 @@ public class DialogoCapturarResultados extends JDialog implements WindowListener
 		};
 		accionSeleccionarCiclo.putValue(Action.SHORT_DESCRIPTION,
 				"Seleccione " + this.ventanaPrincipal.getTorneoActual().getDatosPersonalizacion().getNombreCiclo(3)
-				+ " para capturar o modificar los resultados");
+						+ " para capturar o modificar los resultados");
 		comboSeleccionarCiclo.setAction(accionSeleccionarCiclo);
 		comboSeleccionarCiclo.getActionMap().put("seleccionarciclo", accionSeleccionarCiclo);
 		comboSeleccionarCiclo.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-		.put((KeyStroke) accionSeleccionarCiclo.getValue(Action.ACCELERATOR_KEY), "seleccionarciclo");
+				.put((KeyStroke) accionSeleccionarCiclo.getValue(Action.ACCELERATOR_KEY), "seleccionarciclo");
 		auxPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		tituloTabla.add(auxPanel);
 
@@ -638,7 +638,7 @@ public class DialogoCapturarResultados extends JDialog implements WindowListener
 							+ " que le corresponde al "
 							+ this.ventanaPrincipal.getTorneoActual().getDatosPersonalizacion().getNombreParticipante(2)
 							+ " " + this.ventanaPrincipal.getTorneoActual().getDatosPersonalizacion()
-							.getNombreParticipanteInicial());
+									.getNombreParticipanteInicial());
 					campoMarcadorInicial[i].setPreferredSize(new Dimension(60, 30));
 					auxPanel = new JPanel();
 					auxPanel.add(campoMarcadorInicial[i]);
@@ -652,7 +652,7 @@ public class DialogoCapturarResultados extends JDialog implements WindowListener
 						+ this.ventanaPrincipal.getTorneoActual().getDatosPersonalizacion().getNombreParticipante(3)
 						+ " "
 						+ this.ventanaPrincipal.getTorneoActual().getDatosPersonalizacion()
-						.getNombreParticipanteInicial()
+								.getNombreParticipanteInicial()
 						+ " ha sido el Ganador de "
 						+ this.ventanaPrincipal.getTorneoActual().getDatosPersonalizacion().getNombreEncuentro(3));
 				opcionEmpate[i] = new JRadioButton("", false);
@@ -699,7 +699,7 @@ public class DialogoCapturarResultados extends JDialog implements WindowListener
 							+ " que le corresponde al "
 							+ this.ventanaPrincipal.getTorneoActual().getDatosPersonalizacion().getNombreParticipante(2)
 							+ " " + this.ventanaPrincipal.getTorneoActual().getDatosPersonalizacion()
-							.getNombreParticipanteFinal());
+									.getNombreParticipanteFinal());
 					auxPanel = new JPanel();
 					auxPanel.add(campoMarcadorFinal[i]);
 					auxPanel.setPreferredSize(new Dimension(70, 35));
@@ -763,9 +763,9 @@ public class DialogoCapturarResultados extends JDialog implements WindowListener
 		if (validacionMarcadores) {
 			accionGuardar.putValue(Action.SHORT_DESCRIPTION,
 					"Guarda " + this.ventanaPrincipal.getTorneoActual().getDatosPersonalizacion().getNombreMarcador(4)
-					+ " y el resultado de cada "
-					+ this.ventanaPrincipal.getTorneoActual().getDatosPersonalizacion().getNombreEncuentro(2)
-					+ ". " + "Deshabilita la edición de los resultados capturados");
+							+ " y el resultado de cada "
+							+ this.ventanaPrincipal.getTorneoActual().getDatosPersonalizacion().getNombreEncuentro(2)
+							+ ". " + "Deshabilita la edición de los resultados capturados");
 		} else {
 			accionGuardar.putValue(Action.SHORT_DESCRIPTION,
 					"Guarda el resultado de cada "
@@ -775,7 +775,7 @@ public class DialogoCapturarResultados extends JDialog implements WindowListener
 		botonGuardar = new JButton(accionGuardar);
 		botonGuardar.getActionMap().put("guardar", accionGuardar);
 		botonGuardar.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-		.put((KeyStroke) accionGuardar.getValue(Action.ACCELERATOR_KEY), "guardar");
+				.put((KeyStroke) accionGuardar.getValue(Action.ACCELERATOR_KEY), "guardar");
 		botonGuardar.setPreferredSize(new Dimension(120, 30));
 		auxPanel = new JPanel();
 		auxPanel.add(botonGuardar);
@@ -799,7 +799,7 @@ public class DialogoCapturarResultados extends JDialog implements WindowListener
 		botonMostrarReporte = new JButton(accionMostrarReporte);
 		botonMostrarReporte.getActionMap().put("mostrarReporte", accionMostrarReporte);
 		botonMostrarReporte.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-		.put((KeyStroke) accionMostrarReporte.getValue(Action.ACCELERATOR_KEY), "mostrarReporte");
+				.put((KeyStroke) accionMostrarReporte.getValue(Action.ACCELERATOR_KEY), "mostrarReporte");
 		botonMostrarReporte.setPreferredSize(new Dimension(200, 30));
 		auxPanel = new JPanel();
 		auxPanel.add(botonMostrarReporte);
@@ -823,7 +823,7 @@ public class DialogoCapturarResultados extends JDialog implements WindowListener
 		botonModificarResultados = new JButton(accionModificarResultados);
 		botonModificarResultados.getActionMap().put("modificarResultados", accionModificarResultados);
 		botonModificarResultados.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-		.put((KeyStroke) accionModificarResultados.getValue(Action.ACCELERATOR_KEY), "modificarResultados");
+				.put((KeyStroke) accionModificarResultados.getValue(Action.ACCELERATOR_KEY), "modificarResultados");
 		botonModificarResultados.setPreferredSize(new Dimension(200, 30));
 		auxPanel = new JPanel();
 		auxPanel.add(botonModificarResultados);
@@ -847,7 +847,7 @@ public class DialogoCapturarResultados extends JDialog implements WindowListener
 		botonCancelarCiclo = new JButton(accionCancelarCiclo);
 		botonCancelarCiclo.getActionMap().put("cancelarCiclo", accionCancelarCiclo);
 		botonCancelarCiclo.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-		.put((KeyStroke) accionCancelarCiclo.getValue(Action.ACCELERATOR_KEY), "cancelarCiclo");
+				.put((KeyStroke) accionCancelarCiclo.getValue(Action.ACCELERATOR_KEY), "cancelarCiclo");
 		botonCancelarCiclo.setPreferredSize(new Dimension(200, 30));
 		auxPanel = new JPanel();
 		botonCancelarCiclo.setEnabled(true);
@@ -871,7 +871,7 @@ public class DialogoCapturarResultados extends JDialog implements WindowListener
 		botonSalir = new JButton(accionSalir);
 		botonSalir.getActionMap().put("salir", accionSalir);
 		botonSalir.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-		.put((KeyStroke) accionSalir.getValue(Action.ACCELERATOR_KEY), "salir");
+				.put((KeyStroke) accionSalir.getValue(Action.ACCELERATOR_KEY), "salir");
 		botonSalir.setPreferredSize(new Dimension(120, 30));
 		auxPanel = new JPanel();
 		auxPanel.add(botonSalir);
@@ -959,8 +959,8 @@ public class DialogoCapturarResultados extends JDialog implements WindowListener
 				if (p.getNumeroParticipante() == this
 						.obtenerParticipante(listaEncuentros.get(i).getIdParticipanteFinal()).getNumeroParticipante()
 						&& this.obtenerParticipante(listaEncuentros.get(i).getIdParticipanteFinal())
-						.getNombreParticipante().compareToIgnoreCase(this.torneo.getDatosPersonalizacion()
-								.getNombreParticipanteSinEncuentro()) == 0) {
+								.getNombreParticipante().compareToIgnoreCase(this.torneo.getDatosPersonalizacion()
+										.getNombreParticipanteSinEncuentro()) == 0) {
 					etiquetaNumeroInicial[i].setText(String.valueOf(listaEncuentros.get(i).getIdParticipanteInicial()));
 					etiquetaParticipanteInicial[i]
 							.setText(this.obtenerParticipante(listaEncuentros.get(i).getIdParticipanteInicial())
@@ -970,8 +970,8 @@ public class DialogoCapturarResultados extends JDialog implements WindowListener
 				} else if (p.getNumeroParticipante() == this
 						.obtenerParticipante(listaEncuentros.get(i).getIdParticipanteInicial()).getNumeroParticipante()
 						&& this.obtenerParticipante(listaEncuentros.get(i).getIdParticipanteInicial())
-						.getNombreParticipante().compareToIgnoreCase(this.torneo.getDatosPersonalizacion()
-								.getNombreParticipanteSinEncuentro()) == 0) {
+								.getNombreParticipante().compareToIgnoreCase(this.torneo.getDatosPersonalizacion()
+										.getNombreParticipanteSinEncuentro()) == 0) {
 					etiquetaNumeroInicial[i].setText(String.valueOf(listaEncuentros.get(i).getIdParticipanteFinal()));
 					etiquetaParticipanteInicial[i]
 							.setText(this.obtenerParticipante(listaEncuentros.get(i).getIdParticipanteFinal())
@@ -1153,117 +1153,41 @@ public class DialogoCapturarResultados extends JDialog implements WindowListener
 	 * el ciclo del torneo.
 	 */
 	private void accionCancelarCiclo() {
-
 		Object[] opciones = { "Sí", "No" };
 		int respuesta1 = JOptionPane.showOptionDialog(null,
 				"¿Está seguro de cancelar "
 						+ torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MINUSCULA_SINGULAR) + "?",
-						"Cancelar" + torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MINUSCULA_SINGULAR)
+				"Cancelar" + torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MINUSCULA_SINGULAR)
 						.substring(6),
-						JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[1]);
+				JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[1]);
 		if (respuesta1 == JOptionPane.YES_OPTION) {
 			int respuesta2 = JOptionPane.showOptionDialog(null,
 					"Si se cancela se perderán todos los resultados \n incluyendo "
 							+ torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MINUSCULA_SINGULAR) + "."
 							+ "\n ¿Está realmente seguro de cancelar "
 							+ torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MINUSCULA_SINGULAR) + "?",
-							"Cancelar" + torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MINUSCULA_SINGULAR)
+					"Cancelar" + torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MINUSCULA_SINGULAR)
 							.substring(6),
-							JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, opciones, opciones[1]);
+					JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, opciones, opciones[1]);
 			if (respuesta2 == JOptionPane.YES_OPTION) {
 				JOptionPane.showMessageDialog(null,
 						"" + "El(la)"
 								+ torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MINUSCULA_SINGULAR)
-								.substring(6)
+										.substring(6)
 								+ " se ha cancelado.",
-								"Cancelar" + torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MINUSCULA_SINGULAR)
+						"Cancelar" + torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MINUSCULA_SINGULAR)
 								.substring(6),
-								JOptionPane.INFORMATION_MESSAGE);
-				BaseDatosEncuentro bde = new BaseDatosEncuentro(ventanaPrincipal.getTorneoActual().getNombreArchivo());
-				BaseDatosCiclo bdc = new BaseDatosCiclo(ventanaPrincipal.getTorneoActual().getNombreArchivo());
-				ArrayList<Ciclo> ciclos = torneo.getAlgoritmoTorneo().getCiclos();
-				ArrayList<Encuentro> encuentros = ciclos.get(torneo.getCicloActual() - 1).getEncuentroParticipantes();
-				for (Encuentro e : encuentros) {
-					sumarRestarMarcadorParticipante(e, (-1) * e.getMarcadorParticipanteInicial(),
-							(-1) * e.getMarcadorParticipanteFinal());
-					sumarRestarPuntajeAcumuladoParticipante(e, (-1) * personalizacion.getPuntajeGanar(),
-							(-1) * personalizacion.getPuntajePerder(), (-1) * personalizacion.getPuntajeEmpatar());
-					if (this.torneo.getTipoTorneo().contains("Suizo")) {
-						try {
-							bde.eliminarEncuentro(e, ciclos.get(torneo.getCicloActual() - 1));
-						} catch (ExcepcionBaseDatos e1) {
-							JOptionPane.showMessageDialog(null, e1.getMessage(), "Eliminar ciclo",
-									JOptionPane.ERROR_MESSAGE);
-						} catch (ExcepcionBaseDatosEncuentro e1) {
-							JOptionPane.showMessageDialog(null, e1.getMessage(), "Eliminar encuentros",
-									JOptionPane.ERROR_MESSAGE);
-
-						}
-					} else {
-						try {
-							e.setMarcadorParticipanteFinal("0");
-							e.setMarcadorParticipanteInicial("0");
-							e.setResultadoEncuentro(99);
-							bde.actualizarEncuentro(e, ciclos.get(torneo.getCicloActual() - 1));
-						} catch (ExcepcionBaseDatos | ExcepcionBaseDatosEncuentro | ExcepcionCapturarResultados e1) {
-
-						}
-						comboSeleccionarCiclo.setSelectedIndex(torneo.getCicloActual() - 1); // FIXME
-
-					}
-
-					etiquetaTituloTabla.setText("Tabla de resultados de "
-							+ ventanaPrincipal.getTorneoActual().getDatosPersonalizacion().getNombreCiclo(3) + " "
-							+ (comboSeleccionarCiclo.getSelectedIndex() + 1));
-					etiquetaCicloActual.setText(
-							torneo.getDatosPersonalizacion().getNombreCiclo(1) + " actual: " + torneo.getCicloActual());
-					habilitarBotones();
-				}
-				actualizarParticipantes();
-				if (this.torneo.getTipoTorneo().contains("Suizo")) {
-					try {
-						bdc.eliminarCiclo(ciclos.get(torneo.getCicloActual() - 1));
-					} catch (ExcepcionBaseDatos e) {
-						JOptionPane.showMessageDialog(null, e.getMessage(), "Eliminar ciclo",
-								JOptionPane.ERROR_MESSAGE);
-					} catch (ExcepcionBaseDatosCiclo e) {
-						JOptionPane.showMessageDialog(null, e.getMessage(), "Eliminar ciclo",
-								JOptionPane.ERROR_MESSAGE);
-					}
-					ciclos.remove(torneo.getCicloActual() - 1);
-					this.comboSeleccionarCiclo.removeItemAt(torneo.getCicloActual() - 1);
-					torneo.setCicloActual(torneo.getCicloActual() - 1);
-					torneo.getAlgoritmoTorneo().setCiclos(ciclos);
-				} else {
-					if (torneo.getCicloActual() != 1) {
-						this.comboSeleccionarCiclo.removeItemAt(torneo.getCicloActual() - 1);
-						torneo.setCicloActual(torneo.getCicloActual() - 1);
-						torneo.getAlgoritmoTorneo().setCiclos(ciclos);
-					}
-				}
-				try {
-					BaseDatosTorneo bdt = new BaseDatosTorneo(ventanaPrincipal.getTorneoActual().getNombreArchivo());
-					bdt.actualizarCicloActual(torneo);
-				} catch (ExcepcionBaseDatos e) {
-					JOptionPane.showMessageDialog(null, e.getMessage(), "Eliminar ciclo", JOptionPane.ERROR_MESSAGE);
-				} catch (ExcepcionBaseDatosTorneo e) {
-					JOptionPane.showMessageDialog(null, e.getMessage(), "Eliminar ciclo", JOptionPane.ERROR_MESSAGE);
-				}
-
-				BaseDatosParticipante bdp = new BaseDatosParticipante(this.torneo.getNombreArchivo());
-
-				for (Participante p : participantes) {
-					if (p.getLugarParticipante() > 0) {
-						p.setLugarParticipante(0);
-						try {
-							bdp.actualizarLugarParticipante(p, torneo);
-						} catch (ExcepcionBaseDatos | ExcepcionBaseDatosParticipante e1) {
-
-						}
-					}
-				}
+						JOptionPane.INFORMATION_MESSAGE);
+				eliminarCiclo();
 			}
 		}
+
+		etiquetaTituloTabla.setText("Tabla de resultados de "
+				+ ventanaPrincipal.getTorneoActual().getDatosPersonalizacion().getNombreCiclo(3) + " "
+				+ (comboSeleccionarCiclo.getSelectedIndex() + 1));
+		etiquetaCicloActual
+				.setText(torneo.getDatosPersonalizacion().getNombreCiclo(1) + " actual: " + torneo.getCicloActual());
+		habilitarBotones();
 	}
 
 	/**
@@ -1275,8 +1199,8 @@ public class DialogoCapturarResultados extends JDialog implements WindowListener
 			int opcion = JOptionPane.showOptionDialog(this,
 					"Los resultados no han sido guardados.\nToda la información ingresada se perderá."
 							+ "\n ¿Está seguro que desea salir?",
-							"Capturar resultados", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, valores,
-							valores[1]);
+					"Capturar resultados", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, valores,
+					valores[1]);
 			if (opcion == 0) {
 				dispose();
 			} else if (opcion == 1) {
@@ -1300,6 +1224,87 @@ public class DialogoCapturarResultados extends JDialog implements WindowListener
 		actualizarParticipantes();
 		JOptionPane.showMessageDialog(null, "Los resultados se han guardado exitosamente.", "Capturar resultados",
 				JOptionPane.INFORMATION_MESSAGE);
+	}
+
+	/**
+	 * Elimina el ciclo y los encuentros que están en él, tambien actualiza el
+	 * marcador y el puntaje acumulado de los participantes.
+	 */
+	private void eliminarCiclo() {
+		BaseDatosEncuentro bde = new BaseDatosEncuentro(ventanaPrincipal.getTorneoActual().getNombreArchivo());
+		BaseDatosCiclo bdc = new BaseDatosCiclo(ventanaPrincipal.getTorneoActual().getNombreArchivo());
+		ArrayList<Ciclo> ciclos = torneo.getAlgoritmoTorneo().getCiclos();
+		ArrayList<Encuentro> encuentros = ciclos.get(torneo.getCicloActual() - 1).getEncuentroParticipantes();
+		for (Encuentro e : encuentros) {
+			sumarRestarMarcadorParticipante(e, (-1) * e.getMarcadorParticipanteInicial(),
+					(-1) * e.getMarcadorParticipanteFinal());
+			sumarRestarPuntajeAcumuladoParticipante(e, (-1) * personalizacion.getPuntajeGanar(),
+					(-1) * personalizacion.getPuntajePerder(), (-1) * personalizacion.getPuntajeEmpatar());
+			if (this.torneo.getTipoTorneo().contains("Suizo")) {
+				try {
+					bde.eliminarEncuentro(e, ciclos.get(torneo.getCicloActual() - 1));
+				} catch (ExcepcionBaseDatos e1) {
+					JOptionPane.showMessageDialog(null, e1.getMessage(), "Eliminar ciclo", JOptionPane.ERROR_MESSAGE);
+				} catch (ExcepcionBaseDatosEncuentro e1) {
+					JOptionPane.showMessageDialog(null, e1.getMessage(), "Eliminar encuentros",
+							JOptionPane.ERROR_MESSAGE);
+
+				}
+			} else {
+				try {
+					e.setMarcadorParticipanteFinal("0");
+					e.setMarcadorParticipanteInicial("0");
+					e.setResultadoEncuentro(99);
+					bde.actualizarEncuentro(e, ciclos.get(torneo.getCicloActual() - 1));
+				} catch (ExcepcionBaseDatos | ExcepcionBaseDatosEncuentro | ExcepcionCapturarResultados e1) {
+
+				}
+				comboSeleccionarCiclo.setSelectedIndex(torneo.getCicloActual() - 1); // FIXME
+
+			}
+		}
+		actualizarParticipantes();
+		if (this.torneo.getTipoTorneo().contains("Suizo")) {
+			try {
+				bdc.eliminarCiclo(ciclos.get(torneo.getCicloActual() - 1));
+			} catch (ExcepcionBaseDatos e) {
+				JOptionPane.showMessageDialog(null, e.getMessage(), "Eliminar ciclo", JOptionPane.ERROR_MESSAGE);
+			} catch (ExcepcionBaseDatosCiclo e) {
+				JOptionPane.showMessageDialog(null, e.getMessage(), "Eliminar ciclo", JOptionPane.ERROR_MESSAGE);
+			}
+			ciclos.remove(torneo.getCicloActual() - 1);
+			this.comboSeleccionarCiclo.removeItemAt(torneo.getCicloActual() - 1);
+			torneo.setCicloActual(torneo.getCicloActual() - 1);
+			torneo.getAlgoritmoTorneo().setCiclos(ciclos);
+		} else {
+			if (torneo.getCicloActual() != 1) {
+				this.comboSeleccionarCiclo.removeItemAt(torneo.getCicloActual() - 1);
+				torneo.setCicloActual(torneo.getCicloActual() - 1);
+				torneo.getAlgoritmoTorneo().setCiclos(ciclos);
+			}
+		}
+		try {
+			BaseDatosTorneo bdt = new BaseDatosTorneo(ventanaPrincipal.getTorneoActual().getNombreArchivo());
+			bdt.actualizarCicloActual(torneo);
+		} catch (ExcepcionBaseDatos e) {
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Eliminar ciclo", JOptionPane.ERROR_MESSAGE);
+		} catch (ExcepcionBaseDatosTorneo e) {
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Eliminar ciclo", JOptionPane.ERROR_MESSAGE);
+		}
+
+		BaseDatosParticipante bdp = new BaseDatosParticipante(this.torneo.getNombreArchivo());
+
+		for (Participante p : participantes) {
+			if (p.getLugarParticipante() > 0) {
+				p.setLugarParticipante(0);
+				try {
+					bdp.actualizarLugarParticipante(p, torneo);
+				} catch (ExcepcionBaseDatos | ExcepcionBaseDatosParticipante e1) {
+
+				}
+			}
+		}
+
 	}
 
 	/**
@@ -1478,68 +1483,5 @@ public class DialogoCapturarResultados extends JDialog implements WindowListener
 				}
 			}
 		}
-	}
-
-	/**
-	 * @param e valor por defecto
-	 * 
-	 */
-	public void windowOpened(WindowEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	/**
-	 * @param e valor por defecto
-	 * 
-	 */
-	public void windowClosing(WindowEvent e) {
-		// TODO Auto-generated method stub
-		accionSalir();
-	}
-
-	/**
-	 * @param e valor por defecto
-	 * 
-	 */
-	public void windowClosed(WindowEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	/**
-	 * @param e valor por defecto
-	 * 
-	 */
-	public void windowIconified(WindowEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	/**
-	 * @param e valor por defecto
-	 * 
-	 */
-	public void windowDeiconified(WindowEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	/**
-	 * @param e valor por defecto
-	 * 
-	 */
-	public void windowActivated(WindowEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	/**
-	 * @param e valor por defecto
-	 * 
-	 */
-	public void windowDeactivated(WindowEvent e) {
-		// TODO Auto-generated method stub
-
 	}
 }

@@ -131,8 +131,8 @@ public class BaseDatosEncuentro extends BaseDatos {
 	 */
 	public void actualizarFechaEncuentro(Encuentro encuentro, Ciclo ciclo)
 			throws ExcepcionBaseDatos, ExcepcionBaseDatosEncuentro {
+		
 		SimpleDateFormat formato = new SimpleDateFormat("yyyy/MM/dd");
-
 		Date dateFechaDelEncuentro = encuentro.getFechaEncuentro();
 		String cadenaFechaDelEncuentro = formato.format(dateFechaDelEncuentro);
 

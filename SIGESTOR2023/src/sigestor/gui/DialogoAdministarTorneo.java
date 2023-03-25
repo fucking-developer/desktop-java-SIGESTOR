@@ -7,8 +7,8 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
@@ -72,7 +72,7 @@ import sigestor.excepcion.ExcepcionCapturarResultados;
  * 
  * </ul>
  * 
- * @version 21/03/2023
+ * @version 22/03/2023
  * 
  * @author Ricky Didier Peralta Reyes
  * @author Uriel Romeo Cruz Cortes
@@ -80,7 +80,7 @@ import sigestor.excepcion.ExcepcionCapturarResultados;
  * @author Beatriz Andrea Jiménez Ríos
  * @author Erik Vasquez Policarpo
  */
-public class DialogoAdministarTorneo extends JDialog implements WindowListener {
+public class DialogoAdministarTorneo extends JDialog {
 
 	/**
 	 * Sirve para definir un id que sera usado por la virtual machine cuando
@@ -150,7 +150,13 @@ public class DialogoAdministarTorneo extends JDialog implements WindowListener {
 	 */
 	public DialogoAdministarTorneo(VentanaPrincipal principal) {
 		super(principal, "Administrar torneo");
-
+		
+		this.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				accionSalir();
+			}
+		});
+		
 		ventanaPrincipal = principal;
 
 		panelGeneral = new PanelGeneral(principal);
@@ -331,7 +337,6 @@ public class DialogoAdministarTorneo extends JDialog implements WindowListener {
 				.put((KeyStroke) accionAyuda.getValue(Action.ACCELERATOR_KEY), "ayuda");
 
 		this.add(panelAux, BorderLayout.SOUTH);
-		this.addWindowListener(this);
 		this.setSize(new Dimension(805, 550));
 		this.setResizable(true);
 		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
@@ -534,66 +539,12 @@ public class DialogoAdministarTorneo extends JDialog implements WindowListener {
 			return null;
 		}
 	}
-
+	
 	/**
-	 * @param e valor por defecto
-	 * 
+	 * Permite cerrar la ventana.
 	 */
-	public void windowActivated(WindowEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	/**
-	 * @param e valor por defecto
-	 * 
-	 */
-	public void windowClosed(WindowEvent e) {
-		// TODO Auto-generated method stub
-	}
-
-	/**
-	 * @param e valor por defecto
-	 * 
-	 */
-	public void windowClosing(WindowEvent e) {
+	private void accionSalir() {
 		accionCancelarAvanceTorneo();
+		dispose();
 	}
-
-	/**
-	 * @param e valor por defecto
-	 * 
-	 */
-	public void windowDeactivated(WindowEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	/**
-	 * @param e valor por defecto
-	 * 
-	 */
-	public void windowDeiconified(WindowEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	/**
-	 * @param e valor por defecto
-	 * 
-	 */
-	public void windowIconified(WindowEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	/**
-	 * @param e valor por defecto
-	 * 
-	 */
-	public void windowOpened(WindowEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
 }

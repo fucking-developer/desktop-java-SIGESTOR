@@ -87,7 +87,6 @@ public class BaseDatosTorneo extends BaseDatos {
 			realizarAccion("CREATE TABLE eliminacionDirecta(numeroCiclos INTEGER DEFAULT 1)");
 			cerrarConexion();
 		} catch (ExcepcionBaseDatos e) {
-
 			throw new ExcepcionBaseDatosTorneo(ExcepcionBaseDatosTorneo.MENSAJE_EXCEPCION_CREA_BASE_DATOS_PARTE_1
 					+ getNombreArchivo() + ExcepcionBaseDatosTorneo.MENSAJE_EXCEPCION_CREA_BASE_DATOS_PARTE_2
 					+ ExcepcionBaseDatosTorneo.MENSAJE_EXCEPCION_SOLUCION);

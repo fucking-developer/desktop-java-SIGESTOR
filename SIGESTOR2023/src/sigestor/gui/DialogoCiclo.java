@@ -12,6 +12,8 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import com.toedter.calendar.JDateChooser;
+
+import sigestor.bd.BaseDatosEncuentro;
 import sigestor.dominio.*;
 import sigestor.excepcion.ExcepcionBaseDatos;
 import sigestor.excepcion.ExcepcionBaseDatosCiclo;
@@ -69,7 +71,7 @@ import sigestor.excepcion.ExcepcionUtilerias;
  * <li><code>serialVersionUID</code> Para el número de versión de la clase.</li>
  * </ul>
  * 
- * @version 21/03/2023
+ * @version 25/03/2023
  * 
  * @author Jonathan Eduardo Ibarra Martinez
  * @author Hernan Sesai Lopez Aragon
@@ -249,8 +251,9 @@ public class DialogoCiclo extends JDialog {
 	/**
 	 * Asigna el parámetro recibido a la variable <code>cicloSeleccionado</code>.
 	 * 
-	 * @param cicloSeleccionado Recibe un numero entero del cicloo
-	 *                          <code>cicloSeleeccionado</code>.
+	 * @param cicloSeleccionado
+	 *            Recibe un numero entero del cicloo
+	 *            <code>cicloSeleeccionado</code>.
 	 */
 	public void setCicloSeleccionado(int cicloSeleccionado) {
 		this.cicloSeleccionado = cicloSeleccionado;
@@ -259,8 +262,9 @@ public class DialogoCiclo extends JDialog {
 	/**
 	 * Constructor en el que se inicializa el diálogo.
 	 * 
-	 * @param principal Recibe un objeto de tipo ventanaPrincipal el cual contiene
-	 *                  el objeto de tipo torneo.
+	 * @param principal
+	 *            Recibe un objeto de tipo ventanaPrincipal el cual contiene el
+	 *            objeto de tipo torneo.
 	 */
 	public DialogoCiclo(VentanaPrincipal principal) {
 		super(principal,
@@ -320,8 +324,8 @@ public class DialogoCiclo extends JDialog {
 				etiquetaCicloActual.setText("Torneo finalizado");
 			} else {
 				etiquetaCicloActual
-				.setText(torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MAYUSCULA_SINGULAR)
-						+ " actual: " + torneo.getCicloActual());
+						.setText(torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MAYUSCULA_SINGULAR)
+								+ " actual: " + torneo.getCicloActual());
 			}
 
 		}
@@ -342,7 +346,7 @@ public class DialogoCiclo extends JDialog {
 		accionAyuda.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0));
 		etiquetaCicloActual.getActionMap().put("ayuda", accionAyuda);
 		etiquetaCicloActual.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-		.put((KeyStroke) accionAyuda.getValue(Action.ACCELERATOR_KEY), "ayuda");
+				.put((KeyStroke) accionAyuda.getValue(Action.ACCELERATOR_KEY), "ayuda");
 
 		JLabel etiquetaTorneo = new JLabel("Torneo: ");
 		etiquetaTorneo.setBounds(465, 20, 50, 25);
@@ -412,7 +416,7 @@ public class DialogoCiclo extends JDialog {
 		botonHacer = new JButton(accionHacer);
 		botonHacer.getActionMap().put("hacer", accionHacer);
 		botonHacer.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-		.put((KeyStroke) accionHacer.getValue(Action.ACCELERATOR_KEY), "hacer");
+				.put((KeyStroke) accionHacer.getValue(Action.ACCELERATOR_KEY), "hacer");
 		botonHacer.setBounds(930, 175, 100, 30);
 		if (getCicloSeleccionado() == torneo.getCicloActual() - 1 && torneo.getTipoTorneo().contains("Round Robin")) {
 			botonHacer.setEnabled(false);
@@ -429,7 +433,7 @@ public class DialogoCiclo extends JDialog {
 
 		comboSeleccionarCiclo.setToolTipText(
 				"Seleccione un " + torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MINUSCULA_SINGULAR)
-				+ " para generar el reporte de pareos en pantalla");
+						+ " para generar el reporte de pareos en pantalla");
 		comboSeleccionarCiclo.setEnabled(true);
 		comboSeleccionarCiclo.setBounds(930, 250, 120, 25);
 		panelNorte.add(comboSeleccionarCiclo);
@@ -449,10 +453,10 @@ public class DialogoCiclo extends JDialog {
 		comboSeleccionarCiclo.setAction(accionSeleccionarCiclo);
 		comboSeleccionarCiclo.getActionMap().put("seleccionarciclo", accionSeleccionarCiclo);
 		comboSeleccionarCiclo.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-		.put((KeyStroke) accionSeleccionarCiclo.getValue(Action.ACCELERATOR_KEY), "seleccionarciclo");
+				.put((KeyStroke) accionSeleccionarCiclo.getValue(Action.ACCELERATOR_KEY), "seleccionarciclo");
 		accionSeleccionarCiclo.putValue(Action.SHORT_DESCRIPTION,
 				"Seleccione un " + torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MINUSCULA_SINGULAR)
-				+ " para generar el reporte de pareos en pantalla");
+						+ " para generar el reporte de pareos en pantalla");
 
 		etiquetaCicloActual2.setBounds(550, 290, 200, 25);
 		panelNorte.add(etiquetaCicloActual2);
@@ -490,7 +494,7 @@ public class DialogoCiclo extends JDialog {
 		botonExportar = new JButton(accionExportarRonda);
 		botonExportar.getActionMap().put("exportarRonda", accionExportarRonda);
 		botonExportar.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-		.put((KeyStroke) accionExportarRonda.getValue(Action.ACCELERATOR_KEY), "exportarRonda");
+				.put((KeyStroke) accionExportarRonda.getValue(Action.ACCELERATOR_KEY), "exportarRonda");
 		panelSur.add(botonExportar);
 
 		imagenF = new ImageIcon(getClass().getResource("/imagenes/guardar.png"));
@@ -510,7 +514,7 @@ public class DialogoCiclo extends JDialog {
 		botonGuardar = new JButton(accionGuardar);
 		botonGuardar.getActionMap().put("guardar", accionGuardar);
 		botonGuardar.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-		.put((KeyStroke) accionGuardar.getValue(Action.ACCELERATOR_KEY), "guardar");
+				.put((KeyStroke) accionGuardar.getValue(Action.ACCELERATOR_KEY), "guardar");
 		botonGuardar.setPreferredSize(new Dimension(170, 30));
 		panelSur.add(botonGuardar);
 
@@ -530,7 +534,7 @@ public class DialogoCiclo extends JDialog {
 		botonSalir = new JButton(accionSalir);
 		botonSalir.getActionMap().put("salir", accionSalir);
 		botonSalir.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-		.put((KeyStroke) accionSalir.getValue(Action.ACCELERATOR_KEY), "salir");
+				.put((KeyStroke) accionSalir.getValue(Action.ACCELERATOR_KEY), "salir");
 
 		panelSur.add(botonSalir);
 
@@ -584,10 +588,8 @@ public class DialogoCiclo extends JDialog {
 	 */
 	private void llenarTablaParticipantes() {
 		tablaListaParticipantes.setEnabled(false);
-
 		modelo.addColumn("Núm.");
 		modelo.addColumn("Nombre");
-
 		if (torneo.getDatosPersonalizacion().isExistenciaMarcador()) {
 			modelo.addColumn(torneo.getDatosPersonalizacion().getNombreMarcador(Personalizacion.MAYUSCULA_SINGULAR)
 					+ " a favor");
@@ -595,7 +597,6 @@ public class DialogoCiclo extends JDialog {
 					+ " en contra");
 		}
 		modelo.addColumn("Puntaje");
-
 		// FIXME
 		if (!torneo.getTipoTorneo().equals("Eliminación directa")) {
 			for (int i = 0; i < torneo.getListaParticipantes().size(); i++) {
@@ -624,7 +625,8 @@ public class DialogoCiclo extends JDialog {
 	/**
 	 * Obtiene los participantes de la lista de participantes.
 	 * 
-	 * @param numeroParticipante Cantidad de participantes del torneo.
+	 * @param numeroParticipante
+	 *            Cantidad de participantes del torneo.
 	 * @return Devuelve el nombre del participante solicitado.
 	 */
 	private Participante obtenerParticipante(int numeroParticipante) {
@@ -639,7 +641,8 @@ public class DialogoCiclo extends JDialog {
 	/**
 	 * Inhabilita columnas cuando existe un participante en descanso
 	 * 
-	 * @param i posición de arreglo.
+	 * @param i
+	 *            posición de arreglo.
 	 */
 	private void desactivarColumnasTabla(int i) {
 		etiquetaNumeroFinal[i].setText("");
@@ -772,12 +775,25 @@ public class DialogoCiclo extends JDialog {
 	}
 
 	/**
-	 * Permite guardar el ciclo actual.
-	 * 
+	 * Encargado de guardar las fechas de los encuentros del ciclo seleccionado.
 	 */
 	private void accionGuardarFechas() {
-		JOptionPane.showMessageDialog(null, "Has seleccionado boton guardar.", "Guardar",
-				JOptionPane.INFORMATION_MESSAGE);
+		Ciclo ciclo = listaCiclos.get(this.getCicloSeleccionado() - 1);
+		ArrayList<Encuentro> encuentro = ciclo.getEncuentroParticipantes();
+		BaseDatosEncuentro bde = new BaseDatosEncuentro(torneo.getNombreArchivo());
+		for (int i = 0; i < encuentro.size(); i++) {
+			encuentro.get(i).setFechaEncuentro(fechaEncuentro[i].getDate());
+			try {
+				bde.actualizarFechaEncuentro(encuentro.get(i), ciclo);
+			} catch (ExcepcionBaseDatos | ExcepcionBaseDatosEncuentro e) {
+				JOptionPane.showMessageDialog(null,
+						"Ha ocurridó un error al guardar las fechas de los encuentros."
+								+ "\n.Favor de contactar a soporte técnico.",
+						"Error al guardar las fechas.", JOptionPane.ERROR_MESSAGE);
+			}
+		}
+		JOptionPane.showMessageDialog(null, "Las fechas de los encuentros se han guardado con éxito.",
+				"Guardar fechas.", JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	/**
@@ -790,12 +806,12 @@ public class DialogoCiclo extends JDialog {
 			setCicloSeleccionado(comboSeleccionarCiclo.getSelectedIndex() + 1);
 			if (getCicloSeleccionado() == torneo.getCicloActual()) {
 				etiquetaCicloActual2
-				.setText(torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MAYUSCULA_SINGULAR)
-						+ " " + torneo.getCicloActual() + " - Actual");
+						.setText(torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MAYUSCULA_SINGULAR)
+								+ " " + torneo.getCicloActual() + " - Actual");
 			} else {
 				etiquetaCicloActual2
-				.setText(torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MAYUSCULA_SINGULAR)
-						+ " " + getCicloSeleccionado());
+						.setText(torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MAYUSCULA_SINGULAR)
+								+ " " + getCicloSeleccionado());
 			}
 			if (comboSeleccionarCiclo.getSelectedIndex() >= 0 && torneo.getCicloActual() > 0) {
 				Ciclo ciclo = listaCiclos.get(this.getCicloSeleccionado() - 1);
@@ -808,8 +824,8 @@ public class DialogoCiclo extends JDialog {
 								.obtenerParticipante(listaEncuentros.get(i).getIdParticipanteFinal())
 								.getNumeroParticipante()
 								&& this.obtenerParticipante(listaEncuentros.get(i).getIdParticipanteFinal())
-								.getNombreParticipante().compareToIgnoreCase(this.torneo
-										.getDatosPersonalizacion().getNombreParticipanteSinEncuentro()) == 0) {
+										.getNombreParticipante().compareToIgnoreCase(this.torneo
+												.getDatosPersonalizacion().getNombreParticipanteSinEncuentro()) == 0) {
 							etiquetaNumeroInicial[i]
 									.setText(String.valueOf(listaEncuentros.get(i).getIdParticipanteInicial()));
 							etiquetaParticipanteInicial[i].setText(this
@@ -822,8 +838,8 @@ public class DialogoCiclo extends JDialog {
 								.obtenerParticipante(listaEncuentros.get(i).getIdParticipanteInicial())
 								.getNumeroParticipante()
 								&& this.obtenerParticipante(listaEncuentros.get(i).getIdParticipanteInicial())
-								.getNombreParticipante().compareToIgnoreCase(this.torneo
-										.getDatosPersonalizacion().getNombreParticipanteSinEncuentro()) == 0) {
+										.getNombreParticipante().compareToIgnoreCase(this.torneo
+												.getDatosPersonalizacion().getNombreParticipanteSinEncuentro()) == 0) {
 							etiquetaNumeroInicial[i]
 									.setText(String.valueOf(listaEncuentros.get(i).getIdParticipanteFinal()));
 							etiquetaParticipanteInicial[i].setText(this
@@ -881,7 +897,7 @@ public class DialogoCiclo extends JDialog {
 							+ torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MINUSCULA_SINGULAR) + "."
 							+ " \n Por favor capture todos los resultados.",
 							"Encarar" + torneo.getDatosPersonalizacion()
-							.getNombreParticipante(Personalizacion.MINUSCULA_PLURAL).substring(8),
+									.getNombreParticipante(Personalizacion.MINUSCULA_PLURAL).substring(8),
 							JOptionPane.ERROR_MESSAGE);
 				}
 			} else {
@@ -897,8 +913,8 @@ public class DialogoCiclo extends JDialog {
 			}
 			activarDesactivarBotonHacer();
 			etiquetaCicloActual
-			.setText(torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MAYUSCULA_SINGULAR)
-					+ " actual: " + torneo.getCicloActual());
+					.setText(torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MAYUSCULA_SINGULAR)
+							+ " actual: " + torneo.getCicloActual());
 
 			if (getCicloSeleccionado() == torneo.getCicloActual() - 1
 					&& torneo.getTipoTorneo().contains("Round Robin")) {
@@ -937,7 +953,7 @@ public class DialogoCiclo extends JDialog {
 				this.torneo.getAlgoritmoTorneo().generarReporteCiclo(archivo, comboSeleccionarCiclo.getSelectedIndex());
 				JOptionPane.showMessageDialog(
 						null, "El archivo se ha guardado exitosamente.", "Generar reporte de " + this.torneo
-						.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MAYUSCULA_SINGULAR),
+								.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MAYUSCULA_SINGULAR),
 						JOptionPane.INFORMATION_MESSAGE);
 			} catch (ExcepcionUtilerias e) {
 				JOptionPane.showMessageDialog(null, e.getMessage(), "Advertencia", JOptionPane.ERROR_MESSAGE);
