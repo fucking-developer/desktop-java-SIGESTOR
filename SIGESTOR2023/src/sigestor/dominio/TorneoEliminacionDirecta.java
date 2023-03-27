@@ -17,8 +17,8 @@ import sigestor.excepcion.ExcepcionCapturarResultados;
 
 /**
  * <code>AlgoritmoTorneo</code> Sirve para realizar las operaciones del torneo,
- * como: crear los ciclos según lo establecido en el sistema Eliminación
- * directa, los encuentros según el sistema Eliminación directa, desempatar
+ * como: crear los ciclos segÃºn lo establecido en el sistema EliminaciÃ³n
+ * directa, los encuentros segÃºn el sistema EliminaciÃ³n directa, desempatar
  * jugadores y realizar reportes.
  * 
  * <p>
@@ -28,7 +28,7 @@ import sigestor.excepcion.ExcepcionCapturarResultados;
  * doble.</li>
  * </ul>
  * 
- * @version 16/03/2023
+ * @version 27/03/2023
  * 
  * @author German Luis Cruz Martinez.
  * @author Eder Euclides Dionisio Diaz.
@@ -37,8 +37,8 @@ import sigestor.excepcion.ExcepcionCapturarResultados;
 public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 
 	/**
-	 * Sirve para determinar que tipo de torneo de Eliminación Directa se va a
-	 * efectuar true = Eliminación simple o directa false = eliminación doble
+	 * Sirve para determinar que tipo de torneo de EliminaciÃ³n Directa se va a
+	 * efectuar true = EliminaciÃ³n simple o directa false = eliminaciÃ³n doble
 	 */
 	private boolean esSimple;
 
@@ -46,16 +46,17 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 	 * Inicializa las variables con un valor por defecto y asigna a la variable
 	 * <code>torneo</code> el torneo recibido.
 	 * 
-	 * @param torneo Contiene los datos generales del torneo.
+	 * @param torneo
+	 *            Contiene los datos generales del torneo.
 	 */
 	public TorneoEliminacionDirecta(Torneo torneo) {
 		super(torneo);
 	}
 
 	/*
-	 * obtiene el tipo de Eliminación Directa
+	 * obtiene el tipo de EliminaciÃ³n Directa
 	 * 
-	 * @param true = Eliminación Directa simple false = Eliminación Directa doble
+	 * @param true = EliminaciÃ³n Directa simple false = EliminaciÃ³n Directa doble
 	 */
 
 	public void setTipoEliminacion(boolean tipoEliminacion) {
@@ -63,11 +64,12 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 	}
 
 	/**
-	 * Obtiene la cantidad máxima de ciclos del torneo según el algoritmo general
-	 * del sistema Eliminación Directa.
+	 * Obtiene la cantidad mÃ¡xima de ciclos del torneo segÃºn el algoritmo general
+	 * del sistema EliminaciÃ³n Directa.
 	 * 
-	 * @param numeroParticipantes Cantidad de participantes inscritos en el torneo.
-	 * @return El número máximo de ciclos que tendrá el torneo.
+	 * @param numeroParticipantes
+	 *            Cantidad de participantes inscritos en el torneo.
+	 * @return El nÃºmero mÃ¡ximo de ciclos que tendrÃ¡ el torneo.
 	 */
 	@Override
 	public int calcularNumeroCiclos(int numeroParticipantes) {
@@ -79,13 +81,12 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 	}
 
 	/**
-	 * Genera inicialmente los encuentros del primer ciclo y después los encuentros
+	 * Genera inicialmente los encuentros del primer ciclo y despuÃ©s los encuentros
 	 * del siguiente ciclo una vez terminado el ciclo anterior.
 	 */
 	@Override
 	public void realizarEncuentros() throws ExcepcionBaseDatos, ExcepcionBaseDatosEncuentro, ExcepcionBaseDatosCiclo {
 		Date fechaEncuentro;
-
 	}
 
 	/**
@@ -100,20 +101,66 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 	/**
 	 * Realiza los encuentros del primer ciclo.
 	 * 
-	 * @param ciclo Ciclo a realizar.
-	 * @throws ExcepcionCapturarResultados    Si ocurre un error con el objeto
-	 *                                        <code>Encuentros</code>.
-	 * @throws ExcepcionBaseDatos             Si ocurre un problema con la base de
-	 *                                        datos.
-	 * @throws ExcepcionBaseDatosEncuentro    Si ocurre un problema al insertar en
-	 *                                        la tabla <code>encuentros</code>.
-	 * @throws ExcepcionBaseDatosParticipante Si ocurre un problema al actualizar un
-	 *                                        participante en la tabla
-	 *                                        <code>participantes</code>.
+	 * @param ciclo
+	 *            Ciclo a realizar.
+	 * @throws ExcepcionCapturarResultados
+	 *             Si ocurre un error con el objeto <code>Encuentros</code>.
+	 * @throws ExcepcionBaseDatos
+	 *             Si ocurre un problema con la base de datos.
+	 * @throws ExcepcionBaseDatosEncuentro
+	 *             Si ocurre un problema al insertar en la tabla
+	 *             <code>encuentros</code>.
+	 * @throws ExcepcionBaseDatosParticipante
+	 *             Si ocurre un problema al actualizar un participante en la tabla
+	 *             <code>participantes</code>.
 	 */
 	public void encararParticipantes(Ciclo ciclo) throws ExcepcionCapturarResultados, ExcepcionBaseDatos,
-			ExcepcionBaseDatosEncuentro, ExcepcionBaseDatosParticipante {
+	ExcepcionBaseDatosEncuentro, ExcepcionBaseDatosParticipante {
+		BaseDatosEncuentro bde = new BaseDatosEncuentro(torneo.getNombreArchivo());
+		BaseDatosParticipante bdp = new BaseDatosParticipante(torneo.getNombreArchivo());
+		ArrayList<Participante> participantes = torneo.getListaParticipantes();
+		int totalParticipantes = participantes.size();
+		int descansos = 0;
+		if (!esPotenciaDeDos(totalParticipantes)) {
+			descansos = (int) (Math.pow(2, calcularNumeroCiclos(totalParticipantes))) - totalParticipantes;
+		}
+		int mitad = participantes.size() / 2;
 
+		ArrayList<Encuentro> encuentros = new ArrayList<Encuentro>();
+		for (int i = 1; i <= mitad; i++) {
+			if (descansos == 0) {
+				encuentros.add(new Encuentro(i, participantes.get(i - 1).getNumeroParticipante(),
+						participantes.get(participantes.size() - i).getNumeroParticipante(),
+						this.getTorneo().getFechaInicioTorneo()));
+				bde.insertarEncuentro(encuentros.get(i - 1), ciclo);
+				bdp.actualizarResultadoParticipante(participantes.get(i - 1), ciclo);
+				bdp.actualizarResultadoParticipante(participantes.get(i + mitad - 1), ciclo);
+			} else {
+				descansos--;
+			}
+
+		}
+		ciclo.setEncuentroParticipantes(encuentros);
+	}
+
+	/**
+	 * Calcula por medio de recursividad si el nÃºmero dado es potencia de dos
+	 * 
+	 * @param numero
+	 *            numero a evaluar si es potencia de dos.
+	 * 
+	 * @return True si el nÃºmero es potencia de dos, False si no es potencia de dos
+	 * 
+	 */
+	public boolean esPotenciaDeDos(double numero) {
+		if (numero == 1) {
+			return true;
+		} else if (numero > 1 && numero < 2) {
+			return false;
+		} else if (numero >= 2) {
+			return esPotenciaDeDos(numero / 2);
+		}
+		return false;
 	}
 
 	/**
@@ -127,18 +174,19 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 	}
 
 	/**
-	 * Inicia un torneo Eliminación Directa e inserta el numero de ciclos en la
+	 * Inicia un torneo EliminaciÃ³n Directa e inserta el numero de ciclos en la
 	 * tabla <code>suizo</code>.
 	 * 
-	 * @param torneoEliminacionDirecta Recibe el objeto
-	 *                                 <code>TorneoEliminacionDirecta</code>. para
-	 *                                 iniciar el torneo.
-	 * @throws ExcepcionBaseDatos          Si ocurre un problema con la base de
-	 *                                     datos.
-	 * @throws ExcepcionBaseDatosEncuentro Si ocurre un problema al insertar en la
-	 *                                     tabla <code>encuentros</code>.
-	 * @throws ExcepcionBaseDatosCiclo     Si ocurre un error al insertar en la
-	 *                                     tabla <code>ciclos</code>.
+	 * @param torneoEliminacionDirecta
+	 *            Recibe el objeto <code>TorneoEliminacionDirecta</code>. para
+	 *            iniciar el torneo.
+	 * @throws ExcepcionBaseDatos
+	 *             Si ocurre un problema con la base de datos.
+	 * @throws ExcepcionBaseDatosEncuentro
+	 *             Si ocurre un problema al insertar en la tabla
+	 *             <code>encuentros</code>.
+	 * @throws ExcepcionBaseDatosCiclo
+	 *             Si ocurre un error al insertar en la tabla <code>ciclos</code>.
 	 */
 	public void iniciarTorneo(TorneoEliminacionDirecta torneoEliminacionDirecta)
 			throws ExcepcionBaseDatos, ExcepcionBaseDatosEncuentro, ExcepcionBaseDatosCiclo {
