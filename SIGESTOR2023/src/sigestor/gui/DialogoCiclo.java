@@ -941,7 +941,6 @@ public class DialogoCiclo extends JDialog {
 		dialogo.setDialogTitle("Guardar como");
 		FileFilter filtro1 = new FileNameExtensionFilter("Archivo CSV", "csv", "CSV");
 		dialogo.setFileFilter(filtro1);
-
 		dialogo.setAcceptAllFileFilterUsed(false);
 		dialogo.setCurrentDirectory(new File(System.getProperty("user.dir")));
 		dialogo.setSelectedFile(null);

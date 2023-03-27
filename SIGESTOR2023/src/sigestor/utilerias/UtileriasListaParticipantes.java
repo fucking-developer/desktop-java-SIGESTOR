@@ -15,7 +15,7 @@ import sigestor.excepcion.ExcepcionUtilerias;
  * Encargada de validar el formato y leer la lista de participantes de un
  * archivo CSV, así como generar una plantilla en un archivo Csv.
  * 
- * @version 23/03/2022
+ * @version 26/03/2023
  * 
  * @author Jonathan Eduardo Ibarra Martínez.
  * @author Eder Euclides Dionisio Diaz.
@@ -29,8 +29,12 @@ public class UtileriasListaParticipantes {
 	 * 
 	 * @param rutaArchivo
 	 *            Contiene la ruta del archivo CSV.
-	 * @return <tt>true</tt> Si el formato del archivo es correcto, <tt>false</tt>
-	 *         en caso contrario.
+	 * @return <tt>true</tt> Si el formato del archivo es correcto, es decir,
+	 *         contiene dos columnas y los encabezados son 'Nombre' y 'Puntaje',
+	 *         <tt>false</tt> en caso contrario.
+	 * @throws ExcepcionUtilerias
+	 *             Lanza la excepcion en caso de que ocurra un error al leer el
+	 *             archvio CSV.
 	 */
 	private static boolean validarListaParticipantes(String rutaArchivo) throws ExcepcionUtilerias {
 		boolean formatoCorrecto = false;
@@ -70,24 +74,20 @@ public class UtileriasListaParticipantes {
 			readerCsv.readRecord();
 			while (readerCsv.readRecord()) {
 				participante = new Participante();
-
 				if (readerCsv.get(0).trim().isEmpty()) {
 					continue;
 				}
 				try {
 					participante.setNombreParticipante(readerCsv.get(0));
 					participante.setPuntajeParticipante(Float.valueOf(readerCsv.get(1)));
-
 				} catch (NumberFormatException e) {
 					if (readerCsv.get(1).trim().isEmpty()) {
 						participante.setPuntajeParticipante(0.0f);
 						listaParticipantes.add(participante);
 					}
 					continue;
-
 				}
 				listaParticipantes.add(participante);
-
 			}
 			readerCsv.close();
 			return listaParticipantes;
@@ -97,7 +97,8 @@ public class UtileriasListaParticipantes {
 	}
 
 	/**
-	 * Genera una plantilla con extencion CSV con los datos de los participantes.
+	 * Genera una plantilla con extensión CSV para el ingreso de datos para una
+	 * lista de participantes.
 	 * 
 	 * @param rutaDestino
 	 *            Indica la ruta del archivo donde se guardara la plantilla.
@@ -109,8 +110,8 @@ public class UtileriasListaParticipantes {
 			Writer writer;
 			writer = new FileWriter(rutaDestino, false);
 			CsvWriter writerCsv = new CsvWriter(writer, ',');
-			writerCsv.write("Nombre ");
-			writerCsv.write("Puntaje ");
+			writerCsv.write("Nombre");
+			writerCsv.write("Puntaje");
 			writerCsv.endRecord();
 			writerCsv.close();
 		} catch (IOException e) {

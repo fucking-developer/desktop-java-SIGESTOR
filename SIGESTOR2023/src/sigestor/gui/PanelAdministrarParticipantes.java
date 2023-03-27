@@ -14,7 +14,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.StringTokenizer;
-
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.BoxLayout;
@@ -24,6 +23,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -34,6 +34,8 @@ import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import sigestor.dominio.Participante;
 import sigestor.excepcion.ExcepcionUtilerias;
 import sigestor.utilerias.UtileriasListaParticipantes;
@@ -579,19 +581,26 @@ public class PanelAdministrarParticipantes extends JPanel {
 	}
 
 	/**
-	 * Consiste en abrir un archivo CSV que contiene una lista de participantes.
+	 * Consiste en abrir un archivo CSV que contiene una lista de participantes y el
+	 * puntaje de dichos participantes.
 	 */
 	private void accionImportarParticipantes() {
-		FileDialog dialog = new FileDialog((VentanaPrincipal) null, "Abrir archivo CSV", FileDialog.LOAD);
-		dialog.setFile("*.csv");
-		dialog.setVisible(true);
-		String filename = dialog.getFile();
-		if (filename != null) {
-			File file = new File(dialog.getDirectory() + filename);
-			if (file.exists() && file.getName().endsWith(".csv")) {
+		JFileChooser dialogo = new JFileChooser();
+		dialogo.setDialogTitle("Importar archivo CSV");
+		FileFilter filtro1 = new FileNameExtensionFilter("Archivo CSV", "csv", "CSV");
+		dialogo.setFileFilter(filtro1);
+		dialogo.addChoosableFileFilter(filtro1);
+		dialogo.setAcceptAllFileFilterUsed(false);
+		dialogo.setCurrentDirectory(new File(System.getProperty("user.dir")));
+		dialogo.setSelectedFile(null);
+		dialogo.setMultiSelectionEnabled(false);
+		int valor = dialogo.showOpenDialog(this);
+		if (valor == JFileChooser.APPROVE_OPTION) {
+			File archivo = dialogo.getSelectedFile();
+			if (archivo.exists() && archivo.getName().toUpperCase().endsWith(".CSV")) {
 				try {
 					ArrayList<Participante> participantes = UtileriasListaParticipantes
-							.leerListaParticipantes(file.getAbsolutePath());
+							.leerListaParticipantes(archivo.getAbsolutePath());
 					for (Participante p : participantes) {
 						Participante participante = new Participante((model.size() + 1), p.getNombreParticipante(),
 								p.getPuntajeParticipante());
