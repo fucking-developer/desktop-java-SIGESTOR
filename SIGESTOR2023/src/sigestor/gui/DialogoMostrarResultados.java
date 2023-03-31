@@ -80,10 +80,13 @@ import java.util.Date;
  * activados o no.</li>
  * <li><code>indiceMostrarResultados</code></li>
  * <li><code>serialVersionUID</code> Para el número de versión de la clase.</li>
+ * <li><code>formatoFechasEncuentro</code> Para establecer el formato de las
+ * flechas de los encuentros.</li>
  * </ul>
  * 
- * @version 21/03/2023
+ * @version 28/03/2023
  * 
+ * @author Jonathan Eduardo Ibarra Martínez
  * @author Alicia Adriana Clemente Hernandez
  * @author Luis Fernando de la Cruz López
  * @author Luis Antonio Ruiz Sierra
@@ -125,7 +128,6 @@ public class DialogoMostrarResultados extends JDialog {
 	 */
 	private JTextField campoFechaFin;
 
-	// Central-----------------------------------------------------
 	/**
 	 * Arreglo de campos para las fechas de los encuentros.
 	 */
@@ -141,7 +143,7 @@ public class DialogoMostrarResultados extends JDialog {
 	 * Arreglo de campos para los marcadores de participantes no iniciales
 	 */
 	private JTextField[] campoMarcadorFinal;
-	// Inferior-----------------------------------------------------
+
 	/**
 	 * Botón <code>Exportar resultados</code>.
 	 * 
@@ -223,6 +225,11 @@ public class DialogoMostrarResultados extends JDialog {
 	 * Permite mostrar los resultados con base al ciclo seleccionado.
 	 */
 	private int indiceMostrarResultados;
+
+	/**
+	 * Variable para establecer el formato de las fechas de los encuentros.
+	 */
+	private DateFormat formatoFechasEncuentro = DateFormat.getDateInstance(DateFormat.LONG);
 
 	/**
 	 * Constructor en el que se inicializa el diálogo.
@@ -370,7 +377,7 @@ public class DialogoMostrarResultados extends JDialog {
 		accionAyuda.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0));
 		etiquetaCicloActual.getActionMap().put("ayuda", accionAyuda);
 		etiquetaCicloActual.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-		.put((KeyStroke) accionAyuda.getValue(Action.ACCELERATOR_KEY), "ayuda");
+				.put((KeyStroke) accionAyuda.getValue(Action.ACCELERATOR_KEY), "ayuda");
 
 		JLabel etiquetaOrganizador = new JLabel("Organizador:");
 		etiquetaOrganizador.setPreferredSize(new Dimension(90, 25));
@@ -407,11 +414,6 @@ public class DialogoMostrarResultados extends JDialog {
 		panelAuxSup.add(auxPanel);
 
 		superiorPanel.add(panelAuxSup);
-		/*
-		 * Panel
-		 * central----------------------------------------------------------------------
-		 * -----------------------------------------------------------------------------
-		 */
 		JPanel tituloTabla = new JPanel();
 		tituloTabla.setLayout(new GridLayout(2, 1));
 
@@ -445,11 +447,11 @@ public class DialogoMostrarResultados extends JDialog {
 		};
 		accionSeleccionarCiclo.putValue(Action.SHORT_DESCRIPTION,
 				"Seleccione " + this.ventanaPrincipal.getTorneoActual().getDatosPersonalizacion().getNombreCiclo(3)
-				+ " para ver los resultados");
+						+ " para ver los resultados");
 		comboSeleccionarCiclo.setAction(accionSeleccionarCiclo);
 		comboSeleccionarCiclo.getActionMap().put("seleccionarciclo", accionSeleccionarCiclo);
 		comboSeleccionarCiclo.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-		.put((KeyStroke) accionSeleccionarCiclo.getValue(Action.ACCELERATOR_KEY), "seleccionarciclo");
+				.put((KeyStroke) accionSeleccionarCiclo.getValue(Action.ACCELERATOR_KEY), "seleccionarciclo");
 
 		etiquetaElegirCiclo.setDisplayedMnemonic(KeyEvent.VK_I);
 		etiquetaElegirCiclo.setLabelFor(comboSeleccionarCiclo);
@@ -605,9 +607,7 @@ public class DialogoMostrarResultados extends JDialog {
 
 				}
 
-				// FIXME
-				DateFormat formato = DateFormat.getDateInstance(DateFormat.LONG);
-				etiquetaFechaEncuentros[i] = new JTextField(formato.format(new Date()));
+				etiquetaFechaEncuentros[i] = new JTextField(formatoFechasEncuentro.format(new Date()));
 				etiquetaFechaEncuentros[i].setPreferredSize(new Dimension(170, 25));
 				etiquetaFechaEncuentros[i].setEditable(false);
 				auxPanel = new JPanel();
@@ -659,7 +659,7 @@ public class DialogoMostrarResultados extends JDialog {
 		botonExportarResultados = new JButton(accionExportarResultados);
 		botonExportarResultados.getActionMap().put("exportarResultados", accionExportarResultados);
 		botonExportarResultados.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-		.put((KeyStroke) accionExportarResultados.getValue(Action.ACCELERATOR_KEY), "exportarResultados");
+				.put((KeyStroke) accionExportarResultados.getValue(Action.ACCELERATOR_KEY), "exportarResultados");
 		botonExportarResultados.setPreferredSize(new Dimension(190, 30));
 		auxPanel = new JPanel();
 		auxPanel.add(botonExportarResultados);
@@ -681,7 +681,7 @@ public class DialogoMostrarResultados extends JDialog {
 		botonSalir = new JButton(accionSalir);
 		botonSalir.getActionMap().put("regresar", accionSalir);
 		botonSalir.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-		.put((KeyStroke) accionSalir.getValue(Action.ACCELERATOR_KEY), "regresar");
+				.put((KeyStroke) accionSalir.getValue(Action.ACCELERATOR_KEY), "regresar");
 		botonSalir.setPreferredSize(new Dimension(120, 30));
 		auxPanel = new JPanel();
 		auxPanel.add(botonSalir);
@@ -752,8 +752,8 @@ public class DialogoMostrarResultados extends JDialog {
 				if (p.getNumeroParticipante() == this
 						.obtenerParticipante(listaEncuentros.get(i).getIdParticipanteFinal()).getNumeroParticipante()
 						&& this.obtenerParticipante(listaEncuentros.get(i).getIdParticipanteFinal())
-						.getNombreParticipante().compareToIgnoreCase(this.torneo.getDatosPersonalizacion()
-								.getNombreParticipanteSinEncuentro()) == 0) {
+								.getNombreParticipante().compareToIgnoreCase(this.torneo.getDatosPersonalizacion()
+										.getNombreParticipanteSinEncuentro()) == 0) {
 					desactivarColumnasTabla(i);
 					etiquetaNumeroInicial[i].setText(String.valueOf(listaEncuentros.get(i).getIdParticipanteInicial()));
 					etiquetaParticipanteInicial[i]
@@ -763,8 +763,8 @@ public class DialogoMostrarResultados extends JDialog {
 				} else if (p.getNumeroParticipante() == this
 						.obtenerParticipante(listaEncuentros.get(i).getIdParticipanteInicial()).getNumeroParticipante()
 						&& this.obtenerParticipante(listaEncuentros.get(i).getIdParticipanteInicial())
-						.getNombreParticipante().compareToIgnoreCase(this.torneo.getDatosPersonalizacion()
-								.getNombreParticipanteSinEncuentro()) == 0) {
+								.getNombreParticipante().compareToIgnoreCase(this.torneo.getDatosPersonalizacion()
+										.getNombreParticipanteSinEncuentro()) == 0) {
 					desactivarColumnasTabla(i);
 					etiquetaNumeroInicial[i].setText(String.valueOf(listaEncuentros.get(i).getIdParticipanteFinal()));
 					etiquetaParticipanteInicial[i]
@@ -783,7 +783,6 @@ public class DialogoMostrarResultados extends JDialog {
 						this.etiquetaParticipanteFinal[i].setText(p.getNombreParticipante());
 					}
 				}
-
 			}
 			if (this.validacionMarcadores) {
 				this.campoMarcadorInicial[i]
@@ -792,6 +791,8 @@ public class DialogoMostrarResultados extends JDialog {
 						.setText(String.valueOf(listaEncuentros.get(i).getMarcadorParticipanteFinal()));
 			}
 			this.etiquetaResultado[i].setText(String.valueOf(listaEncuentros.get(i).toString()));
+			etiquetaFechaEncuentros[i]
+					.setText(formatoFechasEncuentro.format(listaEncuentros.get(i).getFechaEncuentro()));
 		}
 	}
 
@@ -857,7 +858,7 @@ public class DialogoMostrarResultados extends JDialog {
 						comboSeleccionarCiclo.getSelectedIndex());
 				JOptionPane.showMessageDialog(
 						null, "El archivo se ha guardado exitosamente.", "Generar reporte de " + this.torneo
-						.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MAYUSCULA_SINGULAR),
+								.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MAYUSCULA_SINGULAR),
 						JOptionPane.INFORMATION_MESSAGE);
 			} catch (ExcepcionUtilerias e) {
 				JOptionPane.showMessageDialog(null, e.getMessage(), "Advertencia", JOptionPane.ERROR_MESSAGE);

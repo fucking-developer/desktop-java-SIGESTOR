@@ -11,14 +11,17 @@ package sigestor.excepcion;
  * del error al no poder actualizar el encuentro en la base de datos.</li>
  * <li><code>MENSAJE_EXCEPCION_ELIMINA_ENCUENTRO</code> para mostrar la causa
  * del error al no poder eliminar el encuentro en la base de datos.</li>
+ * <li><code>MENSAJE_EXCEPCION_OBTIENE_ENCUENTRO</code> para mostrar la causa
+ * del error al no poder obtener el encuentro en la base de datos.</li>
  * <li><code>MENSAJE_EXCEPCION_SOLUCION</code> para mostrar la solución del
  * error presentado.</li>
  * </ul>
  * 
- * @version 20/04/2022
+ * @version 27/03/2023
  * 
  * @author Beatriz Andrea Jiménez Ríos
  * @author Victor Triste Pérez
+ * @author Eder Euclides Dionisio Diaz
  */
 public class ExcepcionBaseDatosEncuentro extends Exception {
 
@@ -47,6 +50,11 @@ public class ExcepcionBaseDatosEncuentro extends Exception {
 	 * encuentro en la base de datos.
 	 */
 	public static final String MENSAJE_EXCEPCION_ELIMINA_ENCUENTRO = "No se ha conseguido eliminar los datos de ";
+	/**
+	 * Primera parte del mensaje que indica que no ha sido posible obtener el
+	 * encuentro en la base de datos.
+	 */
+	public static final String MENSAJE_EXCEPCION_OBTIENE_ENCUENTRO = "No se ha conseguido obtener los encuentros del torneo ";
 	/**
 	 * Segunda parte del mensaje que indica la solución del error presentado.
 	 */

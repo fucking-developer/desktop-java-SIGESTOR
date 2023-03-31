@@ -2,7 +2,6 @@ package sigestor.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.FileDialog;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
@@ -13,7 +12,6 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.StringTokenizer;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.BoxLayout;
@@ -67,13 +65,15 @@ import sigestor.utilerias.UtileriasListaParticipantes;
  * <code>VentanaPrincipal</code>.</li>
  * </ul>
  * 
- * @version 21/03/2023
+ * @version 31/03/2023
  * 
  * @author Ricky Didier Peralta Reyes
  * @author Uriel Romeo Cruz Cortes
  * @author Jennifer Cortés Pérez
  * @author Beatriz Andrea Jiménez Ríos
  * @author Erik Vasquez Policarpo
+ * @author German Luis cruz Martínez
+ * 
  */
 public class PanelAdministrarParticipantes extends JPanel {
 
@@ -135,8 +135,7 @@ public class PanelAdministrarParticipantes extends JPanel {
 	 * Constructor que consiste en mostrar en pantalla el
 	 * <code>PanelAdministrarParticipantes</code> con sus respectivos componentes.
 	 * 
-	 * @param principal
-	 *            Referencia a la clase <code>VentanaPrincipal</code>.
+	 * @param principal Referencia a la clase <code>VentanaPrincipal</code>.
 	 * 
 	 */
 	public PanelAdministrarParticipantes(VentanaPrincipal principal) {
@@ -202,7 +201,7 @@ public class PanelAdministrarParticipantes extends JPanel {
 		botonNuevo = new JButton(accionBotonNuevo);
 		botonNuevo.getActionMap().put("botonNuevo", accionBotonNuevo);
 		botonNuevo.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-		.put((KeyStroke) accionBotonNuevo.getValue(Action.ACCELERATOR_KEY), "botonNuevo");
+				.put((KeyStroke) accionBotonNuevo.getValue(Action.ACCELERATOR_KEY), "botonNuevo");
 		botonNuevo.setPreferredSize(new Dimension(130, 30));
 		panelAux3.add(botonNuevo);
 		panelAux.add(panelAux3);
@@ -226,7 +225,7 @@ public class PanelAdministrarParticipantes extends JPanel {
 		botonModificar = new JButton(accionBotonModificar);
 		botonModificar.getActionMap().put("botonModificar", accionBotonModificar);
 		botonModificar.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-		.put((KeyStroke) accionBotonModificar.getValue(Action.ACCELERATOR_KEY), "botonModificar");
+				.put((KeyStroke) accionBotonModificar.getValue(Action.ACCELERATOR_KEY), "botonModificar");
 		botonModificar.setPreferredSize(new Dimension(130, 30));
 		panelAux3.add(botonModificar);
 		panelAux.add(panelAux3);
@@ -250,7 +249,7 @@ public class PanelAdministrarParticipantes extends JPanel {
 		botonEliminar = new JButton(accionBotonEliminar);
 		botonEliminar.getActionMap().put("botonEliminar", accionBotonEliminar);
 		botonEliminar.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-		.put((KeyStroke) accionBotonEliminar.getValue(Action.ACCELERATOR_KEY), "botonEliminar");
+				.put((KeyStroke) accionBotonEliminar.getValue(Action.ACCELERATOR_KEY), "botonEliminar");
 		botonEliminar.setPreferredSize(new Dimension(130, 30));
 		panelAux3.add(botonEliminar);
 		panelAux.add(panelAux3);
@@ -417,7 +416,7 @@ public class PanelAdministrarParticipantes extends JPanel {
 				JOptionPane.showMessageDialog(null,
 						"El campo 'nombre del participante' no puede estar vacío.\n"
 								+ "Ingrese un nombre para el participante.\n" + "Ejemplo: Pedro Cortes, Pumas",
-								"Nombre participante", JOptionPane.ERROR_MESSAGE);
+						"Nombre participante", JOptionPane.ERROR_MESSAGE);
 			}
 
 		}
@@ -454,8 +453,8 @@ public class PanelAdministrarParticipantes extends JPanel {
 					JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 
 			texto = new JLabel("Seleccione el nuevo puntaje para el participante " + campoNombreParticipante.getText()
-			+ " con el puntaje "
-			+ listaDeParticipantes.get(listaParticipantes.getSelectedIndex()).getPuntajeParticipante());
+					+ " con el puntaje "
+					+ listaDeParticipantes.get(listaParticipantes.getSelectedIndex()).getPuntajeParticipante());
 
 			panelAux = new JPanel();
 			panelAux.add(texto);
@@ -478,14 +477,14 @@ public class PanelAdministrarParticipantes extends JPanel {
 						Float puntajeParticipante = (float) spinner.getValue();
 						participante = new Participante(
 								this.listaDeParticipantes.get(listaParticipantes.getSelectedIndex())
-								.getNumeroParticipante(),
+										.getNumeroParticipante(),
 								campoNombreParticipante.getText(), puntajeParticipante);
 					} else {
 						participante = new Participante(
 								this.listaDeParticipantes.get(listaParticipantes.getSelectedIndex())
-								.getNumeroParticipante(),
+										.getNumeroParticipante(),
 								campoNombreParticipante.getText(), listaDeParticipantes
-								.get(listaParticipantes.getSelectedIndex()).getPuntajeParticipante());
+										.get(listaParticipantes.getSelectedIndex()).getPuntajeParticipante());
 					}
 					model.setElementAt(participante.toString(), listaParticipantes.getSelectedIndex());
 					listaDeParticipantes.set(listaParticipantes.getSelectedIndex(), participante);
@@ -509,8 +508,8 @@ public class PanelAdministrarParticipantes extends JPanel {
 			int seleccion = JOptionPane.showOptionDialog(null,
 					"Está seguro de que desea eliminar al participante "
 							+ listaDeParticipantes.get(listaParticipantes.getSelectedIndex()).getNombreParticipante(),
-							"Eliminar participantes", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null,
-							null);
+					"Eliminar participantes", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null,
+					null);
 			if (seleccion == 0) {
 				listaDeParticipantes.remove(listaParticipantes.getSelectedIndex());
 				model.remove(listaParticipantes.getSelectedIndex());
@@ -586,10 +585,9 @@ public class PanelAdministrarParticipantes extends JPanel {
 	 */
 	private void accionImportarParticipantes() {
 		JFileChooser dialogo = new JFileChooser();
-		dialogo.setDialogTitle("Importar archivo CSV");
+		dialogo.setDialogTitle("Importar lista de participantes");
 		FileFilter filtro1 = new FileNameExtensionFilter("Archivo CSV", "csv", "CSV");
 		dialogo.setFileFilter(filtro1);
-		dialogo.addChoosableFileFilter(filtro1);
 		dialogo.setAcceptAllFileFilterUsed(false);
 		dialogo.setCurrentDirectory(new File(System.getProperty("user.dir")));
 		dialogo.setSelectedFile(null);
@@ -619,42 +617,54 @@ public class PanelAdministrarParticipantes extends JPanel {
 	}
 
 	/**
-	 * Permite descargar una plantilla con extension .csv con un formato ya
+	 * Permite descargar una plantilla con extensión CSV con un formato ya
 	 * establecido.
 	 */
 	private void accionDescargarPlantilla() {
-
-		FileDialog descargarPlantilla = new FileDialog((VentanaPrincipal) null, "Descargar plantilla", FileDialog.SAVE);
-		descargarPlantilla.setFile("Plantilla");
-		descargarPlantilla.setVisible(true);
-		String nombre = descargarPlantilla.getFile();
-		if (!nombre.endsWith(".csv") || nombre.endsWith(".CSV")) {
-			nombre = nombre.concat(".csv");
-		}
-		if (nombre != null) {
-			File plantilla = new File(descargarPlantilla.getDirectory() + nombre);
-			StringTokenizer tokenizer = new StringTokenizer(plantilla.getName(), ".");
-			if (tokenizer.countTokens() > 1) {
-				String nombrePlantilla = tokenizer.nextToken();
-				String extension = tokenizer.nextToken();
-				if (extension.equals("csv") || extension.equals("CSV")) {
-					JOptionPane.showMessageDialog(null, "¡La plantilla se ha descargado corectamente!",
+		JFileChooser dialogo = new JFileChooser();
+		dialogo.setDialogTitle("Descargar plantilla de lista de participantes");
+		FileFilter filtro1 = new FileNameExtensionFilter("Archivo CSV", "csv", "CSV");
+		dialogo.setFileFilter(filtro1);
+		dialogo.setAcceptAllFileFilterUsed(false);
+		dialogo.setCurrentDirectory(new File(System.getProperty("user.dir")));
+		File nombrePorDefecto = new File("Plantilla.CSV");
+		dialogo.setSelectedFile(nombrePorDefecto);
+		dialogo.setMultiSelectionEnabled(false);
+		if (dialogo.showSaveDialog(ventanaPrincipal) == JFileChooser.APPROVE_OPTION) {
+			File plantilla = dialogo.getSelectedFile();
+			if (plantilla.exists() && plantilla.getName().toUpperCase().endsWith(".CSV")) {
+				plantilla = new File(plantilla.getAbsolutePath());
+			} else {
+				plantilla = new File(plantilla.getAbsolutePath() + ".csv");
+			}
+			if (!plantilla.exists()) {
+				try {
+					UtileriasListaParticipantes.escribirPlantilla(plantilla.getAbsolutePath());
+					JOptionPane.showMessageDialog(null, "La plantilla se ha descargado correctamente",
 							"Descargar plantilla", JOptionPane.INFORMATION_MESSAGE);
+				} catch (ExcepcionUtilerias e) {
+					JOptionPane.showMessageDialog(null, ExcepcionUtilerias.MENSAJE_EXCEPCION_ESCRIBIR_PLANTILLA_CSV,
+							"Descargar plantilla", JOptionPane.ERROR_MESSAGE);
+				}
+
+			} else if (plantilla.exists()) {
+				String[] valores = { "Sí", "No" };
+				int opcionRemplazar = JOptionPane.showOptionDialog(this,
+						plantilla.getName() + " ya existe.\n ¿Desea reemplazarlo?", "Descargar plantilla",
+						JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, valores, valores[1]);
+				if (opcionRemplazar == 0) {
 					try {
 						UtileriasListaParticipantes.escribirPlantilla(plantilla.getAbsolutePath());
-
+						JOptionPane.showMessageDialog(null, "La plantilla se ha reemplazado correctamente",
+								"Descargar plantilla", JOptionPane.INFORMATION_MESSAGE);
 					} catch (ExcepcionUtilerias e) {
-
-						JOptionPane.showMessageDialog(null, ExcepcionUtilerias.MENSAJE_EXCEPCION_FORMATO_INCORRECTO,
-								"Descargar Plantilla", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, e.getMessage(), "Descargar plantilla",
+								JOptionPane.ERROR_MESSAGE);
 					}
-				} else {
-					JOptionPane.showMessageDialog(null, "El nombre de la extencion no es CSV", "Descargar plantilla",
-							JOptionPane.ERROR_MESSAGE);
 				}
+
 			}
-
 		}
-	}
 
+	}
 }

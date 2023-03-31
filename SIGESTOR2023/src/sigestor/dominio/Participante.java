@@ -434,11 +434,9 @@ public class Participante implements Comparable<Participante> {
 		String original1 = this.getNombreParticipante();
 		String cadenaNormalize1 = Normalizer.normalize(original1, Normalizer.Form.NFD);
 		String cadenaSinAcentos1 = cadenaNormalize1.replaceAll("[^\\p{ASCII}]", "");
-
 		String original = participante.getNombreParticipante();
 		String cadenaNormalize = Normalizer.normalize(original, Normalizer.Form.NFD);
 		String cadenaSinAcentos = cadenaNormalize.replaceAll("[^\\p{ASCII}]", "");
-
 		return cadenaSinAcentos1.compareToIgnoreCase(cadenaSinAcentos);
 	}
 }

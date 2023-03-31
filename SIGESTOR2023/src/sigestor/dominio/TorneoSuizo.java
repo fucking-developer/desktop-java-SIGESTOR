@@ -358,11 +358,14 @@ public class TorneoSuizo extends AlgoritmoTorneo {
 	ExcepcionBaseDatos, ExcepcionBaseDatosEncuentro, ExcepcionBaseDatosParticipante {
 		BaseDatosEncuentro bde = new BaseDatosEncuentro(torneo.getNombreArchivo());
 		BaseDatosParticipante bdp = new BaseDatosParticipante(torneo.getNombreArchivo());
+		
 		int contador = 1;
 		ArrayList<Participante> participantes = torneo.getListaParticipantes();
 		ArrayList<Encuentro> encuentros = new ArrayList<Encuentro>();
 
+		
 		for (int i = 0; i < participantes.size(); i += 2) {
+			
 			if (fueInicial(participantes.get(i).getNumeroParticipante())) {
 
 				if (participantes.get(i + 1).getNombreParticipante().compareToIgnoreCase(
@@ -378,6 +381,8 @@ public class TorneoSuizo extends AlgoritmoTorneo {
 				encuentros.add(new Encuentro(contador, participantes.get(i).getNumeroParticipante(),
 						participantes.get(i + 1).getNumeroParticipante(), this.getTorneo().getFechaInicioTorneo()));
 			}
+			
+			
 			bde.insertarEncuentro(encuentros.get(contador - 1), ciclo);
 			bdp.actualizarResultadoParticipante(participantes.get(i), ciclo);
 			bdp.actualizarResultadoParticipante(participantes.get(i + 1), ciclo);

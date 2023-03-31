@@ -10,6 +10,7 @@ import sigestor.dominio.Personalizacion;
 import sigestor.dominio.Torneo;
 import sigestor.excepcion.ExcepcionBaseDatos;
 import sigestor.excepcion.ExcepcionBaseDatosCiclo;
+import sigestor.excepcion.ExcepcionBaseDatosEncuentro;
 import sigestor.excepcion.ExcepcionCapturarResultados;
 
 /**
@@ -31,7 +32,8 @@ public class BaseDatosCiclo extends BaseDatos {
 	/**
 	 * Permite llamar el constructor de la clase padre.
 	 * 
-	 * @param nombreArchivo Nombre personalizado del archivo de la base de datos.
+	 * @param nombreArchivo
+	 *            Nombre personalizado del archivo de la base de datos.
 	 */
 	public BaseDatosCiclo(String nombreArchivo) {
 		super(nombreArchivo);
@@ -41,12 +43,14 @@ public class BaseDatosCiclo extends BaseDatos {
 	 * Inserta el número del ciclos en la tabla <code>ciclo</code> de la base de
 	 * datos.
 	 * 
-	 * @param ciclo Recibe el objeto <code>Ciclo</code> que contiene los datos de un
-	 *              ciclo.
-	 * @throws ExcepcionBaseDatos      Lanza la excepción sí ocurre un error en
-	 *                                 <code>BaseDatos</code>.
-	 * @throws ExcepcionBaseDatosCiclo Lanza la excepción sí ocurre un error al
-	 *                                 insertar un dato la tabla <code>ciclo</code>.
+	 * @param ciclo
+	 *            Recibe el objeto <code>Ciclo</code> que contiene los datos de un
+	 *            ciclo.
+	 * @throws ExcepcionBaseDatos
+	 *             Lanza la excepción sí ocurre un error en <code>BaseDatos</code>.
+	 * @throws ExcepcionBaseDatosCiclo
+	 *             Lanza la excepción sí ocurre un error al insertar un dato la
+	 *             tabla <code>ciclo</code>.
 	 */
 	public void insertarCiclo(Ciclo ciclo) throws ExcepcionBaseDatos, ExcepcionBaseDatosCiclo {
 		realizarConexion();
@@ -63,11 +67,13 @@ public class BaseDatosCiclo extends BaseDatos {
 	 * Elimina el número del ciclo en la tabla <code>ciclo</code> de la base de
 	 * datos.
 	 * 
-	 * @param ciclo Recibe el objeto <code>Ciclo</code> que contiene los datos de un
-	 *              ciclo.
-	 * @throws ExcepcionBaseDatos Lanza la excepción sí ocurre un error en
-	 *                           <code>BaseDatos</code>.
-	 * @throws ExcepcionBaseDatosCiclo Lanza la excepción sí ocurre un error
+	 * @param ciclo
+	 *            Recibe el objeto <code>Ciclo</code> que contiene los datos de un
+	 *            ciclo.
+	 * @throws ExcepcionBaseDatos
+	 *             Lanza la excepción sí ocurre un error en <code>BaseDatos</code>.
+	 * @throws ExcepcionBaseDatosCiclo
+	 *             Lanza la excepción sí ocurre un error
 	 */
 	public void eliminarCiclo(Ciclo ciclo) throws ExcepcionBaseDatos, ExcepcionBaseDatosCiclo {
 		realizarConexion();
@@ -83,15 +89,18 @@ public class BaseDatosCiclo extends BaseDatos {
 	/**
 	 * Obtiene todos los ciclos con sus respectivos encuentros.
 	 * 
-	 * @param torneo Recibe el objeto <code>Torneo</code> que contiene los datos del
-	 *               torneo.
+	 * @param torneo
+	 *            Recibe el objeto <code>Torneo</code> que contiene los datos del
+	 *            torneo.
 	 * @return Regresa la lista de ciclos.
-	 * @throws ExcepcionBaseDatos          Lanza la excepción sí ocurre un error en
-	 *                                     <code>BaseDatos</code>.
-	 * @throws ExcepcionCapturarResultados Lanza la excepción si ocurre un error al
-	 *                                     crear el objeto <code>Encuentro</code>.
+	 * @throws ExcepcionBaseDatos
+	 *             Lanza la excepción sí ocurre un error en <code>BaseDatos</code>.
+	 * @throws ExcepcionCapturarResultados
+	 *             Lanza la excepción si ocurre un error al crear el objeto
+	 *             <code>Encuentro</code>.
 	 */
-	public ArrayList<Ciclo> obtenerCiclos(Torneo torneo) throws ExcepcionBaseDatos, ExcepcionCapturarResultados {
+	public ArrayList<Ciclo> obtenerCiclos(Torneo torneo)
+			throws ExcepcionBaseDatos, ExcepcionCapturarResultados {
 		ArrayList<Ciclo> ciclos = new ArrayList<>();
 		BaseDatosEncuentro bde = new BaseDatosEncuentro(getNombreArchivo());
 		try {
@@ -103,7 +112,7 @@ public class BaseDatosCiclo extends BaseDatos {
 				ciclo.setEncuentroParticipantes(encuentros);
 				ciclos.add(ciclo);
 			}
-		} catch (ExcepcionBaseDatos | SQLException e) {
+		} catch (ExcepcionBaseDatos | SQLException | ExcepcionBaseDatosEncuentro e) {
 
 		} finally {
 			cerrarConexion();
@@ -114,11 +123,11 @@ public class BaseDatosCiclo extends BaseDatos {
 	/**
 	 * Para eliminar los ciclos del torneo que se encuentras en la base de datos.
 	 * 
-	 * @throws ExcepcionBaseDatos      Lanza la excepción sí ocurre un error en
-	 *                                 <code>BaseDatos</code>.
-	 * @throws ExcepcionBaseDatosCiclo Lanza la excepción sí ocurre un erroral
-	 *                                 eliminar un registro de la tabla
-	 *                                 <code>ciclo</code>.
+	 * @throws ExcepcionBaseDatos
+	 *             Lanza la excepción sí ocurre un error en <code>BaseDatos</code>.
+	 * @throws ExcepcionBaseDatosCiclo
+	 *             Lanza la excepción sí ocurre un erroral eliminar un registro de
+	 *             la tabla <code>ciclo</code>.
 	 */
 	public void eliminarCiclos() throws ExcepcionBaseDatos, ExcepcionBaseDatosCiclo {
 		realizarConexion();

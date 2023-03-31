@@ -13,6 +13,7 @@ import sigestor.excepcion.*;
  * <p>
  * Las características de la clase <code>VentanaPrincipal</code> son:
  * <ul>
+ * <li><code>comboTipoTorneo</code>Para mostrar los dos tipos de torneo</li>
  * <li><code>menuArchivo</code> Para abrir, crear, cerrar o salir del
  * torneo.</li>
  * <li><code>menuOperaciones</code> Para administrar, iniciar o cancelar el
@@ -69,7 +70,7 @@ import sigestor.excepcion.*;
  * <li><code>serialVersionUID</code> Para el número de versión de la clase.</li>
  * </ul>
  * 
- * @version 22/03/2023
+ * @version 30/03/2023
  * 
  * @author Jonathan Eduardo Ibarra Martínez
  * @author Ricky Didier Peralta Reyes
@@ -79,8 +80,13 @@ import sigestor.excepcion.*;
  * @author Alicia Adriana Clemente Hernandez
  * @author Hernán Sesaí López Aragón
  * @author Erik Vasquez Policarpo
+ * @author German Luis Cruz Martínez
  */
 public class VentanaPrincipal extends JFrame implements ActionListener {
+	/**
+	 * lista desplegable para seleccionar el tipo de torneo simple o doble.
+	 */
+	private JComboBox<String> comboTipoTorneo;
 
 	/**
 	 * Menú <code>Archivo</code>
@@ -153,12 +159,14 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 	private JMenuItem submenuConsultarCiclosSuizo;
 
 	/**
-	 * Opcion <code>Capturar resultados</code> del menú <code>Torneo Suizo</code>.
+	 * Opcion <code>Capturar resultados</code> del menú
+	 * <code>Torneo Suizo</code>.
 	 */
 	private JMenuItem submenuResultadosSuizo;
 
 	/**
-	 * Opcion <code>Resultados finales</code> del menú <code>Torneo Suizo</code>.
+	 * Opcion <code>Resultados finales</code> del menú
+	 * <code>Torneo Suizo</code>.
 	 */
 	private JMenuItem submenuResultadosFinalesSuizo;
 
@@ -217,7 +225,6 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 	 * Sirve para acceder a los datos que tenga almacenado el torneo actual.
 	 */
 	private Torneo torneoActual;
-
 	/**
 	 * Sirve para definir un id que sera usado por la virtual machine cuando
 	 * serializa y deserealiza el applet.
@@ -279,7 +286,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		menuOperaciones.setIcon(new ImageIcon(getClass().getResource("/imagenes/operaciones.png")));
 		menuOperaciones.setMnemonic(KeyEvent.VK_O);
 		menuOperaciones
-		.setToolTipText("Configura el torneo a crear, inicia el torneo creado y cancela el torneo actual");
+				.setToolTipText("Configura el torneo a crear, inicia el torneo creado y cancela el torneo actual");
 		menuOperaciones.setEnabled(false);
 
 		submenuAdministrarTorneo = new JMenuItem("Administrar torneo");
@@ -316,7 +323,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		submenuConsultarCiclosSuizo.setIcon(new ImageIcon(getClass().getResource("/imagenes/emparejamiento.png")));
 		submenuConsultarCiclosSuizo.addActionListener(this);
 		submenuConsultarCiclosSuizo
-		.setToolTipText("Muestra la lista de los participantes, los pareos creados y permite hacer los pareos");
+				.setToolTipText("Muestra la lista de los participantes, los pareos creados y permite hacer los pareos");
 		submenuResultadosSuizo = new JMenuItem("Capturar resultados");
 		submenuResultadosSuizo.setIcon(new ImageIcon(getClass().getResource("/imagenes/capturarResultados.png")));
 		submenuResultadosSuizo.addActionListener(this);
@@ -326,7 +333,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		submenuResultadosFinalesSuizo.setIcon(new ImageIcon(getClass().getResource("/imagenes/resultadosFinales.png")));
 		submenuResultadosFinalesSuizo.addActionListener(this);
 		submenuResultadosFinalesSuizo
-		.setToolTipText("Muestra la tabla final de posiciones y muestra al ganador del torneo");
+				.setToolTipText("Muestra la tabla final de posiciones y muestra al ganador del torneo");
 		menuTorneoSuizo.add(submenuConsultarCiclosSuizo);
 		menuTorneoSuizo.addSeparator();
 		menuTorneoSuizo.add(submenuResultadosSuizo);
@@ -343,7 +350,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		submenuConsultarCiclosRoundRobin.setIcon(new ImageIcon(getClass().getResource("/imagenes/emparejamiento.png")));
 		submenuConsultarCiclosRoundRobin.addActionListener(this);
 		submenuConsultarCiclosRoundRobin
-		.setToolTipText("Muestra la lista de los participantes y los pareos de cada ciclo");
+				.setToolTipText("Muestra la lista de los participantes y los pareos de cada ciclo");
 		submenuResultadosRoundRobin = new JMenuItem("Capturar resultados");
 		submenuResultadosRoundRobin.setIcon(new ImageIcon(getClass().getResource("/imagenes/capturarResultados.png")));
 		submenuResultadosRoundRobin.addActionListener(this);
@@ -351,9 +358,9 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 				"Permite capturar y modificar los resultados parciales del ciclo actual y anteriores. También muestra los resultados que ya hayan sido capturados");
 		submenuResultadosFinalesRoundRobin = new JMenuItem("Resultados finales");
 		submenuResultadosFinalesRoundRobin
-		.setIcon(new ImageIcon(getClass().getResource("/imagenes/resultadosFinales.png")));
+				.setIcon(new ImageIcon(getClass().getResource("/imagenes/resultadosFinales.png")));
 		submenuResultadosFinalesRoundRobin
-		.setToolTipText("Muestra la tabla final de posiciones y muestra al ganador del torneo");
+				.setToolTipText("Muestra la tabla final de posiciones y muestra al ganador del torneo");
 		submenuResultadosFinalesRoundRobin.addActionListener(this);
 		menuTorneoRoundRobin.add(submenuConsultarCiclosRoundRobin);
 		menuTorneoRoundRobin.addSeparator();
@@ -362,30 +369,28 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		menuTorneoRoundRobin.add(submenuResultadosFinalesRoundRobin);
 		/*-------------------------------------------------------------*/
 		menuTorneoEliminacionDirecta = new JMenu("Torneo Eliminacion Directa");
-		menuTorneoEliminacionDirecta.setIcon(new ImageIcon(getClass().getResource("/imagenes/eliminaciondirecta.png")));// FIXME
-
-		// lo activé en true, debe de ser false
+		menuTorneoEliminacionDirecta.setIcon(new ImageIcon(getClass().getResource("/imagenes/eliminaciondirecta.png")));
 		menuTorneoEliminacionDirecta.setEnabled(false);
 		menuTorneoEliminacionDirecta.setMnemonic(KeyEvent.VK_D);
 		menuTorneoEliminacionDirecta.setToolTipText("Tipo de sistema en el que se basará el torneo");
 		submenuConsultarCiclosEliminacionDirecta = new JMenuItem("Consultar ciclos");
 		submenuConsultarCiclosEliminacionDirecta
-		.setIcon(new ImageIcon(getClass().getResource("/imagenes/emparejamiento.png")));
+				.setIcon(new ImageIcon(getClass().getResource("/imagenes/emparejamiento.png")));
 		submenuConsultarCiclosEliminacionDirecta.addActionListener(this);
 		submenuConsultarCiclosEliminacionDirecta
-		.setToolTipText("Muestra la lista de los participantes, los pareos creados y permite hacer los pareos");
+				.setToolTipText("Muestra la lista de los participantes, los pareos creados y permite hacer los pareos");
 		submenuResultadosEliminacionDirecta = new JMenuItem("Capturar resultados");
 		submenuResultadosEliminacionDirecta
-		.setIcon(new ImageIcon(getClass().getResource("/imagenes/capturarResultados.png")));
+				.setIcon(new ImageIcon(getClass().getResource("/imagenes/capturarResultados.png")));
 		submenuResultadosEliminacionDirecta.addActionListener(this);
 		submenuResultadosEliminacionDirecta.setToolTipText(
 				"Permite capturar y modificar los resultados parciales del ciclo actual. También muestra los resultados que ya hayan sido capturados");
 		submenuResultadosFinalesEliminacionDirecta = new JMenuItem("Resultados finales");
 		submenuResultadosFinalesEliminacionDirecta
-		.setIcon(new ImageIcon(getClass().getResource("/imagenes/resultadosFinales.png")));
+				.setIcon(new ImageIcon(getClass().getResource("/imagenes/resultadosFinales.png")));
 		submenuResultadosFinalesEliminacionDirecta.addActionListener(this);
 		submenuResultadosFinalesEliminacionDirecta
-		.setToolTipText("Muestra la tabla final de posiciones y muestra al ganador del torneo");
+				.setToolTipText("Muestra la tabla final de posiciones y muestra al ganador del torneo");
 		menuTorneoEliminacionDirecta.add(submenuConsultarCiclosEliminacionDirecta);
 		menuTorneoEliminacionDirecta.addSeparator();
 		menuTorneoEliminacionDirecta.add(submenuResultadosEliminacionDirecta);
@@ -452,8 +457,8 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 	}
 
 	/**
-	 * Encargado del manejo de eventos producido al hacer clic sobre un componente
-	 * de la ventana principal.
+	 * Encargado del manejo de eventos producido al hacer clic sobre un
+	 * componente de la ventana principal.
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -521,13 +526,13 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 	 * Encargado de salir del sistema.
 	 */
 	private void accionSalir() {
-		dispose();
+		System.exit(0);
 	}
 
 	/**
-	 * Habilita la administración del torneo y deshabilita los menús de los torneos
-	 * Suizo, Eliminacion Directa y Round Robin, además de deshabilitar la opción de
-	 * <code>Cancelar torneo</code> el torneo.
+	 * Habilita la administración del torneo y deshabilita los menús de los
+	 * torneos Suizo, Eliminacion Directa y Round Robin, además de deshabilitar
+	 * la opción de <code>Cancelar torneo</code> el torneo.
 	 */
 	private void accionCancelarTorneo() {
 		String[] valores = { "Sí", "No" };
@@ -578,9 +583,9 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 	}
 
 	/**
-	 * Deshabilita la opción <code>Operaciones</code> del menú, así como ambos tipos
-	 * de torneos del menú y retira el nombre asignado en la aplicación de acuerdo
-	 * al nombre que se tenía en el torneo que estaba abierto.
+	 * Deshabilita la opción <code>Operaciones</code> del menú, así como ambos
+	 * tipos de torneos del menú y retira el nombre asignado en la aplicación de
+	 * acuerdo al nombre que se tenía en el torneo que estaba abierto.
 	 */
 	private void accionCerrarTorneo() {
 		setTorneoActual(null);
@@ -595,8 +600,8 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 	}
 
 	/**
-	 * Permite crear un nuevo torneo almancenando la administración del torneo en el
-	 * archivo seleccionado.
+	 * Permite crear un nuevo torneo almancenando la administración del torneo
+	 * en el archivo seleccionado.
 	 */
 	private void accionCrearTorneo() {
 		new DialogoAdministarTorneo(this);
@@ -612,8 +617,8 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 	}
 
 	/**
-	 * Muestra en una ventana al director del proyecto y sus colaboradores con la
-	 * opción <code>Acerca de...</code>.
+	 * Muestra en una ventana al director del proyecto y sus colaboradores con
+	 * la opción <code>Acerca de...</code>.
 	 */
 	private void accionAbrirAcercaDe() {
 		JOptionPane.showMessageDialog(this, "Sistema gestor de torneos v.1.0\n\n" + "\nDirector del proyecto"
@@ -628,9 +633,9 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 	}
 
 	/**
-	 * Encargado de mostrar un archivo PDF al usuario con información relevante de
-	 * como utilizar el sistema, en caso de que no exista o no se pueda abrir el
-	 * archivo se mostrará un mensaje de error.
+	 * Encargado de mostrar un archivo PDF al usuario con información relevante
+	 * de como utilizar el sistema, en caso de que no exista o no se pueda abrir
+	 * el archivo se mostrará un mensaje de error.
 	 */
 	public void accionCargarManual() {
 		File archivo = new File("MANUAL SIGESTOR.pdf");
@@ -653,7 +658,8 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 	/**
 	 * Regresa el torneo actual con todos sus atributos y sus valores asignados.
 	 * 
-	 * @return Variable de tipo <code>Torneo</code> con los datos del torneo actual.
+	 * @return Variable de tipo <code>Torneo</code> con los datos del torneo
+	 *         actual.
 	 */
 	public Torneo getTorneoActual() {
 		return torneoActual;
@@ -670,10 +676,10 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 	}
 
 	/**
-	 * Permite abrir el archivo del torneo con extensión .torn y verifica si puede
-	 * continuar con la administración del torneo, verifica si el torneo ya ha
-	 * comenzado para permitir continuar capurando los resultados o visualiza los
-	 * resultados finales del torneo seleccionado.
+	 * Permite abrir el archivo del torneo con extensión .torn y verifica si
+	 * puede continuar con la administración del torneo, verifica si el torneo
+	 * ya ha comenzado para permitir continuar capurando los resultados o
+	 * visualiza los resultados finales del torneo seleccionado.
 	 * 
 	 * @param ruta
 	 *            La ruta que tiene el archivo.
@@ -713,17 +719,17 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 						menuTorneoSuizo.setEnabled(true);
 						this.cambiarTitulo();
 						submenuConsultarCiclosSuizo
-						.setText("Consultar " + getTorneoActual().getDatosPersonalizacion().getNombreCiclo(1));
+								.setText("Consultar " + getTorneoActual().getDatosPersonalizacion().getNombreCiclo(1));
 					} else if (getTorneoActual().getTipoTorneo().compareTo("Round Robin") == 0) {
 						menuTorneoRoundRobin.setEnabled(true);
 						this.cambiarTitulo();
 						submenuConsultarCiclosRoundRobin
-						.setText("Consultar " + getTorneoActual().getDatosPersonalizacion().getNombreCiclo(1));
+								.setText("Consultar " + getTorneoActual().getDatosPersonalizacion().getNombreCiclo(1));
 					} else {
 						menuTorneoEliminacionDirecta.setEnabled(true);
 						this.cambiarTitulo();
 						submenuConsultarCiclosEliminacionDirecta
-						.setText("Consultar " + getTorneoActual().getDatosPersonalizacion().getNombreCiclo(1));
+								.setText("Consultar " + getTorneoActual().getDatosPersonalizacion().getNombreCiclo(1));
 					}
 				} else {
 					submenuAdministrarTorneo.setEnabled(true);
@@ -775,14 +781,13 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		return null;
 	}
 
-	// Falta agregar a Eliminacion Directa, pero para eso tenemos que implementar
-	// metodos a la clase del torneo
-
 	/**
 	 * Validará de acuerdo a la personalización del torneo el tipo de torneo que
-	 * deberá dar comienzo, así mismo solicitará la cantidad de ciclos y el número
-	 * de vueltas únicamente para el torneo Round Robin. Deshabilitará el continuar
-	 * con la adminstración del torneo una vez iniciado.
+	 * deberá dar comienzo, así mismo, solicitará la cantidad de ciclos y el
+	 * número de vueltas únicamente para el torneo Round Robin y para el torneo
+	 * de Eliminación directa solo pedirá si el tipo del torneo será simple o
+	 * doble. Deshabilitará el continuar con la adminstración del torneo una vez
+	 * iniciado.
 	 */
 	private void accionIniciarTorneo() {
 		try {
@@ -819,11 +824,11 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 
 					SpinnerNumberModel sModel2 = new SpinnerNumberModel(
 							roundRobin.calcularNumeroCiclos(getTorneoActual().getListaParticipantes().size())
-							* (int) spinner1.getValue(),
+									* (int) spinner1.getValue(),
 							((((int) spinner1.getValue()) - 1) * (getTorneoActual().getListaParticipantes().size() - 1))
-							+ 1,
+									+ 1,
 							roundRobin.calcularNumeroCiclos(getTorneoActual().getListaParticipantes().size())
-							* (int) spinner1.getValue(),
+									* (int) spinner1.getValue(),
 							1);
 
 					JSpinner spinner2 = new JSpinner(sModel2);
@@ -843,26 +848,29 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 							try {
 								getTorneoActual().iniciarTorneo(roundRobin, null, null);
 							} catch (ExcepcionCapturarResultados e) {
-
-								e.printStackTrace();
+								JOptionPane.showMessageDialog(null, e.getMessage(), "Iniciar torneo Round Robin",
+										JOptionPane.ERROR_MESSAGE);
 							} catch (ExcepcionBaseDatosParticipante e) {
-
-								e.printStackTrace();
+								JOptionPane.showMessageDialog(null, e.getMessage(), "Iniciar torneo Round Robin",
+										JOptionPane.ERROR_MESSAGE);
 							}
+							JOptionPane.showMessageDialog(null,
+									"El torneo " + getTorneoActual().getNombreTorneo()
+											+ " se ha iniciado correctamente.",
+									"Iniciar torneo Round Robin", JOptionPane.INFORMATION_MESSAGE);
+
+							menuTorneoRoundRobin.setEnabled(true);
+							submenuAdministrarTorneo.setEnabled(false);
+							submenuIniciarTorneo.setEnabled(false);
+							submenuCancelarTorneo.setEnabled(true);
+							submenuConsultarCiclosRoundRobin.setText(
+									"Consultar " + getTorneoActual().getDatosPersonalizacion().getNombreCiclo(1));
+
 						} catch (ExcepcionBaseDatosTorneo e) {
 							JOptionPane.showMessageDialog(null, e.getMessage(), "Iniciar torneo",
 									JOptionPane.ERROR_MESSAGE);
 						}
-						JOptionPane.showMessageDialog(null,
-								"El torneo " + getTorneoActual().getNombreTorneo() + " se a iniciado correctamente.",
-								"Iniciar torneo Round Robin", JOptionPane.INFORMATION_MESSAGE);
 
-						menuTorneoRoundRobin.setEnabled(true);
-						submenuAdministrarTorneo.setEnabled(false);
-						submenuIniciarTorneo.setEnabled(false);
-						submenuCancelarTorneo.setEnabled(true);
-						submenuConsultarCiclosRoundRobin
-						.setText("Consultar " + getTorneoActual().getDatosPersonalizacion().getNombreCiclo(1));
 					}
 				}
 			} else if (getTorneoActual().getTipoTorneo().equals("Suizo")) {
@@ -879,7 +887,6 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 				spinner.setPreferredSize(new Dimension(80, 20));
 				panelAux.add(spinner);
 				contenido.add(panelAux);
-
 				int seleccionCiclo = JOptionPane.showOptionDialog(null, contenido, "Iniciar torneo",
 						JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 				if (seleccionCiclo == 0) {
@@ -888,40 +895,45 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 						try {
 							getTorneoActual().iniciarTorneo(null, suizo, null);
 						} catch (ExcepcionCapturarResultados e) {
-							JOptionPane.showMessageDialog(null, e.getMessage(), "Iniciar torneo suizo",
+							JOptionPane.showMessageDialog(null, e.getMessage(), "Iniciar torneo Suizo",
 									JOptionPane.ERROR_MESSAGE);
+
 						} catch (ExcepcionBaseDatosParticipante e) {
-							JOptionPane.showMessageDialog(null, e.getMessage(), "Iniciar torneo suizo",
+							JOptionPane.showMessageDialog(null, e.getMessage(), "Iniciar torneo Suizo",
 									JOptionPane.ERROR_MESSAGE);
 						}
 						JOptionPane.showMessageDialog(null,
 								"El torneo " + getTorneoActual().getNombreTorneo() + " se ha iniciado correctamente.",
 								"Iniciar torneo Suizo", JOptionPane.INFORMATION_MESSAGE);
+
 						menuTorneoSuizo.setEnabled(true);
 						submenuAdministrarTorneo.setEnabled(false);
 						submenuIniciarTorneo.setEnabled(false);
 						submenuCancelarTorneo.setEnabled(true);
+
 						submenuConsultarCiclosSuizo
-						.setText("Consultar " + getTorneoActual().getDatosPersonalizacion().getNombreCiclo(1));
+								.setText("Consultar " + getTorneoActual().getDatosPersonalizacion().getNombreCiclo(1));
+
 					} catch (ExcepcionBaseDatosTorneo e) {
 						JOptionPane.showMessageDialog(null, e.getMessage(), "Iniciar torneo",
 								JOptionPane.ERROR_MESSAGE);
 					}
+
 				}
 
 			} else if (getTorneoActual().getTipoTorneo().equals("Eliminación directa")) {
 				TorneoEliminacionDirecta eliminacionDirecta = new TorneoEliminacionDirecta(this.torneoActual);
 				JPanel contenidoMensaje = new JPanel();
 				contenidoMensaje.setLayout(new BoxLayout(contenidoMensaje, BoxLayout.Y_AXIS));
-				JLabel texto = new JLabel("Seleccione el tipo de torneo Eliminación directa");
+				JLabel texto = new JLabel("Seleccione el tipo de torneo Eliminación directa:");
 				contenidoMensaje.add(texto);
 				String[] arregloTipoTorneo = { "Simple", "Doble" };
 				contenidoMensaje.add(texto);
-				
-				JComboBox<String> comboTipoTorneo = new JComboBox<String>(arregloTipoTorneo);
-				comboTipoTorneo.setPreferredSize(new Dimension(100, 20));
+				comboTipoTorneo = new JComboBox<String>(arregloTipoTorneo);
+				comboTipoTorneo.setPreferredSize(new Dimension(100, 30));
 				contenidoMensaje.add(comboTipoTorneo);
-				
+				JOptionPane.showOptionDialog(null, contenidoMensaje, "Iniciar torneo", JOptionPane.OK_CANCEL_OPTION,
+						JOptionPane.QUESTION_MESSAGE, null, null, null);
 				if (comboTipoTorneo.getSelectedItem().equals("Simple")) {
 					eliminacionDirecta.setTipoEliminacion(true);
 				} else {
@@ -944,13 +956,16 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 					JOptionPane.showMessageDialog(null, "Número de ciclos es: " + eliminacionDirecta.getNumeroCiclos(),
 							"Iniciar torneo Eliminación directa", JOptionPane.INFORMATION_MESSAGE);
 
+					JOptionPane.showMessageDialog(null,
+							"El torneo " + getTorneoActual().getNombreTorneo() + " se ha iniciado correctamente.",
+							"Iniciar torneo Eliminación directa", JOptionPane.INFORMATION_MESSAGE);
+
 					menuTorneoEliminacionDirecta.setEnabled(true);
 					submenuAdministrarTorneo.setEnabled(false);
 					submenuIniciarTorneo.setEnabled(false);
 					submenuCancelarTorneo.setEnabled(true);
-
 					submenuConsultarCiclosEliminacionDirecta
-					.setText("Consultar " + getTorneoActual().getDatosPersonalizacion().getNombreCiclo(1));
+							.setText("Consultar " + getTorneoActual().getDatosPersonalizacion().getNombreCiclo(1));
 
 				} catch (ExcepcionBaseDatosTorneo e) {
 					JOptionPane.showMessageDialog(null, e.getMessage(), "Iniciar torneo", JOptionPane.ERROR_MESSAGE);
@@ -971,8 +986,8 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 	}
 
 	/**
-	 * Permite abrir la ventana <code>Resultados finales</code> una vez terminado de
-	 * capturar todos los resultados de los ciclos del torneo.
+	 * Permite abrir la ventana <code>Resultados finales</code> una vez
+	 * terminado de capturar todos los resultados de los ciclos del torneo.
 	 */
 	private void accionAbrirResultadosFinales() {
 		if (this.getTorneoActual().getAlgoritmoTorneo().verificarResultadosCompletos() && this.getTorneoActual()
@@ -988,13 +1003,13 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 	}
 
 	/**
-	 * Cambia el titulo del menú <code>Capturar resultados</code> una vez terminado
-	 * el torneo.
+	 * Cambia el titulo del menú <code>Capturar resultados</code> una vez
+	 * terminado el torneo.
 	 */
 	private void cambiarTitulo() {
 		if (this.getTorneoActual() != null && this.getTorneoActual().getAlgoritmoTorneo().verificarResultadosCompletos()
 				&& this.getTorneoActual().getCicloActual() == this.getTorneoActual().getAlgoritmoTorneo()
-				.getNumeroCiclos()
+						.getNumeroCiclos()
 				&& this.getTorneoActual().getListaParticipantes().get(1).getLugarParticipante() > 0) {
 
 			this.submenuResultadosRoundRobin.setText("Reporte de resultados");

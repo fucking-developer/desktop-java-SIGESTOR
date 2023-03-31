@@ -18,7 +18,7 @@ import sigestor.excepcion.*;
 /**
  * Sirve para manejar la base datos general del torneo.
  * 
- * @version 21/03/2023
+ * @version 31/03/2023
  * 
  * @author Ricky Didier Peralta Reyes
  * @author Uriel Romeo Cruz Cortes
@@ -31,20 +31,21 @@ import sigestor.excepcion.*;
  * @author Luis Fernando de la Cruz López
  * @author Luis Antonio Ruiz Sierra
  * @author Victor Triste Pérez
+ * @author German Luis Cruz Martinez
  */
 public class BaseDatosTorneo extends BaseDatos {
 
 	/**
-	 * Permite validar sí existe el archivo de la base de datos y además que existan
+	 * Permite validar si existe el archivo de la base de datos y además que existan
 	 * todas las tablas correspondientes, en caso contrario crea la base de datos.
 	 * 
 	 * @param nombreArchivo
 	 *            Nombre del archivo de la base de datos.
 	 * @throws ExcepcionBaseDatos
-	 *             Lanza la excepción sí no se pudo realizar la conexión.
+	 *             Lanza la excepción si no se pudo realizar la conexión.
 	 * @throws ExcepcionBaseDatosTorneo
-	 *             Lanza la excepción sí ocurre un error al validar la existencia
-	 *             del archivo y al validar las tablas o sí ocurre un error al crear
+	 *             Lanza la excepción si ocurre un error al validar la existencia
+	 *             del archivo y al validar las tablas o si ocurre un error al crear
 	 *             la base de datos.
 	 *
 	 */
@@ -61,7 +62,7 @@ public class BaseDatosTorneo extends BaseDatos {
 	 * documento diccionario de datos.
 	 * 
 	 * @throws ExcepcionBaseDatos
-	 *             Lanza la excepción sí no se pudo realizar la conexión.
+	 *             Lanza la excepción si no se pudo realizar la conexión.
 	 * @throws ExcepcionBaseDatosTorneo
 	 *             lanza la excepcion si no se puede crear la base de datos.
 	 */
@@ -84,9 +85,11 @@ public class BaseDatosTorneo extends BaseDatos {
 					"CREATE TABLE encuentro(numeroEncuentro INTEGER DEFAULT 0, idParticipanteInicial INTEGER DEFAULT 0, idParticipanteFinal INTEGER DEFAULT 0, marcadorParticipanteInicial INTEGER DEFAULT 0, marcadorParticipanteFinal INTEGER DEFAULT 0, resultado INTEGER DEFAULT 0, numeroCiclo INTEGER DEFAULT 0, fechaDelEncuentro TEXT)");
 			realizarAccion(
 					"CREATE TABLE participante(numeroParticipante INTEGER DEFAULT 0, nombreParticipante  TEXT, puntajeParticipante REAL DEFAULT 0.0, puntajeAcumuladoParticipante REAL DEFAULT 0.0, marcadorFavor INTEGER DEFAULT 0, marcadorContra INTEGER DEFAULT 0, lugarParticipante INTEGER DEFAULT 0)");
-			realizarAccion("CREATE TABLE eliminacionDirecta(numeroCiclos INTEGER DEFAULT 1)");
+			realizarAccion(
+					"CREATE TABLE eliminacionDirecta(numeroCiclos INTEGER DEFAULT 1,esSimple BOOLEAN DEFAULT true)");
 			cerrarConexion();
 		} catch (ExcepcionBaseDatos e) {
+
 			throw new ExcepcionBaseDatosTorneo(ExcepcionBaseDatosTorneo.MENSAJE_EXCEPCION_CREA_BASE_DATOS_PARTE_1
 					+ getNombreArchivo() + ExcepcionBaseDatosTorneo.MENSAJE_EXCEPCION_CREA_BASE_DATOS_PARTE_2
 					+ ExcepcionBaseDatosTorneo.MENSAJE_EXCEPCION_SOLUCION);
@@ -96,13 +99,13 @@ public class BaseDatosTorneo extends BaseDatos {
 	/**
 	 * Verifica la existencia de todas las tablas en la base de datos.
 	 * 
-	 * @return <tt>true</tt> sí verifica la existencia de todas las tablas en la
+	 * @return <tt>true</tt> si verifica la existencia de todas las tablas en la
 	 *         base de datos, <tt>false</tt> en caso de que la base de datos esté
 	 *         vacía.
 	 * @throws ExcepcionBaseDatos
-	 *             Lanza la excepción sí no se pudo realizar la conexión.
+	 *             Lanza la excepción si no se pudo realizar la conexión.
 	 * @throws ExcepcionBaseDatosTorneo
-	 *             Lanza la excepción sí ocurre un error al obtener las tablas o sí
+	 *             Lanza la excepción si ocurre un error al obtener las tablas o si
 	 *             el archivo no es del sistema.
 	 */
 	private boolean validarTablas() throws ExcepcionBaseDatos, ExcepcionBaseDatosTorneo {
@@ -132,7 +135,7 @@ public class BaseDatosTorneo extends BaseDatos {
 	 * 
 	 * @return regresa un objeto de tipo torneo con los datos generales
 	 * @throws ExcepcionBaseDatos
-	 *             Lanza la excepción sí no se pudo realizar la conexión.
+	 *             Lanza la excepción si no se pudo realizar la conexión.
 	 * @throws ExcepcionBaseDatosTorneo
 	 *             Lanza la excepción si ocurre un error al obtener los datos
 	 *             generales de la tabla <code>datosGenerales</code> de la base de
@@ -171,7 +174,7 @@ public class BaseDatosTorneo extends BaseDatos {
 	 * @param torneo
 	 *            Contiene los datos generales del torneo.
 	 * @throws ExcepcionBaseDatos
-	 *             Lanza la excepción sí no se pudo realizar la conexión.
+	 *             Lanza la excepción si no se pudo realizar la conexión.
 	 * 
 	 * @throws ExcepcionBaseDatosTorneo
 	 *             Lanza la excepción si ocurre un error al insertar en la tabla
@@ -204,9 +207,9 @@ public class BaseDatosTorneo extends BaseDatos {
 	 * @param torneo
 	 *            Contiene los datos generales del torneo.
 	 * @throws ExcepcionBaseDatos
-	 *             Lanza la excepción sí no se pudo realizar la conexión.
+	 *             Lanza la excepción si no se pudo realizar la conexión.
 	 * @throws ExcepcionBaseDatosTorneo
-	 *             Lanza la excepción sí ocurre un error al actualizar la tabla
+	 *             Lanza la excepción si ocurre un error al actualizar la tabla
 	 *             <code>datosGenerales</code> en la base de datos.
 	 */
 	public void actualizarDatosGenerales(Torneo torneo) throws ExcepcionBaseDatos, ExcepcionBaseDatosTorneo {
@@ -220,10 +223,10 @@ public class BaseDatosTorneo extends BaseDatos {
 
 		realizarConexion();
 		int filasAfectadas = realizarAccion("UPDATE datosGenerales SET nombreTorneo = '" + torneo.getNombreTorneo()
-		+ "', nombreOrganizador = '" + torneo.getNombreOrganizador() + "', fechaInicioTorneo = '"
-		+ cadenaFechaInicial + "', fechaFinalTorneo = '" + cadenaFechaFinal + "', cicloActual = "
-		+ torneo.getCicloActual() + ", tipoTorneo = '" + torneo.getTipoTorneo() + "', descripcion = '"
-		+ torneo.getDescripcionTorneo() + "'");
+				+ "', nombreOrganizador = '" + torneo.getNombreOrganizador() + "', fechaInicioTorneo = '"
+				+ cadenaFechaInicial + "', fechaFinalTorneo = '" + cadenaFechaFinal + "', cicloActual = "
+				+ torneo.getCicloActual() + ", tipoTorneo = '" + torneo.getTipoTorneo() + "', descripcion = '"
+				+ torneo.getDescripcionTorneo() + "'");
 		cerrarConexion();
 		if (filasAfectadas != 1) {
 			throw new ExcepcionBaseDatosTorneo(ExcepcionBaseDatosTorneo.MENSAJE_EXCEPCION_ACTUALIZA_DATOS_GENERALES
@@ -238,9 +241,9 @@ public class BaseDatosTorneo extends BaseDatos {
 	 * @param torneo
 	 *            Contiene los datos generales del torneo.
 	 * @throws ExcepcionBaseDatos
-	 *             Lanza la excepción sí no se pudo realizar la conexión.
+	 *             Lanza la excepción si no se pudo realizar la conexión.
 	 * @throws ExcepcionBaseDatosTorneo
-	 *             Lanza la excepción sí ocurre un error al actualizar el ciclo
+	 *             Lanza la excepción si ocurre un error al actualizar el ciclo
 	 *             actual en tabla <code>datosGenerales</code> de la base de datos.
 	 */
 	public void actualizarCicloActual(Torneo torneo) throws ExcepcionBaseDatos, ExcepcionBaseDatosTorneo {
@@ -257,22 +260,25 @@ public class BaseDatosTorneo extends BaseDatos {
 	}
 
 	/**
-	 * Obtiene los ciclos del torneo suizo de la base de datos
+	 * Obtiene el número de ciclos del torneo Suizo de la base de datos
 	 * 
-	 * @return Regresa el número de ciclos del torneo
+	 * @return Regresa un objeto <code>TorneoSuizo</code> que contiene el número de
+	 *         ciclos.
 	 * @throws ExcepcionBaseDatos
-	 *             Lanza la excepción sí no se pudo realizar la conexión.
+	 *             Lanza la excepción si no se pudo realizar la conexión.
 	 * @throws ExcepcionBaseDatosTorneo
 	 *             Lanza la excepción si ocurre un error al obtener el número de
 	 *             ciclos en la tabla <code>suizo</code> de la base de datos.
 	 */
-	public int obtenerTorneoSuizo() throws ExcepcionBaseDatos, ExcepcionBaseDatosTorneo {
+	public TorneoSuizo obtenerTorneoSuizo() throws ExcepcionBaseDatos, ExcepcionBaseDatosTorneo {
 		try {
 			realizarConexion();
 			ResultSet resultado = realizarConsulta("SELECT *FROM suizo");
-			return resultado.getInt("numeroCiclos");
+			TorneoSuizo s = new TorneoSuizo(null);
+			s.setNumeroCiclos(resultado.getInt("numeroCiclos"));
+			return s;
 		} catch (SQLException e) {
-			throw new ExcepcionBaseDatosTorneo(ExcepcionBaseDatosTorneo.MENSAJE_EXCEPCION_CONSULTA_CICLO_SUIZO
+			throw new ExcepcionBaseDatosTorneo(ExcepcionBaseDatosTorneo.MENSAJE_EXCEPCION_CONSULTA_TORNEO_SUIZO
 					+ ExcepcionBaseDatosTorneo.MENSAJE_EXCEPCION_SOLUCION);
 		} finally {
 			cerrarConexion();
@@ -280,22 +286,28 @@ public class BaseDatosTorneo extends BaseDatos {
 	}
 
 	/**
-	 * Obtiene los ciclos del torneo round robin de la base de datos
+	 * Obtiene el número de ciclos y vueltas del torneo Round Robin de la base de
+	 * datos
 	 * 
-	 * @return Regresa el número de ciclos del torneo
+	 * @return Regresa un objeto <code>TorneoRoundRobin</code> que contiene el
+	 *         número de ciclos y de vueltas.
 	 * @throws ExcepcionBaseDatos
-	 *             Lanza la excepción sí no se pudo realizar la conexión.
+	 *             Lanza la excepción si no se pudo realizar la conexión.
 	 * @throws ExcepcionBaseDatosTorneo
 	 *             Lanza la excepción si ocurre un error al obtener el número de
-	 *             ciclos en la tabla <code>roundRobin</code> de la base de datos.
+	 *             ciclos y vueltas en la tabla <code>roundRobin</code> de la base
+	 *             de datos.
 	 */
-	public int obtenerTorneoRoundRobin() throws ExcepcionBaseDatos, ExcepcionBaseDatosTorneo {
+	public TorneoRoundRobin obtenerTorneoRoundRobin() throws ExcepcionBaseDatos, ExcepcionBaseDatosTorneo {
 		try {
 			realizarConexion();
 			ResultSet resultado = realizarConsulta("SELECT *FROM roundRobin");
-			return resultado.getInt("numeroCiclos");
+			TorneoRoundRobin r = new TorneoRoundRobin(null);
+			r.setNumeroCiclos(resultado.getInt("numeroCiclos"));
+			r.setNumeroVueltas(resultado.getInt("numeroVueltas"));
+			return r;
 		} catch (SQLException e) {
-			throw new ExcepcionBaseDatosTorneo(ExcepcionBaseDatosTorneo.MENSAJE_EXCEPCION_CONSULTA_CICLO_ROUND_ROBIN
+			throw new ExcepcionBaseDatosTorneo(ExcepcionBaseDatosTorneo.MENSAJE_EXCEPCION_CONSULTA_TORNEO_ROUND_ROBIN
 					+ ExcepcionBaseDatosTorneo.MENSAJE_EXCEPCION_SOLUCION);
 		} finally {
 			cerrarConexion();
@@ -303,28 +315,36 @@ public class BaseDatosTorneo extends BaseDatos {
 	}
 
 	/**
-	 * Obtiene los ciclos del torneo eliminacionDirecta de la base de datos
+	 * Obtiene el número de ciclos y el subtipo (simple o doble) del torneo
+	 * Eliminación directa de la base de datos
 	 * 
-	 * @return Regresa el número de ciclos del torneo
+	 * @return Regresa un objeto <code>TorneoEliminacionDirecta</code> que contiene
+	 *         el número de ciclos y <tt>true</tt> si es simple o <tt>false</tt> si
+	 *         es doble.
 	 * @throws ExcepcionBaseDatos
-	 *             Lanza la excepción sí no se pudo realizar la conexión.
+	 *             Lanza la excepción si no se pudo realizar la conexión.
 	 * @throws ExcepcionBaseDatosTorneo
 	 *             Lanza la excepción si ocurre un error al obtener el número de
 	 *             ciclos en la tabla <code>eliminacionDirecta</code> de la base de
 	 *             datos.
 	 */
-	public int obtenerTorneoEliminacionDirecta() throws ExcepcionBaseDatos, ExcepcionBaseDatosTorneo {
+	public TorneoEliminacionDirecta obtenerTorneoEliminacionDirecta()
+			throws ExcepcionBaseDatos, ExcepcionBaseDatosTorneo {
+
 		try {
 			realizarConexion();
 			ResultSet resultado = realizarConsulta("SELECT *FROM eliminacionDirecta");
-			return resultado.getInt("numeroCiclos");
+			TorneoEliminacionDirecta t = new TorneoEliminacionDirecta(null);
+			t.setNumeroCiclos(resultado.getInt("numeroCiclos"));
+			t.setTipoEliminacion(resultado.getBoolean("esSimple"));
+			return t;
 		} catch (SQLException e) {
-			throw new ExcepcionBaseDatosTorneo(
-					ExcepcionBaseDatosTorneo.MENSAJE_EXCEPCION_CONSULTA_CICLO_ELIMINACION_DIRECTA
+			throw new ExcepcionBaseDatosTorneo(ExcepcionBaseDatosTorneo.MENSAJE_EXCEPCION_CONSULTA_TORNEO_ROUND_ROBIN
 					+ ExcepcionBaseDatosTorneo.MENSAJE_EXCEPCION_SOLUCION);
 		} finally {
 			cerrarConexion();
 		}
+
 	}
 
 	/**
@@ -334,7 +354,7 @@ public class BaseDatosTorneo extends BaseDatos {
 	 * @param torneoSuizo
 	 *            Contiene los datos generales del torneo suizo.
 	 * @throws ExcepcionBaseDatos
-	 *             Lanza la excepción sí no se pudo realizar la conexión.
+	 *             Lanza la excepción si no se pudo realizar la conexión.
 	 * @throws ExcepcionBaseDatosTorneo
 	 *             Lanza la excepción si ocurre un error al insertar el número de
 	 *             ciclos en la tabla <code>suizo</code> de la base de datos.
@@ -357,9 +377,9 @@ public class BaseDatosTorneo extends BaseDatos {
 	 * @param robin
 	 *            Contiene el número de ciclos y el número de vueltas del torneo.
 	 * @throws ExcepcionBaseDatos
-	 *             Lanza la excepción sí no se pudo realizar la conexión.
+	 *             Lanza la excepción si no se pudo realizar la conexión.
 	 * @throws ExcepcionBaseDatosTorneo
-	 *             Lanza la excepción sí ocurre un error al insertar los datos en la
+	 *             Lanza la excepción si ocurre un error al insertar los datos en la
 	 *             tabla <code>roundRobin</code> de la base de datos.
 	 */
 	public void insertarTorneoRoundRobin(TorneoRoundRobin robin) throws ExcepcionBaseDatos, ExcepcionBaseDatosTorneo {
@@ -374,27 +394,27 @@ public class BaseDatosTorneo extends BaseDatos {
 	}
 
 	/**
-	 * Inserta el número de ciclos en la tabla <code>eliminacionDirecta</code> de la
-	 * base de datos.
+	 * Inserta el número de ciclos y también si el torneo es simple o no en la tabla
+	 * <code>eliminacionDirecta</code> de la base de datos.
 	 * 
 	 * @param eliminacionDirecta
-	 *            Contiene el número de ciclos del torneo.
+	 *            Contiene el número de ciclos del torneo y si es simple el torneo.
 	 * @throws ExcepcionBaseDatos
-	 *             Lanza la excepción sí no se pudo realizar la conexión.
+	 *             Lanza la excepción si no se pudo realizar la conexión.
 	 * @throws ExcepcionBaseDatosTorneo
-	 *             Lanza la excepción sí ocurre un error al insertar los datos en la
+	 *             Lanza la excepción si ocurre un error al insertar los datos en la
 	 *             tabla <code>eliminacionDirecta</code> de la base de datos.
 	 */
 	public void insertarTorneoEliminacionDirecta(TorneoEliminacionDirecta eliminacionDirecta)
 			throws ExcepcionBaseDatos, ExcepcionBaseDatosTorneo {
 		realizarConexion();
-		int valor = realizarAccion(
-				"INSERT INTO eliminacionDirecta VALUES(" + eliminacionDirecta.getNumeroCiclos() + ")");
+		int valor = realizarAccion("INSERT INTO eliminacionDirecta (numeroCiclos, esSimple) VALUES("
+				+ eliminacionDirecta.getNumeroCiclos() + "," + eliminacionDirecta.getTipoEliminacion() + ")");
 		cerrarConexion();
 		if (valor != 1) {
 			throw new ExcepcionBaseDatosTorneo(
 					ExcepcionBaseDatosTorneo.MENSAJE_EXCEPCION_INSERTA_TORNEO_ELIMINACION_DIRECTA
-					+ ExcepcionBaseDatosTorneo.MENSAJE_EXCEPCION_SOLUCION);
+							+ ExcepcionBaseDatosTorneo.MENSAJE_EXCEPCION_SOLUCION);
 		}
 	}
 
@@ -403,7 +423,7 @@ public class BaseDatosTorneo extends BaseDatos {
 	 * datos.
 	 * 
 	 * @throws ExcepcionBaseDatos
-	 *             Lanza la excepción sí no se pudo realizar la conexión.
+	 *             Lanza la excepción si no se pudo realizar la conexión.
 	 * @throws ExcepcionBaseDatosTorneo
 	 *             Lanza la excepción si ocurre un error al eliminar el número de
 	 *             ciclos en la tabla <code>suizo</code> de la base de datos.
@@ -422,7 +442,7 @@ public class BaseDatosTorneo extends BaseDatos {
 	 * Elimina los datos de la tabla <code>roundRobin</code> de la base de datos.
 	 * 
 	 * @throws ExcepcionBaseDatos
-	 *             Lanza la excepción sí no se pudo realizar la conexión.
+	 *             Lanza la excepción si no se pudo realizar la conexión.
 	 * @throws ExcepcionBaseDatosTorneo
 	 *             Lanza la excepción si ocurre un error al eliminar los datos de la
 	 *             tabla <code>roundRobin</code> de la base de datos.
@@ -442,7 +462,7 @@ public class BaseDatosTorneo extends BaseDatos {
 	 * datos.
 	 * 
 	 * @throws ExcepcionBaseDatos
-	 *             Lanza la excepción sí no se pudo realizar la conexión.
+	 *             Lanza la excepción si no se pudo realizar la conexión.
 	 * @throws ExcepcionBaseDatosTorneo
 	 *             Lanza la excepción si ocurre un error al eliminar los datos de la
 	 *             tabla <code>eliminacionDirecta</code> de la base de datos.
@@ -454,7 +474,7 @@ public class BaseDatosTorneo extends BaseDatos {
 		if (resultado < 0) {
 			throw new ExcepcionBaseDatosTorneo(
 					ExcepcionBaseDatosTorneo.MENSAJE_EXCEPCION_ELIMINA_TORNEO_ELIMINACION_DIRECTA
-					+ ExcepcionBaseDatosTorneo.MENSAJE_EXCEPCION_SOLUCION);
+							+ ExcepcionBaseDatosTorneo.MENSAJE_EXCEPCION_SOLUCION);
 		}
 	}
 }

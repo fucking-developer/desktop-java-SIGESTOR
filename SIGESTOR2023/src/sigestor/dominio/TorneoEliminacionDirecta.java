@@ -28,10 +28,11 @@ import sigestor.excepcion.ExcepcionCapturarResultados;
  * doble.</li>
  * </ul>
  * 
- * @version 27/03/2023
+ * @version 30/03/2023
  * 
  * @author German Luis Cruz Martinez.
  * @author Eder Euclides Dionisio Diaz.
+ * @author Erik Vasquez Policarpo
  * @see AlgoritmoTorneo
  */
 public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
@@ -40,7 +41,7 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 	 * Sirve para determinar que tipo de torneo de Eliminación Directa se va a
 	 * efectuar true = Eliminación simple o directa false = eliminación doble
 	 */
-	private boolean esSimple;
+	public boolean esSimple;
 
 	/**
 	 * Inicializa las variables con un valor por defecto y asigna a la variable
@@ -53,14 +54,19 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 		super(torneo);
 	}
 
-	/*
+	/**
 	 * obtiene el tipo de Eliminación Directa
 	 * 
-	 * @param true = Eliminación Directa simple false = Eliminación Directa doble
+	 * @param true
+	 *            = Eliminación Directa simple false = Eliminación Directa doble
 	 */
 
 	public void setTipoEliminacion(boolean tipoEliminacion) {
 		this.esSimple = tipoEliminacion;
+	}
+
+	public boolean getTipoEliminacion() {
+		return esSimple;
 	}
 
 	/**
@@ -86,7 +92,27 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 	 */
 	@Override
 	public void realizarEncuentros() throws ExcepcionBaseDatos, ExcepcionBaseDatosEncuentro, ExcepcionBaseDatosCiclo {
-		Date fechaEncuentro;
+		// Date fechaEncuentro;
+		try {
+
+			torneo.setCicloActual(torneo.getCicloActual());
+			BaseDatosCiclo bdc = new BaseDatosCiclo(torneo.getNombreArchivo());
+
+			Ciclo ciclo = new Ciclo(torneo, torneo.getCicloActual());
+			bdc.insertarCiclo(ciclo);
+			encararParticipantes(ciclo);
+			torneo.getAlgoritmoTorneo().getCiclos().add(ciclo);
+			try {
+				BaseDatosTorneo bdt = new BaseDatosTorneo(torneo.getNombreArchivo());
+				bdt.actualizarCicloActual(torneo);
+			} catch (ExcepcionBaseDatos | ExcepcionBaseDatosTorneo e) {
+
+			}
+
+		} catch (ExcepcionCapturarResultados | ExcepcionBaseDatosParticipante e1) {
+
+		}
+
 	}
 
 	/**
@@ -115,32 +141,101 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 	 *             <code>participantes</code>.
 	 */
 	public void encararParticipantes(Ciclo ciclo) throws ExcepcionCapturarResultados, ExcepcionBaseDatos,
-	ExcepcionBaseDatosEncuentro, ExcepcionBaseDatosParticipante {
+			ExcepcionBaseDatosEncuentro, ExcepcionBaseDatosParticipante {
+
 		BaseDatosEncuentro bde = new BaseDatosEncuentro(torneo.getNombreArchivo());
 		BaseDatosParticipante bdp = new BaseDatosParticipante(torneo.getNombreArchivo());
+
 		ArrayList<Participante> participantes = torneo.getListaParticipantes();
 		int totalParticipantes = participantes.size();
-		int descansos = 0;
-		if (!esPotenciaDeDos(totalParticipantes)) {
-			descansos = (int) (Math.pow(2, calcularNumeroCiclos(totalParticipantes))) - totalParticipantes;
-		}
-		int mitad = participantes.size() / 2;
+		int descansosPrimeraVuelta = 0;
+		int descansosSegundaVuelta = 0;
 
-		ArrayList<Encuentro> encuentros = new ArrayList<Encuentro>();
-		for (int i = 1; i <= mitad; i++) {
-			if (descansos == 0) {
-				encuentros.add(new Encuentro(i, participantes.get(i - 1).getNumeroParticipante(),
-						participantes.get(participantes.size() - i).getNumeroParticipante(),
-						this.getTorneo().getFechaInicioTorneo()));
-				bde.insertarEncuentro(encuentros.get(i - 1), ciclo);
-				bdp.actualizarResultadoParticipante(participantes.get(i - 1), ciclo);
-				bdp.actualizarResultadoParticipante(participantes.get(i + mitad - 1), ciclo);
-			} else {
-				descansos--;
+		int auxUltimaPosicion = 0;
+		int auxUltimaPosicionSegundaVuelta = 0;
+
+		if (esSimple) {
+			if (!esPotenciaDeDos(totalParticipantes)) {
+				descansosPrimeraVuelta = (int) (Math.pow(2, calcularNumeroCiclos(totalParticipantes)))
+						- totalParticipantes;
+
 			}
+			int numeroDeEncuentrosSimple = ((participantes.size() - descansosPrimeraVuelta) / 2)
+					+ descansosPrimeraVuelta;
+
+			ArrayList<Encuentro> encuentros = new ArrayList<Encuentro>();
+			for (int i = 1; i <= numeroDeEncuentrosSimple; i++) {
+				if (!(descansosPrimeraVuelta > 0)) {
+
+					encuentros.add(new Encuentro(i, participantes.get(i - 1).getNumeroParticipante(),
+							participantes.get((participantes.size() - 1) - auxUltimaPosicion).getNumeroParticipante(),
+							this.getTorneo().getFechaInicioTorneo()));
+					auxUltimaPosicion++;
+
+					bde.insertarEncuentro(encuentros.get((auxUltimaPosicion) - 1), ciclo);
+					bdp.actualizarResultadoParticipante(participantes.get(i - 1), ciclo);
+					bdp.actualizarResultadoParticipante(participantes.get(i + numeroDeEncuentrosSimple - 1), ciclo);
+				} else {
+					descansosPrimeraVuelta--;
+				}
+
+			}
+			ciclo.setEncuentroParticipantes(encuentros);
+
+		} else {
+			if (!esPotenciaDeDos(totalParticipantes)) {
+				descansosPrimeraVuelta = (int) (Math.pow(2, calcularNumeroCiclos(totalParticipantes)))
+						- totalParticipantes;
+				descansosSegundaVuelta = descansosPrimeraVuelta;
+
+			}
+			int numeroDeEncuentrosDoble = ((participantes.size() - descansosPrimeraVuelta) / 2)
+					+ descansosPrimeraVuelta;
+
+			ArrayList<Encuentro> encuentros = new ArrayList<Encuentro>();
+			for (int i = 1; i <= numeroDeEncuentrosDoble; i++) {
+				if (!(descansosPrimeraVuelta > 0)) {
+
+					encuentros.add(new Encuentro(i, participantes.get(i - 1).getNumeroParticipante(),
+							participantes.get((participantes.size() - 1) - auxUltimaPosicion).getNumeroParticipante(),
+							this.getTorneo().getFechaInicioTorneo()));
+					auxUltimaPosicion++;
+					auxUltimaPosicionSegundaVuelta++;
+					bde.insertarEncuentro(encuentros.get((auxUltimaPosicionSegundaVuelta) - 1), ciclo);
+					bdp.actualizarResultadoParticipante(participantes.get((auxUltimaPosicionSegundaVuelta + 1) - 1),
+							ciclo);
+					bdp.actualizarResultadoParticipante(
+							participantes.get((auxUltimaPosicionSegundaVuelta + 1) + numeroDeEncuentrosDoble - 1),
+							ciclo);
+				} else {
+					descansosPrimeraVuelta--;
+				}
+
+			}
+			auxUltimaPosicion = 0;
+			for (int i = 1; i <= numeroDeEncuentrosDoble; i++) {
+				if (!(descansosSegundaVuelta > 0)) {
+
+					encuentros.add(new Encuentro(i,
+							participantes.get((participantes.size() - 1) - auxUltimaPosicion).getNumeroParticipante(),
+							participantes.get(i - 1).getNumeroParticipante(), this.getTorneo().getFechaInicioTorneo()));
+					auxUltimaPosicion++;
+					auxUltimaPosicionSegundaVuelta++;
+					bde.insertarEncuentro(encuentros.get((auxUltimaPosicionSegundaVuelta) - 1), ciclo);
+					bdp.actualizarResultadoParticipante(participantes.get((auxUltimaPosicionSegundaVuelta + 1) - 1),
+							ciclo);
+					bdp.actualizarResultadoParticipante(
+							participantes.get((auxUltimaPosicionSegundaVuelta + 1) + numeroDeEncuentrosDoble - 1),
+							ciclo);
+				} else {
+					descansosSegundaVuelta--;
+				}
+
+			}
+			ciclo.setEncuentroParticipantes(encuentros);
 
 		}
-		ciclo.setEncuentroParticipantes(encuentros);
+
 	}
 
 	/**
@@ -152,7 +247,7 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 	 * @return True si el número es potencia de dos, False si no es potencia de dos
 	 * 
 	 */
-	public boolean esPotenciaDeDos(double numero) {
+	private boolean esPotenciaDeDos(double numero) {
 		if (numero == 1) {
 			return true;
 		} else if (numero > 1 && numero < 2) {
@@ -190,6 +285,17 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 	 */
 	public void iniciarTorneo(TorneoEliminacionDirecta torneoEliminacionDirecta)
 			throws ExcepcionBaseDatos, ExcepcionBaseDatosEncuentro, ExcepcionBaseDatosCiclo {
+
+		try {
+			BaseDatosTorneo bdt = new BaseDatosTorneo(torneo.getNombreArchivo());
+			bdt.insertarTorneoEliminacionDirecta(this);
+			this.realizarEncuentros();
+		} catch (ExcepcionBaseDatosTorneo e) {
+			e.printStackTrace();
+		}
+
+		torneo.getAlgoritmoTorneo().setNumeroCiclos(torneoEliminacionDirecta.getNumeroCiclos());
+		// torneoEliminacionDirecta.realizarEncuentros();
 
 	}
 

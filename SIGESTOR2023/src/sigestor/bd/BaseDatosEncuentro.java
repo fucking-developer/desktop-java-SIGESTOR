@@ -189,8 +189,12 @@ public class BaseDatosEncuentro extends BaseDatos {
 	 * @throws ExcepcionCapturarResultados
 	 *             Lanza la excepción si ocurre un error al crear el objeto
 	 *             <code>Encuentro</code>.
+	 * @throws ExcepcionBaseDatosEncuentro
+	 *             Lanza la excepción si ocurre un error al obtener los encuentros
+	 *             en la tabla <code>encuentro</code> de la base de datos.
 	 */
-	public ArrayList<Encuentro> obtenerEncuentros(Ciclo ciclo) throws ExcepcionBaseDatos, ExcepcionCapturarResultados {
+	public ArrayList<Encuentro> obtenerEncuentros(Ciclo ciclo)
+			throws ExcepcionBaseDatos, ExcepcionCapturarResultados, ExcepcionBaseDatosEncuentro {
 		ArrayList<Encuentro> encuentros = new ArrayList<Encuentro>();
 		realizarConexion();
 		try {
@@ -199,14 +203,15 @@ public class BaseDatosEncuentro extends BaseDatos {
 			while (busqueda.next()) {
 				SimpleDateFormat formato = new SimpleDateFormat("yyyy/MM/dd");
 
-				Date fechaEncuentro = formato.parse(busqueda.getString(7));
+				Date fechaEncuentro = formato.parse(busqueda.getString(8));
 
 				encuentros.add(new Encuentro(busqueda.getInt(1), busqueda.getInt(2), busqueda.getInt(3),
 						String.valueOf(busqueda.getInt(4)), String.valueOf(busqueda.getInt(5)), busqueda.getInt(6),
 						fechaEncuentro));
 			}
 		} catch (SQLException | ParseException e) {
-
+			throw new ExcepcionBaseDatosEncuentro(ExcepcionBaseDatosEncuentro.MENSAJE_EXCEPCION_OBTIENE_ENCUENTRO
+					+ ExcepcionBaseDatosEncuentro.MENSAJE_EXCEPCION_OBTIENE_ENCUENTRO);
 		} finally {
 			cerrarConexion();
 		}

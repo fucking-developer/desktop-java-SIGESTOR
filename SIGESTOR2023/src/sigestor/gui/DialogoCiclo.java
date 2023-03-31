@@ -71,7 +71,7 @@ import sigestor.excepcion.ExcepcionUtilerias;
  * <li><code>serialVersionUID</code> Para el número de versión de la clase.</li>
  * </ul>
  * 
- * @version 25/03/2023
+ * @version 28/03/2023
  * 
  * @author Jonathan Eduardo Ibarra Martinez
  * @author Hernan Sesai Lopez Aragon
@@ -251,9 +251,8 @@ public class DialogoCiclo extends JDialog {
 	/**
 	 * Asigna el parámetro recibido a la variable <code>cicloSeleccionado</code>.
 	 * 
-	 * @param cicloSeleccionado
-	 *            Recibe un numero entero del cicloo
-	 *            <code>cicloSeleeccionado</code>.
+	 * @param cicloSeleccionado Recibe un numero entero del cicloo
+	 *                          <code>cicloSeleeccionado</code>.
 	 */
 	public void setCicloSeleccionado(int cicloSeleccionado) {
 		this.cicloSeleccionado = cicloSeleccionado;
@@ -262,9 +261,8 @@ public class DialogoCiclo extends JDialog {
 	/**
 	 * Constructor en el que se inicializa el diálogo.
 	 * 
-	 * @param principal
-	 *            Recibe un objeto de tipo ventanaPrincipal el cual contiene el
-	 *            objeto de tipo torneo.
+	 * @param principal Recibe un objeto de tipo ventanaPrincipal el cual contiene
+	 *                  el objeto de tipo torneo.
 	 */
 	public DialogoCiclo(VentanaPrincipal principal) {
 		super(principal,
@@ -625,8 +623,7 @@ public class DialogoCiclo extends JDialog {
 	/**
 	 * Obtiene los participantes de la lista de participantes.
 	 * 
-	 * @param numeroParticipante
-	 *            Cantidad de participantes del torneo.
+	 * @param numeroParticipante Cantidad de participantes del torneo.
 	 * @return Devuelve el nombre del participante solicitado.
 	 */
 	private Participante obtenerParticipante(int numeroParticipante) {
@@ -641,8 +638,7 @@ public class DialogoCiclo extends JDialog {
 	/**
 	 * Inhabilita columnas cuando existe un participante en descanso
 	 * 
-	 * @param i
-	 *            posición de arreglo.
+	 * @param i posición de arreglo.
 	 */
 	private void desactivarColumnasTabla(int i) {
 		etiquetaNumeroFinal[i].setText("");
@@ -786,14 +782,11 @@ public class DialogoCiclo extends JDialog {
 			try {
 				bde.actualizarFechaEncuentro(encuentro.get(i), ciclo);
 			} catch (ExcepcionBaseDatos | ExcepcionBaseDatosEncuentro e) {
-				JOptionPane.showMessageDialog(null,
-						"Ha ocurridó un error al guardar las fechas de los encuentros."
-								+ "\n.Favor de contactar a soporte técnico.",
-						"Error al guardar las fechas.", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, e.getMessage(), "Guardar fechas", JOptionPane.ERROR_MESSAGE);
 			}
 		}
-		JOptionPane.showMessageDialog(null, "Las fechas de los encuentros se han guardado con éxito.",
-				"Guardar fechas.", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(null, "Las fechas de los encuentros se han guardado con éxito.", "Guardar fechas",
+				JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	/**
@@ -816,9 +809,7 @@ public class DialogoCiclo extends JDialog {
 			if (comboSeleccionarCiclo.getSelectedIndex() >= 0 && torneo.getCicloActual() > 0) {
 				Ciclo ciclo = listaCiclos.get(this.getCicloSeleccionado() - 1);
 				ArrayList<Encuentro> listaEncuentros = ciclo.getEncuentroParticipantes();
-
 				for (int i = 0; i < listaEncuentros.size(); i++) {
-
 					for (Participante p : torneo.getListaParticipantes()) {
 						if (p.getNumeroParticipante() == this
 								.obtenerParticipante(listaEncuentros.get(i).getIdParticipanteFinal())
@@ -859,8 +850,11 @@ public class DialogoCiclo extends JDialog {
 								etiquetaParticipanteFinal[i].setText(p.getNombreParticipante());
 							}
 						}
+
 					}
+					fechaEncuentro[i].setDate(listaEncuentros.get(i).getFechaEncuentro());
 				}
+
 			}
 		}
 	}
@@ -873,6 +867,8 @@ public class DialogoCiclo extends JDialog {
 	private void accionHacer() {
 		// FIXME
 		if (!torneo.getTipoTorneo().equals("Eliminación directa")) {
+			
+			
 			if (this.torneo.getTipoTorneo().contains("Suizo")) {
 				TorneoSuizo ts = new TorneoSuizo(torneo);
 				if (ts.verificarEncuentros()) {
@@ -922,6 +918,8 @@ public class DialogoCiclo extends JDialog {
 			} else {
 				actualizarCombo();
 			}
+			
+			
 		}
 	}
 

@@ -104,10 +104,13 @@ import sigestor.excepcion.ExcepcionCapturarResultados;
  * <li><code>estadoModificar</code> Para verificar si se hará una modificación a
  * los resultados de un ciclo.</li>
  * <li><code>serialVersionUID</code> Para el número de versión de la clase.</li>
+ * <li><code>formatoFechasEncuentro</code> Para establecer el formato de las
+ * flechas de los encuentros.</li>
  * </ul>
  * 
- * @version 23/03/2023
+ * @version 28/03/2023
  * 
+ * @author Jonathan Eduardo Ibarra Martínez
  * @author Alicia Adriana Clemente Hernandez
  * @author Luis Fernando de la Cruz López
  * @author Luis Antonio Ruiz Sierra
@@ -292,6 +295,11 @@ public class DialogoCapturarResultados extends JDialog {
 	 * Variable que llevará el control si se modifican los resultados del ciclo.
 	 */
 	private boolean estadoModificar = false;
+
+	/**
+	 * Variable para establecer el formato de las fechas de los encuentros.
+	 */
+	private DateFormat formatoFechasEncuentro = DateFormat.getDateInstance(DateFormat.LONG);
 
 	/**
 	 * Constructor en el que se inicializa el diálogo. .
@@ -706,10 +714,7 @@ public class DialogoCapturarResultados extends JDialog {
 					panelFilasTabla[i].add(auxPanel);
 
 				}
-
-				// FIXME
-				DateFormat f = DateFormat.getDateInstance(DateFormat.LONG);
-				etiquetaFechaEncuentros[i] = new JTextField(f.format(new Date()));
+				etiquetaFechaEncuentros[i] = new JTextField(formatoFechasEncuentro.format(new Date()));
 				etiquetaFechaEncuentros[i].setPreferredSize(new Dimension(170, 25));
 				etiquetaFechaEncuentros[i].setEditable(false);
 
@@ -954,7 +959,6 @@ public class DialogoCapturarResultados extends JDialog {
 	 */
 	private void obtenerResultadosCiclo(ArrayList<Encuentro> listaEncuentros) {
 		for (int i = 0; i < listaEncuentros.size(); i++) {
-
 			for (Participante p : torneo.getListaParticipantes()) {
 				if (p.getNumeroParticipante() == this
 						.obtenerParticipante(listaEncuentros.get(i).getIdParticipanteFinal()).getNumeroParticipante()
@@ -994,6 +998,7 @@ public class DialogoCapturarResultados extends JDialog {
 						campoMarcadorFinal[i]
 								.setText(String.valueOf(listaEncuentros.get(i).getMarcadorParticipanteFinal()));
 					}
+
 					if (listaEncuentros.get(i).getResultadoEncuentro() == Encuentro.GANADOR_INICIAL) {
 						this.opcionGanadorInicial[i].setSelected(true);
 					} else if (listaEncuentros.get(i).getResultadoEncuentro() == Encuentro.GANADOR_FINAL) {
@@ -1007,6 +1012,8 @@ public class DialogoCapturarResultados extends JDialog {
 					}
 				}
 			}
+			etiquetaFechaEncuentros[i]
+					.setText(formatoFechasEncuentro.format(listaEncuentros.get(i).getFechaEncuentro()));
 		}
 	}
 
