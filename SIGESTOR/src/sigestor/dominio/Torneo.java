@@ -50,7 +50,7 @@ import sigestor.excepcion.ExcepcionTorneo;
  * avanzar el torneo.</li>
  * </ul>
  * 
- * @version 04/03/2023
+ * @version 04/04/2023
  * 
  * @author Jonathan Eduardo Ibarra Martínez
  * @author Ricky Didier Peralta Reyes

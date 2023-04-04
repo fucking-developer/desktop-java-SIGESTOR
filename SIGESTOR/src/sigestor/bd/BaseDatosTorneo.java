@@ -18,7 +18,7 @@ import sigestor.excepcion.*;
 /**
  * Sirve para manejar la base datos general del torneo.
  * 
- * @version 04/03/2023
+ * @version 04/04/2023
  * 
  * @author Ricky Didier Peralta Reyes
  * @author Uriel Romeo Cruz Cortes

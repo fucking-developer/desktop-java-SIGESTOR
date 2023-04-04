@@ -65,7 +65,7 @@ import sigestor.utilerias.UtileriasListaParticipantes;
  * <code>VentanaPrincipal</code>.</li>
  * </ul>
  * 
- * @version 31/03/2023
+ * @version 04/04/2023
  * 
  * @author Ricky Didier Peralta Reyes
  * @author Uriel Romeo Cruz Cortes
@@ -633,37 +633,24 @@ public class PanelAdministrarParticipantes extends JPanel {
 		dialogo.setMultiSelectionEnabled(false);
 		if (dialogo.showSaveDialog(ventanaPrincipal) == JFileChooser.APPROVE_OPTION) {
 			File plantilla = dialogo.getSelectedFile();
-			if (plantilla.exists() && plantilla.getName().toUpperCase().endsWith(".CSV")) {
-				plantilla = new File(plantilla.getAbsolutePath());
-			} else {
-				plantilla = new File(plantilla.getAbsolutePath() + ".csv");
+			if (!plantilla.equals(null) && !plantilla.getName().toUpperCase().endsWith(".CSV")) {
+				plantilla = new File(plantilla.getAbsolutePath() + ".CSV");
 			}
-			if (!plantilla.exists()) {
-				try {
-					UtileriasListaParticipantes.escribirPlantilla(plantilla.getAbsolutePath());
-					JOptionPane.showMessageDialog(null, "La plantilla se ha descargado correctamente",
-							"Descargar plantilla", JOptionPane.INFORMATION_MESSAGE);
-				} catch (ExcepcionUtilerias e) {
-					JOptionPane.showMessageDialog(null, ExcepcionUtilerias.MENSAJE_EXCEPCION_ESCRIBIR_PLANTILLA_CSV,
-							"Descargar plantilla", JOptionPane.ERROR_MESSAGE);
-				}
-
-			} else if (plantilla.exists()) {
+			if (plantilla.exists()) {
 				String[] valores = { "Sí", "No" };
-				int opcionRemplazar = JOptionPane.showOptionDialog(this,
-						plantilla.getName() + " ya existe.\n ¿Desea reemplazarlo?", "Descargar plantilla",
+				int opcionRemplazar = JOptionPane.showOptionDialog(null,
+						plantilla.getName() + " ya existe.\n ¿Desea reemplazarlo?", "Confirmar Descargar plantilla",
 						JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, valores, valores[1]);
-				if (opcionRemplazar == 0) {
-					try {
-						UtileriasListaParticipantes.escribirPlantilla(plantilla.getAbsolutePath());
-						JOptionPane.showMessageDialog(null, "La plantilla se ha remplazado correctamente",
-								"Descargar plantilla", JOptionPane.INFORMATION_MESSAGE);
-					} catch (ExcepcionUtilerias e) {
-						JOptionPane.showMessageDialog(null, e.getMessage(), "Descargar plantilla",
-								JOptionPane.ERROR_MESSAGE);
-					}
+				if (opcionRemplazar != 0) {
+					return;
 				}
-
+			}
+			try {
+				UtileriasListaParticipantes.escribirPlantilla(plantilla.getAbsolutePath());
+				JOptionPane.showMessageDialog(null, "La plantilla se ha descargado correctamente",
+						"Descargar plantilla", JOptionPane.INFORMATION_MESSAGE);
+			} catch (ExcepcionUtilerias e) {
+				JOptionPane.showMessageDialog(null, e.getMessage(), "Descargar plantilla", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 
