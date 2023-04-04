@@ -18,7 +18,7 @@ import sigestor.excepcion.*;
 /**
  * Sirve para manejar la base datos general del torneo.
  * 
- * @version 31/03/2023
+ * @version 04/03/2023
  * 
  * @author Ricky Didier Peralta Reyes
  * @author Uriel Romeo Cruz Cortes
@@ -131,7 +131,7 @@ public class BaseDatosTorneo extends BaseDatos {
 	}
 
 	/**
-	 * Obtiene los datos generales del torneo
+	 * Obtiene los datos generales del torneo.
 	 * 
 	 * @return regresa un objeto de tipo torneo con los datos generales
 	 * @throws ExcepcionBaseDatos
@@ -260,7 +260,7 @@ public class BaseDatosTorneo extends BaseDatos {
 	}
 
 	/**
-	 * Obtiene el número de ciclos del torneo Suizo de la base de datos
+	 * Obtiene el número de ciclos del torneo Suizo de la base de datos.
 	 * 
 	 * @return Regresa un objeto <code>TorneoSuizo</code> que contiene el número de
 	 *         ciclos.
@@ -287,7 +287,7 @@ public class BaseDatosTorneo extends BaseDatos {
 
 	/**
 	 * Obtiene el número de ciclos y vueltas del torneo Round Robin de la base de
-	 * datos
+	 * datos.
 	 * 
 	 * @return Regresa un objeto <code>TorneoRoundRobin</code> que contiene el
 	 *         número de ciclos y de vueltas.
@@ -316,7 +316,7 @@ public class BaseDatosTorneo extends BaseDatos {
 
 	/**
 	 * Obtiene el número de ciclos y el subtipo (simple o doble) del torneo
-	 * Eliminación directa de la base de datos
+	 * Eliminación directa de la base de datos.
 	 * 
 	 * @return Regresa un objeto <code>TorneoEliminacionDirecta</code> que contiene
 	 *         el número de ciclos y el subtipo del torneo: <tt>true</tt> si es
