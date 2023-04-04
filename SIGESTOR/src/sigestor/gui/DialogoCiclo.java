@@ -872,7 +872,9 @@ public class DialogoCiclo extends JDialog {
 			if (this.torneo.getTipoTorneo().contains("Suizo")) {
 				TorneoSuizo ts = new TorneoSuizo(torneo);
 				if (ts.verificarEncuentros()) {
+					
 					ts.desempatarParticipantes();
+					
 					try {
 						ts.realizarEncuentros();
 					} catch (ExcepcionBaseDatos e) {

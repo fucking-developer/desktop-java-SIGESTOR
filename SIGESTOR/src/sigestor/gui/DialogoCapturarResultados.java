@@ -1319,6 +1319,7 @@ public class DialogoCapturarResultados extends JDialog {
 	 * <code>BaseDatosParticipante</code>.
 	 */
 	private void actualizarParticipantes() {
+		
 		BaseDatosParticipante bdp = new BaseDatosParticipante(ventanaPrincipal.getTorneoActual().getNombreArchivo());
 		Ciclo ciclo = torneo.getAlgoritmoTorneo().getCiclos().get(torneo.getCicloActual() - 1);
 		Collections.sort(this.participantes);

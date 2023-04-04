@@ -52,6 +52,7 @@ import sigestor.excepcion.ExcepcionTorneo;
  * 
  * @version 31/03/2023
  * 
+ * @author Jonathan Eduardo Ibarra Martínez
  * @author Ricky Didier Peralta Reyes
  * @author Uriel Romeo Cruz Cortes
  * @author Jennifer Cortés Pérez
@@ -431,6 +432,7 @@ public class Torneo {
 			TorneoEliminacionDirecta torneoEliminacionDirecta)
 			throws ExcepcionBaseDatos, ExcepcionBaseDatosEncuentro, ExcepcionBaseDatosCiclo, ExcepcionBaseDatosTorneo,
 			ExcepcionBaseDatosParticipante, ExcepcionCapturarResultados {
+		
 		ordenarParticipantes();
 		if (this.getTipoTorneo().equals("Suizo")) {
 			torneoSuizo.iniciarTorneo(torneoSuizo);
@@ -541,40 +543,50 @@ public class Torneo {
 	 *             <code>BaseDatosPersonalizacion</code>.
 	 */
 	public void recuperarTorneo()
-			throws ExcepcionBaseDatos, ExcepcionBaseDatosTorneo, ExcepcionBaseDatosCriteriosDesempate,
-			ExcepcionBaseDatosParticipante, ExcepcionCapturarResultados, ExcepcionBaseDatosPersonalizacion {
-		BaseDatosTorneo baseDatosTorneo = new BaseDatosTorneo(this.nombreArchivo);
-		BaseDatosCriteriosDesempate baseDatosCriterios = new BaseDatosCriteriosDesempate(this.nombreArchivo);
-		BaseDatosPersonalizacion baseDatosPersonalizacion = new BaseDatosPersonalizacion(this.nombreArchivo);
-		BaseDatosParticipante baseDatosParticipantes = new BaseDatosParticipante(this.nombreArchivo);
+            throws ExcepcionBaseDatos, ExcepcionBaseDatosTorneo, ExcepcionBaseDatosCriteriosDesempate,
+            ExcepcionBaseDatosParticipante, ExcepcionCapturarResultados, ExcepcionBaseDatosPersonalizacion {
+        BaseDatosTorneo baseDatosTorneo = new BaseDatosTorneo(this.nombreArchivo);
+        BaseDatosCriteriosDesempate baseDatosCriterios = new BaseDatosCriteriosDesempate(this.nombreArchivo);
+        BaseDatosPersonalizacion baseDatosPersonalizacion = new BaseDatosPersonalizacion(this.nombreArchivo);
+        BaseDatosParticipante baseDatosParticipantes = new BaseDatosParticipante(this.nombreArchivo);
+       
+        Torneo torneoConsultado = baseDatosTorneo.obtenerDatosGenerales();
+        this.setNombreTorneo(torneoConsultado.getNombreTorneo());
+        this.setTipoTorneo(torneoConsultado.getTipoTorneo());
+        this.setNombreOrganizador(torneoConsultado.getNombreOrganizador());
+        this.setDescripcionTorneo(torneoConsultado.getDescripcionTorneo());
+        this.setFechaInicioTorneo(torneoConsultado.getFechaInicioTorneo());
+        this.setFechaFinalTorneo(torneoConsultado.getFechaFinalTorneo());
+        this.setCicloActual(torneoConsultado.getCicloActual());
+        this.setCriteriosDesempate(baseDatosCriterios.obtenerCriteriosDesempate());
+        this.setDatosPersonalizacion(baseDatosPersonalizacion.obtenerPersonalización());
+        this.setListaParticipantes(baseDatosParticipantes.obtenerParticipante());
 
-		Torneo torneoConsultado = baseDatosTorneo.obtenerDatosGenerales();
-		this.setNombreTorneo(torneoConsultado.getNombreTorneo());
-		this.setTipoTorneo(torneoConsultado.getTipoTorneo());
-		this.setNombreOrganizador(torneoConsultado.getNombreOrganizador());
-		this.setDescripcionTorneo(torneoConsultado.getDescripcionTorneo());
-		this.setFechaInicioTorneo(torneoConsultado.getFechaInicioTorneo());
-		this.setFechaFinalTorneo(torneoConsultado.getFechaFinalTorneo());
-		this.setCicloActual(torneoConsultado.getCicloActual());
-		this.setCriteriosDesempate(baseDatosCriterios.obtenerCriteriosDesempate());
-		this.setDatosPersonalizacion(baseDatosPersonalizacion.obtenerPersonalización());
-		this.setListaParticipantes(baseDatosParticipantes.obtenerParticipante());
-
-		if (this.getCicloActual() > 0) {
-			AlgoritmoTorneo algoritmo = null;
-			if (this.getTipoTorneo().equals("Suizo")) {
-				algoritmo = baseDatosTorneo.obtenerTorneoSuizo();
-			} else if (this.getTipoTorneo().equals("Round Robin")) {
-				algoritmo = baseDatosTorneo.obtenerTorneoRoundRobin();
-			} else if (this.getTipoTorneo().equals("Eliminación directa")) {
-				algoritmo = baseDatosTorneo.obtenerTorneoEliminacionDirecta();
-			}
-			algoritmo.setTorneo(this);
-			this.setAlgoritmoTorneo(algoritmo);
-			BaseDatosCiclo baseDatosCiclos = new BaseDatosCiclo(nombreArchivo);
-			this.getAlgoritmoTorneo().setCiclos(baseDatosCiclos.obtenerCiclos(this));
-		}
-	}
+        AlgoritmoTorneo algoritmo = null;
+        if (this.getCicloActual() > 0) {
+            // Torneo iniciado            
+            if (this.getTipoTorneo().equals("Suizo")) {
+                algoritmo = baseDatosTorneo.obtenerTorneoSuizo();
+            } else if (this.getTipoTorneo().equals("Round Robin")) {
+                algoritmo = baseDatosTorneo.obtenerTorneoRoundRobin();
+            } else if (this.getTipoTorneo().equals("Eliminación directa")) {
+                algoritmo = baseDatosTorneo.obtenerTorneoEliminacionDirecta();
+            }
+            algoritmo.setTorneo(this);
+        } else {
+            // Torneo no iniciado
+            if (this.getTipoTorneo().equals("Suizo")) {
+                algoritmo = new TorneoSuizo(this);
+            } else if (this.getTipoTorneo().equals("Round Robin")) {
+                algoritmo = new TorneoRoundRobin(this);
+            } else if (this.getTipoTorneo().equals("Eliminación directa")) {
+                algoritmo = new TorneoEliminacionDirecta(this);
+            }
+        }
+        this.setAlgoritmoTorneo(algoritmo);
+        BaseDatosCiclo baseDatosCiclos = new BaseDatosCiclo(nombreArchivo);
+        this.getAlgoritmoTorneo().setCiclos(baseDatosCiclos.obtenerCiclos(this));            
+    }
 
 	/**
 	 * Permite guardar los datos de la base de datos para ingresarlos al objeto
