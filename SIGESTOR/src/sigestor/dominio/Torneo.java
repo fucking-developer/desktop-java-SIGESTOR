@@ -50,7 +50,7 @@ import sigestor.excepcion.ExcepcionTorneo;
  * avanzar el torneo.</li>
  * </ul>
  * 
- * @version 31/03/2023
+ * @version 04/03/2023
  * 
  * @author Jonathan Eduardo Ibarra Martínez
  * @author Ricky Didier Peralta Reyes
@@ -446,8 +446,8 @@ public class Torneo {
 
 	/**
 	 * Permite validar los datos ingresados en los paneles:
-	 * <code>PanelGeneral</code>, <code>PanelCriteriosDesempate</code>,
-	 * <code>PanelAdministrarParticipantes</code>
+	 * <code>PanelGeneral</code>, <code>PanelCriteriosDesempate</code> y
+	 * <code>PanelAdministrarParticipantes</code>.
 	 * 
 	 * @throws ExcepcionTorneo
 	 *             Lanza la excepción si la variable <code>nombreTorneo</code> se
