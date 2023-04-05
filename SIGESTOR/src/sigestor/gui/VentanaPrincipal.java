@@ -70,7 +70,7 @@ import sigestor.excepcion.*;
  * <li><code>serialVersionUID</code> Para el número de versión de la clase.</li>
  * </ul>
  * 
- * @version 30/03/2023
+ * @version 04/04/2023
  * 
  * @author Jonathan Eduardo Ibarra Martínez
  * @author Ricky Didier Peralta Reyes
@@ -159,14 +159,12 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 	private JMenuItem submenuConsultarCiclosSuizo;
 
 	/**
-	 * Opcion <code>Capturar resultados</code> del menú
-	 * <code>Torneo Suizo</code>.
+	 * Opcion <code>Capturar resultados</code> del menú <code>Torneo Suizo</code>.
 	 */
 	private JMenuItem submenuResultadosSuizo;
 
 	/**
-	 * Opcion <code>Resultados finales</code> del menú
-	 * <code>Torneo Suizo</code>.
+	 * Opcion <code>Resultados finales</code> del menú <code>Torneo Suizo</code>.
 	 */
 	private JMenuItem submenuResultadosFinalesSuizo;
 
@@ -457,8 +455,8 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 	}
 
 	/**
-	 * Encargado del manejo de eventos producido al hacer clic sobre un
-	 * componente de la ventana principal.
+	 * Encargado del manejo de eventos producido al hacer clic sobre un componente
+	 * de la ventana principal.
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -530,9 +528,9 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 	}
 
 	/**
-	 * Habilita la administración del torneo y deshabilita los menús de los
-	 * torneos Suizo, Eliminacion Directa y Round Robin, además de deshabilitar
-	 * la opción de <code>Cancelar torneo</code> el torneo.
+	 * Habilita la administración del torneo y deshabilita los menús de los torneos
+	 * Suizo, Eliminacion Directa y Round Robin, además de deshabilitar la opción de
+	 * <code>Cancelar torneo</code> el torneo.
 	 */
 	private void accionCancelarTorneo() {
 		String[] valores = { "Sí", "No" };
@@ -583,9 +581,9 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 	}
 
 	/**
-	 * Deshabilita la opción <code>Operaciones</code> del menú, así como ambos
-	 * tipos de torneos del menú y retira el nombre asignado en la aplicación de
-	 * acuerdo al nombre que se tenía en el torneo que estaba abierto.
+	 * Deshabilita la opción <code>Operaciones</code> del menú, así como ambos tipos
+	 * de torneos del menú y retira el nombre asignado en la aplicación de acuerdo
+	 * al nombre que se tenía en el torneo que estaba abierto.
 	 */
 	private void accionCerrarTorneo() {
 		setTorneoActual(null);
@@ -600,8 +598,8 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 	}
 
 	/**
-	 * Permite crear un nuevo torneo almancenando la administración del torneo
-	 * en el archivo seleccionado.
+	 * Permite crear un nuevo torneo almancenando la administración del torneo en el
+	 * archivo seleccionado.
 	 */
 	private void accionCrearTorneo() {
 		new DialogoAdministarTorneo(this);
@@ -617,8 +615,8 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 	}
 
 	/**
-	 * Muestra en una ventana al director del proyecto y sus colaboradores con
-	 * la opción <code>Acerca de...</code>.
+	 * Muestra en una ventana al director del proyecto y sus colaboradores con la
+	 * opción <code>Acerca de...</code>.
 	 */
 	private void accionAbrirAcercaDe() {
 		JOptionPane.showMessageDialog(this, "Sistema gestor de torneos v.1.0\n\n" + "\nDirector del proyecto"
@@ -633,9 +631,9 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 	}
 
 	/**
-	 * Encargado de mostrar un archivo PDF al usuario con información relevante
-	 * de como utilizar el sistema, en caso de que no exista o no se pueda abrir
-	 * el archivo se mostrará un mensaje de error.
+	 * Encargado de mostrar un archivo PDF al usuario con información relevante de
+	 * como utilizar el sistema, en caso de que no exista o no se pueda abrir el
+	 * archivo se mostrará un mensaje de error.
 	 */
 	public void accionCargarManual() {
 		File archivo = new File("MANUAL SIGESTOR.pdf");
@@ -658,8 +656,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 	/**
 	 * Regresa el torneo actual con todos sus atributos y sus valores asignados.
 	 * 
-	 * @return Variable de tipo <code>Torneo</code> con los datos del torneo
-	 *         actual.
+	 * @return Variable de tipo <code>Torneo</code> con los datos del torneo actual.
 	 */
 	public Torneo getTorneoActual() {
 		return torneoActual;
@@ -676,10 +673,10 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 	}
 
 	/**
-	 * Permite abrir el archivo del torneo con extensión .torn y verifica si
-	 * puede continuar con la administración del torneo, verifica si el torneo
-	 * ya ha comenzado para permitir continuar capurando los resultados o
-	 * visualiza los resultados finales del torneo seleccionado.
+	 * Permite abrir el archivo del torneo con extensión .torn y verifica si puede
+	 * continuar con la administración del torneo, verifica si el torneo ya ha
+	 * comenzado para permitir continuar capurando los resultados o visualiza los
+	 * resultados finales del torneo seleccionado.
 	 * 
 	 * @param ruta
 	 *            La ruta que tiene el archivo.
@@ -783,11 +780,10 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 
 	/**
 	 * Validará de acuerdo a la personalización del torneo el tipo de torneo que
-	 * deberá dar comienzo, así mismo, solicitará la cantidad de ciclos y el
-	 * número de vueltas únicamente para el torneo Round Robin y para el torneo
-	 * de Eliminación directa solo pedirá si el tipo del torneo será simple o
-	 * doble. Deshabilitará el continuar con la adminstración del torneo una vez
-	 * iniciado.
+	 * deberá dar comienzo, así mismo, solicitará la cantidad de ciclos y el número
+	 * de vueltas únicamente para el torneo Round Robin y para el torneo de
+	 * Eliminación directa solo pedirá si el tipo del torneo será simple o doble.
+	 * Deshabilitará el continuar con la adminstración del torneo una vez iniciado.
 	 */
 	private void accionIniciarTorneo() {
 		try {
@@ -803,9 +799,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 				JLabel textoVueltas = new JLabel("Seleccione el número de vueltas para el torneo:");
 				contenidoVueltas.add(textoVueltas);
 
-				SpinnerNumberModel sModel1 = new SpinnerNumberModel(
-						getTorneoActual().getListaParticipantes().size() - 1, 1,
-						getTorneoActual().getListaParticipantes().size() - 1, 1);
+				SpinnerNumberModel sModel1 = new SpinnerNumberModel(1, 1, null, 1);
 				JSpinner spinner1 = new JSpinner(sModel1);
 				spinner1.setPreferredSize(new Dimension(80, 20));
 				panelAuxVueltas.add(spinner1);
@@ -925,51 +919,56 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 				TorneoEliminacionDirecta eliminacionDirecta = new TorneoEliminacionDirecta(this.torneoActual);
 				JPanel contenidoMensaje = new JPanel();
 				contenidoMensaje.setLayout(new BoxLayout(contenidoMensaje, BoxLayout.Y_AXIS));
-				JLabel texto = new JLabel("Seleccione el tipo de torneo Eliminación directa:");
+				JLabel texto = new JLabel("Seleccione el subtipo de torneo Eliminación directa:");
 				contenidoMensaje.add(texto);
 				String[] arregloTipoTorneo = { "Simple", "Doble" };
 				contenidoMensaje.add(texto);
 				comboTipoTorneo = new JComboBox<String>(arregloTipoTorneo);
 				comboTipoTorneo.setPreferredSize(new Dimension(100, 30));
 				contenidoMensaje.add(comboTipoTorneo);
-				JOptionPane.showOptionDialog(null, contenidoMensaje, "Iniciar torneo", JOptionPane.OK_CANCEL_OPTION,
-						JOptionPane.QUESTION_MESSAGE, null, null, null);
-				if (comboTipoTorneo.getSelectedItem().equals("Simple")) {
-					eliminacionDirecta.setTipoEliminacion(true);
-				} else {
-					eliminacionDirecta.setTipoEliminacion(false);
-				}
-
-				eliminacionDirecta.setNumeroCiclos(
-						eliminacionDirecta.calcularNumeroCiclos(getTorneoActual().getListaParticipantes().size()));
-				try {
+				int resultado = JOptionPane.showOptionDialog(null, contenidoMensaje, "Iniciar torneo",
+						JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+				if (resultado == JOptionPane.OK_OPTION) {
+					if (comboTipoTorneo.getSelectedItem().equals("Simple")) {
+						eliminacionDirecta.setTipoEliminacion(true);
+					} else {
+						eliminacionDirecta.setTipoEliminacion(false);
+					}
+					eliminacionDirecta.setNumeroCiclos(
+							eliminacionDirecta.calcularNumeroCiclos(getTorneoActual().getListaParticipantes().size()));
 					try {
-						getTorneoActual().iniciarTorneo(null, null, eliminacionDirecta);
-					} catch (ExcepcionCapturarResultados e) {
-						JOptionPane.showMessageDialog(null, e.getMessage(), "Iniciar torneo Eliminación directa",
-								JOptionPane.ERROR_MESSAGE);
+						try {
+							getTorneoActual().iniciarTorneo(null, null, eliminacionDirecta);
+						} catch (ExcepcionCapturarResultados e) {
+							JOptionPane.showMessageDialog(null, e.getMessage(), "Iniciar torneo Eliminación directa",
+									JOptionPane.ERROR_MESSAGE);
 
-					} catch (ExcepcionBaseDatosParticipante e) {
-						JOptionPane.showMessageDialog(null, e.getMessage(), "Iniciar torneo Eliminación directa",
+						} catch (ExcepcionBaseDatosParticipante e) {
+							JOptionPane.showMessageDialog(null, e.getMessage(), "Iniciar torneo Eliminación directa",
+									JOptionPane.ERROR_MESSAGE);
+						}
+						JOptionPane.showMessageDialog(null,
+								"Número de ciclos es: " + eliminacionDirecta.getNumeroCiclos(),
+								"Iniciar torneo Eliminación directa", JOptionPane.INFORMATION_MESSAGE);
+
+						JOptionPane.showMessageDialog(null,
+								"El torneo " + getTorneoActual().getNombreTorneo() + " se ha iniciado correctamente.",
+								"Iniciar torneo Eliminación directa", JOptionPane.INFORMATION_MESSAGE);
+
+						menuTorneoEliminacionDirecta.setEnabled(true);
+						submenuAdministrarTorneo.setEnabled(false);
+						submenuIniciarTorneo.setEnabled(false);
+						submenuCancelarTorneo.setEnabled(true);
+						submenuConsultarCiclosEliminacionDirecta
+								.setText("Consultar " + getTorneoActual().getDatosPersonalizacion().getNombreCiclo(1));
+
+					} catch (ExcepcionBaseDatosTorneo e) {
+						JOptionPane.showMessageDialog(null, e.getMessage(), "Iniciar torneo",
 								JOptionPane.ERROR_MESSAGE);
 					}
-					JOptionPane.showMessageDialog(null, "Número de ciclos es: " + eliminacionDirecta.getNumeroCiclos(),
-							"Iniciar torneo Eliminación directa", JOptionPane.INFORMATION_MESSAGE);
 
-					JOptionPane.showMessageDialog(null,
-							"El torneo " + getTorneoActual().getNombreTorneo() + " se ha iniciado correctamente.",
-							"Iniciar torneo Eliminación directa", JOptionPane.INFORMATION_MESSAGE);
-
-					menuTorneoEliminacionDirecta.setEnabled(true);
-					submenuAdministrarTorneo.setEnabled(false);
-					submenuIniciarTorneo.setEnabled(false);
-					submenuCancelarTorneo.setEnabled(true);
-					submenuConsultarCiclosEliminacionDirecta
-							.setText("Consultar " + getTorneoActual().getDatosPersonalizacion().getNombreCiclo(1));
-
-				} catch (ExcepcionBaseDatosTorneo e) {
-					JOptionPane.showMessageDialog(null, e.getMessage(), "Iniciar torneo", JOptionPane.ERROR_MESSAGE);
 				}
+
 			}
 
 		} catch (ExcepcionTorneo e) {
@@ -986,8 +985,8 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 	}
 
 	/**
-	 * Permite abrir la ventana <code>Resultados finales</code> una vez
-	 * terminado de capturar todos los resultados de los ciclos del torneo.
+	 * Permite abrir la ventana <code>Resultados finales</code> una vez terminado de
+	 * capturar todos los resultados de los ciclos del torneo.
 	 */
 	private void accionAbrirResultadosFinales() {
 		if (this.getTorneoActual().getAlgoritmoTorneo().verificarResultadosCompletos() && this.getTorneoActual()
@@ -1003,8 +1002,8 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 	}
 
 	/**
-	 * Cambia el titulo del menú <code>Capturar resultados</code> una vez
-	 * terminado el torneo.
+	 * Cambia el titulo del menú <code>Capturar resultados</code> una vez terminado
+	 * el torneo.
 	 */
 	private void cambiarTitulo() {
 		if (this.getTorneoActual() != null && this.getTorneoActual().getAlgoritmoTorneo().verificarResultadosCompletos()
