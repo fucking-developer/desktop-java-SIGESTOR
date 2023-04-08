@@ -41,29 +41,21 @@ package sigestor.excepcion;
  * en la base de datos.</li>
  * <li><code>MENSAJE_EXCEPCION_CONSULTA_TORNEO</code> para indicar que no ha
  * sido posible consultar los datos del torneo.</li>
- * 
- * 
  * <li><code> MENSAJE_EXCEPCION_CONSULTA_TORNEO_SUIZO</code> para indicar que no
  * ha sido posible obtener el número de ciclos del torneo Suizo.</li>
- * 
- * 
  * <li><code> MENSAJE_EXCEPCION_CONSULTA_TORNEO_ROUND_ROBIN</code> para indicar
  * que no ha sido posible obtener el número de ciclos y vueltas del torneo Round
  * Robin.</li>
- * 
- * 
  * <li><code> MENSAJE_EXCEPCION_CONSULTA_TORNEO_ELIMINACION_DIRECTA</code> para
  * indicar que no ha sido posible obtener el número de ciclos y el subtipo
  * (simple o doble) del torneo Eliminación directa.</li>
- * 
- * 
- * 
  * <li><code>MENSAJE_EXCEPCION_SOLUCION </code> para mostrar la solución del
  * error presentado.</li>
  * </ul>
  * 
- * @version 31/03/2023
+ * @version 08/04/2023
  * 
+ * @author Hernan Sesai Lopez Aragon
  * @author Jennifer Cortés Pérez
  * @author Beatriz Andrea Jiménez Ríos
  * @author Victor Triste Pérez
