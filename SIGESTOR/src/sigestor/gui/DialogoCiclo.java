@@ -600,7 +600,7 @@ public class DialogoCiclo extends JDialog {
 			for (int i = 0; i < torneo.getListaParticipantes().size(); i++) {
 				if (!this.listaParticipantes.get(i).getNombreParticipante().equals(this.torneo.getAlgoritmoTorneo()
 						.getTorneo().getDatosPersonalizacion().getNombreParticipanteSinEncuentro())) {
-
+					
 					if (torneo.getDatosPersonalizacion().isExistenciaMarcador()) {
 						Object[] fila = { this.listaParticipantes.get(i).getNumeroParticipante(),
 								this.listaParticipantes.get(i).toString(),
@@ -867,13 +867,10 @@ public class DialogoCiclo extends JDialog {
 	private void accionHacer() {
 		// FIXME
 		if (!torneo.getTipoTorneo().equals("Eliminación directa")) {
-			
-			
-			if (this.torneo.getTipoTorneo().contains("Suizo")) {
+			if (this.torneo.getTipoTorneo().equals("Suizo")) {
 				TorneoSuizo ts = new TorneoSuizo(torneo);
 				if (ts.verificarEncuentros()) {
-					
-					ts.desempatarParticipantes();
+					ts.desempatarParticipantes();	
 					
 					try {
 						ts.realizarEncuentros();

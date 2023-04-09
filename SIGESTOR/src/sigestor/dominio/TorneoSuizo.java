@@ -2,8 +2,6 @@ package sigestor.dominio;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
-
 import sigestor.bd.BaseDatosCiclo;
 import sigestor.bd.BaseDatosEncuentro;
 import sigestor.bd.BaseDatosParticipante;
@@ -21,13 +19,14 @@ import sigestor.excepcion.ExcepcionCapturarResultados;
  * desempatar jugadores y realizar reportes. <code>AlgoritmoTorneo</code>.
  * <p>
  * 
- * @version 19/03/2023
+ * @version 08/04/2023
  * 
  * @author Jonathan Eduardo Ibarra Martínez
  * @author Alicia Adriana Clemente Hernandez
  * @author Luis Fernando de la Cruz López
  * @author Luis Antonio Ruiz Sierra
  * @author Victor Triste Pérez
+ * 
  * @see AlgoritmoTorneo
  */
 public class TorneoSuizo extends AlgoritmoTorneo {
@@ -214,48 +213,6 @@ public class TorneoSuizo extends AlgoritmoTorneo {
 	}
 
 	/**
-	 * Obtiene los encuentros de un participante.
-	 * 
-	 * @param numeroParticipante
-	 *            número del participante a evaluar.
-	 * @return La lista de encuentros del participante evaluado.
-	 */
-	private ArrayList<Encuentro> obtenerEncuentrosParticipante(int numeroParticipante) {
-		ArrayList<Ciclo> ciclos = torneo.getAlgoritmoTorneo().getCiclos();
-		ArrayList<Encuentro> encuentrosParticipante = new ArrayList<Encuentro>();
-
-		for (Ciclo c : ciclos) {
-			ArrayList<Encuentro> encuentros = c.getEncuentroParticipantes();
-			for (Encuentro e : encuentros) {
-				if (e.getIdParticipanteInicial() == numeroParticipante
-						|| e.getIdParticipanteFinal() == numeroParticipante) {
-					encuentrosParticipante.add(e);
-				}
-			}
-		}
-		return encuentrosParticipante;
-	}
-
-	/**
-	 * Verifica si el partcipante evaluado jugó como inicial en su último encuentro.
-	 * 
-	 * @param numeroParticipante
-	 *            número del participante a evaluar.
-	 * @return <code>true</code> en caso de que haya jugado como incial,
-	 *         <code>false</code> en caso de haber jugado como final.
-	 */
-	private boolean fueInicial(int numeroParticipante) {
-		ArrayList<Encuentro> encuentrosParticipante = obtenerEncuentrosParticipante(numeroParticipante);
-		Encuentro ultimoEncuentroParticipante = encuentrosParticipante.get(encuentrosParticipante.size() - 1);
-
-		if (ultimoEncuentroParticipante.getIdParticipanteInicial() == numeroParticipante) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	/**
 	 * Intercambia las posiciones de 2 jugadores empatados si el ganador está una
 	 * posición abajo del jugador con quien empató, de lo contrario no realiza
 	 * ningún movimiento.
@@ -306,35 +263,40 @@ public class TorneoSuizo extends AlgoritmoTorneo {
 	 */
 	public void encararParticipantesPrimerCiclo(Ciclo ciclo) throws ExcepcionCapturarResultados, ExcepcionBaseDatos,
 			ExcepcionBaseDatosEncuentro, ExcepcionBaseDatosParticipante {
-
 		BaseDatosEncuentro bde = new BaseDatosEncuentro(torneo.getNombreArchivo());
 		BaseDatosParticipante bdp = new BaseDatosParticipante(torneo.getNombreArchivo());
+		ArrayList<Participante> participantes = torneo.getListaParticipantes();
+		ArrayList<Encuentro> encuentros = new ArrayList<Encuentro>();
+		int mitad = participantes.size() / 2;
+		Participante sinEncuentro = null;
 
-		int posicionDescanso = 0;
-		for (Participante p : torneo.getListaParticipantes()) {
+		for (Participante p : participantes) {
 			if (p.getNombreParticipante()
-					.compareToIgnoreCase(torneo.getDatosPersonalizacion().getNombreParticipanteSinEncuentro()) == 0) {
-				Collections.swap(torneo.getListaParticipantes(), posicionDescanso,
-						torneo.getListaParticipantes().size() - 1);
+					.equalsIgnoreCase(torneo.getDatosPersonalizacion().getNombreParticipanteSinEncuentro())) {
+				sinEncuentro = p;
 				break;
 			}
-			posicionDescanso++;
-
 		}
-
-		ArrayList<Participante> participantes = torneo.getListaParticipantes();
-
-		int mitad = participantes.size() / 2;
-
-		ArrayList<Encuentro> encuentros = new ArrayList<Encuentro>();
+		if (sinEncuentro != null) {
+			participantes.remove(sinEncuentro);
+			participantes.add(sinEncuentro);
+			mitad = mitad - 1;
+		}
 		for (int i = 1; i <= mitad; i++) {
-
 			encuentros.add(new Encuentro(i, participantes.get(i - 1).getNumeroParticipante(),
 					participantes.get(i - 1 + mitad).getNumeroParticipante(), this.getTorneo().getFechaInicioTorneo()));
 			bde.insertarEncuentro(encuentros.get(i - 1), ciclo);
 			bdp.actualizarResultadoParticipante(participantes.get(i - 1), ciclo);
 			bdp.actualizarResultadoParticipante(participantes.get(i + mitad - 1), ciclo);
+		}
 
+		if (sinEncuentro != null) {
+			encuentros.add(new Encuentro(mitad + 1, participantes.get(participantes.size() - 2).getNumeroParticipante(),
+					participantes.get(participantes.size() - 1).getNumeroParticipante(),
+					this.getTorneo().getFechaInicioTorneo()));
+			bde.insertarEncuentro(encuentros.get(mitad), ciclo);
+			bdp.actualizarResultadoParticipante(participantes.get(participantes.size() - 2), ciclo);
+			bdp.actualizarResultadoParticipante(participantes.get(participantes.size() - 1), ciclo);
 		}
 		ciclo.setEncuentroParticipantes(encuentros);
 	}
@@ -361,28 +323,43 @@ public class TorneoSuizo extends AlgoritmoTorneo {
 
 		BaseDatosEncuentro bde = new BaseDatosEncuentro(torneo.getNombreArchivo());
 		BaseDatosParticipante bdp = new BaseDatosParticipante(torneo.getNombreArchivo());
-
-		int contador = 1;
 		ArrayList<Participante> participantes = torneo.getListaParticipantes();
 		ArrayList<Encuentro> encuentros = new ArrayList<Encuentro>();
 
-		
-		for (int i = 0; i < participantes.size(); i++) {
-			System.out.println(participantes.get(i).getNombreParticipante() + " - "
-					+ participantes.get(i).getPuntajeAcumuladoParticipante());
+		Participante sinEncuentro = null;
+		for (Participante p : participantes) {
+			if (p.getNombreParticipante()
+					.equalsIgnoreCase(torneo.getDatosPersonalizacion().getNombreParticipanteSinEncuentro())) {
+				sinEncuentro = p;
+				break;
+			}
+		}
+		if (sinEncuentro != null) {
+			participantes.remove(sinEncuentro);
+			participantes.add(sinEncuentro);
 		}
 
-		for (int i = 0; i < participantes.size() - 1; i += 2) {
-			
-			encuentros.add(new Encuentro(contador, 
-					participantes.get(i).getNumeroParticipante(),
-					participantes.get(i + 1).getNumeroParticipante(),
-					this.getTorneo().getFechaInicioTorneo()));
-			
-			bde.insertarEncuentro(encuentros.get(contador - 1), ciclo);
-			bdp.actualizarResultadoParticipante(participantes.get(i), ciclo);
-			bdp.actualizarResultadoParticipante(participantes.get(i + 1), ciclo);
-			contador++;
+		int num = 1;
+		int pos = 0;
+		while (pos < participantes.size()) {
+			Participante p1 = participantes.get(pos);
+			float puntaje = p1.getPuntajeAcumuladoParticipante();
+			int fin = pos + 1;
+			while (fin < participantes.size() && participantes.get(fin).getPuntajeAcumuladoParticipante() == puntaje) {
+				fin++;
+			}
+			int mitad = (fin - pos) / 2;
+			for (int j = 0; j < mitad; j++) {
+				encuentros.add(new Encuentro(num, participantes.get(pos).getNumeroParticipante(),
+						participantes.get(pos + mitad).getNumeroParticipante(),
+						this.getTorneo().getFechaInicioTorneo()));
+				bde.insertarEncuentro(encuentros.get(num - 1), ciclo);
+				bdp.actualizarResultadoParticipante(participantes.get(pos), ciclo);
+				bdp.actualizarResultadoParticipante(participantes.get(pos + mitad), ciclo);
+				num++;
+				pos++;
+			}
+			pos += mitad;
 		}
 		ciclo.setEncuentroParticipantes(encuentros);
 	}
