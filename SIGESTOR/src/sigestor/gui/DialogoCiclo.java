@@ -253,8 +253,9 @@ public class DialogoCiclo extends JDialog {
 	/**
 	 * Asigna el parámetro recibido a la variable <code>cicloSeleccionado</code>.
 	 * 
-	 * @param cicloSeleccionado Recibe un numero entero del cicloo
-	 *                          <code>cicloSeleeccionado</code>.
+	 * @param cicloSeleccionado
+	 *            Recibe un numero entero del cicloo
+	 *            <code>cicloSeleeccionado</code>.
 	 */
 	public void setCicloSeleccionado(int cicloSeleccionado) {
 		this.cicloSeleccionado = cicloSeleccionado;
@@ -263,8 +264,9 @@ public class DialogoCiclo extends JDialog {
 	/**
 	 * Constructor en el que se inicializa el diálogo.
 	 * 
-	 * @param principal Recibe un objeto de tipo ventanaPrincipal el cual contiene
-	 *                  el objeto de tipo torneo.
+	 * @param principal
+	 *            Recibe un objeto de tipo ventanaPrincipal el cual contiene el
+	 *            objeto de tipo torneo.
 	 */
 	public DialogoCiclo(VentanaPrincipal principal) {
 		super(principal,
@@ -625,7 +627,8 @@ public class DialogoCiclo extends JDialog {
 	/**
 	 * Obtiene los participantes de la lista de participantes.
 	 * 
-	 * @param numeroParticipante Cantidad de participantes del torneo.
+	 * @param numeroParticipante
+	 *            Cantidad de participantes del torneo.
 	 * @return Devuelve el nombre del participante solicitado.
 	 */
 	private Participante obtenerParticipante(int numeroParticipante) {
@@ -640,7 +643,8 @@ public class DialogoCiclo extends JDialog {
 	/**
 	 * Inhabilita columnas cuando existe un participante en descanso
 	 * 
-	 * @param i posición de arreglo.
+	 * @param i
+	 *            posición de arreglo.
 	 */
 	private void desactivarColumnasTabla(int i) {
 		etiquetaNumeroFinal[i].setText("");
@@ -867,97 +871,92 @@ public class DialogoCiclo extends JDialog {
 	 * misma cantidad de ciclos establecido para el torneo.
 	 */
 	private void accionHacer() {
-		
-			if (this.torneo.getTipoTorneo().contains("Suizo")) {
-				TorneoSuizo ts = new TorneoSuizo(torneo);
-				if (ts.verificarEncuentros()) {
-					
-					ts.desempatarParticipantes();
-					
-					try {
-						ts.realizarEncuentros();
-					} catch (ExcepcionBaseDatos e) {
-						JOptionPane.showMessageDialog(null, e.getMessage(), "Ciclos", JOptionPane.ERROR_MESSAGE);
-					} catch (ExcepcionBaseDatosEncuentro e) {
-						JOptionPane.showMessageDialog(null, e.getMessage(), "Ciclos", JOptionPane.ERROR_MESSAGE);
-					} catch (ExcepcionBaseDatosCiclo e) {
-						JOptionPane.showMessageDialog(null, e.getMessage(), "Ciclos", JOptionPane.ERROR_MESSAGE);
-					}
-					JOptionPane.showMessageDialog(null,
-							"El(la) " + torneo.getDatosPersonalizacion().getNombreCiclo(
-									Personalizacion.MAYUSCULA_SINGULAR) + " se ha realizado exitosamente.",
-							"Parear", JOptionPane.INFORMATION_MESSAGE);
-				} else {
-					JOptionPane.showMessageDialog(null, "El sistema no ha podido realizar "
-							+ torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MINUSCULA_SINGULAR)
-							+ " \n porque no ha finalizado "
-							+ torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MINUSCULA_SINGULAR) + "."
-							+ " \n Por favor capture todos los resultados.",
-							"Encarar" + torneo.getDatosPersonalizacion()
-									.getNombreParticipante(Personalizacion.MINUSCULA_PLURAL).substring(8),
-							JOptionPane.ERROR_MESSAGE);
-				}
-			}else if(this.torneo.getTipoTorneo().contains("Eliminación directa")) {
-				TorneoEliminacionDirecta ted = new TorneoEliminacionDirecta(torneo);
-				if (ted.verificarEncuentros()) {
-					
-					ted.desempatarParticipantes();
-					
-					try {
-						ted.realizarEncuentros();
-					} catch (ExcepcionBaseDatos e) {
-						JOptionPane.showMessageDialog(null, e.getMessage(), "Ciclos", JOptionPane.ERROR_MESSAGE);
-					} catch (ExcepcionBaseDatosEncuentro e) {
-						JOptionPane.showMessageDialog(null, e.getMessage(), "Ciclos", JOptionPane.ERROR_MESSAGE);
-					} catch (ExcepcionBaseDatosCiclo e) {
-						JOptionPane.showMessageDialog(null, e.getMessage(), "Ciclos", JOptionPane.ERROR_MESSAGE);
-					} catch (ExcepcionBaseDatosTorneo e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (ExcepcionCapturarResultados e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					JOptionPane.showMessageDialog(null,
-							"El(la) " + torneo.getDatosPersonalizacion().getNombreCiclo(
-									Personalizacion.MAYUSCULA_SINGULAR) + " se ha realizado exitosamente.",
-							"Parear", JOptionPane.INFORMATION_MESSAGE);
-				} else {
-					JOptionPane.showMessageDialog(null, "El sistema no ha podido realizar "
-							+ torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MINUSCULA_SINGULAR)
-							+ " \n porque no ha finalizado "
-							+ torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MINUSCULA_SINGULAR) + "."
-							+ " \n Por favor capture todos los resultados.",
-							"Encarar" + torneo.getDatosPersonalizacion()
-									.getNombreParticipante(Personalizacion.MINUSCULA_PLURAL).substring(8),
-							JOptionPane.ERROR_MESSAGE);
-				}
-			}
-			else {
-				if (this.torneo.getCicloActual() < this.torneo.getAlgoritmoTorneo().getNumeroCiclos()) {
-					this.torneo.setCicloActual(torneo.getCicloActual() + 1);
-					this.torneo.getAlgoritmoTorneo().actualizarCiclo(this.torneo.getNombreArchivo());
-					this.setCicloSeleccionado(this.torneo.getCicloActual() + 1);
-					JOptionPane.showMessageDialog(null,
-							"El(la) " + torneo.getDatosPersonalizacion().getNombreCiclo(
-									Personalizacion.MAYUSCULA_SINGULAR) + " se ha realizado exitosamente.",
-							"Parear", JOptionPane.INFORMATION_MESSAGE);
-				}
-			}
-			activarDesactivarBotonHacer();
-			etiquetaCicloActual
-					.setText(torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MAYUSCULA_SINGULAR)
-							+ " actual: " + torneo.getCicloActual());
 
-			if (getCicloSeleccionado() == torneo.getCicloActual() - 1
-					&& torneo.getTipoTorneo().contains("Round Robin")) {
-				// actualizarCombo();
+		if (this.torneo.getTipoTorneo().contains("Suizo")) {
+			TorneoSuizo ts = new TorneoSuizo(torneo);
+			if (ts.verificarEncuentros()) {
+
+				ts.desempatarParticipantes();
+
+				try {
+					ts.realizarEncuentros();
+				} catch (ExcepcionBaseDatos e) {
+					JOptionPane.showMessageDialog(null, e.getMessage(), "Ciclos", JOptionPane.ERROR_MESSAGE);
+				} catch (ExcepcionBaseDatosEncuentro e) {
+					JOptionPane.showMessageDialog(null, e.getMessage(), "Ciclos", JOptionPane.ERROR_MESSAGE);
+				} catch (ExcepcionBaseDatosCiclo e) {
+					JOptionPane.showMessageDialog(null, e.getMessage(), "Ciclos", JOptionPane.ERROR_MESSAGE);
+				}
+				JOptionPane.showMessageDialog(null,
+						"El(la) " + torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MAYUSCULA_SINGULAR)
+								+ " se ha realizado exitosamente.",
+						"Parear", JOptionPane.INFORMATION_MESSAGE);
 			} else {
-				actualizarCombo();
+				JOptionPane.showMessageDialog(null,
+						"El sistema no ha podido realizar "
+								+ torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MINUSCULA_SINGULAR)
+								+ " \n porque no ha finalizado "
+								+ torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MINUSCULA_SINGULAR)
+								+ "." + " \n Por favor capture todos los resultados.",
+						"Encarar" + torneo.getDatosPersonalizacion()
+								.getNombreParticipante(Personalizacion.MINUSCULA_PLURAL).substring(8),
+						JOptionPane.ERROR_MESSAGE);
 			}
-			
-			
-		
+		} else if (this.torneo.getTipoTorneo().contains("Eliminación directa")) {
+			TorneoEliminacionDirecta ted = new TorneoEliminacionDirecta(torneo);
+			if (ted.verificarEncuentros()) {
+
+				ted.desempatarParticipantes();
+
+				try {
+					ted.realizarEncuentros();
+				} catch (ExcepcionBaseDatos e) {
+					JOptionPane.showMessageDialog(null, e.getMessage(), "Ciclos", JOptionPane.ERROR_MESSAGE);
+				} catch (ExcepcionBaseDatosEncuentro e) {
+					JOptionPane.showMessageDialog(null, e.getMessage(), "Ciclos", JOptionPane.ERROR_MESSAGE);
+				} catch (ExcepcionBaseDatosCiclo e) {
+					JOptionPane.showMessageDialog(null, e.getMessage(), "Ciclos", JOptionPane.ERROR_MESSAGE);
+				} catch (ExcepcionBaseDatosTorneo e) {
+					JOptionPane.showMessageDialog(null, e.getMessage(), "Ciclos", JOptionPane.ERROR_MESSAGE);
+				} catch (ExcepcionCapturarResultados e) {
+					JOptionPane.showMessageDialog(null, e.getMessage(), "Ciclos", JOptionPane.ERROR_MESSAGE);
+				}
+				JOptionPane.showMessageDialog(null,
+						"El(la) " + torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MAYUSCULA_SINGULAR)
+								+ " se ha realizado exitosamente.",
+						"Parear", JOptionPane.INFORMATION_MESSAGE);
+			} else {
+				JOptionPane.showMessageDialog(null,
+						"El sistema no ha podido realizar "
+								+ torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MINUSCULA_SINGULAR)
+								+ " \n porque no ha finalizado "
+								+ torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MINUSCULA_SINGULAR)
+								+ "." + " \n Por favor capture todos los resultados.",
+						"Encarar" + torneo.getDatosPersonalizacion()
+								.getNombreParticipante(Personalizacion.MINUSCULA_PLURAL).substring(8),
+						JOptionPane.ERROR_MESSAGE);
+			}
+		} else {
+			if (this.torneo.getCicloActual() < this.torneo.getAlgoritmoTorneo().getNumeroCiclos()) {
+				this.torneo.setCicloActual(torneo.getCicloActual() + 1);
+				this.torneo.getAlgoritmoTorneo().actualizarCiclo(this.torneo.getNombreArchivo());
+				this.setCicloSeleccionado(this.torneo.getCicloActual() + 1);
+				JOptionPane.showMessageDialog(null,
+						"El(la) " + torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MAYUSCULA_SINGULAR)
+								+ " se ha realizado exitosamente.",
+						"Parear", JOptionPane.INFORMATION_MESSAGE);
+			}
+		}
+		activarDesactivarBotonHacer();
+		etiquetaCicloActual.setText(torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MAYUSCULA_SINGULAR)
+				+ " actual: " + torneo.getCicloActual());
+
+		if (getCicloSeleccionado() == torneo.getCicloActual() - 1 && torneo.getTipoTorneo().contains("Round Robin")) {
+			// actualizarCombo();
+		} else {
+			actualizarCombo();
+		}
+
 	}
 
 	/**
@@ -984,12 +983,12 @@ public class DialogoCiclo extends JDialog {
 		if (valor == JFileChooser.APPROVE_OPTION) {
 			try {
 				archivo = dialogo.getSelectedFile();
-					this.torneo.getAlgoritmoTorneo().generarReporteCiclo(archivo, comboSeleccionarCiclo.getSelectedIndex());
-					JOptionPane.showMessageDialog(
-							null, "El archivo se ha guardado exitosamente.", "Generar reporte de " + this.torneo
-									.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MAYUSCULA_SINGULAR),
-							JOptionPane.INFORMATION_MESSAGE);
-				
+				this.torneo.getAlgoritmoTorneo().generarReporteCiclo(archivo, comboSeleccionarCiclo.getSelectedIndex());
+				JOptionPane.showMessageDialog(
+						null, "El archivo se ha guardado exitosamente.", "Generar reporte de " + this.torneo
+								.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MAYUSCULA_SINGULAR),
+						JOptionPane.INFORMATION_MESSAGE);
+
 			} catch (ExcepcionUtilerias e) {
 				JOptionPane.showMessageDialog(null, e.getMessage(), "Advertencia", JOptionPane.ERROR_MESSAGE);
 			}
