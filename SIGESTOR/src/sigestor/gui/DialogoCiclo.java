@@ -18,6 +18,8 @@ import sigestor.dominio.*;
 import sigestor.excepcion.ExcepcionBaseDatos;
 import sigestor.excepcion.ExcepcionBaseDatosCiclo;
 import sigestor.excepcion.ExcepcionBaseDatosEncuentro;
+import sigestor.excepcion.ExcepcionBaseDatosTorneo;
+import sigestor.excepcion.ExcepcionCapturarResultados;
 import sigestor.excepcion.ExcepcionUtilerias;
 
 /**
@@ -865,10 +867,7 @@ public class DialogoCiclo extends JDialog {
 	 * misma cantidad de ciclos establecido para el torneo.
 	 */
 	private void accionHacer() {
-		// FIXME
-		if (!torneo.getTipoTorneo().equals("Eliminación directa")) {
-			
-			
+		
 			if (this.torneo.getTipoTorneo().contains("Suizo")) {
 				TorneoSuizo ts = new TorneoSuizo(torneo);
 				if (ts.verificarEncuentros()) {
@@ -898,7 +897,43 @@ public class DialogoCiclo extends JDialog {
 									.getNombreParticipante(Personalizacion.MINUSCULA_PLURAL).substring(8),
 							JOptionPane.ERROR_MESSAGE);
 				}
-			} else {
+			}else if(this.torneo.getTipoTorneo().contains("Eliminación directa")) {
+				TorneoEliminacionDirecta ted = new TorneoEliminacionDirecta(torneo);
+				if (ted.verificarEncuentros()) {
+					
+					ted.desempatarParticipantes();
+					
+					try {
+						ted.realizarEncuentros();
+					} catch (ExcepcionBaseDatos e) {
+						JOptionPane.showMessageDialog(null, e.getMessage(), "Ciclos", JOptionPane.ERROR_MESSAGE);
+					} catch (ExcepcionBaseDatosEncuentro e) {
+						JOptionPane.showMessageDialog(null, e.getMessage(), "Ciclos", JOptionPane.ERROR_MESSAGE);
+					} catch (ExcepcionBaseDatosCiclo e) {
+						JOptionPane.showMessageDialog(null, e.getMessage(), "Ciclos", JOptionPane.ERROR_MESSAGE);
+					} catch (ExcepcionBaseDatosTorneo e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (ExcepcionCapturarResultados e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					JOptionPane.showMessageDialog(null,
+							"El(la) " + torneo.getDatosPersonalizacion().getNombreCiclo(
+									Personalizacion.MAYUSCULA_SINGULAR) + " se ha realizado exitosamente.",
+							"Parear", JOptionPane.INFORMATION_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(null, "El sistema no ha podido realizar "
+							+ torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MINUSCULA_SINGULAR)
+							+ " \n porque no ha finalizado "
+							+ torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MINUSCULA_SINGULAR) + "."
+							+ " \n Por favor capture todos los resultados.",
+							"Encarar" + torneo.getDatosPersonalizacion()
+									.getNombreParticipante(Personalizacion.MINUSCULA_PLURAL).substring(8),
+							JOptionPane.ERROR_MESSAGE);
+				}
+			}
+			else {
 				if (this.torneo.getCicloActual() < this.torneo.getAlgoritmoTorneo().getNumeroCiclos()) {
 					this.torneo.setCicloActual(torneo.getCicloActual() + 1);
 					this.torneo.getAlgoritmoTorneo().actualizarCiclo(this.torneo.getNombreArchivo());
@@ -922,7 +957,7 @@ public class DialogoCiclo extends JDialog {
 			}
 			
 			
-		}
+		
 	}
 
 	/**

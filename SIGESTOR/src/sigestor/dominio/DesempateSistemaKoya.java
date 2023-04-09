@@ -18,7 +18,7 @@ public class DesempateSistemaKoya extends Desempate {
 	/**
 	 * Desempata dos participantes, sumando para cada participante, los puntos
 	 * logrados contra sus rivales que hayan alcanzado la mitad o más de los puntos
-	 * totaltes posibles del torneo. La sumatoria será el puntaje de desempate del
+	 * totales posibles del torneo. La sumatoria será el puntaje de desempate del
 	 * participante. Gana el participante con mayor puntaje.
 	 * 
 	 * @param p1

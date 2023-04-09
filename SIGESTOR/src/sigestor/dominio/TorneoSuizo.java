@@ -237,7 +237,7 @@ public class TorneoSuizo extends AlgoritmoTorneo {
 	}
 
 	/**
-	 * Verifica si el partcipante evaluado jugó como inicial en su último encuentro.
+	 * Verifica si el participante evaluado jugó como inicial en su último encuentro.
 	 * 
 	 * @param numeroParticipante
 	 *            número del participante a evaluar.
