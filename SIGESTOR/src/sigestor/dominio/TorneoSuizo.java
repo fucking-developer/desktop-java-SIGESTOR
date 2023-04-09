@@ -19,7 +19,7 @@ import sigestor.excepcion.ExcepcionCapturarResultados;
  * desempatar jugadores y realizar reportes. <code>AlgoritmoTorneo</code>.
  * <p>
  * 
- * @version 08/04/2023
+ * @version 09/04/2023
  * 
  * @author Jonathan Eduardo Ibarra Martínez
  * @author Alicia Adriana Clemente Hernandez
@@ -211,6 +211,7 @@ public class TorneoSuizo extends AlgoritmoTorneo {
 		}
 		return encuentrosTotales;
 	}
+
 
 	/**
 	 * Intercambia las posiciones de 2 jugadores empatados si el ganador está una

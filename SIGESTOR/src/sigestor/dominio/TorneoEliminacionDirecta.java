@@ -88,29 +88,35 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 
 	/**
 	 * Genera inicialmente los encuentros del primer ciclo y después los encuentros
-	 * del siguiente ciclo una vez terminado el ciclo anterior.
+	 * del siguiente ciclo una vez terminado el ciclo anterior. FIXME agregar
+	 * documentaciòn
+	 * 
+	 * @throws ExcepcionBaseDatosTorneo
+	 * @throws ExcepcionCapturarResultados
 	 */
 	@Override
-	public void realizarEncuentros() throws ExcepcionBaseDatos, ExcepcionBaseDatosEncuentro, ExcepcionBaseDatosCiclo {
-		// Date fechaEncuentro;
-		try {
-
-			torneo.setCicloActual(torneo.getCicloActual());
+	public void realizarEncuentros() throws ExcepcionBaseDatos, ExcepcionBaseDatosEncuentro, ExcepcionBaseDatosCiclo,
+			ExcepcionBaseDatosTorneo, ExcepcionCapturarResultados {
+		if (torneo.getCicloActual() < torneo.getAlgoritmoTorneo().getNumeroCiclos()) {
+			torneo.setCicloActual(torneo.getCicloActual() + 1);
 			BaseDatosCiclo bdc = new BaseDatosCiclo(torneo.getNombreArchivo());
 
 			Ciclo ciclo = new Ciclo(torneo, torneo.getCicloActual());
 			bdc.insertarCiclo(ciclo);
-			encararParticipantes(ciclo);
-			torneo.getAlgoritmoTorneo().getCiclos().add(ciclo);
 			try {
-				BaseDatosTorneo bdt = new BaseDatosTorneo(torneo.getNombreArchivo());
-				bdt.actualizarCicloActual(torneo);
-			} catch (ExcepcionBaseDatos | ExcepcionBaseDatosTorneo e) {
+				if (torneo.getCicloActual() > 1) {
 
+					encararParticipantesCiclosPosteriores(ciclo);
+				} else {
+					encararParticipantesPrimerCiclo(ciclo);
+				}
+			} catch (ExcepcionBaseDatosParticipante e) {
+				e.printStackTrace();
 			}
 
-		} catch (ExcepcionCapturarResultados | ExcepcionBaseDatosParticipante e1) {
-
+			torneo.getAlgoritmoTorneo().getCiclos().add(ciclo);
+			BaseDatosTorneo bdt = new BaseDatosTorneo(torneo.getNombreArchivo());
+			bdt.actualizarCicloActual(torneo);
 		}
 
 	}
@@ -121,7 +127,98 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 	 */
 	@Override
 	public void desempatarParticipantes() {
+		Desempate desempate;
+		Participante participanteGanador;
+		ArrayList<String> criterios = torneo.getCriteriosDesempate().getListaCriteriosSeleccionados();
 
+		ArrayList<Participante> participantes = torneo.getListaParticipantes();
+		for (Participante p1 : participantes) {
+			for (Participante p2 : participantes) {
+				if (p1.getPuntajeAcumuladoParticipante() == p2.getPuntajeAcumuladoParticipante()) {
+					cicloromper: {
+						for (String criterio : criterios) {
+							switch (criterio) {
+							case "Puntuacion":
+								desempate = new DesempatePuntuacion();
+								participanteGanador = desempate.desempatar(p1, p2, participantes,
+										obtenerEncuentrosTotales(), torneo);
+								if (participanteGanador != null) {
+									participantes = intercambiarPosiciones(p1.getNumeroParticipante(),
+											p2.getNumeroParticipante(), participanteGanador.getNumeroParticipante());
+									break cicloromper;
+								}
+								break;
+							case "Marcador de participante final":
+								desempate = new DesempateEncuentroDirecto();
+								participanteGanador = desempate.desempatar(p1, p2, participantes,
+										obtenerEncuentrosTotales(), torneo);
+								if (participanteGanador != null) {
+									participantes = intercambiarPosiciones(p1.getNumeroParticipante(),
+											p2.getNumeroParticipante(), participanteGanador.getNumeroParticipante());
+									break cicloromper;
+								}
+								break;
+							default: // no se ha seleccionado ningún criterio
+							}
+
+						}
+					}
+				}
+			}
+		}
+		torneo.setListaParticipantes(participantes);
+
+	}
+
+	/**
+	 * Intercambia las posiciones de 2 jugadores empatados si el ganador está una
+	 * posición abajo del jugador con quien empató, de lo contrario no realiza
+	 * ningún movimiento.
+	 * 
+	 * @param numeroP1
+	 *            Primer participante empatado.
+	 * @param numP2
+	 *            Segundo participante empatado.
+	 * @param numPGanador
+	 *            El participante que obtuvo más puntaje con el criterio de
+	 *            desempate aplicado.
+	 * @return Lista de participantes ordenada.
+	 */
+	private ArrayList<Participante> intercambiarPosiciones(int numeroP1, int numP2, int numPGanador) {
+
+		ArrayList<Participante> participantes = torneo.getListaParticipantes();
+
+		boolean encontrado = false;
+		int index = 0;
+
+		for (Participante p : participantes) {
+			if (numeroP1 == p.getNumeroParticipante() || numP2 == p.getNumeroParticipante()) {
+				if (encontrado && p.getNumeroParticipante() == numPGanador) {
+					Collections.swap(participantes, index, index - 1);
+				}
+				encontrado = true;
+			}
+			index++;
+		}
+		return participantes;
+	}
+
+	/**
+	 * Obtiene todos los encuentros que ya hayan sido jugados en el torneo.
+	 * 
+	 * @return lista de encuentros jugados.
+	 */
+	private ArrayList<Encuentro> obtenerEncuentrosTotales() {
+		ArrayList<Encuentro> encuentrosTotales = new ArrayList<Encuentro>();
+
+		ArrayList<Ciclo> ciclos = torneo.getAlgoritmoTorneo().getCiclos();
+		for (Ciclo ciclo : ciclos) {
+			ArrayList<Encuentro> encuentros = ciclo.getEncuentroParticipantes();
+			for (Encuentro encuentro : encuentros) {
+				encuentrosTotales.add(encuentro);
+			}
+		}
+		return encuentrosTotales;
 	}
 
 	/**
@@ -140,9 +237,8 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 	 *             Si ocurre un problema al actualizar un participante en la tabla
 	 *             <code>participantes</code>.
 	 */
-	public void encararParticipantes(Ciclo ciclo) throws ExcepcionCapturarResultados, ExcepcionBaseDatos,
+	private void encararParticipantesPrimerCiclo(Ciclo ciclo) throws ExcepcionCapturarResultados, ExcepcionBaseDatos,
 			ExcepcionBaseDatosEncuentro, ExcepcionBaseDatosParticipante {
-
 		BaseDatosEncuentro bde = new BaseDatosEncuentro(torneo.getNombreArchivo());
 		BaseDatosParticipante bdp = new BaseDatosParticipante(torneo.getNombreArchivo());
 
@@ -162,21 +258,19 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 			}
 			int numeroDeEncuentrosSimple = ((participantes.size() - descansosPrimeraVuelta) / 2)
 					+ descansosPrimeraVuelta;
-
 			ArrayList<Encuentro> encuentros = new ArrayList<Encuentro>();
 			for (int i = 1; i <= numeroDeEncuentrosSimple; i++) {
 				if (!(descansosPrimeraVuelta > 0)) {
 
-					encuentros.add(new Encuentro(i, participantes.get(i - 1).getNumeroParticipante(),
+					encuentros.add(new Encuentro(auxUltimaPosicion + 1,
+							participantes.get(i - 1).getNumeroParticipante(),
 							participantes.get((participantes.size() - 1) - auxUltimaPosicion).getNumeroParticipante(),
 							this.getTorneo().getFechaInicioTorneo()));
 					auxUltimaPosicion++;
-
 					bde.insertarEncuentro(encuentros.get((auxUltimaPosicion) - 1), ciclo);
 					bdp.actualizarResultadoParticipante(participantes.get(i - 1), ciclo);
-					bdp.actualizarResultadoParticipante(participantes.get(i + numeroDeEncuentrosSimple - 1), ciclo);
-				} else {
-					descansosPrimeraVuelta--;
+					bdp.actualizarResultadoParticipante(
+							participantes.get((participantes.size() - 1) - auxUltimaPosicion), ciclo);
 				}
 
 			}
@@ -196,17 +290,16 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 			for (int i = 1; i <= numeroDeEncuentrosDoble; i++) {
 				if (!(descansosPrimeraVuelta > 0)) {
 
-					encuentros.add(new Encuentro(i, participantes.get(i - 1).getNumeroParticipante(),
+					encuentros.add(new Encuentro(auxUltimaPosicion + 1,
+							participantes.get(i - 1).getNumeroParticipante(),
 							participantes.get((participantes.size() - 1) - auxUltimaPosicion).getNumeroParticipante(),
 							this.getTorneo().getFechaInicioTorneo()));
 					auxUltimaPosicion++;
 					auxUltimaPosicionSegundaVuelta++;
 					bde.insertarEncuentro(encuentros.get((auxUltimaPosicionSegundaVuelta) - 1), ciclo);
-					bdp.actualizarResultadoParticipante(participantes.get((auxUltimaPosicionSegundaVuelta + 1) - 1),
-							ciclo);
+					bdp.actualizarResultadoParticipante(participantes.get((i - 1)), ciclo);
 					bdp.actualizarResultadoParticipante(
-							participantes.get((auxUltimaPosicionSegundaVuelta + 1) + numeroDeEncuentrosDoble - 1),
-							ciclo);
+							participantes.get((participantes.size() - 1) - auxUltimaPosicionSegundaVuelta), ciclo);
 				} else {
 					descansosPrimeraVuelta--;
 				}
@@ -216,17 +309,15 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 			for (int i = 1; i <= numeroDeEncuentrosDoble; i++) {
 				if (!(descansosSegundaVuelta > 0)) {
 
-					encuentros.add(new Encuentro(i,
+					encuentros.add(new Encuentro(auxUltimaPosicionSegundaVuelta + 1,
 							participantes.get((participantes.size() - 1) - auxUltimaPosicion).getNumeroParticipante(),
 							participantes.get(i - 1).getNumeroParticipante(), this.getTorneo().getFechaInicioTorneo()));
 					auxUltimaPosicion++;
 					auxUltimaPosicionSegundaVuelta++;
 					bde.insertarEncuentro(encuentros.get((auxUltimaPosicionSegundaVuelta) - 1), ciclo);
-					bdp.actualizarResultadoParticipante(participantes.get((auxUltimaPosicionSegundaVuelta + 1) - 1),
-							ciclo);
+					bdp.actualizarResultadoParticipante(participantes.get((i - 1)), ciclo);
 					bdp.actualizarResultadoParticipante(
-							participantes.get((auxUltimaPosicionSegundaVuelta + 1) + numeroDeEncuentrosDoble - 1),
-							ciclo);
+							participantes.get((participantes.size() - 1) - auxUltimaPosicion), ciclo);
 				} else {
 					descansosSegundaVuelta--;
 				}
@@ -236,6 +327,78 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 
 		}
 
+	}
+
+	/**
+	 * Realiza los encuentros de un ciclo posterior al primer ciclo.
+	 * 
+	 * @param ciclo
+	 *            Recibe el objeto <code>Ciclo</code> para guardar los encuentros a
+	 *            realizar.
+	 * @throws ExcepcionCapturarResultados
+	 *             Si ocurre un error con el objeto <code>Encuentros</code>.
+	 * @throws ExcepcionBaseDatos
+	 *             Si ocurre un problema con la base de datos.
+	 * @throws ExcepcionBaseDatosEncuentro
+	 *             Si ocurre un problema al insertar en la tabla
+	 *             <code>encuentros</code>.
+	 * @throws ExcepcionBaseDatosParticipante
+	 *             Si ocurre un problema al actualizar un participante en la tabla
+	 *             <code>participantes</code>.
+	 */
+	public void encararParticipantesCiclosPosteriores(Ciclo ciclo) throws ExcepcionCapturarResultados,
+			ExcepcionBaseDatos, ExcepcionBaseDatosEncuentro, ExcepcionBaseDatosParticipante {
+		BaseDatosEncuentro bde = new BaseDatosEncuentro(torneo.getNombreArchivo());
+		BaseDatosParticipante bdp = new BaseDatosParticipante(torneo.getNombreArchivo());
+
+		ArrayList<Participante> participantes = torneo.getListaParticipantes();
+		int descansosSegundaVuelta = 0;
+
+		int auxUltimaPosicion = 0;
+		int auxUltimaPosicionSegundaVuelta = 0;
+
+		if (esSimple) {
+			int mitad = participantes.size() / 2;
+			ArrayList<Encuentro> encuentros = new ArrayList<Encuentro>();
+			for (int i = 1; i <= mitad; i++) {
+				encuentros.add(new Encuentro(i, participantes.get(i - 1).getNumeroParticipante(),
+						participantes.get((i - 1) + mitad).getNumeroParticipante(),
+						this.getTorneo().getFechaInicioTorneo()));
+				bde.insertarEncuentro(encuentros.get((i) - 1), ciclo);
+				bdp.actualizarResultadoParticipante(participantes.get(i - 1), ciclo);
+				bdp.actualizarResultadoParticipante(participantes.get((i - 1) + mitad), ciclo);
+
+			}
+			ciclo.setEncuentroParticipantes(encuentros);
+
+		} else {
+			int mitad = (participantes.size() / 2);
+			ArrayList<Encuentro> encuentros = new ArrayList<Encuentro>();
+			for (int i = 1; i <= mitad; i++) {
+				encuentros.add(new Encuentro(auxUltimaPosicionSegundaVuelta + 1,
+						participantes.get(i - 1).getNumeroParticipante(),
+						participantes.get((i - 1) + mitad).getNumeroParticipante(),
+						this.getTorneo().getFechaInicioTorneo()));
+				auxUltimaPosicion++;
+				auxUltimaPosicionSegundaVuelta++;
+				bde.insertarEncuentro(encuentros.get((auxUltimaPosicionSegundaVuelta) - 1), ciclo);
+				bdp.actualizarResultadoParticipante(participantes.get((i - 1)), ciclo);
+				bdp.actualizarResultadoParticipante(participantes.get((i - 1) + mitad), ciclo);
+			}
+			auxUltimaPosicion = 0;
+			for (int i = 1; i <= mitad; i++) {
+				encuentros.add(new Encuentro(auxUltimaPosicionSegundaVuelta + 1,
+						participantes.get((i - 1) + mitad).getNumeroParticipante(),
+						participantes.get(i - 1).getNumeroParticipante(), this.getTorneo().getFechaInicioTorneo()));
+				auxUltimaPosicion++;
+				auxUltimaPosicionSegundaVuelta++;
+				bde.insertarEncuentro(encuentros.get((auxUltimaPosicionSegundaVuelta) - 1), ciclo);
+				bdp.actualizarResultadoParticipante(participantes.get((i - 1)), ciclo);
+				bdp.actualizarResultadoParticipante(participantes.get((i - 1) + mitad), ciclo);
+			}
+			ciclo.setEncuentroParticipantes(encuentros);
+
+		}
 	}
 
 	/**
@@ -265,7 +428,15 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 	 *         <tt>false</tt> de lo contrario.
 	 */
 	public boolean verificarEncuentros() {
+		ArrayList<Encuentro> encuentros = torneo.getAlgoritmoTorneo().getCiclos().get(torneo.getCicloActual() - 1)
+				.getEncuentroParticipantes();
+		for (Encuentro e : encuentros) {
+			if (e.getResultadoEncuentro() == Encuentro.SIN_JUGAR) {
+				return false;
+			}
+		}
 		return true;
+
 	}
 
 	/**
@@ -282,19 +453,19 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 	 *             <code>encuentros</code>.
 	 * @throws ExcepcionBaseDatosCiclo
 	 *             Si ocurre un error al insertar en la tabla <code>ciclos</code>.
+	 * @throws ExcepcionCapturarResultados
+	 *             si ocurre un error al generar los encuentros.
+	 * @throws ExcepcionBaseDatosTorneo
+	 *             si ocurre un error con el torneo.
 	 */
-	public void iniciarTorneo(TorneoEliminacionDirecta torneoEliminacionDirecta)
-			throws ExcepcionBaseDatos, ExcepcionBaseDatosEncuentro, ExcepcionBaseDatosCiclo {
+	public void iniciarTorneo() throws ExcepcionBaseDatos, ExcepcionBaseDatosEncuentro, ExcepcionBaseDatosCiclo,
+			ExcepcionCapturarResultados, ExcepcionBaseDatosTorneo {
 
-		try {
-			BaseDatosTorneo bdt = new BaseDatosTorneo(torneo.getNombreArchivo());
-			bdt.insertarTorneoEliminacionDirecta(this);
-			this.realizarEncuentros();
-		} catch (ExcepcionBaseDatosTorneo e) {
-			e.printStackTrace();
-		}
-
-		torneo.getAlgoritmoTorneo().setNumeroCiclos(torneoEliminacionDirecta.getNumeroCiclos());
+		BaseDatosTorneo bdt = new BaseDatosTorneo(torneo.getNombreArchivo());
+		bdt.insertarTorneoEliminacionDirecta(this);
+		this.setCiclos(new ArrayList<Ciclo>());
+		torneo.setAlgoritmoTorneo(this);
+		this.realizarEncuentros();
 		// torneoEliminacionDirecta.realizarEncuentros();
 
 	}

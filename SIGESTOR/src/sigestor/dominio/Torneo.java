@@ -50,14 +50,14 @@ import sigestor.excepcion.ExcepcionTorneo;
  * avanzar el torneo.</li>
  * </ul>
  * 
- * @version 04/04/2023
+ * @version 08/04/2023
  * 
  * @author Jonathan Eduardo Ibarra Martínez
  * @author Ricky Didier Peralta Reyes
  * @author Uriel Romeo Cruz Cortes
  * @author Jennifer Cortés Pérez
  * @author Beatriz Andrea Jiménez Ríos
- * @author Lopez Aragon Hernan Sesai
+ * @author Hernan Sesai Lopez Aragon 
  * @author German Luis Cruz Martínez
  * 
  */
@@ -437,7 +437,7 @@ public class Torneo {
 		if (this.getTipoTorneo().equals("Suizo")) {
 			torneoSuizo.iniciarTorneo(torneoSuizo);
 		} else if (this.getTipoTorneo().equals("Eliminación directa")) {
-			torneoEliminacionDirecta.iniciarTorneo(torneoEliminacionDirecta);
+			torneoEliminacionDirecta.iniciarTorneo();
 		} else if (this.getTipoTorneo().equals("Round Robin")) {
 			torneoRoundRobin.iniciarTorneo();
 		}
@@ -694,6 +694,7 @@ public class Torneo {
 		bdt.actualizarCicloActual(this);
 		bdt.eliminarTorneoRoundRobin();
 		bdt.eliminarTorneoSuizo();
+		bdt.eliminarTorneoEliminacionDirecta();
 
 		recuperarTorneo();
 
