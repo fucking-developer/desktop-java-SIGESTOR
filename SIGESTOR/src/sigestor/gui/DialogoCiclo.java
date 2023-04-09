@@ -984,11 +984,12 @@ public class DialogoCiclo extends JDialog {
 		if (valor == JFileChooser.APPROVE_OPTION) {
 			try {
 				archivo = dialogo.getSelectedFile();
-				this.torneo.getAlgoritmoTorneo().generarReporteCiclo(archivo, comboSeleccionarCiclo.getSelectedIndex());
-				JOptionPane.showMessageDialog(
-						null, "El archivo se ha guardado exitosamente.", "Generar reporte de " + this.torneo
-								.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MAYUSCULA_SINGULAR),
-						JOptionPane.INFORMATION_MESSAGE);
+					this.torneo.getAlgoritmoTorneo().generarReporteCiclo(archivo, comboSeleccionarCiclo.getSelectedIndex());
+					JOptionPane.showMessageDialog(
+							null, "El archivo se ha guardado exitosamente.", "Generar reporte de " + this.torneo
+									.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MAYUSCULA_SINGULAR),
+							JOptionPane.INFORMATION_MESSAGE);
+				
 			} catch (ExcepcionUtilerias e) {
 				JOptionPane.showMessageDialog(null, e.getMessage(), "Advertencia", JOptionPane.ERROR_MESSAGE);
 			}
