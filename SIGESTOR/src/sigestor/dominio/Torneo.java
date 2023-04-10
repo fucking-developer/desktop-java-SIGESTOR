@@ -437,7 +437,7 @@ public class Torneo {
 		if (this.getTipoTorneo().equals("Suizo")) {
 			torneoSuizo.iniciarTorneo(torneoSuizo);
 		} else if (this.getTipoTorneo().equals("Eliminación directa")) {
-			torneoEliminacionDirecta.iniciarTorneo(torneoEliminacionDirecta);
+			torneoEliminacionDirecta.iniciarTorneo();
 		} else if (this.getTipoTorneo().equals("Round Robin")) {
 			torneoRoundRobin.iniciarTorneo();
 		}

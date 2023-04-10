@@ -7,6 +7,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import sigestor.dominio.Participante;
 import sigestor.dominio.Personalizacion;
+import sigestor.dominio.TorneoEliminacionDirecta;
 import sigestor.dominio.TorneoRoundRobin;
 import sigestor.dominio.TorneoSuizo;
 import sigestor.excepcion.ExcepcionUtilerias;
@@ -141,7 +142,11 @@ public class DialogoResultadosFinales extends JDialog {
 		if (principal.getTorneoActual().getTipoTorneo().contains("Suizo")) {
 			TorneoSuizo ts = new TorneoSuizo(principal.getTorneoActual());
 			ts.desempatarParticipantes();
-		} else {
+		}else if((principal.getTorneoActual().getTipoTorneo().contains("Eliminación directa"))){
+			TorneoEliminacionDirecta te = new TorneoEliminacionDirecta(principal.getTorneoActual());
+			te.desempatarParticipantes();
+		}
+		else {
 			TorneoRoundRobin tr = new TorneoRoundRobin(principal.getTorneoActual());
 			tr.desempatarParticipantes();
 		}
