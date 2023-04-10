@@ -194,29 +194,28 @@ public class DialogoCapturarResultados extends JDialog {
 	/**
 	 * Botón <code>Guardar</code>.
 	 * 
-	 * @see #accionBtnGuardar()
+	 * @see #accionGuardar()
 	 */
 	private JButton botonGuardar;
 
 	/**
 	 * Botón <code>Mostrar Reporte</code>.
 	 * 
-	 * @see #accionBtnMostrarReporte()
+	 * @see #accionMostrarReporte()
 	 */
 	private JButton botonMostrarReporte;
 
 	/**
 	 * Botón <code>Modificar resultados</code>.
 	 * 
-	 * @see #accionBtnModificarResultados()
+	 * @see #accionModificarResultados()
 	 */
 	private JButton botonModificarResultados;
 
 	/**
 	 * Botón <code>Cancelar ciclo</code>.
 	 * 
-	 * @see #accionBtnCancelarRonda()
-	 * 
+	 * @see #accionCancelarCiclo()
 	 *      El botón será personalizable en ciclo, por que dependerá del nombre
 	 *      asignado.
 	 */
@@ -225,7 +224,7 @@ public class DialogoCapturarResultados extends JDialog {
 	/**
 	 * Botón <code>Salir</code>.
 	 * 
-	 * @see #accionBtnSalir()
+	 * @see #accionSalir()
 	 */
 	private JButton botonSalir;
 
@@ -309,8 +308,9 @@ public class DialogoCapturarResultados extends JDialog {
 	/**
 	 * Constructor en el que se inicializa el diálogo. .
 	 * 
-	 * @param principal Recibe un objeto de tipo ventanaPrincipal el cual contiene
-	 *                  el objeto de tipo torneo.
+	 * @param principal
+	 *            Recibe un objeto de tipo ventanaPrincipal el cual contiene el
+	 *            objeto de tipo torneo.
 	 */
 	public DialogoCapturarResultados(VentanaPrincipal principal) {
 		super(principal, "Capturar resultados");
@@ -957,7 +957,8 @@ public class DialogoCapturarResultados extends JDialog {
 	/**
 	 * Obtiene toda la información almacena en un ciclo.
 	 * 
-	 * @param listaEncuentros Recibe la lista de los encuentros de un ciclo.
+	 * @param listaEncuentros
+	 *            Recibe la lista de los encuentros de un ciclo.
 	 */
 	private void obtenerResultadosCiclo(ArrayList<Encuentro> listaEncuentros) {
 		for (int i = 0; i < listaEncuentros.size(); i++) {
@@ -1019,6 +1020,12 @@ public class DialogoCapturarResultados extends JDialog {
 		}
 	}
 
+	/**
+	 * Desactiva las columnas de la tabla.
+	 * 
+	 * @param i
+	 *            Posicion de la fila de la tabla.
+	 */
 	private void desactivarColumnasTabla(int i) {
 		etiquetaNumeroFinal[i].setText("");
 		etiquetaNumeroFinal[i].setVisible(false);
@@ -1039,7 +1046,8 @@ public class DialogoCapturarResultados extends JDialog {
 	/**
 	 * Obtiene al participante registrado en el torneo.
 	 * 
-	 * @param numeroParticipante Identificador unico del participante.
+	 * @param numeroParticipante
+	 *            Identificador unico del participante.
 	 * @return Retorna al participante.
 	 */
 	private Participante obtenerParticipante(int numeroParticipante) {
@@ -1059,8 +1067,9 @@ public class DialogoCapturarResultados extends JDialog {
 	 * Permite obtener los datos generales del torneo y mostrarlos en la parte
 	 * superior de la pantalla en su respectivo componente.
 	 * 
-	 * @param torneo Recibe el objeto <code>Torneo</code> con la información del
-	 *               torneo.
+	 * @param torneo
+	 *            Recibe el objeto <code>Torneo</code> con la información del
+	 *            torneo.
 	 */
 	private void mostrarDatosGenerales(Torneo torneo) {
 		DateFormat f = DateFormat.getDateInstance(DateFormat.FULL);
@@ -1321,7 +1330,7 @@ public class DialogoCapturarResultados extends JDialog {
 	 * <code>BaseDatosParticipante</code>.
 	 */
 	private void actualizarParticipantes() {
-		
+
 		BaseDatosParticipante bdp = new BaseDatosParticipante(ventanaPrincipal.getTorneoActual().getNombreArchivo());
 		Ciclo ciclo = torneo.getAlgoritmoTorneo().getCiclos().get(torneo.getCicloActual() - 1);
 		Collections.sort(this.participantes);
@@ -1432,12 +1441,13 @@ public class DialogoCapturarResultados extends JDialog {
 	 * Actualiza el marcador a favor y el marcador en contra de los participantes de
 	 * un encuentro.
 	 * 
-	 * @param encuentro                   Recible el objeto <code>Encuentro</code>
-	 *                                    que contiene los datos un encuentro.
-	 * @param marcadorParticipanteInicial Recibe el marcador del participante
-	 *                                    inicial.
-	 * @param marcadorParticipanteFinal   Recibe el marcador obtenido del
-	 *                                    participante final.
+	 * @param encuentro
+	 *            Recible el objeto <code>Encuentro</code> que contiene los datos un
+	 *            encuentro.
+	 * @param marcadorParticipanteInicial
+	 *            Recibe el marcador del participante inicial.
+	 * @param marcadorParticipanteFinal
+	 *            Recibe el marcador obtenido del participante final.
 	 */
 	private void sumarRestarMarcadorParticipante(Encuentro encuentro, int marcadorParticipanteInicial,
 			int marcadorParticipanteFinal) {
@@ -1458,11 +1468,15 @@ public class DialogoCapturarResultados extends JDialog {
 	/**
 	 * Actualiza el puntaje acumulado del participante .
 	 * 
-	 * @param encuentro      Recible el objeto <code>Encuentro</code> que contiene
-	 *                       los datos del encuentro.
-	 * @param puntajeGanar   Recibe el valor del puntaje ganador.
-	 * @param puntajePerder  Recibe el valor del puntaje perdedor.
-	 * @param puntajeEmpatar Recibe el valor del puntaje empate.
+	 * @param encuentro
+	 *            Recible el objeto <code>Encuentro</code> que contiene los datos
+	 *            del encuentro.
+	 * @param puntajeGanar
+	 *            Recibe el valor del puntaje ganador.
+	 * @param puntajePerder
+	 *            Recibe el valor del puntaje perdedor.
+	 * @param puntajeEmpatar
+	 *            Recibe el valor del puntaje empate.
 	 */
 	private void sumarRestarPuntajeAcumuladoParticipante(Encuentro encuentro, float puntajeGanar, float puntajePerder,
 			float puntajeEmpatar) {

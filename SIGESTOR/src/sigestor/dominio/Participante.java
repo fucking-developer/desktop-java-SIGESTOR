@@ -71,15 +71,8 @@ public class Participante implements Comparable<Participante> {
 	 */
 	private static boolean puntaje;
 
+	
 	private static boolean puntajeAcumulado = false;
-
-	public static boolean isPuntajeAcumulado() {
-		return puntajeAcumulado;
-	}
-
-	public static void setPuntajeAcumulado(boolean puntajeAcumulado) {
-		Participante.puntajeAcumulado = puntajeAcumulado;
-	}
 
 	/**
 	 * Para ordenar a los participantes alfabética o aleatoriamente.
@@ -107,6 +100,14 @@ public class Participante implements Comparable<Participante> {
 		setLugarParticipante(0);
 	}
 
+	public static boolean isPuntajeAcumulado() {
+		return puntajeAcumulado;
+	}
+
+	
+	public static void setPuntajeAcumulado(boolean puntajeAcumulado) {
+		Participante.puntajeAcumulado = puntajeAcumulado;
+	}
 	/**
 	 * Devuelve el lugar que se le asignó al participante.
 	 * 

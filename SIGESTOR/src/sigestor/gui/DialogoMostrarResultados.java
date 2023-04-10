@@ -147,14 +147,14 @@ public class DialogoMostrarResultados extends JDialog {
 	/**
 	 * Botón <code>Exportar resultados</code>.
 	 * 
-	 * @see #accionBotonExportarResultados()
+	 * @see #accionExportarResultados()
 	 */
 	private JButton botonExportarResultados;
 
 	/**
 	 * Botón <code>Salir</code>.
 	 * 
-	 * @see #accionBtnSalir()
+	 * @see #accionSalir()
 	 */
 	private JButton botonSalir;
 
@@ -234,9 +234,11 @@ public class DialogoMostrarResultados extends JDialog {
 	/**
 	 * Constructor en el que se inicializa el diálogo.
 	 * 
-	 * @param principal               Recibe un objeto de tipo ventanaPrincipal el
-	 *                                cual contiene el objeto de tipo torneo.
-	 * @param indiceMostrarResultados El ciclo a mostrar los resultados.
+	 * @param principal
+	 *            Recibe un objeto de tipo ventanaPrincipal el cual contiene el
+	 *            objeto de tipo torneo.
+	 * @param indiceMostrarResultados
+	 *            El ciclo a mostrar los resultados.
 	 */
 	public DialogoMostrarResultados(VentanaPrincipal principal, int indiceMostrarResultados) {
 		super(principal, "Reporte de resultados");
@@ -742,8 +744,10 @@ public class DialogoMostrarResultados extends JDialog {
 	 * Obtiene de la base de datos la información correspondiente de cada
 	 * participante.
 	 * 
-	 * @param listaEncuentros    La lista de encuentros del ciclo seleccionado.
-	 * @param listaParticipantes La lista de participantes del torneo.
+	 * @param listaEncuentros
+	 *            La lista de encuentros del ciclo seleccionado.
+	 * @param listaParticipantes
+	 *            La lista de participantes del torneo.
 	 */
 	private void obtenerResultadosCiclo(ArrayList<Encuentro> listaEncuentros,
 			ArrayList<Participante> listaParticipantes) {
@@ -796,6 +800,12 @@ public class DialogoMostrarResultados extends JDialog {
 		}
 	}
 
+	/**
+	 * Desactiva las columnas de la tabla.
+	 * 
+	 * @param i
+	 *            Posicion de la fila de la tabla.
+	 */
 	private void desactivarColumnasTabla(int i) {
 		this.etiquetaParticipanteFinal[i].setVisible(false);
 		this.etiquetaNumeroFinal[i].setVisible(false);
@@ -809,7 +819,8 @@ public class DialogoMostrarResultados extends JDialog {
 	/**
 	 * Obtiene al participante registrado en el torneo.
 	 * 
-	 * @param numeroParticipante Identificador unico del participante.
+	 * @param numeroParticipante
+	 *            Identificador unico del participante.
 	 * @return Retorna al participante.
 	 */
 	private Participante obtenerParticipante(int numeroParticipante) {
@@ -825,7 +836,8 @@ public class DialogoMostrarResultados extends JDialog {
 	 * Permite obtener los datos generales del torneo y mostrarlos en la parte
 	 * superior de la pantalla en su respectivo componente.
 	 * 
-	 * @param torneo Información contenida del torneo.
+	 * @param torneo
+	 *            Información contenida del torneo.
 	 */
 	private void mostrarDatosGenerales(Torneo torneo) {
 		DateFormat f = DateFormat.getDateInstance(DateFormat.FULL);
