@@ -95,14 +95,14 @@ public class DialogoResultadosFinales extends JDialog {
 	/**
 	 * Botón <code>Exportar resultados</code>.
 	 * 
-	 * @see #accionBtnExportarResultados()
+	 * @see #accionExportarResultados()
 	 */
 	private JButton botonExportar;
 
 	/**
 	 * Botón <code>Salir</code>.
 	 * 
-	 * @see #accionBtnSalir()
+	 * @see #accionSalir()
 	 */
 	private JButton botonSalir;
 	/**
@@ -165,7 +165,6 @@ public class DialogoResultadosFinales extends JDialog {
 
 		Action accionAyuda = new AbstractAction("Reporte de resultados finales del torneo", null) {
 			private static final long serialVersionUID = 1L;
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				accionAyuda();
