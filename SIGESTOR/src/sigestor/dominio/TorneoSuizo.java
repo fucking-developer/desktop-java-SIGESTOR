@@ -30,6 +30,7 @@ import sigestor.excepcion.ExcepcionCapturarResultados;
  * @see AlgoritmoTorneo
  */
 public class TorneoSuizo extends AlgoritmoTorneo {
+	
 	/**
 	 * Inicializa las variables con un valor por defecto y asigna a la variable
 	 * <code>torneo</code> el torneo recibido.
@@ -212,7 +213,6 @@ public class TorneoSuizo extends AlgoritmoTorneo {
 		return encuentrosTotales;
 	}
 
-
 	/**
 	 * Intercambia las posiciones de 2 jugadores empatados si el ganador está una
 	 * posición abajo del jugador con quien empató, de lo contrario no realiza
@@ -391,19 +391,18 @@ public class TorneoSuizo extends AlgoritmoTorneo {
 	 * @throws ExcepcionBaseDatos
 	 *             Si ocurre un problema con la base de datos.
 	 * @throws ExcepcionBaseDatosEncuentro
-	 *             Si ocurre un problema al insertar en la tabla
-	 *             <code>encuentros</code>.
+	 *             Si ocurre un problema al insertar en la tabla<code>encuentros</code>.
 	 * @throws ExcepcionBaseDatosCiclo
 	 *             Si ocurre un error al insertar en la tabla <code>ciclos</code>.
+	 * @throws ExcepcionBaseDatosTorneo
+	 *             Si ocurre un error al insertar en la tabla <code>suizo</code>.
 	 */
-	public void iniciarTorneo(TorneoSuizo torneoSuizo)
-			throws ExcepcionBaseDatos, ExcepcionBaseDatosEncuentro, ExcepcionBaseDatosCiclo {
-		try {
-			BaseDatosTorneo bdt = new BaseDatosTorneo(torneo.getNombreArchivo());
-			bdt.insertarTorneoSuizo(torneoSuizo);
-		} catch (ExcepcionBaseDatosTorneo e) {
-		}
-		torneo.getAlgoritmoTorneo().setNumeroCiclos(torneoSuizo.getNumeroCiclos());
-		torneoSuizo.realizarEncuentros();
+	public void iniciarTorneo()
+			throws ExcepcionBaseDatos, ExcepcionBaseDatosEncuentro, ExcepcionBaseDatosCiclo, ExcepcionBaseDatosTorneo {
+		BaseDatosTorneo bdt = new BaseDatosTorneo(torneo.getNombreArchivo());
+		bdt.insertarTorneoSuizo(this);
+		this.setCiclos(new ArrayList<Ciclo>());
+		torneo.setAlgoritmoTorneo(this);
+		this.realizarEncuentros();
 	}
 }

@@ -361,7 +361,6 @@ public class BaseDatosTorneo extends BaseDatos {
 	 *             ciclos en la tabla <code>suizo</code> de la base de datos.
 	 */
 	public void insertarTorneoSuizo(TorneoSuizo torneoSuizo) throws ExcepcionBaseDatos, ExcepcionBaseDatosTorneo {
-
 		realizarConexion();
 		int resultado = realizarAccion("INSERT INTO suizo VALUES(" + torneoSuizo.getNumeroCiclos() + ")");
 		cerrarConexion();

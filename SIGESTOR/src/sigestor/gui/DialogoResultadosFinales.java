@@ -139,14 +139,16 @@ public class DialogoResultadosFinales extends JDialog {
 
 		panelBase.setLayout(new GridLayout(1, 1));
 		panelAuxiliar.setLayout(null);
+		
 		if (principal.getTorneoActual().getTipoTorneo().contains("Suizo")) {
 			TorneoSuizo ts = new TorneoSuizo(principal.getTorneoActual());
 			ts.desempatarParticipantes();
+		
 		}else if((principal.getTorneoActual().getTipoTorneo().contains("Eliminación directa"))){
 			TorneoEliminacionDirecta te = new TorneoEliminacionDirecta(principal.getTorneoActual());
 			te.desempatarParticipantes();
-		}
-		else {
+		
+		}else {
 			TorneoRoundRobin tr = new TorneoRoundRobin(principal.getTorneoActual());
 			tr.desempatarParticipantes();
 		}

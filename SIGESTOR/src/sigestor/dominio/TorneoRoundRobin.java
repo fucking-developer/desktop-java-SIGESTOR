@@ -17,8 +17,9 @@ import sigestor.excepcion.ExcepcionCapturarResultados;
  * <code>AlgoritmoTorneo</code>.
  * <p>
  * 
- * @version 19/03/2023
+ * @version 05/04/2023
  * 
+ * @author Jennifer Cortés Pérez
  * @author Jonathan Eduardo Ibarra Martínez
  * @author Hernán Sesaí Lopéz Aragón
  * @author Francisco Samuel Reyes Cortes
@@ -33,12 +34,11 @@ public class TorneoRoundRobin extends AlgoritmoTorneo {
 	private int numeroVueltas;
 
 	/**
-	 * @author Francisco Samuel Reyes Cortes
+	 * Inicializa las variables con un valor por defecto y asigna a la variable
+	 * <code>torneo</code> el torneo recibido.
 	 * 
-	 *         Constructor en el que se inicializa la variable
-	 *         <code>numeroVueltas</code>.
 	 * @param torneo
-	 *            Objeto de la clase <code>Torneo</code>.
+	 *            Contiene los datos generales del torneo.
 	 */
 	public TorneoRoundRobin(Torneo torneo) {
 		super(torneo);
@@ -46,10 +46,9 @@ public class TorneoRoundRobin extends AlgoritmoTorneo {
 	}
 
 	/**
-	 * Método que sirver para devolver el valor de la variable
-	 * <code>numeroVueltas</code>.
+	 * Devuelve el valor de la variable <code>numeroVueltas</code>.
 	 * 
-	 * @return Número de veces que se enfrentarían los participantes.
+	 * @return Número de veces que se enfrentaran los participantes.
 	 */
 	public int getNumeroVueltas() {
 		return numeroVueltas;
@@ -93,24 +92,26 @@ public class TorneoRoundRobin extends AlgoritmoTorneo {
 	 *             Si ocurre un problema con la base de datos.
 	 * @throws ExcepcionBaseDatosTorneo
 	 *             Si ocurre un problema al insertar en la tabla
-	 *             <code>encuentros</code>.
+	 *             <code>roundRobin</code>.
 	 * @throws ExcepcionBaseDatosEncuentro
 	 *             Si ocurre un problema al insertar en la tabla
 	 *             <code>encuentros</code>.
 	 * @throws ExcepcionBaseDatosCiclo
 	 *             Si ocurre un error al insertar en la tabla <code>ciclos</code>.
 	 * @throws ExcepcionCapturarResultados
+	 *             Si ocurre un error al realizar los encuentros.
 	 */
 	public void iniciarTorneo() throws ExcepcionBaseDatos, ExcepcionBaseDatosTorneo, ExcepcionBaseDatosEncuentro,
 			ExcepcionBaseDatosCiclo, ExcepcionCapturarResultados {
 		BaseDatosTorneo bdt = new BaseDatosTorneo(torneo.getNombreArchivo());
 		bdt.insertarTorneoRoundRobin(this);
+		this.setCiclos(new ArrayList<Ciclo>());
+		torneo.setAlgoritmoTorneo(this);
 		this.realizarEncuentros();
-		// Participante.setPuntajeAcumulado(true);
 	}
 
 	/**
-	 * Asigana los encuentros que tendrá cada ciclo del torneo entre los
+	 * Asigna los encuentros que tendrá cada ciclo del torneo entre los
 	 * participantes registrados.
 	 * 
 	 * @throws ExcepcionBaseDatosEncuentro
@@ -121,15 +122,11 @@ public class TorneoRoundRobin extends AlgoritmoTorneo {
 	 * @throws ExcepcionBaseDatosCiclo
 	 *             Si ocurre un error al insertar en la tabla <code>ciclos</code>.s
 	 * @throws ExcepcionCapturarResultados
+	 *             Si ocurre un error al realizar los encuentros.
 	 * @throws ExcepcionBaseDatosTorneo
+	 *             Si ocurre un error al obtener
 	 */
-	@Override
 	public void realizarEncuentros() throws ExcepcionBaseDatos, ExcepcionBaseDatosEncuentro, ExcepcionBaseDatosCiclo,
-			ExcepcionCapturarResultados, ExcepcionBaseDatosTorneo {
-		parearParticipantes();
-	}
-
-	private void parearParticipantes() throws ExcepcionBaseDatos, ExcepcionBaseDatosEncuentro, ExcepcionBaseDatosCiclo,
 			ExcepcionCapturarResultados, ExcepcionBaseDatosTorneo {
 		int numeroParticipantes = this.getTorneo().getListaParticipantes().size();
 		int numeroPareos = numeroParticipantes / 2;
@@ -415,7 +412,7 @@ public class TorneoRoundRobin extends AlgoritmoTorneo {
 	 *             participante en la tabla <code>participante</code> de la base de
 	 *             datos.
 	 */
-	
+
 	private void posicionarParticipante(ArrayList<Participante> participantes)
 			throws ExcepcionBaseDatos, ExcepcionBaseDatosParticipante {
 		BaseDatosParticipante bdp = new BaseDatosParticipante(this.getTorneo().getNombreArchivo());

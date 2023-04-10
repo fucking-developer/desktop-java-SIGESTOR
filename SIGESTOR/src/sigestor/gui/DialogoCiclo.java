@@ -420,11 +420,9 @@ public class DialogoCiclo extends JDialog {
 		botonHacer.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
 				.put((KeyStroke) accionHacer.getValue(Action.ACCELERATOR_KEY), "hacer");
 		botonHacer.setBounds(930, 175, 100, 30);
-		if (getCicloSeleccionado() == torneo.getCicloActual() - 1 && torneo.getTipoTorneo().contains("Round Robin")) {
-			botonHacer.setEnabled(false);
-		} else {
-			botonHacer.setEnabled(true);
-		}
+
+		botonHacer.setEnabled(true);
+
 		panelNorte.add(botonHacer);
 
 		JLabel etiquetaElegirCiclo = new JLabel(
@@ -870,90 +868,86 @@ public class DialogoCiclo extends JDialog {
 	 * resultados del ciclo anterior. Solo estará habilitado hasta que llegue a la
 	 * misma cantidad de ciclos establecido para el torneo.
 	 */
+	
+	/**
+	 * Encargado de pasar al siguiente ciclo considerando los casos para cada tipo de torneo.
+	 */
 	private void accionHacer() {
-		// FIXME
-		if (!torneo.getTipoTorneo().equals("Eliminación directa")) {
-			if (this.torneo.getTipoTorneo().equals("Suizo")) {
-				TorneoSuizo ts = new TorneoSuizo(torneo);
-				if (ts.verificarEncuentros()) {
-					ts.desempatarParticipantes();
-					try {
-						ts.realizarEncuentros();
-					} catch (ExcepcionBaseDatos e) {
-						JOptionPane.showMessageDialog(null, e.getMessage(), "Ciclos", JOptionPane.ERROR_MESSAGE);
-					} catch (ExcepcionBaseDatosEncuentro e) {
-						JOptionPane.showMessageDialog(null, e.getMessage(), "Ciclos", JOptionPane.ERROR_MESSAGE);
-					} catch (ExcepcionBaseDatosCiclo e) {
-						JOptionPane.showMessageDialog(null, e.getMessage(), "Ciclos", JOptionPane.ERROR_MESSAGE);
-					}
-					JOptionPane.showMessageDialog(null,
-							"El(la) " + torneo.getDatosPersonalizacion().getNombreCiclo(
-									Personalizacion.MAYUSCULA_SINGULAR) + " se ha realizado exitosamente.",
-							"Parear", JOptionPane.INFORMATION_MESSAGE);
-				} else {
-					JOptionPane.showMessageDialog(null, "El sistema no ha podido realizar "
-							+ torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MINUSCULA_SINGULAR)
-							+ " \n porque no ha finalizado "
-							+ torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MINUSCULA_SINGULAR) + "."
-							+ " \n Por favor capture todos los resultados.",
-							"Encarar" + torneo.getDatosPersonalizacion()
-									.getNombreParticipante(Personalizacion.MINUSCULA_PLURAL).substring(8),
-							JOptionPane.ERROR_MESSAGE);
+		if (this.torneo.getTipoTorneo().equals("Suizo")) {
+			TorneoSuizo ts = new TorneoSuizo(torneo);
+			if (ts.verificarEncuentros()) {
+				ts.desempatarParticipantes();
+				try {
+					ts.realizarEncuentros();
+				} catch (ExcepcionBaseDatos e) {
+					JOptionPane.showMessageDialog(null, e.getMessage(), "Ciclos", JOptionPane.ERROR_MESSAGE);
+				} catch (ExcepcionBaseDatosEncuentro e) {
+					JOptionPane.showMessageDialog(null, e.getMessage(), "Ciclos", JOptionPane.ERROR_MESSAGE);
+				} catch (ExcepcionBaseDatosCiclo e) {
+					JOptionPane.showMessageDialog(null, e.getMessage(), "Ciclos", JOptionPane.ERROR_MESSAGE);
 				}
-			} else if (this.torneo.getTipoTorneo().contains("Eliminación directa")) {
-				TorneoEliminacionDirecta ted = new TorneoEliminacionDirecta(torneo);
-				if (ted.verificarEncuentros()) {
-					ted.desempatarParticipantes();
-					try {
-						ted.realizarEncuentros();
-					} catch (ExcepcionBaseDatos e) {
-						JOptionPane.showMessageDialog(null, e.getMessage(), "Ciclos", JOptionPane.ERROR_MESSAGE);
-					} catch (ExcepcionBaseDatosEncuentro e) {
-						JOptionPane.showMessageDialog(null, e.getMessage(), "Ciclos", JOptionPane.ERROR_MESSAGE);
-					} catch (ExcepcionBaseDatosCiclo e) {
-						JOptionPane.showMessageDialog(null, e.getMessage(), "Ciclos", JOptionPane.ERROR_MESSAGE);
-					} catch (ExcepcionBaseDatosTorneo e) {
-						JOptionPane.showMessageDialog(null, e.getMessage(), "Ciclos", JOptionPane.ERROR_MESSAGE);
-					} catch (ExcepcionCapturarResultados e) {
-						JOptionPane.showMessageDialog(null, e.getMessage(), "Ciclos", JOptionPane.ERROR_MESSAGE);
-					}
-					JOptionPane.showMessageDialog(null,
-							"El(la) " + torneo.getDatosPersonalizacion().getNombreCiclo(
-									Personalizacion.MAYUSCULA_SINGULAR) + " se ha realizado exitosamente.",
-							"Parear", JOptionPane.INFORMATION_MESSAGE);
-				} else {
-					JOptionPane.showMessageDialog(null, "El sistema no ha podido realizar "
-							+ torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MINUSCULA_SINGULAR)
-							+ " \n porque no ha finalizado "
-							+ torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MINUSCULA_SINGULAR) + "."
-							+ " \n Por favor capture todos los resultados.",
-							"Encarar" + torneo.getDatosPersonalizacion()
-									.getNombreParticipante(Personalizacion.MINUSCULA_PLURAL).substring(8),
-							JOptionPane.ERROR_MESSAGE);
-				}
+				JOptionPane.showMessageDialog(null,
+						"El(la) " + torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MAYUSCULA_SINGULAR)
+								+ " se ha realizado exitosamente.",
+						"Parear", JOptionPane.INFORMATION_MESSAGE);
 			} else {
-				if (this.torneo.getCicloActual() < this.torneo.getAlgoritmoTorneo().getNumeroCiclos()) {
-					this.torneo.setCicloActual(torneo.getCicloActual() + 1);
-					this.torneo.getAlgoritmoTorneo().actualizarCiclo(this.torneo.getNombreArchivo());
-					this.setCicloSeleccionado(this.torneo.getCicloActual() + 1);
-					JOptionPane.showMessageDialog(null,
-							"El(la) " + torneo.getDatosPersonalizacion().getNombreCiclo(
-									Personalizacion.MAYUSCULA_SINGULAR) + " se ha realizado exitosamente.",
-							"Parear", JOptionPane.INFORMATION_MESSAGE);
-				}
+				JOptionPane.showMessageDialog(null,
+						"El sistema no ha podido realizar "
+								+ torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MINUSCULA_SINGULAR)
+								+ " \n porque no ha finalizado "
+								+ torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MINUSCULA_SINGULAR)
+								+ "." + " \n Por favor capture todos los resultados.",
+						"Encarar" + torneo.getDatosPersonalizacion()
+								.getNombreParticipante(Personalizacion.MINUSCULA_PLURAL).substring(8),
+						JOptionPane.ERROR_MESSAGE);
 			}
-			activarDesactivarBotonHacer();
-			etiquetaCicloActual
-					.setText(torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MAYUSCULA_SINGULAR)
-							+ " actual: " + torneo.getCicloActual());
-
-			if (getCicloSeleccionado() == torneo.getCicloActual() - 1
-					&& torneo.getTipoTorneo().contains("Round Robin")) {
-				// actualizarCombo();
+		} else if (this.torneo.getTipoTorneo().contains("Eliminación directa")) {
+			TorneoEliminacionDirecta ted = new TorneoEliminacionDirecta(torneo);
+			if (ted.verificarEncuentros()) {
+				ted.desempatarParticipantes();
+				try {
+					ted.realizarEncuentros();
+				} catch (ExcepcionBaseDatos e) {
+					JOptionPane.showMessageDialog(null, e.getMessage(), "Ciclos", JOptionPane.ERROR_MESSAGE);
+				} catch (ExcepcionBaseDatosEncuentro e) {
+					JOptionPane.showMessageDialog(null, e.getMessage(), "Ciclos", JOptionPane.ERROR_MESSAGE);
+				} catch (ExcepcionBaseDatosCiclo e) {
+					JOptionPane.showMessageDialog(null, e.getMessage(), "Ciclos", JOptionPane.ERROR_MESSAGE);
+				} catch (ExcepcionBaseDatosTorneo e) {
+					JOptionPane.showMessageDialog(null, e.getMessage(), "Ciclos", JOptionPane.ERROR_MESSAGE);
+				} catch (ExcepcionCapturarResultados e) {
+					JOptionPane.showMessageDialog(null, e.getMessage(), "Ciclos", JOptionPane.ERROR_MESSAGE);
+				}
+				JOptionPane.showMessageDialog(null,
+						"El(la) " + torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MAYUSCULA_SINGULAR)
+								+ " se ha realizado exitosamente.",
+						"Parear", JOptionPane.INFORMATION_MESSAGE);
 			} else {
-				actualizarCombo();
+				JOptionPane.showMessageDialog(null,
+						"El sistema no ha podido realizar "
+								+ torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MINUSCULA_SINGULAR)
+								+ " \n porque no ha finalizado "
+								+ torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MINUSCULA_SINGULAR)
+								+ "." + " \n Por favor capture todos los resultados.",
+						"Encarar" + torneo.getDatosPersonalizacion()
+								.getNombreParticipante(Personalizacion.MINUSCULA_PLURAL).substring(8),
+						JOptionPane.ERROR_MESSAGE);
+			}
+		} else {
+			if (this.torneo.getCicloActual() < this.torneo.getAlgoritmoTorneo().getNumeroCiclos()) {
+				this.torneo.setCicloActual(torneo.getCicloActual() + 1);
+				this.torneo.getAlgoritmoTorneo().actualizarCiclo(this.torneo.getNombreArchivo());
+				this.setCicloSeleccionado(this.torneo.getCicloActual() + 1);
+				JOptionPane.showMessageDialog(null,
+						"El(la) " + torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MAYUSCULA_SINGULAR)
+								+ " se ha realizado exitosamente.",
+						"Parear", JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
+		actualizarCombo();
+		activarDesactivarBotonHacer();
+		etiquetaCicloActual.setText(torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MAYUSCULA_SINGULAR)
+				+ " actual: " + torneo.getCicloActual());
 
 	}
 

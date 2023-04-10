@@ -998,7 +998,6 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 					ExcepcionResultadosFinales.MENSAJE_EXCEPCION_RESULTADOS_FINALES_INCOMPLETOS, "Resultados finales",
 					JOptionPane.ERROR_MESSAGE);
 		}
-		new DialogoResultadosFinales(this);
 	}
 
 	/**
