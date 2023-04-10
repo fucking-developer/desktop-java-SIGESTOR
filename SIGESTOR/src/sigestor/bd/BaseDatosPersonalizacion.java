@@ -120,7 +120,7 @@ public class BaseDatosPersonalizacion extends BaseDatos {
 	 *                                           <code>personalizacion</code> de la
 	 *                                           base de datos.
 	 */
-	public Personalizacion obtenerPersonalización() throws ExcepcionBaseDatos, ExcepcionBaseDatosPersonalizacion {
+	public Personalizacion obtenerPersonalizacion() throws ExcepcionBaseDatos, ExcepcionBaseDatosPersonalizacion {
 		try {
 			realizarConexion();
 			Personalizacion personalizacion = new Personalizacion();

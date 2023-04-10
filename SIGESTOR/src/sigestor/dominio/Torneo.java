@@ -559,7 +559,7 @@ public class Torneo {
         this.setFechaFinalTorneo(torneoConsultado.getFechaFinalTorneo());
         this.setCicloActual(torneoConsultado.getCicloActual());
         this.setCriteriosDesempate(baseDatosCriterios.obtenerCriteriosDesempate());
-        this.setDatosPersonalizacion(baseDatosPersonalizacion.obtenerPersonalización());
+        this.setDatosPersonalizacion(baseDatosPersonalizacion.obtenerPersonalizacion());
         this.setListaParticipantes(baseDatosParticipantes.obtenerParticipante());
 
         AlgoritmoTorneo algoritmo = null;

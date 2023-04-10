@@ -1,9 +1,7 @@
-package sigestor.dominio;
+﻿package sigestor.dominio;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
-
 import sigestor.bd.BaseDatosCiclo;
 import sigestor.bd.BaseDatosEncuentro;
 import sigestor.bd.BaseDatosParticipante;
