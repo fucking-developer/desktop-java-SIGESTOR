@@ -70,7 +70,7 @@ import sigestor.excepcion.*;
  * <li><code>serialVersionUID</code> Para el número de versión de la clase.</li>
  * </ul>
  * 
- * @version 04/04/2023
+ * @version 11/04/2023
  * 
  * @author Jonathan Eduardo Ibarra Martínez
  * @author Ricky Didier Peralta Reyes
@@ -786,6 +786,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 	 * Deshabilitará el continuar con la adminstración del torneo una vez iniciado.
 	 */
 	private void accionIniciarTorneo() {
+		System.out.println(getTorneoActual().getTipoTorneo());
 		try {
 			getTorneoActual().validarTorneo();
 			getTorneoActual().getDatosPersonalizacion().validarPersonalizacion();

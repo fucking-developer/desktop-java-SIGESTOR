@@ -1,4 +1,4 @@
-ï»¿package sigestor.dominio;
+package sigestor.dominio;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,8 +15,8 @@ import sigestor.excepcion.ExcepcionCapturarResultados;
 
 /**
  * <code>AlgoritmoTorneo</code> Sirve para realizar las operaciones del torneo,
- * como: crear los ciclos segÃºn lo establecido en el sistema EliminaciÃ³n
- * directa, los encuentros segÃºn el sistema EliminaciÃ³n directa, desempatar
+ * como: crear los ciclos según lo establecido en el sistema Eliminación
+ * directa, los encuentros según el sistema Eliminación directa, desempatar
  * jugadores y realizar reportes.
  * 
  * <p>
@@ -36,8 +36,8 @@ import sigestor.excepcion.ExcepcionCapturarResultados;
 public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 
 	/**
-	 * Sirve para determinar que tipo de torneo de EliminaciÃ³n Directa se va a
-	 * efectuar true = EliminaciÃ³n simple o directa false = eliminaciÃ³n doble
+	 * Sirve para determinar que tipo de torneo de Eliminación Directa se va a
+	 * efectuar true = Eliminación simple o directa false = eliminación doble
 	 */
 	public boolean esSimple;
 
@@ -53,10 +53,10 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 	}
 
 	/**
-	 * obtiene el tipo de EliminaciÃ³n Directa
+	 * obtiene el tipo de Eliminación Directa
 	 * 
 	 * @param true
-	 *            = EliminaciÃ³n Directa simple false = EliminaciÃ³n Directa doble
+	 *            = Eliminación Directa simple false = Eliminación Directa doble
 	 */
 
 	public void setTipoEliminacion(boolean tipoEliminacion) {
@@ -68,12 +68,12 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 	}
 
 	/**
-	 * Obtiene la cantidad mÃ¡xima de ciclos del torneo segÃºn el algoritmo general
-	 * del sistema EliminaciÃ³n Directa.
+	 * Obtiene la cantidad máxima de ciclos del torneo según el algoritmo general
+	 * del sistema Eliminación Directa.
 	 * 
 	 * @param numeroParticipantes
 	 *            Cantidad de participantes inscritos en el torneo.
-	 * @return El nÃºmero mÃ¡ximo de ciclos que tendrÃ¡ el torneo.
+	 * @return El número máximo de ciclos que tendrá el torneo.
 	 */
 	@Override
 	public int calcularNumeroCiclos(int numeroParticipantes) {
@@ -85,9 +85,9 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 	}
 
 	/**
-	 * Genera inicialmente los encuentros del primer ciclo y despuÃ©s los encuentros
+	 * Genera inicialmente los encuentros del primer ciclo y después los encuentros
 	 * del siguiente ciclo una vez terminado el ciclo anterior. FIXME agregar
-	 * documentaciÃ²n
+	 * documentaciòn
 	 * 
 	 * @throws ExcepcionBaseDatosTorneo
 	 * @throws ExcepcionCapturarResultados
@@ -156,7 +156,7 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 									break cicloromper;
 								}
 								break;
-							default: // no se ha seleccionado ningÃºn criterio
+							default: // no se ha seleccionado ningún criterio
 							}
 
 						}
@@ -169,16 +169,16 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 	}
 
 	/**
-	 * Intercambia las posiciones de 2 jugadores empatados si el ganador estÃ¡ una
-	 * posiciÃ³n abajo del jugador con quien empatÃ³, de lo contrario no realiza
-	 * ningÃºn movimiento.
+	 * Intercambia las posiciones de 2 jugadores empatados si el ganador está una
+	 * posición abajo del jugador con quien empató, de lo contrario no realiza
+	 * ningún movimiento.
 	 * 
 	 * @param numeroP1
 	 *            Primer participante empatado.
 	 * @param numP2
 	 *            Segundo participante empatado.
 	 * @param numPGanador
-	 *            El participante que obtuvo mÃ¡s puntaje con el criterio de
+	 *            El participante que obtuvo más puntaje con el criterio de
 	 *            desempate aplicado.
 	 * @return Lista de participantes ordenada.
 	 */
@@ -400,12 +400,12 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 	}
 
 	/**
-	 * Calcula por medio de recursividad si el nÃºmero dado es potencia de dos
+	 * Calcula por medio de recursividad si el número dado es potencia de dos
 	 * 
 	 * @param numero
 	 *            numero a evaluar si es potencia de dos.
 	 * 
-	 * @return True si el nÃºmero es potencia de dos, False si no es potencia de dos
+	 * @return True si el número es potencia de dos, False si no es potencia de dos
 	 * 
 	 */
 	private boolean esPotenciaDeDos(double numero) {
@@ -438,7 +438,7 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 	}
 
 	/**
-	 * Inicia un torneo EliminaciÃ³n Directa e inserta el numero de ciclos en la
+	 * Inicia un torneo Eliminación Directa e inserta el numero de ciclos en la
 	 * tabla <code>suizo</code>.
 	 * 
 	 * @param torneoEliminacionDirecta
