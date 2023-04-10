@@ -122,28 +122,28 @@ public class DialogoCiclo extends JDialog {
 	/**
 	 * Botón <code>ExportarRonda</code>.
 	 * 
-	 * @see #ExportarRonda()
+	 * @see #accionExportarRonda()
 	 */
 	private JButton botonExportar;
 
 	/**
 	 * Botón <code>Guardar</code>.
 	 * 
-	 * @see #accionBtnGuardar()
+	 * @see #accionGuardarFechas()
 	 */
 	private JButton botonGuardar;
 
 	/**
 	 * Botón <code>Salir</code>.
 	 * 
-	 * @see #accionBotonSalir()
+	 * @see #accionSalir()
 	 */
 	private JButton botonSalir;
 
 	/**
 	 * Botón <code>Hacer</code>.
 	 * 
-	 * @see #accionBotonHacer()
+	 * @see #accionHacer()
 	 */
 	private JButton botonHacer;
 

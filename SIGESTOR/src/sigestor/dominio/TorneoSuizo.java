@@ -386,8 +386,6 @@ public class TorneoSuizo extends AlgoritmoTorneo {
 	 * Inicia un torneo suizo e inserta el numero de ciclos en la tabla
 	 * <code>suizo</code>.
 	 * 
-	 * @param torneoSuizo
-	 *            Recibe el objeto <code>TorneoSuizo</code>. para iniciar el torneo.
 	 * @throws ExcepcionBaseDatos
 	 *             Si ocurre un problema con la base de datos.
 	 * @throws ExcepcionBaseDatosEncuentro

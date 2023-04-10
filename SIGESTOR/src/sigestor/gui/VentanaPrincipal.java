@@ -786,7 +786,6 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 	 * Deshabilitará el continuar con la adminstración del torneo una vez iniciado.
 	 */
 	private void accionIniciarTorneo() {
-		System.out.println(getTorneoActual().getTipoTorneo());
 		try {
 			getTorneoActual().validarTorneo();
 			getTorneoActual().getDatosPersonalizacion().validarPersonalizacion();

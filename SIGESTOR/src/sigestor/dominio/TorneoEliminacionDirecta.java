@@ -73,7 +73,7 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 	 * 
 	 * @param numeroParticipantes
 	 *            Cantidad de participantes inscritos en el torneo.
-	 * @return El n�mero máximo de ciclos que tendrá el torneo.
+	 * @return El número máximo de ciclos que tendrá el torneo.
 	 */
 	@Override
 	public int calcularNumeroCiclos(int numeroParticipantes) {
@@ -85,7 +85,7 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 	}
 
 	/**
-	 * Genera inicialmente los encuentros del primer ciclo y despu�s los encuentros
+	 * Genera inicialmente los encuentros del primer ciclo y después los encuentros
 	 * del siguiente ciclo una vez terminado el ciclo anterior. FIXME agregar
 	 * documentación
 	 * 
@@ -169,7 +169,7 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 
 	/**
 	 * Intercambia las posiciones de 2 jugadores empatados si el ganador está una
-	 * posición abajo del jugador con quien empat�, de lo contrario no realiza
+	 * posición abajo del jugador con quien empaté, de lo contrario no realiza
 	 * ningún movimiento.
 	 * 
 	 * @param numeroP1
@@ -448,9 +448,6 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 	 * Inicia un torneo Eliminación Directa e inserta el numero de ciclos en la
 	 * tabla <code>suizo</code>.
 	 * 
-	 * @param torneoEliminacionDirecta
-	 *            Recibe el objeto <code>TorneoEliminacionDirecta</code>. para
-	 *            iniciar el torneo.
 	 * @throws ExcepcionBaseDatos
 	 *             Si ocurre un problema con la base de datos.
 	 * @throws ExcepcionBaseDatosEncuentro
