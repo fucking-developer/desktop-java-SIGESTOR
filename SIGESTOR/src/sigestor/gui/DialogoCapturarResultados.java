@@ -328,13 +328,11 @@ public class DialogoCapturarResultados extends JDialog {
 		personalizacion = torneo.getDatosPersonalizacion();
 		validacionMarcadores = ventanaPrincipal.getTorneoActual().getDatosPersonalizacion().isExistenciaMarcador();
 		listaCiclos = torneo.getAlgoritmoTorneo().getCiclos();
-		if (!torneo.getTipoTorneo().equals("Eliminación directa")) {
 			numeroPartidas = this.ventanaPrincipal.getTorneoActual().getAlgoritmoTorneo().getCiclos()
 					.get(this.ventanaPrincipal.getTorneoActual().getCicloActual() - 1).getEncuentroParticipantes()
 					.size();
 
-		}
-		// FIXME
+		
 		int auxImpar = 0;
 		if (participantes.size() % 2 != 0) {
 			auxImpar = 1;
@@ -626,9 +624,6 @@ public class DialogoCapturarResultados extends JDialog {
 		campoMarcadorFinal = new JTextField[numeroPartidas + auxImpar];
 		etiquetaFechaEncuentros = new JTextField[numeroPartidas + auxImpar];
 
-		// FIXME
-		if (!torneo.getAlgoritmoTorneo().equals("Eliminación directa")) {
-
 			for (int i = 0; i < numeroPartidas + auxImpar; i++) {
 				panelFilasTabla[i] = new JPanel();
 				panelFilasTabla[i].setLayout(new FlowLayout(1));
@@ -731,7 +726,7 @@ public class DialogoCapturarResultados extends JDialog {
 
 				panelCentralCentral.add(panelFilasTabla[i]);
 			}
-		}
+		
 		if (participantes.size() % 2 != 0) {
 			etiquetaNumeroInicial[numeroPartidas]
 					.setText(participantes.get(participantes.size() - 1).getNumeroParticipante() + "");
@@ -1051,14 +1046,12 @@ public class DialogoCapturarResultados extends JDialog {
 	 * @return Retorna al participante.
 	 */
 	private Participante obtenerParticipante(int numeroParticipante) {
-		if (!torneo.getTipoTorneo().equals("Eliminación directa")) {
+
 			for (Participante p : participantes) {
 				if (p.getNumeroParticipante() == numeroParticipante) {
 					return p;
 				}
 			}
-		}
-		// FIXME
 
 		return null;
 	}
@@ -1148,8 +1141,6 @@ public class DialogoCapturarResultados extends JDialog {
 	 * Obtiene toda la información de un ciclo al ser seleccionado en el combo.
 	 */
 	private void accionSeleccionarCiclo() {
-		// FIXME
-		if (!torneo.getTipoTorneo().equals("Eliminación directa")) {
 			ArrayList<Ciclo> listaCiclos = torneo.getAlgoritmoTorneo().getCiclos();
 			Ciclo ciclo = listaCiclos.get(comboSeleccionarCiclo.getSelectedIndex());
 			ArrayList<Encuentro> listaEncuentros = ciclo.getEncuentroParticipantes();
@@ -1160,7 +1151,7 @@ public class DialogoCapturarResultados extends JDialog {
 					+ (comboSeleccionarCiclo.getSelectedIndex() + 1));
 			etiquetaCicloActual.setText(
 					torneo.getDatosPersonalizacion().getNombreCiclo(1) + " actual: " + torneo.getCicloActual());
-		}
+		
 		habilitarBotones();
 	}
 
