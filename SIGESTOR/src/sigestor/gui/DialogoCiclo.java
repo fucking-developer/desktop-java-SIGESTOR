@@ -416,11 +416,7 @@ public class DialogoCiclo extends JDialog {
 		botonHacer.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
 		.put((KeyStroke) accionHacer.getValue(Action.ACCELERATOR_KEY), "hacer");
 		botonHacer.setBounds(930, 175, 100, 30);
-		if (getCicloSeleccionado() == torneo.getCicloActual() - 1 && torneo.getTipoTorneo().contains("Round Robin")) {
-			botonHacer.setEnabled(false);
-		} else {
-			botonHacer.setEnabled(true);
-		}
+		botonHacer.setEnabled(true);
 		panelNorte.add(botonHacer);
 
 		JLabel etiquetaElegirCiclo = new JLabel(
@@ -861,15 +857,10 @@ public class DialogoCiclo extends JDialog {
 	 * misma cantidad de ciclos establecido para el torneo.
 	 */
 	private void accionHacer() {
-		// FIXME
-		if (!torneo.getTipoTorneo().equals("Eliminación directa")) {
-
 			if (this.torneo.getTipoTorneo().contains("Suizo")) {
 				TorneoSuizo ts = new TorneoSuizo(torneo);
 				if (ts.verificarEncuentros()) {
-
 					ts.desempatarParticipantes();
-
 					try {
 						ts.realizarEncuentros();
 					} catch (ExcepcionBaseDatos e) {
@@ -904,19 +895,11 @@ public class DialogoCiclo extends JDialog {
 							"Parear", JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
+			actualizarCombo();
 			activarDesactivarBotonHacer();
 			etiquetaCicloActual
 			.setText(torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MAYUSCULA_SINGULAR)
 					+ " actual: " + torneo.getCicloActual());
-
-			if (getCicloSeleccionado() == torneo.getCicloActual() - 1
-					&& torneo.getTipoTorneo().contains("Round Robin")) {
-				// actualizarCombo();
-			} else {
-				actualizarCombo();
-			}
-
-		}
 	}
 
 	/**
