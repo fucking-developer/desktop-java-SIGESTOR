@@ -84,6 +84,7 @@ import sigestor.excepcion.ExcepcionUtilerias;
  * @author Luis Antonio Ruiz Sierra
  * @author Victor Triste Pérez
  * @author German Luis Cruz Martinez
+ * @author Eder Euclides Dionisio Diaz
  * 
  */
 public class DialogoCiclo extends JDialog {
