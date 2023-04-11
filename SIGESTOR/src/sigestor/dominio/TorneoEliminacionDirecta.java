@@ -147,7 +147,7 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 					desempate = new DesempateMarcadorParticipanteFinal();
 					participanteGanador = desempate.desempatar(p1, p2, participantes, obtenerEncuentrosTotales(),
 							torneo);
-					if (participanteGanador != null) {
+					if (participanteGanador != null) {1
 						participantes = intercambiarPosiciones(p1.getNumeroParticipante(), p2.getNumeroParticipante(),
 								participanteGanador.getNumeroParticipante());
 						break cicloromper;
