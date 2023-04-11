@@ -71,7 +71,7 @@ public class Participante implements Comparable<Participante> {
 	 */
 	private static boolean puntaje;
 
-	
+	//FIXME falta documentar
 	private static boolean puntajeAcumulado = false;
 
 	/**

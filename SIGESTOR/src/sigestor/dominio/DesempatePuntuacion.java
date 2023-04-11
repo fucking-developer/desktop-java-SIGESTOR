@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Sirve para implementar el criterio de desempate Puntuación.
  * <p>
  * 
- * @version 08/04/2023
+ * @version 11/04/2023
  * 
  * @author Eder Euclides Dionisio Diaz
  */

@@ -125,71 +125,32 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 
 	@Override
 	public void desempatarParticipantes() {
-/*		BaseDatosEncuentro bde = new BaseDatosEncuentro(torneo.getNombreArchivo());
-		BaseDatosCiclo bdc = new BaseDatosCiclo(torneo.getNombreArchivo());
-		ArrayList<Participante> participantes = torneo.getListaParticipantes();
-		ArrayList<String> criterios = torneo.getCriteriosDesempate().getListaCriteriosSeleccionados();
-		ArrayList<Encuentro> encuentrosParticipante = new ArrayList<Encuentro>();
-
-		try {
-			encuentrosParticipante = bde.obtenerEncuentros(bdc.obtenerCiclos(torneo).get(torneo.getCicloActual() - 1));
-		} catch (ExcepcionBaseDatos | ExcepcionCapturarResultados | ExcepcionBaseDatosEncuentro e) {
-			e.printStackTrace();
-		}
-
-		for (Encuentro encuentro : encuentrosParticipante) {
-			cicloromper: {
-				for (String criterio : criterios) {
-					switch (criterio) {
-					case "Puntuación":
-						Desempate desempate = new DesempatePuntuacion();
-						Participante participanteGanador = desempate.desempatar(
-								participantes.get(encuentro.getIdParticipanteInicial()),
-								participantes.get(encuentro.getIdParticipanteFinal()), participantes,
-								obtenerEncuentrosTotales(), torneo);
-						if (participanteGanador != null) {
-							participantes.get(participanteGanador.getNumeroParticipante()).setLugarParticipante(100);
-						}
-						break;
-					default: // no se ha seleccionado ningún criterio
-					}
-
-				}
-			}
-		}*/
-	}
-
-	/**
-	 * Intercambia las posiciones de 2 jugadores empatados si el ganador está una
-	 * posición abajo del jugador con quien empate, de lo contrario no realiza
-	 * ningún movimiento.
-	 * 
-	 * @param numeroP1
-	 *            Primer participante empatado.
-	 * @param numP2
-	 *            Segundo participante empatado.
-	 * @param numPGanador
-	 *            El participante que obtuvo más puntaje con el criterio de
-	 *            desempate aplicado.
-	 * @return Lista de participantes ordenada.
-	 */
-	private ArrayList<Participante> intercambiarPosiciones(int numeroP1, int numP2, int numPGanador) {
-
-		ArrayList<Participante> participantes = torneo.getListaParticipantes();
-
-		boolean encontrado = false;
-		int index = 0;
-
-		for (Participante p : participantes) {
-			if (numeroP1 == p.getNumeroParticipante() || numP2 == p.getNumeroParticipante()) {
-				if (encontrado && p.getNumeroParticipante() == numPGanador) {
-					Collections.swap(participantes, index, index - 1);
-				}
-				encontrado = true;
-			}
-			index++;
-		}
-		return participantes;
+		/*
+		 * BaseDatosEncuentro bde = new BaseDatosEncuentro(torneo.getNombreArchivo());
+		 * BaseDatosCiclo bdc = new BaseDatosCiclo(torneo.getNombreArchivo());
+		 * ArrayList<Participante> participantes = torneo.getListaParticipantes();
+		 * ArrayList<String> criterios =
+		 * torneo.getCriteriosDesempate().getListaCriteriosSeleccionados();
+		 * ArrayList<Encuentro> encuentrosParticipante = new ArrayList<Encuentro>();
+		 * 
+		 * try { encuentrosParticipante =
+		 * bde.obtenerEncuentros(bdc.obtenerCiclos(torneo).get(torneo.getCicloActual() -
+		 * 1)); } catch (ExcepcionBaseDatos | ExcepcionCapturarResultados |
+		 * ExcepcionBaseDatosEncuentro e) { e.printStackTrace(); }
+		 * 
+		 * for (Encuentro encuentro : encuentrosParticipante) { cicloromper: { for
+		 * (String criterio : criterios) { switch (criterio) { case "Puntuación":
+		 * Desempate desempate = new DesempatePuntuacion(); Participante
+		 * participanteGanador = desempate.desempatar(
+		 * participantes.get(encuentro.getIdParticipanteInicial()),
+		 * participantes.get(encuentro.getIdParticipanteFinal()), participantes,
+		 * obtenerEncuentrosTotales(), torneo); if (participanteGanador != null) {
+		 * participantes.get(participanteGanador.getNumeroParticipante()).
+		 * setLugarParticipante(100); } break; default: // no se ha seleccionado ningún
+		 * criterio }
+		 * 
+		 * } } }
+		 */
 	}
 
 	/**
@@ -355,10 +316,12 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 			} else if (encuentro.getResultadoEncuentro() == Encuentro.EMPATE) {
 				cicloromper: {
 					for (String criterio : criterios) {
+						Desempate desempate = new DesempatePuntuacion();
+						Participante participanteGanador = new Participante();
 						switch (criterio) {
 						case "Puntuación":
-							Desempate desempate = new DesempatePuntuacion();
-							Participante participanteGanador = desempate.desempatar(
+							desempate = new DesempatePuntuacion();
+							participanteGanador = desempate.desempatar(
 									participantes.get(encuentro.getIdParticipanteInicial()),
 									participantes.get(encuentro.getIdParticipanteFinal()), participantes,
 									obtenerEncuentrosTotales(), torneo);
@@ -369,6 +332,20 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 							}
 							break;
 						case "Marcador de participante final":
+							if (esSimple) {
+								// nada
+							} else {
+								desempate = new DesempatePuntuacion();
+								participanteGanador = desempate.desempatar(
+										participantes.get(encuentro.getIdParticipanteInicial()),
+										participantes.get(encuentro.getIdParticipanteFinal()), participantes,
+										obtenerEncuentrosTotales(), torneo);
+								if (participanteGanador != null) {
+									participantes.get(participanteGanador.getNumeroParticipante())
+											.setLugarParticipante(100);
+									break cicloromper;
+								}
+							}
 							break;
 						default:
 							if (Math.random() < 0.5) {
