@@ -252,7 +252,6 @@ public class TorneoRoundRobin extends AlgoritmoTorneo {
 			if (numeroP1 == p.getNumeroParticipante() || numP2 == p.getNumeroParticipante()) {
 				if (encontrado && p.getNumeroParticipante() == numPGanador) {
 					Collections.swap(participantes, index, index - 1);
-					System.out.println(true);
 				}
 				encontrado = true;
 			}

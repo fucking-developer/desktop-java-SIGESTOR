@@ -17,7 +17,6 @@ import sigestor.gui.VentanaPrincipal;
  * @author Hernán Sesaí Lopéz Aragón
  * @author Francisco Samuel Reyes Cortes
  * 
- *
  */
 public class SIGESTOR {
 	/**

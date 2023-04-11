@@ -252,14 +252,10 @@ public class DialogoMostrarResultados extends JDialog {
 		this.indiceMostrarResultados = indiceMostrarResultados;
 
 		torneo = principal.getTorneoActual();
-		participantes = torneo.getListaParticipantes();
-		// FIXME
-		if (!torneo.getTipoTorneo().equals("Eliminación directa")) {
-			numeroPartidas = this.ventanaPrincipal.getTorneoActual().getAlgoritmoTorneo().getCiclos()
+		participantes = torneo.getListaParticipantes();		
+		numeroPartidas = this.ventanaPrincipal.getTorneoActual().getAlgoritmoTorneo().getCiclos()
 					.get(this.ventanaPrincipal.getTorneoActual().getCicloActual() - 1).getEncuentroParticipantes()
 					.size();
-
-		}
 		personalizacion = torneo.getDatosPersonalizacion();
 		this.validacionMarcadores = ventanaPrincipal.getTorneoActual().getDatosPersonalizacion().isExistenciaMarcador();
 
@@ -418,15 +414,10 @@ public class DialogoMostrarResultados extends JDialog {
 		tituloTabla.setLayout(new GridLayout(2, 1));
 
 		JLabel etiquetaElegirCiclo;
-		// FIXME
-		if (!torneo.getTipoTorneo().equals("Eliminación directa")) {
-			etiquetaElegirCiclo = new JLabel("Elegir "
+		etiquetaElegirCiclo = new JLabel("Elegir "
 					+ this.ventanaPrincipal.getTorneoActual().getDatosPersonalizacion().getNombreCiclo(1) + ": ");
-		} else {
-			etiquetaElegirCiclo = new JLabel();
-		}
-
 		// etiquetaElegirCiclo.setDisplayedMnemonic(KeyEvent.VK_C);
+		
 		etiquetaTituloTabla = new JLabel();
 		auxPanel = new JPanel();
 		auxPanel.add(etiquetaElegirCiclo);
@@ -544,9 +535,7 @@ public class DialogoMostrarResultados extends JDialog {
 		etiquetaResultado = new JLabel[numeroPartidas + auxImpar];
 		etiquetaFechaEncuentros = new JTextField[numeroPartidas + auxImpar];
 
-		// FIXME
-		if (!torneo.getTipoTorneo().equals("Eliminación directa")) {
-
+		
 			for (int i = 0; i < numeroPartidas + auxImpar; i++) {
 				panelFilasTabla[i] = new JPanel();
 				panelFilasTabla[i].setLayout(new FlowLayout(1));
@@ -621,7 +610,7 @@ public class DialogoMostrarResultados extends JDialog {
 				panelCentralCentral.add(panelFilasTabla[i]);
 
 			}
-		}
+		
 		if (participantes.size() % 2 != 0) {
 			etiquetaNumeroInicial[numeroPartidas]
 					.setText(participantes.get(participantes.size() - 1).getNumeroParticipante() + "");
@@ -720,8 +709,8 @@ public class DialogoMostrarResultados extends JDialog {
 	 * contenido.
 	 */
 	private void inicializar() {
-		// FIXME
-		if (!torneo.getTipoTorneo().equals("Eliminación directa")) {
+		
+		
 			Torneo torneo = this.ventanaPrincipal.getTorneoActual();
 			ArrayList<Ciclo> listaCiclos = torneo.getAlgoritmoTorneo().getCiclos();
 			ArrayList<Participante> listaParticipantes = torneo.getListaParticipantes();
@@ -735,7 +724,6 @@ public class DialogoMostrarResultados extends JDialog {
 			ArrayList<Encuentro> listaEncuentros = ciclo.getEncuentroParticipantes();
 			obtenerResultadosCiclo(listaEncuentros, listaParticipantes);
 
-		}
 	}
 
 	/**
@@ -887,16 +875,12 @@ public class DialogoMostrarResultados extends JDialog {
 	 * Permite la seleccion de un ciclo del torneo.
 	 */
 	private void accionSeleccionarCiclo() {
-		// FIXME
-		if (!torneo.getTipoTorneo().equals("Eliminación directa")) {
-
-			Torneo torneo = this.ventanaPrincipal.getTorneoActual();
-			ArrayList<Ciclo> listaCiclos = torneo.getAlgoritmoTorneo().getCiclos();
-			ArrayList<Participante> listaParticipantes = torneo.getListaParticipantes();
-			Ciclo ciclo = listaCiclos.get(comboSeleccionarCiclo.getSelectedIndex());
-			ArrayList<Encuentro> listaEncuentros = ciclo.getEncuentroParticipantes();
-			obtenerResultadosCiclo(listaEncuentros, listaParticipantes);
-		}
+		Torneo torneo = this.ventanaPrincipal.getTorneoActual();
+		ArrayList<Ciclo> listaCiclos = torneo.getAlgoritmoTorneo().getCiclos();
+		ArrayList<Participante> listaParticipantes = torneo.getListaParticipantes();
+		Ciclo ciclo = listaCiclos.get(comboSeleccionarCiclo.getSelectedIndex());
+		ArrayList<Encuentro> listaEncuentros = ciclo.getEncuentroParticipantes();
+		obtenerResultadosCiclo(listaEncuentros, listaParticipantes);
 		etiquetaTituloTabla.setText("Tabla de resultados de "
 				+ ventanaPrincipal.getTorneoActual().getDatosPersonalizacion().getNombreCiclo(3) + " "
 				+ (comboSeleccionarCiclo.getSelectedIndex() + 1));

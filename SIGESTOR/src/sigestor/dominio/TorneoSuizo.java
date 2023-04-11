@@ -30,7 +30,7 @@ import sigestor.excepcion.ExcepcionCapturarResultados;
  * @see AlgoritmoTorneo
  */
 public class TorneoSuizo extends AlgoritmoTorneo {
-	
+
 	/**
 	 * Inicializa las variables con un valor por defecto y asigna a la variable
 	 * <code>torneo</code> el torneo recibido.
@@ -283,7 +283,7 @@ public class TorneoSuizo extends AlgoritmoTorneo {
 			participantes.add(sinEncuentro);
 			mitad = mitad - 1;
 		}
-		
+
 		for (int i = 1; i <= mitad; i++) {
 			encuentros.add(new Encuentro(i, participantes.get(i - 1).getNumeroParticipante(),
 					participantes.get(i - 1 + mitad).getNumeroParticipante(), this.getTorneo().getFechaInicioTorneo()));
@@ -390,7 +390,8 @@ public class TorneoSuizo extends AlgoritmoTorneo {
 	 * @throws ExcepcionBaseDatos
 	 *             Si ocurre un problema con la base de datos.
 	 * @throws ExcepcionBaseDatosEncuentro
-	 *             Si ocurre un problema al insertar en la tabla<code>encuentros</code>.
+	 *             Si ocurre un problema al insertar en la
+	 *             tabla<code>encuentros</code>.
 	 * @throws ExcepcionBaseDatosCiclo
 	 *             Si ocurre un error al insertar en la tabla <code>ciclos</code>.
 	 * @throws ExcepcionBaseDatosTorneo
