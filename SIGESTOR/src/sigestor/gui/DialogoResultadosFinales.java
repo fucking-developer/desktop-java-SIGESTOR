@@ -34,11 +34,11 @@ import java.util.ArrayList;
  * terminará almacenada con anterioridad.</li>
  * <li><code>campoNombreOrganizador</code>Se especificará el nombre que tendrá
  * el organizador del torneo almacenado con anterioridad.</li>
- * <li><code>campoNombreGanador</code> Se especificara el nombre que tendra el
+ * <li><code>campoNombreGanador</code> Se especificará el nombre que tendrá el
  * ganador del torneo.</li>
- * <li><code>botonExportar</code>Se exportara a un archivo CSV donde contendra
+ * <li><code>botonExportar</code>Exportará en un archivo CSV donde contendrá
  * los resultados de los participantes.</li>
- * <li><code>botonSalir</code>Tendra la funcionalidad de cerrar el dialogo.</li>
+ * <li><code>botonSalir</code>Tendrá la funcionalidad de cerrar el diálogo.</li>
  * <li><code>ventanaPrincipal</code>Se hara llamado a la ventana principal del
  * torneo.</li>
  * <li><code>serialVersionUID</code> Para el número de versión de la clase.</li>
@@ -122,7 +122,7 @@ public class DialogoResultadosFinales extends JDialog {
 	private ArrayList<Participante> listaParticipantes;
 
 	/**
-	 * Constructor en el que se inicializa el dialogo <code>principal</code>
+	 * Constructor en el que se inicializa el diálogo <code>principal</code>
 	 * 
 	 * @param principal Recibe un objeto de tipo ventanaPrincipal el cual contiene
 	 *                  el objeto de tipo torneo.
