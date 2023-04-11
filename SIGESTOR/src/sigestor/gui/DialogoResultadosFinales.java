@@ -184,7 +184,7 @@ public class DialogoResultadosFinales extends JDialog {
 		campoNombreTorneo = new JTextField(this.ventanaPrincipal.getTorneoActual().getNombreTorneo());
 		campoNombreTorneo.setBounds(400, 40, 150, 20);
 		campoNombreTorneo.setEditable(false);
-		;
+		
 		panelAuxiliar.add(campoNombreTorneo);
 		panelBase.add(panelAuxiliar);
 
