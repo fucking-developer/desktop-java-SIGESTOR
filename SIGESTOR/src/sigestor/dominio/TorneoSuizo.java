@@ -283,6 +283,7 @@ public class TorneoSuizo extends AlgoritmoTorneo {
 			participantes.add(sinEncuentro);
 			mitad = mitad - 1;
 		}
+		
 		for (int i = 1; i <= mitad; i++) {
 			encuentros.add(new Encuentro(i, participantes.get(i - 1).getNumeroParticipante(),
 					participantes.get(i - 1 + mitad).getNumeroParticipante(), this.getTorneo().getFechaInicioTorneo()));

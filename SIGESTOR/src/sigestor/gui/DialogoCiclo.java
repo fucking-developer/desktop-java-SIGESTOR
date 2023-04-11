@@ -73,15 +73,17 @@ import sigestor.excepcion.ExcepcionUtilerias;
  * <li><code>serialVersionUID</code> Para el número de versión de la clase.</li>
  * </ul>
  * 
- * @version 09/04/2023
+ * @version 11/04/2023
  * 
  * @author Jonathan Eduardo Ibarra Martinez
+ * @author Jennifer Cortés Pérez
  * @author Hernan Sesai Lopez Aragon
  * @author Francisco Samuel Reyes Cortes
  * @author Alicia Adriana Clemente Hernandez
  * @author Luis Fernando de la Cruz López
  * @author Luis Antonio Ruiz Sierra
  * @author Victor Triste Pérez
+ * @author German Luis Cruz Martinez 
  * 
  */
 public class DialogoCiclo extends JDialog {
