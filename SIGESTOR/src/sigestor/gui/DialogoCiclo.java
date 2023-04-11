@@ -18,6 +18,8 @@ import sigestor.dominio.*;
 import sigestor.excepcion.ExcepcionBaseDatos;
 import sigestor.excepcion.ExcepcionBaseDatosCiclo;
 import sigestor.excepcion.ExcepcionBaseDatosEncuentro;
+import sigestor.excepcion.ExcepcionBaseDatosTorneo;
+import sigestor.excepcion.ExcepcionCapturarResultados;
 import sigestor.excepcion.ExcepcionUtilerias;
 
 /**
@@ -424,7 +426,7 @@ public class DialogoCiclo extends JDialog {
 
 		comboSeleccionarCiclo.setToolTipText(
 				"Seleccione un " + torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MINUSCULA_SINGULAR)
-				+ " para generar el reporte de encuentros en pantalla");
+						+ " para generar el reporte de encuentros en pantalla");
 		comboSeleccionarCiclo.setEnabled(true);
 		comboSeleccionarCiclo.setBounds(930, 250, 120, 25);
 		panelNorte.add(comboSeleccionarCiclo);
@@ -447,7 +449,7 @@ public class DialogoCiclo extends JDialog {
 				.put((KeyStroke) accionSeleccionarCiclo.getValue(Action.ACCELERATOR_KEY), "seleccionarciclo");
 		accionSeleccionarCiclo.putValue(Action.SHORT_DESCRIPTION,
 				"Seleccione un " + torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MINUSCULA_SINGULAR)
-				+ " para generar el reporte de encuentros en pantalla");
+						+ " para generar el reporte de encuentros en pantalla");
 		etiquetaCicloActual2.setBounds(550, 290, 200, 25);
 		panelNorte.add(etiquetaCicloActual2);
 		crearEncabezadoTablaEncuentros();
@@ -839,10 +841,10 @@ public class DialogoCiclo extends JDialog {
 	}
 
 	/**
-	 * Permite crear un nuevo ciclo luego de terminar de capturar los
-	 * resultados del ciclo actual para los torneos de Eliminación directa y Suizo; 
-	 * mientras que para el torneo Round Robin solo pasa al siguiente ciclo sin tener 
-	 * que capturar los resultados del ciclo actual.
+	 * Permite crear un nuevo ciclo luego de terminar de capturar los resultados del
+	 * ciclo actual para los torneos de Eliminación directa y Suizo; mientras que
+	 * para el torneo Round Robin solo pasa al siguiente ciclo sin tener que
+	 * capturar los resultados del ciclo actual.
 	 */
 	private void accionHacer() {
 		if (this.torneo.getTipoTorneo().equals("Suizo")) {
@@ -873,7 +875,40 @@ public class DialogoCiclo extends JDialog {
 								.getNombreParticipante(Personalizacion.MINUSCULA_PLURAL).substring(8),
 						JOptionPane.ERROR_MESSAGE);
 			}
-		} else {
+		} else if (this.torneo.getTipoTorneo().equals("Eliminación directa")) {
+			TorneoEliminacionDirecta ted = new TorneoEliminacionDirecta(torneo);
+			if (ted.verificarEncuentros()) {
+				try {
+					ted.realizarEncuentros();
+				} catch (ExcepcionBaseDatos e) {
+					JOptionPane.showMessageDialog(null, e.getMessage(), "Ciclos", JOptionPane.ERROR_MESSAGE);
+				} catch (ExcepcionBaseDatosEncuentro e) {
+					JOptionPane.showMessageDialog(null, e.getMessage(), "Ciclos", JOptionPane.ERROR_MESSAGE);
+				} catch (ExcepcionBaseDatosCiclo e) {
+					JOptionPane.showMessageDialog(null, e.getMessage(), "Ciclos", JOptionPane.ERROR_MESSAGE);
+				} catch (ExcepcionBaseDatosTorneo e) {
+					JOptionPane.showMessageDialog(null, e.getMessage(), "Ciclos", JOptionPane.ERROR_MESSAGE);
+				} catch (ExcepcionCapturarResultados e) {
+					JOptionPane.showMessageDialog(null, e.getMessage(), "Ciclos", JOptionPane.ERROR_MESSAGE);
+				}
+				JOptionPane.showMessageDialog(null,
+						"El(la) " + torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MAYUSCULA_SINGULAR)
+								+ " se ha realizado exitosamente.",
+						"Encuentros", JOptionPane.INFORMATION_MESSAGE);
+			} else {
+				JOptionPane.showMessageDialog(null,
+						"El sistema no ha podido realizar "
+								+ torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MINUSCULA_SINGULAR)
+								+ " \n porque no ha finalizado "
+								+ torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MINUSCULA_SINGULAR)
+								+ "." + " \n Por favor capture todos los resultados.",
+						"Encuentros" + torneo.getDatosPersonalizacion()
+								.getNombreParticipante(Personalizacion.MINUSCULA_PLURAL).substring(8),
+						JOptionPane.ERROR_MESSAGE);
+			}
+		}
+
+		else {
 			if (this.torneo.getCicloActual() < this.torneo.getAlgoritmoTorneo().getNumeroCiclos()) {
 				this.torneo.setCicloActual(torneo.getCicloActual() + 1);
 				this.torneo.getAlgoritmoTorneo().actualizarCiclo(this.torneo.getNombreArchivo());
