@@ -44,7 +44,7 @@ import java.util.ArrayList;
  * <li><code>serialVersionUID</code> Para el número de versión de la clase.</li>
  * </ul>
  * 
- * @version 10/04/2023
+ * @version 11/04/2023
  * 
  * @author Jonathan Eduardo Ibarra Martinez
  * @author Jennifer Cortés Pérez
@@ -54,6 +54,7 @@ import java.util.ArrayList;
  * @author Luis Fernando de la Cruz López
  * @author Luis Antonio Ruiz Sierra
  * @author Victor Triste Pérez
+ * @author German Luis Cruz Martinez
  */
 public class DialogoResultadosFinales extends JDialog {
 
@@ -175,7 +176,7 @@ public class DialogoResultadosFinales extends JDialog {
 		accionAyuda.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0));
 		etiquetaTitulo.getActionMap().put("ayuda", accionAyuda);
 		etiquetaTitulo.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-		.put((KeyStroke) accionAyuda.getValue(Action.ACCELERATOR_KEY), "ayuda");
+				.put((KeyStroke) accionAyuda.getValue(Action.ACCELERATOR_KEY), "ayuda");
 
 		JLabel etiquetaTorneo = new JLabel("Torneo:");
 		etiquetaTorneo.setBounds(320, 40, 50, 20);
@@ -230,11 +231,8 @@ public class DialogoResultadosFinales extends JDialog {
 		panelAuxiliar.add(etiquetaGanador);
 		panelBase.add(panelAuxiliar);
 
-		if (!ventanaPrincipal.getTorneoActual().getTipoTorneo().equals("Eliminacion Directa")) {
 			campoNombreGanador = new JTextField(this.listaParticipantes.get(0).getNombreParticipante());
-		} else {
-			campoNombreGanador = new JTextField();
-		}
+
 
 		campoNombreGanador.setBounds(560, 120, 150, 20);
 		campoNombreGanador.setEditable(false);
@@ -284,7 +282,7 @@ public class DialogoResultadosFinales extends JDialog {
 		botonExportar.setAction(accionExportarResultados);
 		botonExportar.getActionMap().put("exportarResultados", accionExportarResultados);
 		botonExportar.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-		.put((KeyStroke) accionExportarResultados.getValue(Action.ACCELERATOR_KEY), "exportarResultados");
+				.put((KeyStroke) accionExportarResultados.getValue(Action.ACCELERATOR_KEY), "exportarResultados");
 
 		botonSalir = new JButton("Salir");
 		botonSalir.setBounds(680, 500, 100, 30);
@@ -306,10 +304,9 @@ public class DialogoResultadosFinales extends JDialog {
 		botonSalir.setAction(accionSalir);
 		botonSalir.getActionMap().put("salir", accionSalir);
 		botonSalir.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-		.put((KeyStroke) accionSalir.getValue(Action.ACCELERATOR_KEY), "salir");
+				.put((KeyStroke) accionSalir.getValue(Action.ACCELERATOR_KEY), "salir");
 
 		this.add(panelBase);
-
 		this.setSize(new Dimension(1200, 600));
 		this.setLocationRelativeTo(principal);
 		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/imagenes/icono.png")));
@@ -334,29 +331,28 @@ public class DialogoResultadosFinales extends JDialog {
 					.getNombreMarcador(Personalizacion.MAYUSCULA_SINGULAR) + " en contra");
 		}
 		modelo.addColumn("Puntaje");
-		// FIXME
-		if (!ventanaPrincipal.getTorneoActual().getTipoTorneo().equals("Eliminación directa")) {
-			for (int i = 0; i < this.ventanaPrincipal.getTorneoActual().getListaParticipantes().size(); i++) {
-				if (!this.listaParticipantes.get(i).getNombreParticipante().equals(this.ventanaPrincipal
-						.getTorneoActual().getDatosPersonalizacion().getNombreParticipanteSinEncuentro())) {
-					if (this.ventanaPrincipal.getTorneoActual().getDatosPersonalizacion().isExistenciaMarcador()) {
-						Object[] fila = { this.listaParticipantes.get(i).getLugarParticipante(),
-								this.listaParticipantes.get(i).getNumeroParticipante(),
-								this.listaParticipantes.get(i).toString(),
-								this.listaParticipantes.get(i).getMarcadorFavor(),
-								this.listaParticipantes.get(i).getMarcadorContra(),
-								this.listaParticipantes.get(i).getPuntajeAcumuladoParticipante() };
-						modelo.addRow(fila);
-					} else {
-						Object[] fila = { this.listaParticipantes.get(i).getLugarParticipante(),
-								this.listaParticipantes.get(i).getNumeroParticipante(),
-								this.listaParticipantes.get(i).getNombreParticipante(),
-								this.listaParticipantes.get(i).getPuntajeAcumuladoParticipante() };
-						modelo.addRow(fila);
-					}
+
+		for (int i = 0; i < this.ventanaPrincipal.getTorneoActual().getListaParticipantes().size(); i++) {
+			if (!this.listaParticipantes.get(i).getNombreParticipante().equals(this.ventanaPrincipal.getTorneoActual()
+					.getDatosPersonalizacion().getNombreParticipanteSinEncuentro())) {
+				if (this.ventanaPrincipal.getTorneoActual().getDatosPersonalizacion().isExistenciaMarcador()) {
+					Object[] fila = { this.listaParticipantes.get(i).getLugarParticipante(),
+							this.listaParticipantes.get(i).getNumeroParticipante(),
+							this.listaParticipantes.get(i).toString(),
+							this.listaParticipantes.get(i).getMarcadorFavor(),
+							this.listaParticipantes.get(i).getMarcadorContra(),
+							this.listaParticipantes.get(i).getPuntajeAcumuladoParticipante() };
+					modelo.addRow(fila);
+				} else {
+					Object[] fila = { this.listaParticipantes.get(i).getLugarParticipante(),
+							this.listaParticipantes.get(i).getNumeroParticipante(),
+							this.listaParticipantes.get(i).getNombreParticipante(),
+							this.listaParticipantes.get(i).getPuntajeAcumuladoParticipante() };
+					modelo.addRow(fila);
 				}
 			}
 		}
+
 		tablaListaPosiciones.setModel(modelo);
 	}
 
@@ -401,10 +397,10 @@ public class DialogoResultadosFinales extends JDialog {
 			try {
 				this.ventanaPrincipal.getTorneoActual().getAlgoritmoTorneo().generarReporteFinal(archivo);
 				JOptionPane
-				.showMessageDialog(null, "El archivo se ha guardado exitosamente.",
-						"Generar reporte de " + ventanaPrincipal.getTorneoActual().getDatosPersonalizacion()
-						.getNombreCiclo(Personalizacion.MAYUSCULA_SINGULAR),
-						JOptionPane.INFORMATION_MESSAGE);
+						.showMessageDialog(null, "El archivo se ha guardado exitosamente.",
+								"Generar reporte de " + ventanaPrincipal.getTorneoActual().getDatosPersonalizacion()
+										.getNombreCiclo(Personalizacion.MAYUSCULA_SINGULAR),
+								JOptionPane.INFORMATION_MESSAGE);
 			} catch (ExcepcionUtilerias e) {
 				JOptionPane.showMessageDialog(null, e.getMessage(), "Advertencia", JOptionPane.ERROR_MESSAGE);
 			}
