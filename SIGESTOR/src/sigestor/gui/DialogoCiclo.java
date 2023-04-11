@@ -33,24 +33,24 @@ import sigestor.excepcion.ExcepcionUtilerias;
  * el torneo almacenado con anterioridad.</li>
  * <li><code>campoFechaFinalizacion</code>Se especificará la fecha en que el
  * torneo termina almacenada con anterioridad.</li>
- * <li><code>comboSeleccionarCiclo</code>Se selecciona el ciclo de la lista
+ * <li><code>comboSeleccionarCiclo</code>Selecciona el ciclo de la lista
  * almacenada.</li>
  * <li><code>tablaListaParticipantes</code>Lista donde estarán los datos de los
  * participantes previamente almacenados.</li>
  * <li><code>botonExportar</code>Se exportara a un archivo CSV los datos del
  * ciclo.</li>
- * <li><code>botonSalir</code>Se saldra del dialogo.</li>
+ * <li><code>botonSalir</code>Se saldrá del dialogo.</li>
  * <li><code>botonHacer</code>Genera los ciclos del torneo.</li>
  * <li><code>panelEncabezadoTablas</code>Contendra los encabezados de los datos
  * personalizados del torneo.</li>
- * <li><code>ventanaPrincipal</code>Se hara llamado a la ventana principal del
+ * <li><code>ventanaPrincipal</code>Se hará llamado a la ventana principal del
  * torneo.</li>
  * <li><code>modelo</code>Modelo por defecto creado para el uso del
- * dialogo.</li>
+ * diálogo.</li>
  * <li><code>torneo</code>Variable de tipo torneo.</li>
- * <li><code>listaParticipantes</code>lista de tipo participante que tendra los
+ * <li><code>listaParticipantes</code>lista de tipo participante que tendrá los
  * datos de los jugadores previamente almacenados.</li>
- * <li><code>listaCiclo</code>Lista de tipo ciclo que tendra los datos del ciclo
+ * <li><code>listaCiclo</code>Lista de tipo ciclo que tendrá los datos del ciclo
  * seleccionado.</li>
  * <li><code>etiquetaNumeroIncial</code>Para mostrar el número que representa al
  * participante inicial.</li>
@@ -62,7 +62,7 @@ import sigestor.excepcion.ExcepcionUtilerias;
  * obtendrá el participante no inicial.</li>
  * <li><code>fechaEncuentro</code> Para capturar la fecha de los
  * encuentros.</li>
- * <li><code>numeroPartidas</code>Para asignar el numero de las partidas
+ * <li><code>numeroPartidas</code>Para asignar el número de las partidas
  * realizadas.</li>
  * <li><code>cicloSeleccionado</code>Para seleccionar el ciclo almacenado del
  * torneo.</li>
@@ -186,7 +186,7 @@ public class DialogoCiclo extends JDialog {
 	private JLabel[] etiquetaParticipanteInicial;
 
 	/**
-	 * 
+	 * Arreglo de etiquetas para mostrar los "VS".
 	 */
 	private JLabel[] encararVS;
 
@@ -218,7 +218,7 @@ public class DialogoCiclo extends JDialog {
 	private JDateChooser[] fechaEncuentro;
 
 	/**
-	 * Almacenar la cantidad de número de pareos de un ciclo.
+	 * Almacenar la cantidad de número de encuentros de un ciclo.
 	 */
 	private int numeroPartidas;
 
@@ -233,7 +233,7 @@ public class DialogoCiclo extends JDialog {
 	private VentanaPrincipal ventanaPrincipal;
 
 	/**
-	 * Devuelve el numero de paritdas.
+	 * Devuelve el número de ciclos.
 	 * 
 	 * @return numeroPartidas.
 	 */
@@ -839,12 +839,13 @@ public class DialogoCiclo extends JDialog {
 	}
 
 	/**
-	 * Permite crear un nuevo ciclo mientras se haya terminado de capturar los
-	 * resultados del ciclo anterior. Solo estará habilitado hasta que llegue a la
-	 * misma cantidad de ciclos establecido para el torneo.
+	 * Permite crear un nuevo ciclo luego de terminar de capturar los
+	 * resultados del ciclo actual para los torneos de Eliminación directa y Suizo; 
+	 * mientras que para el torneo Round Robin solo pasa al siguiente ciclo sin tener 
+	 * que capturar los resultados del ciclo actual.
 	 */
 	private void accionHacer() {
-		if (this.torneo.getTipoTorneo().contains("Suizo")) {
+		if (this.torneo.getTipoTorneo().equals("Suizo")) {
 			TorneoSuizo ts = new TorneoSuizo(torneo);
 			if (ts.verificarEncuentros()) {
 				ts.desempatarParticipantes();
@@ -860,7 +861,7 @@ public class DialogoCiclo extends JDialog {
 				JOptionPane.showMessageDialog(null,
 						"El(la) " + torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MAYUSCULA_SINGULAR)
 								+ " se ha realizado exitosamente.",
-						"Parear", JOptionPane.INFORMATION_MESSAGE);
+						"Encuentros", JOptionPane.INFORMATION_MESSAGE);
 			} else {
 				JOptionPane.showMessageDialog(null,
 						"El sistema no ha podido realizar "
@@ -868,7 +869,7 @@ public class DialogoCiclo extends JDialog {
 								+ " \n porque no ha finalizado "
 								+ torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MINUSCULA_SINGULAR)
 								+ "." + " \n Por favor capture todos los resultados.",
-						"Encarar" + torneo.getDatosPersonalizacion()
+						"Encuentros" + torneo.getDatosPersonalizacion()
 								.getNombreParticipante(Personalizacion.MINUSCULA_PLURAL).substring(8),
 						JOptionPane.ERROR_MESSAGE);
 			}
@@ -880,7 +881,7 @@ public class DialogoCiclo extends JDialog {
 				JOptionPane.showMessageDialog(null,
 						"El(la) " + torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MAYUSCULA_SINGULAR)
 								+ " se ha realizado exitosamente.",
-						"Parear", JOptionPane.INFORMATION_MESSAGE);
+						"Encuentros", JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
 		actualizarCombo();
@@ -897,7 +898,7 @@ public class DialogoCiclo extends JDialog {
 	}
 
 	/**
-	 * Permite exportar en un archivo CSV los pareos que contiene un ciclo.
+	 * Permite exportar en un archivo CSV los encuentros que contiene un ciclo.
 	 */
 	private void accionExportarRonda() {
 		Object[] opciones = { "Sí", "No" };

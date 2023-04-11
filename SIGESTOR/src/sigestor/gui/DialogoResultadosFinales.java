@@ -32,7 +32,7 @@ import java.util.ArrayList;
  * el torneo almacenado con anterioridad.</li>
  * <li><code>campoFechaFin</code>Se especificará la fecha en que el torneo
  * terminará almacenada con anterioridad.</li>
- * <li><code>campoNombreOrganizador</code>Se especificara el nombre que tendra
+ * <li><code>campoNombreOrganizador</code>Se especificará el nombre que tendrá
  * el organizador del torneo almacenado con anterioridad.</li>
  * <li><code>campoNombreGanador</code> Se especificara el nombre que tendra el
  * ganador del torneo.</li>
@@ -185,7 +185,7 @@ public class DialogoResultadosFinales extends JDialog {
 		campoNombreTorneo = new JTextField(this.ventanaPrincipal.getTorneoActual().getNombreTorneo());
 		campoNombreTorneo.setBounds(400, 40, 150, 20);
 		campoNombreTorneo.setEditable(false);
-		
+		;
 		panelAuxiliar.add(campoNombreTorneo);
 		panelBase.add(panelAuxiliar);
 
