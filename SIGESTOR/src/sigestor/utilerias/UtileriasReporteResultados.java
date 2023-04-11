@@ -18,7 +18,7 @@ import sigestor.excepcion.ExcepcionUtilerias;
 /**
  * Sirve para generar el reporte en un archivo CSV de los resultados parciales.
  *
- * @version 06/04/2023
+ * @version 10/04/2023
  * @author Alicia Adriana Clemente Hernandez
  * @author Luis Fernando de la Cruz López
  * @author Luis Antonio Ruiz Sierra
@@ -81,15 +81,11 @@ public class UtileriasReporteResultados {
 					writerCsv.write(String.valueOf(e.getIdParticipanteFinal()));
 					writerCsv.write(obtenerNombreParticipante(torneo, e.getIdParticipanteFinal()) + " - "
 							+ torneo.getDatosPersonalizacion().getNombreParticipanteSinEncuentro());
-					writerCsv.write(f.format(e.getFechaEncuentro()));
-					writerCsv.endRecord();
 				} else if (obtenerNombreParticipante(torneo, e.getIdParticipanteFinal()).compareToIgnoreCase(
 						torneo.getDatosPersonalizacion().getNombreParticipanteSinEncuentro()) == 0) { 
 					writerCsv.write(String.valueOf(e.getIdParticipanteInicial()));
 					writerCsv.write(obtenerNombreParticipante(torneo, e.getIdParticipanteInicial()) + " - "
 							+ torneo.getDatosPersonalizacion().getNombreParticipanteSinEncuentro());
-					writerCsv.write(f.format(e.getFechaEncuentro()));
-					writerCsv.endRecord();
 				} else {
 					writerCsv.write(String.valueOf(e.getIdParticipanteInicial()));
 					writerCsv.write(obtenerNombreParticipante(torneo, e.getIdParticipanteInicial()));
@@ -102,9 +98,9 @@ public class UtileriasReporteResultados {
 					if (torneo.getDatosPersonalizacion().isExistenciaMarcador()) {
 						writerCsv.write(String.valueOf(e.getMarcadorParticipanteFinal()));
 					}
-					writerCsv.write(f.format(e.getFechaEncuentro()));
-					writerCsv.endRecord();
 				}
+				writerCsv.write(f.format(e.getFechaEncuentro()));
+				writerCsv.endRecord();
 				
 			}
 			writerCsv.close();

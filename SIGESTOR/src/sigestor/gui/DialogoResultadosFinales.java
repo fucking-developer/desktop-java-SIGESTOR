@@ -44,7 +44,7 @@ import java.util.ArrayList;
  * <li><code>serialVersionUID</code> Para el número de versión de la clase.</li>
  * </ul>
  * 
- * @version 21/03/2023
+ * @version 10/04/2023
  * 
  * @author Jonathan Eduardo Ibarra Martinez
  * @author Hernan Sesai Lopez Aragon
@@ -139,16 +139,16 @@ public class DialogoResultadosFinales extends JDialog {
 
 		panelBase.setLayout(new GridLayout(1, 1));
 		panelAuxiliar.setLayout(null);
-		
+
 		if (principal.getTorneoActual().getTipoTorneo().contains("Suizo")) {
 			TorneoSuizo ts = new TorneoSuizo(principal.getTorneoActual());
 			ts.desempatarParticipantes();
-		
-		}else if((principal.getTorneoActual().getTipoTorneo().contains("Eliminación directa"))){
+
+		} else if ((principal.getTorneoActual().getTipoTorneo().contains("Eliminación directa"))) {
 			TorneoEliminacionDirecta te = new TorneoEliminacionDirecta(principal.getTorneoActual());
 			te.desempatarParticipantes();
-		
-		}else {
+
+		} else {
 			TorneoRoundRobin tr = new TorneoRoundRobin(principal.getTorneoActual());
 			tr.desempatarParticipantes();
 		}
@@ -165,6 +165,7 @@ public class DialogoResultadosFinales extends JDialog {
 
 		Action accionAyuda = new AbstractAction("Reporte de resultados finales del torneo", null) {
 			private static final long serialVersionUID = 1L;
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				accionAyuda();
@@ -359,8 +360,8 @@ public class DialogoResultadosFinales extends JDialog {
 	}
 
 	/**
-	 * Permite mostrar un archivo PDF al usuario con información relevante de
-	 * como utilizar el sistema.
+	 * Permite mostrar un archivo PDF al usuario con información relevante de como
+	 * utilizar el sistema.
 	 * 
 	 */
 	private void accionAyuda() {
@@ -372,20 +373,31 @@ public class DialogoResultadosFinales extends JDialog {
 	 * torneo finalizado.
 	 */
 	private void accionExportarResultados() {
+		Object[] opciones = { "Sí", "No" };
 		JFileChooser dialogo = new JFileChooser();
 		File archivo = null;
 		dialogo.setDialogTitle("Guardar como");
 		FileFilter filtro1 = new FileNameExtensionFilter("Archivo CSV", "csv", "CSV");
 		dialogo.setFileFilter(filtro1);
-
 		dialogo.setAcceptAllFileFilterUsed(false);
 		dialogo.setCurrentDirectory(new File(System.getProperty("user.dir")));
 		dialogo.setSelectedFile(null);
 		dialogo.setMultiSelectionEnabled(false);
 		int valor = dialogo.showSaveDialog(null);
 		if (valor == JFileChooser.APPROVE_OPTION) {
+			archivo = dialogo.getSelectedFile();
+			if (!archivo.equals(null) && !archivo.getName().toUpperCase().endsWith(".CSV")) {
+				archivo = new File(archivo.getAbsolutePath() + ".CSV");
+			}
+			if (archivo.exists()) {
+				int respuesta1 = JOptionPane.showOptionDialog(null,
+						archivo.getName() + " ya existe.\n ¿Desea reemplazarlo?", "Confirmar Descargar plantilla",
+						JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, opciones, opciones[1]);
+				if (respuesta1 != 0) {
+					return;
+				}
+			}
 			try {
-				archivo = dialogo.getSelectedFile();
 				this.ventanaPrincipal.getTorneoActual().getAlgoritmoTorneo().generarReporteFinal(archivo);
 				JOptionPane
 				.showMessageDialog(null, "El archivo se ha guardado exitosamente.",

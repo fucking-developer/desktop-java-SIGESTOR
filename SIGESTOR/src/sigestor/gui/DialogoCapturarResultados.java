@@ -134,6 +134,11 @@ public class DialogoCapturarResultados extends JDialog {
 	private JComboBox<Ciclo> comboSeleccionarCiclo;
 
 	/**
+	 * Sirve para obtener la lista de ciclos del torneo.
+	 */
+	private ArrayList<Ciclo> listaCiclos;
+	
+	/**
 	 * Campo para el nombre del torneo.
 	 */
 	private JTextField campoTorneo;
@@ -322,6 +327,7 @@ public class DialogoCapturarResultados extends JDialog {
 		participantes = torneo.getListaParticipantes();
 		personalizacion = torneo.getDatosPersonalizacion();
 		validacionMarcadores = ventanaPrincipal.getTorneoActual().getDatosPersonalizacion().isExistenciaMarcador();
+		listaCiclos = torneo.getAlgoritmoTorneo().getCiclos();
 		if (!torneo.getTipoTorneo().equals("Eliminación directa")) {
 			numeroPartidas = this.ventanaPrincipal.getTorneoActual().getAlgoritmoTorneo().getCiclos()
 					.get(this.ventanaPrincipal.getTorneoActual().getCicloActual() - 1).getEncuentroParticipantes()
@@ -916,10 +922,6 @@ public class DialogoCapturarResultados extends JDialog {
 	 * Inicializa el combo con los ciclos que contiene el torneo.
 	 */
 	private void inicializar() {
-		ArrayList<Ciclo> listaCiclos = new ArrayList<Ciclo>();
-		for (int i = 0; i < this.torneo.getCicloActual(); i++) {
-			listaCiclos.add(torneo.getAlgoritmoTorneo().getCiclos().get(i));
-		}
 		mostrarDatosGenerales(torneo);
 		for (Ciclo c : listaCiclos) {
 			this.comboSeleccionarCiclo.addItem(c);
