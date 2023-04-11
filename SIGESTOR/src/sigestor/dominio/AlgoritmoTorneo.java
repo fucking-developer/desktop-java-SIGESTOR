@@ -33,7 +33,7 @@ import sigestor.utilerias.UtileriasReporteResultadosFinales;
  * eligan en la personalización del torneo.</li>
  * </ul>
  * 
- * @version 24/05/2022
+ * @version 10/04/2023
  * 
  * @author Alicia Adriana Clemente Hernandez
  * @author Luis Fernando de la Cruz López
@@ -116,7 +116,7 @@ public abstract class AlgoritmoTorneo {
 	 *                            en el archivo CSV.
 	 */
 	public void generarReporteParciales(File archivo, int comboSeleccionado) throws ExcepcionUtilerias {
-		UtileriasReporteResultados.escribirArchivoCsvReporteResultados(archivo.getPath() + ".CSV",
+		UtileriasReporteResultados.escribirArchivoCsvReporteResultados(archivo.getPath(),
 				this.ciclos.get(comboSeleccionado), torneo);
 	}
 
@@ -138,7 +138,7 @@ public abstract class AlgoritmoTorneo {
 	 */
 	public void generarReporteCiclo(File archivo, int comboSeleccionado) throws ExcepcionUtilerias {
 
-		UtileriasReporteCiclo.escribirArchivoCsvReporteCiclo(archivo.getPath() + ".CSV", torneo,
+		UtileriasReporteCiclo.escribirArchivoCsvReporteCiclo(archivo.getPath(), torneo,
 				this.ciclos.get(comboSeleccionado));
 
 	}
@@ -152,7 +152,7 @@ public abstract class AlgoritmoTorneo {
 	 *                            en el archivo CSV.
 	 */
 	public void generarReporteFinal(File archivo) throws ExcepcionUtilerias {
-		UtileriasReporteResultadosFinales.escribirArchivoCsvReporteResultadosFinales(archivo.getPath() + ".CSV",
+		UtileriasReporteResultadosFinales.escribirArchivoCsvReporteResultadosFinales(archivo.getPath(),
 				torneo);
 	}
 

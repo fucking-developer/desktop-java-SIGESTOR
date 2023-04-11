@@ -17,7 +17,7 @@ import sigestor.excepcion.ExcepcionUtilerias;
  * Sirve para guardar en un archivo CSV el reporte de los pareos de un ciclo.
  *
  * 
- * @version 06/04/2023
+ * @version 10/04/2023
  * 
  * @author Jonathan Eduardo Ibarra Martinez
  * @author Hernan Sesai Lopez Aragon
@@ -103,24 +103,20 @@ public class UtileriasReporteCiclo {
 					writerCsv.write(String.valueOf(e.getIdParticipanteFinal()));
 					writerCsv.write(obtenerNombreParticipante(torneo, e.getIdParticipanteFinal()) + " - "
 							+ torneo.getDatosPersonalizacion().getNombreParticipanteSinEncuentro());
-					writerCsv.write(fecha.format(e.getFechaEncuentro()));
-					writerCsv.endRecord();
 				} else if (obtenerNombreParticipante(torneo, e.getIdParticipanteFinal()).compareToIgnoreCase(
 						torneo.getDatosPersonalizacion().getNombreParticipanteSinEncuentro()) == 0) { 
 					writerCsv.write(String.valueOf(e.getIdParticipanteInicial()));
 					writerCsv.write(obtenerNombreParticipante(torneo, e.getIdParticipanteInicial()) + " - "
 							+ torneo.getDatosPersonalizacion().getNombreParticipanteSinEncuentro());
-					writerCsv.write(fecha.format(e.getFechaEncuentro()));
-					writerCsv.endRecord();
 				} else {
 					writerCsv.write(String.valueOf(e.getIdParticipanteInicial()));
 					writerCsv.write(obtenerNombreParticipante(torneo, e.getIdParticipanteInicial()));
 					writerCsv.write("vs");
 					writerCsv.write(String.valueOf(e.getIdParticipanteFinal()));
 					writerCsv.write(obtenerNombreParticipante(torneo, e.getIdParticipanteFinal()));
-					writerCsv.write(fecha.format(e.getFechaEncuentro()));
-					writerCsv.endRecord();
 				}
+				writerCsv.write(fecha.format(e.getFechaEncuentro()));
+				writerCsv.endRecord();
 			}
 			writerCsv.close();
 		} catch (IOException e) {
