@@ -84,7 +84,7 @@ import java.util.Date;
  * flechas de los encuentros.</li>
  * </ul>
  * 
- * @version 28/03/2023
+ * @version 10/04/2023
  * 
  * @author Jonathan Eduardo Ibarra Martínez
  * @author Alicia Adriana Clemente Hernandez
@@ -234,11 +234,9 @@ public class DialogoMostrarResultados extends JDialog {
 	/**
 	 * Constructor en el que se inicializa el diálogo.
 	 * 
-	 * @param principal
-	 *            Recibe un objeto de tipo ventanaPrincipal el cual contiene el
-	 *            objeto de tipo torneo.
-	 * @param indiceMostrarResultados
-	 *            El ciclo a mostrar los resultados.
+	 * @param principal               Recibe un objeto de tipo ventanaPrincipal el
+	 *                                cual contiene el objeto de tipo torneo.
+	 * @param indiceMostrarResultados El ciclo a mostrar los resultados.
 	 */
 	public DialogoMostrarResultados(VentanaPrincipal principal, int indiceMostrarResultados) {
 		super(principal, "Reporte de resultados");
@@ -379,7 +377,7 @@ public class DialogoMostrarResultados extends JDialog {
 		accionAyuda.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0));
 		etiquetaCicloActual.getActionMap().put("ayuda", accionAyuda);
 		etiquetaCicloActual.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-				.put((KeyStroke) accionAyuda.getValue(Action.ACCELERATOR_KEY), "ayuda");
+		.put((KeyStroke) accionAyuda.getValue(Action.ACCELERATOR_KEY), "ayuda");
 
 		JLabel etiquetaOrganizador = new JLabel("Organizador:");
 		etiquetaOrganizador.setPreferredSize(new Dimension(90, 25));
@@ -449,11 +447,11 @@ public class DialogoMostrarResultados extends JDialog {
 		};
 		accionSeleccionarCiclo.putValue(Action.SHORT_DESCRIPTION,
 				"Seleccione " + this.ventanaPrincipal.getTorneoActual().getDatosPersonalizacion().getNombreCiclo(3)
-						+ " para ver los resultados");
+				+ " para ver los resultados");
 		comboSeleccionarCiclo.setAction(accionSeleccionarCiclo);
 		comboSeleccionarCiclo.getActionMap().put("seleccionarciclo", accionSeleccionarCiclo);
 		comboSeleccionarCiclo.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-				.put((KeyStroke) accionSeleccionarCiclo.getValue(Action.ACCELERATOR_KEY), "seleccionarciclo");
+		.put((KeyStroke) accionSeleccionarCiclo.getValue(Action.ACCELERATOR_KEY), "seleccionarciclo");
 
 		etiquetaElegirCiclo.setDisplayedMnemonic(KeyEvent.VK_I);
 		etiquetaElegirCiclo.setLabelFor(comboSeleccionarCiclo);
@@ -661,7 +659,7 @@ public class DialogoMostrarResultados extends JDialog {
 		botonExportarResultados = new JButton(accionExportarResultados);
 		botonExportarResultados.getActionMap().put("exportarResultados", accionExportarResultados);
 		botonExportarResultados.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-				.put((KeyStroke) accionExportarResultados.getValue(Action.ACCELERATOR_KEY), "exportarResultados");
+		.put((KeyStroke) accionExportarResultados.getValue(Action.ACCELERATOR_KEY), "exportarResultados");
 		botonExportarResultados.setPreferredSize(new Dimension(190, 30));
 		auxPanel = new JPanel();
 		auxPanel.add(botonExportarResultados);
@@ -683,7 +681,7 @@ public class DialogoMostrarResultados extends JDialog {
 		botonSalir = new JButton(accionSalir);
 		botonSalir.getActionMap().put("regresar", accionSalir);
 		botonSalir.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-				.put((KeyStroke) accionSalir.getValue(Action.ACCELERATOR_KEY), "regresar");
+		.put((KeyStroke) accionSalir.getValue(Action.ACCELERATOR_KEY), "regresar");
 		botonSalir.setPreferredSize(new Dimension(120, 30));
 		auxPanel = new JPanel();
 		auxPanel.add(botonSalir);
@@ -744,10 +742,8 @@ public class DialogoMostrarResultados extends JDialog {
 	 * Obtiene de la base de datos la información correspondiente de cada
 	 * participante.
 	 * 
-	 * @param listaEncuentros
-	 *            La lista de encuentros del ciclo seleccionado.
-	 * @param listaParticipantes
-	 *            La lista de participantes del torneo.
+	 * @param listaEncuentros    La lista de encuentros del ciclo seleccionado.
+	 * @param listaParticipantes La lista de participantes del torneo.
 	 */
 	private void obtenerResultadosCiclo(ArrayList<Encuentro> listaEncuentros,
 			ArrayList<Participante> listaParticipantes) {
@@ -756,8 +752,8 @@ public class DialogoMostrarResultados extends JDialog {
 				if (p.getNumeroParticipante() == this
 						.obtenerParticipante(listaEncuentros.get(i).getIdParticipanteFinal()).getNumeroParticipante()
 						&& this.obtenerParticipante(listaEncuentros.get(i).getIdParticipanteFinal())
-								.getNombreParticipante().compareToIgnoreCase(this.torneo.getDatosPersonalizacion()
-										.getNombreParticipanteSinEncuentro()) == 0) {
+						.getNombreParticipante().compareToIgnoreCase(this.torneo.getDatosPersonalizacion()
+								.getNombreParticipanteSinEncuentro()) == 0) {
 					desactivarColumnasTabla(i);
 					etiquetaNumeroInicial[i].setText(String.valueOf(listaEncuentros.get(i).getIdParticipanteInicial()));
 					etiquetaParticipanteInicial[i]
@@ -767,8 +763,8 @@ public class DialogoMostrarResultados extends JDialog {
 				} else if (p.getNumeroParticipante() == this
 						.obtenerParticipante(listaEncuentros.get(i).getIdParticipanteInicial()).getNumeroParticipante()
 						&& this.obtenerParticipante(listaEncuentros.get(i).getIdParticipanteInicial())
-								.getNombreParticipante().compareToIgnoreCase(this.torneo.getDatosPersonalizacion()
-										.getNombreParticipanteSinEncuentro()) == 0) {
+						.getNombreParticipante().compareToIgnoreCase(this.torneo.getDatosPersonalizacion()
+								.getNombreParticipanteSinEncuentro()) == 0) {
 					desactivarColumnasTabla(i);
 					etiquetaNumeroInicial[i].setText(String.valueOf(listaEncuentros.get(i).getIdParticipanteFinal()));
 					etiquetaParticipanteInicial[i]
@@ -803,8 +799,7 @@ public class DialogoMostrarResultados extends JDialog {
 	/**
 	 * Desactiva las columnas de la tabla.
 	 * 
-	 * @param i
-	 *            Posicion de la fila de la tabla.
+	 * @param i Posicion de la fila de la tabla.
 	 */
 	private void desactivarColumnasTabla(int i) {
 		this.etiquetaParticipanteFinal[i].setVisible(false);
@@ -819,8 +814,7 @@ public class DialogoMostrarResultados extends JDialog {
 	/**
 	 * Obtiene al participante registrado en el torneo.
 	 * 
-	 * @param numeroParticipante
-	 *            Identificador unico del participante.
+	 * @param numeroParticipante Identificador unico del participante.
 	 * @return Retorna al participante.
 	 */
 	private Participante obtenerParticipante(int numeroParticipante) {
@@ -836,8 +830,7 @@ public class DialogoMostrarResultados extends JDialog {
 	 * Permite obtener los datos generales del torneo y mostrarlos en la parte
 	 * superior de la pantalla en su respectivo componente.
 	 * 
-	 * @param torneo
-	 *            Información contenida del torneo.
+	 * @param torneo Información contenida del torneo.
 	 */
 	private void mostrarDatosGenerales(Torneo torneo) {
 		DateFormat f = DateFormat.getDateInstance(DateFormat.FULL);
@@ -852,30 +845,42 @@ public class DialogoMostrarResultados extends JDialog {
 	 * Permite exportar en un archivo CSV los resultados que contiene un ciclo.
 	 */
 	private void accionExportarResultados() {
+		Object[] opciones = { "Sí", "No" };
 		JFileChooser dialogo = new JFileChooser();
 		File archivo = null;
 		dialogo.setDialogTitle("Guardar como");
 		FileFilter filtro1 = new FileNameExtensionFilter("Archivo CSV", "csv", "CSV");
 		dialogo.setFileFilter(filtro1);
-
 		dialogo.setAcceptAllFileFilterUsed(false);
 		dialogo.setCurrentDirectory(new File(System.getProperty("user.dir")));
 		dialogo.setSelectedFile(null);
 		dialogo.setMultiSelectionEnabled(false);
 		int valor = dialogo.showSaveDialog(null);
 		if (valor == JFileChooser.APPROVE_OPTION) {
+			archivo = dialogo.getSelectedFile();
+			if (!archivo.equals(null) && !archivo.getName().toUpperCase().endsWith(".CSV")) {
+				archivo = new File(archivo.getAbsolutePath() + ".CSV");
+			}
+			if (archivo.exists()) {
+				int respuesta1 = JOptionPane.showOptionDialog(null,
+						archivo.getName() + " ya existe.\n ¿Desea reemplazarlo?", "Confirmar Descargar plantilla",
+						JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, opciones, opciones[1]);
+				if (respuesta1 != 0) {
+					return;
+				}
+			}
 			try {
-				archivo = dialogo.getSelectedFile();
 				this.torneo.getAlgoritmoTorneo().generarReporteParciales(archivo,
 						comboSeleccionarCiclo.getSelectedIndex());
 				JOptionPane.showMessageDialog(
 						null, "El archivo se ha guardado exitosamente.", "Generar reporte de " + this.torneo
-								.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MAYUSCULA_SINGULAR),
+						.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MAYUSCULA_SINGULAR),
 						JOptionPane.INFORMATION_MESSAGE);
 			} catch (ExcepcionUtilerias e) {
 				JOptionPane.showMessageDialog(null, e.getMessage(), "Advertencia", JOptionPane.ERROR_MESSAGE);
 			}
 		}
+
 	}
 
 	/**
