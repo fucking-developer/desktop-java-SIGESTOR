@@ -37,11 +37,11 @@ import sigestor.excepcion.ExcepcionUtilerias;
  * almacenada.</li>
  * <li><code>tablaListaParticipantes</code>Lista donde estarán los datos de los
  * participantes previamente almacenados.</li>
- * <li><code>botonExportar</code>Se exportara a un archivo CSV los datos del
+ * <li><code>botonExportar</code>Exportará en un archivo CSV los datos del
  * ciclo.</li>
  * <li><code>botonSalir</code>Se saldrá del dialogo.</li>
  * <li><code>botonHacer</code>Genera los ciclos del torneo.</li>
- * <li><code>panelEncabezadoTablas</code>Contendra los encabezados de los datos
+ * <li><code>panelEncabezadoTablas</code>Contendrá los encabezados de los datos
  * personalizados del torneo.</li>
  * <li><code>ventanaPrincipal</code>Se hará llamado a la ventana principal del
  * torneo.</li>
@@ -540,7 +540,7 @@ public class DialogoCiclo extends JDialog {
 	}
 
 	/**
-	 * Inicializa la ventana del dialogo, llena la tabla de participantes y
+	 * Inicializa la ventana del diálogo, llena la tabla de participantes y
 	 * actualiza el combo para elegir un ciclo.
 	 */
 	private void inicializarDialogo() {
@@ -549,7 +549,7 @@ public class DialogoCiclo extends JDialog {
 	}
 
 	/**
-	 * Actualiza el combo de la lista desplegable eliminado y rellenándolo
+	 * Actualiza el combo de la lista desplegable eliminándolo y rellenándolo
 	 * nuevamente.
 	 */
 	private void actualizarCombo() {
@@ -603,7 +603,7 @@ public class DialogoCiclo extends JDialog {
 	 * Obtiene los participantes de la lista de participantes.
 	 * 
 	 * @param numeroParticipante
-	 *            Cantidad de participantes del torneo.
+	 *            Número de participantes del torneo.
 	 * @return Devuelve el nombre del participante solicitado.
 	 */
 	private Participante obtenerParticipante(int numeroParticipante) {

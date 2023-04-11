@@ -17,7 +17,7 @@ import sigestor.excepcion.ExcepcionCapturarResultados;
  * <code>AlgoritmoTorneo</code>.
  * <p>
  * 
- * @version 10/04/2023
+ * @version 11/04/2023
  * 
  * 
  * @author Jennifer Cortés Pérez
@@ -30,7 +30,7 @@ import sigestor.excepcion.ExcepcionCapturarResultados;
 public class TorneoRoundRobin extends AlgoritmoTorneo {
 
 	/**
-	 * Sirve para saber las veces que se enfrentarían los participantes.
+	 * Sirve para saber la cantidad de veces que se enfrentarán los participantes.
 	 */
 	private int numeroVueltas;
 
@@ -49,7 +49,7 @@ public class TorneoRoundRobin extends AlgoritmoTorneo {
 	/**
 	 * Devuelve el valor de la variable <code>numeroVueltas</code>.
 	 * 
-	 * @return Número de veces que se enfrentaran los participantes.
+	 * @return Número de veces que se enfrentarán los participantes.
 	 */
 	public int getNumeroVueltas() {
 		return numeroVueltas;
@@ -59,7 +59,7 @@ public class TorneoRoundRobin extends AlgoritmoTorneo {
 	 * Asigna valor a la variable <code>numeroVueltas</code>.
 	 * 
 	 * @param numeroVueltas
-	 *            Dato que recive de la personalización del torneo.
+	 *            Dato que recibe de la personalización del torneo.
 	 */
 	public void setNumeroVueltas(int numeroVueltas) {
 		this.numeroVueltas = numeroVueltas;
@@ -71,7 +71,7 @@ public class TorneoRoundRobin extends AlgoritmoTorneo {
 	 * 
 	 * @param numeroParticipantes
 	 *            Cantidad de participantes inscritos en el torneo.
-	 * @return El número máximo de ciclos que tendría el torneo.
+	 * @return El número máximo de ciclos que tendrá el torneo.
 	 */
 	@Override
 	public int calcularNumeroCiclos(int numeroParticipantes) {
@@ -84,7 +84,7 @@ public class TorneoRoundRobin extends AlgoritmoTorneo {
 
 	/**
 	 * 
-	 * Crea instancia de la clase <code>BaseDatosTorneo</code> y llama a su método
+	 * Crea una instancia de la clase <code>BaseDatosTorneo</code> y llama a su método
 	 * <code>insertarTorneoRoundRobin</code> para insertar datos para un torneo de
 	 * tipo Round Robin.
 	 * <p>
@@ -229,7 +229,7 @@ public class TorneoRoundRobin extends AlgoritmoTorneo {
 	}
 
 	/**
-	 * Intercambia las posiciones de 2 jugadores empatados si el ganador está una
+	 * Intercambia las posiciones de los 2 jugadores empatados, si el ganador está una
 	 * posición abajo del jugador con quien empate, de lo contrario no realiza
 	 * ningún movimiento.
 	 * 
@@ -238,7 +238,7 @@ public class TorneoRoundRobin extends AlgoritmoTorneo {
 	 * @param numP2
 	 *            Segundo participante empatado.
 	 * @param numPGanador
-	 *            El participante que obtuvo más puntaje con el criterio de
+	 *            Participante que obtuvo más puntaje con el criterio de
 	 *            desempate aplicado.
 	 * @return Lista de participantes ordenada.
 	 */
