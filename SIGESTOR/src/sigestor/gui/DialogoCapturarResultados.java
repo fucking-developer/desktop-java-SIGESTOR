@@ -1073,7 +1073,6 @@ public class DialogoCapturarResultados extends JDialog {
 	 */
 	private void mostrarDatosGenerales(Torneo torneo) {
 		DateFormat f = DateFormat.getDateInstance(DateFormat.FULL);
-
 		this.campoTorneo.setText(torneo.getNombreTorneo());
 		this.campoOrganizador.setText(torneo.getNombreOrganizador());
 		this.campoFechaInicio.setText(f.format(torneo.getFechaInicioTorneo()));

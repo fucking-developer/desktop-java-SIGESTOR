@@ -31,6 +31,7 @@ import sigestor.excepcion.ExcepcionCapturarResultados;
  * @author German Luis Cruz Martinez.
  * @author Eder Euclides Dionisio Diaz.
  * @author Erik Vasquez Policarpo
+ * 
  * @see AlgoritmoTorneo
  */
 public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
@@ -125,32 +126,7 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 
 	@Override
 	public void desempatarParticipantes() {
-		/*
-		 * BaseDatosEncuentro bde = new BaseDatosEncuentro(torneo.getNombreArchivo());
-		 * BaseDatosCiclo bdc = new BaseDatosCiclo(torneo.getNombreArchivo());
-		 * ArrayList<Participante> participantes = torneo.getListaParticipantes();
-		 * ArrayList<String> criterios =
-		 * torneo.getCriteriosDesempate().getListaCriteriosSeleccionados();
-		 * ArrayList<Encuentro> encuentrosParticipante = new ArrayList<Encuentro>();
-		 * 
-		 * try { encuentrosParticipante =
-		 * bde.obtenerEncuentros(bdc.obtenerCiclos(torneo).get(torneo.getCicloActual() -
-		 * 1)); } catch (ExcepcionBaseDatos | ExcepcionCapturarResultados |
-		 * ExcepcionBaseDatosEncuentro e) { e.printStackTrace(); }
-		 * 
-		 * for (Encuentro encuentro : encuentrosParticipante) { cicloromper: { for
-		 * (String criterio : criterios) { switch (criterio) { case "Puntuación":
-		 * Desempate desempate = new DesempatePuntuacion(); Participante
-		 * participanteGanador = desempate.desempatar(
-		 * participantes.get(encuentro.getIdParticipanteInicial()),
-		 * participantes.get(encuentro.getIdParticipanteFinal()), participantes,
-		 * obtenerEncuentrosTotales(), torneo); if (participanteGanador != null) {
-		 * participantes.get(participanteGanador.getNumeroParticipante()).
-		 * setLugarParticipante(100); } break; default: // no se ha seleccionado ningún
-		 * criterio }
-		 * 
-		 * } } }
-		 */
+		
 	}
 
 	/**
