@@ -19,19 +19,19 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 
 /**
- * Sirve para mostrar la interfaz del dialogo de los resultados finales del
+ * Sirve para mostrar la interfaz del diálogo de los resultados finales del
  * torneo.
  * <p>
  * Las características de la clase <code>DialogoResultadoCiclo</code> son:
  * <ul>
- * <li><code>tablaListaPosiciones</code>Contrenda una tabla con las posiciones
+ * <li><code>tablaListaPosiciones</code>Contendrá una tabla con las posiciones
  * asignadas de los participantes.</li>
- * <li><code>campoNombreTorneo</code>Se especificara el nombre que tendra el
- * torneo almacenado con aterioridad.</li>
- * <li><code>campoFechaInicio</code>Se especificara la fecha en que se inciara
+ * <li><code>campoNombreTorneo</code>Se especificará el nombre que tendrá el
+ * torneo almacenado con anterioridad.</li>
+ * <li><code>campoFechaInicio</code>Se especificará la fecha en que se inciará
  * el torneo almacenado con anterioridad.</li>
- * <li><code>campoFechaFin</code>Se especificara la fecha en que el torneo
- * termina almacenada con anterioridad.</li>
+ * <li><code>campoFechaFin</code>Se especificará la fecha en que el torneo
+ * terminará almacenada con anterioridad.</li>
  * <li><code>campoNombreOrganizador</code>Se especificara el nombre que tendra
  * el organizador del torneo almacenado con anterioridad.</li>
  * <li><code>campoNombreGanador</code> Se especificara el nombre que tendra el
@@ -47,6 +47,7 @@ import java.util.ArrayList;
  * @version 10/04/2023
  * 
  * @author Jonathan Eduardo Ibarra Martinez
+ * @author Jennifer Cortés Pérez
  * @author Hernan Sesai Lopez Aragon
  * @author Francisco Samuel Reyes Cortes
  * @author Alicia Adriana Clemente Hernandez

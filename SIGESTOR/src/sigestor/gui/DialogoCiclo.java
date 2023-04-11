@@ -25,17 +25,17 @@ import sigestor.excepcion.ExcepcionUtilerias;
  * <p>
  * Las características de la clase <code>DialogoCiclo</code> son:
  * <ul>
- * <li><code>campoNombreTorneo</code>Se especificara el nombre que tendra el
- * torneo almacenado con aterioridad.</li>
- * <li><code>campoNombreOrganizador</code>Se especificara el nombre que tendra
+ * <li><code>campoNombreTorneo</code>Se especificará el nombre que tendrá el
+ * torneo almacenado con anterioridad.</li>
+ * <li><code>campoNombreOrganizador</code>Se especificará el nombre que tendrá
  * el organizador del torneo almacenado con anterioridad.</li>
- * <li><code>campoFechaInicio</code>Se especificara la fecha en que se inciara
+ * <li><code>campoFechaInicio</code>Se especificará la fecha en que se inciará
  * el torneo almacenado con anterioridad.</li>
- * <li><code>campoFechaFinalizacion</code>Se especificara la fecha en que el
+ * <li><code>campoFechaFinalizacion</code>Se especificará la fecha en que el
  * torneo termina almacenada con anterioridad.</li>
  * <li><code>comboSeleccionarCiclo</code>Se selecciona el ciclo de la lista
  * almacenada.</li>
- * <li><code>tablaListaParticipantes</code>Lista donde estaran los datos de los
+ * <li><code>tablaListaParticipantes</code>Lista donde estarán los datos de los
  * participantes previamente almacenados.</li>
  * <li><code>botonExportar</code>Se exportara a un archivo CSV los datos del
  * ciclo.</li>
@@ -410,7 +410,7 @@ public class DialogoCiclo extends JDialog {
 		accionHacer.putValue(Action.MNEMONIC_KEY, KeyEvent.VK_H);
 		accionHacer.putValue(Action.ACCELERATOR_KEY,
 				KeyStroke.getKeyStroke(KeyEvent.VK_H, InputEvent.CTRL_DOWN_MASK + InputEvent.SHIFT_DOWN_MASK));
-		accionHacer.putValue(Action.SHORT_DESCRIPTION, "Realiza el siguiente pareo");
+		accionHacer.putValue(Action.SHORT_DESCRIPTION, "Realiza el siguiente ciclo");
 		botonHacer = new JButton(accionHacer);
 		botonHacer.getActionMap().put("hacer", accionHacer);
 		botonHacer.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
@@ -427,7 +427,7 @@ public class DialogoCiclo extends JDialog {
 
 		comboSeleccionarCiclo.setToolTipText(
 				"Seleccione un " + torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MINUSCULA_SINGULAR)
-				+ " para generar el reporte de pareos en pantalla");
+				+ " para generar el reporte de encuentros en pantalla");
 		comboSeleccionarCiclo.setEnabled(true);
 		comboSeleccionarCiclo.setBounds(930, 250, 120, 25);
 		panelNorte.add(comboSeleccionarCiclo);
@@ -450,7 +450,7 @@ public class DialogoCiclo extends JDialog {
 		.put((KeyStroke) accionSeleccionarCiclo.getValue(Action.ACCELERATOR_KEY), "seleccionarciclo");
 		accionSeleccionarCiclo.putValue(Action.SHORT_DESCRIPTION,
 				"Seleccione un " + torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MINUSCULA_SINGULAR)
-				+ " para generar el reporte de pareos en pantalla");
+				+ " para generar el reporte de encuentros en pantalla");
 
 		etiquetaCicloActual2.setBounds(550, 290, 200, 25);
 		panelNorte.add(etiquetaCicloActual2);
@@ -479,7 +479,7 @@ public class DialogoCiclo extends JDialog {
 		accionExportarRonda.putValue(Action.MNEMONIC_KEY, KeyEvent.VK_E);
 		accionExportarRonda.putValue(Action.ACCELERATOR_KEY,
 				KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.CTRL_DOWN_MASK));
-		accionExportarRonda.putValue(Action.SHORT_DESCRIPTION, "Genera un archivo CSV con los pareos del "
+		accionExportarRonda.putValue(Action.SHORT_DESCRIPTION, "Genera un archivo CSV con los encuentros del "
 				+ torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MINUSCULA_SINGULAR));
 
 		JPanel panelSur = new JPanel();
