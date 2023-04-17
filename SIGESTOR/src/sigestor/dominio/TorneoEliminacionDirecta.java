@@ -283,7 +283,7 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 				.obtenerEncuentros(bdc.obtenerCiclos(torneo).get(torneo.getCicloActual() - 1));
 		ArrayList<String> criterios = torneo.getCriteriosDesempate().getListaCriteriosSeleccionados();
 		int auxUltimaPosicionSegundaVuelta = 0;
-
+		System.out.println("entra");
 		for (Encuentro encuentro : encuentrosParticipante) {
 			if (encuentro.getResultadoEncuentro() == Encuentro.GANADOR_INICIAL) {
 				//FIXME eliminar
@@ -350,12 +350,13 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 			}
 		}
 		for (Participante p : participantes) {
-			if (!(p.getLugarParticipante() == 100)) {
+			/*if ((!(p.getLugarParticipante() == 100)) || p.getPuntajeParticipante()<0) {
 				participantesCiclo.add(p);
-			}
+			}*/
 		}
+		
 		//FIXME borrar comentarios
-		System.out.println("Participante que salen: " + participantes);
+		System.out.println("Participante totales: " + participantes);
 		System.out.println("Participante que siguen: " + participantesCiclo);
 
 		if (esSimple) {

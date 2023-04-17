@@ -137,7 +137,7 @@ public class DialogoCapturarResultados extends JDialog {
 	 * Sirve para obtener la lista de ciclos del torneo.
 	 */
 	private ArrayList<Ciclo> listaCiclos;
-	
+
 	/**
 	 * Campo para el nombre del torneo.
 	 */
@@ -215,9 +215,8 @@ public class DialogoCapturarResultados extends JDialog {
 	/**
 	 * Botón <code>Cancelar ciclo</code>.
 	 * 
-	 * @see #accionCancelarCiclo()
-	 *      El botón será personalizable en ciclo, por que dependerá del nombre
-	 *      asignado.
+	 * @see #accionCancelarCiclo() El botón será personalizable en ciclo, por que
+	 *      dependerá del nombre asignado.
 	 */
 	private JButton botonCancelarCiclo;
 
@@ -328,11 +327,9 @@ public class DialogoCapturarResultados extends JDialog {
 		personalizacion = torneo.getDatosPersonalizacion();
 		validacionMarcadores = ventanaPrincipal.getTorneoActual().getDatosPersonalizacion().isExistenciaMarcador();
 		listaCiclos = torneo.getAlgoritmoTorneo().getCiclos();
-			numeroPartidas = this.ventanaPrincipal.getTorneoActual().getAlgoritmoTorneo().getCiclos()
-					.get(this.ventanaPrincipal.getTorneoActual().getCicloActual() - 1).getEncuentroParticipantes()
-					.size();
+		numeroPartidas = this.ventanaPrincipal.getTorneoActual().getAlgoritmoTorneo().getCiclos()
+				.get(this.ventanaPrincipal.getTorneoActual().getCicloActual() - 1).getEncuentroParticipantes().size();
 
-		
 		int auxImpar = 0;
 		if (participantes.size() % 2 != 0) {
 			auxImpar = 1;
@@ -624,109 +621,106 @@ public class DialogoCapturarResultados extends JDialog {
 		campoMarcadorFinal = new JTextField[numeroPartidas + auxImpar];
 		etiquetaFechaEncuentros = new JTextField[numeroPartidas + auxImpar];
 
-			for (int i = 0; i < numeroPartidas + auxImpar; i++) {
-				panelFilasTabla[i] = new JPanel();
-				panelFilasTabla[i].setLayout(new FlowLayout(1));
+		for (int i = 0; i < numeroPartidas + auxImpar; i++) {
+			panelFilasTabla[i] = new JPanel();
+			panelFilasTabla[i].setLayout(new FlowLayout(1));
 
-				etiquetaNumeroInicial[i] = new JLabel();
+			etiquetaNumeroInicial[i] = new JLabel();
+			auxPanel = new JPanel();
+			auxPanel.add(etiquetaNumeroInicial[i]);
+			auxPanel.setPreferredSize(new Dimension(50, 30));
+			panelFilasTabla[i].add(auxPanel);
+
+			etiquetaParticipanteInicial[i] = new JLabel();
+			auxPanel = new JPanel();
+			auxPanel.add(etiquetaParticipanteInicial[i]);
+			auxPanel.setPreferredSize(new Dimension(250, 30));
+			panelFilasTabla[i].add(auxPanel);
+
+			if (validacionMarcadores) {
+				campoMarcadorInicial[i] = new JTextField();
+				campoMarcadorInicial[i].setToolTipText("Escriba el "
+						+ this.ventanaPrincipal.getTorneoActual().getDatosPersonalizacion().getNombreMarcador(2)
+						+ " que le corresponde al "
+						+ this.ventanaPrincipal.getTorneoActual().getDatosPersonalizacion().getNombreParticipante(2)
+						+ " " + this.ventanaPrincipal.getTorneoActual().getDatosPersonalizacion()
+								.getNombreParticipanteInicial());
+				campoMarcadorInicial[i].setPreferredSize(new Dimension(60, 30));
 				auxPanel = new JPanel();
-				auxPanel.add(etiquetaNumeroInicial[i]);
-				auxPanel.setPreferredSize(new Dimension(50, 30));
+				auxPanel.add(campoMarcadorInicial[i]);
+				auxPanel.setPreferredSize(new Dimension(70, 35));
 				panelFilasTabla[i].add(auxPanel);
 
-				etiquetaParticipanteInicial[i] = new JLabel();
-				auxPanel = new JPanel();
-				auxPanel.add(etiquetaParticipanteInicial[i]);
-				auxPanel.setPreferredSize(new Dimension(250, 30));
-				panelFilasTabla[i].add(auxPanel);
-
-				if (validacionMarcadores) {
-					campoMarcadorInicial[i] = new JTextField();
-					campoMarcadorInicial[i].setToolTipText("Escriba el "
-							+ this.ventanaPrincipal.getTorneoActual().getDatosPersonalizacion().getNombreMarcador(2)
-							+ " que le corresponde al "
-							+ this.ventanaPrincipal.getTorneoActual().getDatosPersonalizacion().getNombreParticipante(2)
-							+ " " + this.ventanaPrincipal.getTorneoActual().getDatosPersonalizacion()
-									.getNombreParticipanteInicial());
-					campoMarcadorInicial[i].setPreferredSize(new Dimension(60, 30));
-					auxPanel = new JPanel();
-					auxPanel.add(campoMarcadorInicial[i]);
-					auxPanel.setPreferredSize(new Dimension(70, 35));
-					panelFilasTabla[i].add(auxPanel);
-
-				}
-
-				opcionGanadorInicial[i] = new JRadioButton("", false);
-				opcionGanadorInicial[i].setToolTipText("Seleccione si "
-						+ this.ventanaPrincipal.getTorneoActual().getDatosPersonalizacion().getNombreParticipante(3)
-						+ " "
-						+ this.ventanaPrincipal.getTorneoActual().getDatosPersonalizacion()
-								.getNombreParticipanteInicial()
-						+ " ha sido el Ganador de "
-						+ this.ventanaPrincipal.getTorneoActual().getDatosPersonalizacion().getNombreEncuentro(3));
-				opcionEmpate[i] = new JRadioButton("", false);
-				opcionEmpate[i].setToolTipText("Seleccione si en "
-						+ this.ventanaPrincipal.getTorneoActual().getDatosPersonalizacion().getNombreEncuentro(3)
-						+ " existe un Empate");
-				opcionGanadorFinal[i] = new JRadioButton("", false);
-				opcionGanadorFinal[i].setToolTipText("Seleccione si "
-						+ this.ventanaPrincipal.getTorneoActual().getDatosPersonalizacion().getNombreParticipante(3)
-						+ " "
-						+ this.ventanaPrincipal.getTorneoActual().getDatosPersonalizacion().getNombreParticipanteFinal()
-						+ " ha sido el Ganador de "
-						+ this.ventanaPrincipal.getTorneoActual().getDatosPersonalizacion().getNombreEncuentro(3));
-				grupoResultado[i] = new ButtonGroup();
-				grupoResultado[i].add(opcionGanadorInicial[i]);
-				grupoResultado[i].add(opcionEmpate[i]);
-				grupoResultado[i].add(opcionGanadorFinal[i]);
-
-				auxPanel = new JPanel();
-				auxPanel.add(opcionGanadorInicial[i]);
-				auxPanel.add(opcionEmpate[i]);
-				auxPanel.add(opcionGanadorFinal[i]);
-
-				auxPanel.setPreferredSize(new Dimension(200, 30));
-				panelFilasTabla[i].add(auxPanel);
-
-				etiquetaNumeroFinal[i] = new JLabel();
-				auxPanel = new JPanel();
-				auxPanel.add(etiquetaNumeroFinal[i]);
-				auxPanel.setPreferredSize(new Dimension(50, 30));
-				panelFilasTabla[i].add(auxPanel);
-
-				etiquetaParticipanteFinal[i] = new JLabel();
-				auxPanel = new JPanel();
-				auxPanel.add(etiquetaParticipanteFinal[i]);
-				auxPanel.setPreferredSize(new Dimension(230, 30));
-				panelFilasTabla[i].add(auxPanel);
-
-				if (validacionMarcadores) {
-					campoMarcadorFinal[i] = new JTextField();
-					campoMarcadorFinal[i].setPreferredSize(new Dimension(60, 30));
-					campoMarcadorFinal[i].setToolTipText("Escriba el "
-							+ this.ventanaPrincipal.getTorneoActual().getDatosPersonalizacion().getNombreMarcador(2)
-							+ " que le corresponde al "
-							+ this.ventanaPrincipal.getTorneoActual().getDatosPersonalizacion().getNombreParticipante(2)
-							+ " " + this.ventanaPrincipal.getTorneoActual().getDatosPersonalizacion()
-									.getNombreParticipanteFinal());
-					auxPanel = new JPanel();
-					auxPanel.add(campoMarcadorFinal[i]);
-					auxPanel.setPreferredSize(new Dimension(70, 35));
-					panelFilasTabla[i].add(auxPanel);
-
-				}
-				etiquetaFechaEncuentros[i] = new JTextField(formatoFechasEncuentro.format(new Date()));
-				etiquetaFechaEncuentros[i].setPreferredSize(new Dimension(170, 25));
-				etiquetaFechaEncuentros[i].setEditable(false);
-
-				auxPanel = new JPanel();
-				auxPanel.add(etiquetaFechaEncuentros[i]);
-				auxPanel.setPreferredSize(new Dimension(200, 30));
-				panelFilasTabla[i].add(auxPanel);
-
-				panelCentralCentral.add(panelFilasTabla[i]);
 			}
-		
+
+			opcionGanadorInicial[i] = new JRadioButton("", false);
+			opcionGanadorInicial[i].setToolTipText("Seleccione si "
+					+ this.ventanaPrincipal.getTorneoActual().getDatosPersonalizacion().getNombreParticipante(3) + " "
+					+ this.ventanaPrincipal.getTorneoActual().getDatosPersonalizacion().getNombreParticipanteInicial()
+					+ " ha sido el Ganador de "
+					+ this.ventanaPrincipal.getTorneoActual().getDatosPersonalizacion().getNombreEncuentro(3));
+			opcionEmpate[i] = new JRadioButton("", false);
+			opcionEmpate[i].setToolTipText("Seleccione si en "
+					+ this.ventanaPrincipal.getTorneoActual().getDatosPersonalizacion().getNombreEncuentro(3)
+					+ " existe un Empate");
+			opcionGanadorFinal[i] = new JRadioButton("", false);
+			opcionGanadorFinal[i].setToolTipText("Seleccione si "
+					+ this.ventanaPrincipal.getTorneoActual().getDatosPersonalizacion().getNombreParticipante(3) + " "
+					+ this.ventanaPrincipal.getTorneoActual().getDatosPersonalizacion().getNombreParticipanteFinal()
+					+ " ha sido el Ganador de "
+					+ this.ventanaPrincipal.getTorneoActual().getDatosPersonalizacion().getNombreEncuentro(3));
+			grupoResultado[i] = new ButtonGroup();
+			grupoResultado[i].add(opcionGanadorInicial[i]);
+			grupoResultado[i].add(opcionEmpate[i]);
+			grupoResultado[i].add(opcionGanadorFinal[i]);
+
+			auxPanel = new JPanel();
+			auxPanel.add(opcionGanadorInicial[i]);
+			auxPanel.add(opcionEmpate[i]);
+			auxPanel.add(opcionGanadorFinal[i]);
+
+			auxPanel.setPreferredSize(new Dimension(200, 30));
+			panelFilasTabla[i].add(auxPanel);
+
+			etiquetaNumeroFinal[i] = new JLabel();
+			auxPanel = new JPanel();
+			auxPanel.add(etiquetaNumeroFinal[i]);
+			auxPanel.setPreferredSize(new Dimension(50, 30));
+			panelFilasTabla[i].add(auxPanel);
+
+			etiquetaParticipanteFinal[i] = new JLabel();
+			auxPanel = new JPanel();
+			auxPanel.add(etiquetaParticipanteFinal[i]);
+			auxPanel.setPreferredSize(new Dimension(230, 30));
+			panelFilasTabla[i].add(auxPanel);
+
+			if (validacionMarcadores) {
+				campoMarcadorFinal[i] = new JTextField();
+				campoMarcadorFinal[i].setPreferredSize(new Dimension(60, 30));
+				campoMarcadorFinal[i].setToolTipText("Escriba el "
+						+ this.ventanaPrincipal.getTorneoActual().getDatosPersonalizacion().getNombreMarcador(2)
+						+ " que le corresponde al "
+						+ this.ventanaPrincipal.getTorneoActual().getDatosPersonalizacion().getNombreParticipante(2)
+						+ " " + this.ventanaPrincipal.getTorneoActual().getDatosPersonalizacion()
+								.getNombreParticipanteFinal());
+				auxPanel = new JPanel();
+				auxPanel.add(campoMarcadorFinal[i]);
+				auxPanel.setPreferredSize(new Dimension(70, 35));
+				panelFilasTabla[i].add(auxPanel);
+
+			}
+			etiquetaFechaEncuentros[i] = new JTextField(formatoFechasEncuentro.format(new Date()));
+			etiquetaFechaEncuentros[i].setPreferredSize(new Dimension(170, 25));
+			etiquetaFechaEncuentros[i].setEditable(false);
+
+			auxPanel = new JPanel();
+			auxPanel.add(etiquetaFechaEncuentros[i]);
+			auxPanel.setPreferredSize(new Dimension(200, 30));
+			panelFilasTabla[i].add(auxPanel);
+
+			panelCentralCentral.add(panelFilasTabla[i]);
+		}
+
 		if (participantes.size() % 2 != 0) {
 			etiquetaNumeroInicial[numeroPartidas]
 					.setText(participantes.get(participantes.size() - 1).getNumeroParticipante() + "");
@@ -1047,11 +1041,11 @@ public class DialogoCapturarResultados extends JDialog {
 	 */
 	private Participante obtenerParticipante(int numeroParticipante) {
 
-			for (Participante p : participantes) {
-				if (p.getNumeroParticipante() == numeroParticipante) {
-					return p;
-				}
+		for (Participante p : participantes) {
+			if (p.getNumeroParticipante() == numeroParticipante) {
+				return p;
 			}
+		}
 
 		return null;
 	}
@@ -1141,17 +1135,17 @@ public class DialogoCapturarResultados extends JDialog {
 	 * Obtiene toda la información de un ciclo al ser seleccionado en el combo.
 	 */
 	private void accionSeleccionarCiclo() {
-			ArrayList<Ciclo> listaCiclos = torneo.getAlgoritmoTorneo().getCiclos();
-			Ciclo ciclo = listaCiclos.get(comboSeleccionarCiclo.getSelectedIndex());
-			ArrayList<Encuentro> listaEncuentros = ciclo.getEncuentroParticipantes();
-			obtenerResultadosCiclo(listaEncuentros);
-			deshabilitarTabla();
-			etiquetaTituloTabla.setText("Tabla de resultados de "
-					+ ventanaPrincipal.getTorneoActual().getDatosPersonalizacion().getNombreCiclo(3) + " "
-					+ (comboSeleccionarCiclo.getSelectedIndex() + 1));
-			etiquetaCicloActual.setText(
-					torneo.getDatosPersonalizacion().getNombreCiclo(1) + " actual: " + torneo.getCicloActual());
-		
+		ArrayList<Ciclo> listaCiclos = torneo.getAlgoritmoTorneo().getCiclos();
+		Ciclo ciclo = listaCiclos.get(comboSeleccionarCiclo.getSelectedIndex());
+		ArrayList<Encuentro> listaEncuentros = ciclo.getEncuentroParticipantes();
+		obtenerResultadosCiclo(listaEncuentros);
+		deshabilitarTabla();
+		etiquetaTituloTabla.setText("Tabla de resultados de "
+				+ ventanaPrincipal.getTorneoActual().getDatosPersonalizacion().getNombreCiclo(3) + " "
+				+ (comboSeleccionarCiclo.getSelectedIndex() + 1));
+		etiquetaCicloActual
+				.setText(torneo.getDatosPersonalizacion().getNombreCiclo(1) + " actual: " + torneo.getCicloActual());
+
 		habilitarBotones();
 	}
 
@@ -1348,6 +1342,8 @@ public class DialogoCapturarResultados extends JDialog {
 
 		Ciclo ciclo = null;
 		if (this.torneo.getTipoTorneo().contains("Suizo")) {
+			ciclo = comboSeleccionarCiclo.getItemAt(torneo.getCicloActual() - 1);
+		} else if (this.torneo.getTipoTorneo().contains("Eliminación directa")) {
 			ciclo = comboSeleccionarCiclo.getItemAt(torneo.getCicloActual() - 1);
 		} else {
 			ciclo = comboSeleccionarCiclo.getItemAt(this.comboSeleccionarCiclo.getSelectedIndex());
