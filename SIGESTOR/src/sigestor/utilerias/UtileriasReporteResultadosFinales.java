@@ -57,6 +57,8 @@ public class UtileriasReporteResultadosFinales {
 			writerCsv.write("Fecha de fin");
 			writerCsv.write(f.format(torneo.getFechaFinalTorneo()));
 			writerCsv.endRecord();
+			writerCsv.write(torneo.getDescripcionTorneo());
+			writerCsv.endRecord();
 			writerCsv.endRecord();
 			writerCsv.write("Tabla de resultados finales");
 			writerCsv.endRecord();
