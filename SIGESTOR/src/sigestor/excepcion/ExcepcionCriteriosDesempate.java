@@ -47,17 +47,17 @@ public class ExcepcionCriteriosDesempate extends Exception {
 	/**
 	 * Mensaje 2.3.2 del documento de mensajes del sistema.
 	 */
-	public static final String MENSAJE_EXCEPCION_CRITERIOS_INVALIDOS = "No se pueden utilizar los siguientes criterios de desempate: Diferencia de marcadores, Marcador en contra, Marcador a favor y Marcador de participante final, si no hay marcadores selecionados.";
+	public static final String MENSAJE_EXCEPCION_CRITERIOS_INVALIDOS = "No se pueden utilizar los siguientes criterios de desempate:\nDiferencia de marcadores, Marcador en contra, Marcador a favor\ny Marcador de participante final, si no hay marcadores selecionados.";
 
 	/**
 	 * Mensaje 2.3.1 del documento de mensajes del sistema.
 	 */
-	public static final String MENSAJE_EXCEPCION_CRITERIOS_TIPO_TORNEO = "El desempate Bucholtz no puede ser utilizado en el torneo de tipo Round Robin. Seleccione otro criterio de desempate.";
+	public static final String MENSAJE_EXCEPCION_CRITERIOS_TIPO_TORNEO = "El desempate Bucholtz no puede ser utilizado en el\ntorneo de tipo Round Robin. Seleccione otro criterio de desempate.";
 
 	/**
 	 * Mensaje 2.3.3 del documento de mensajes del sistema.
 	 */
-	public static final String MENSAJE_EXCEPCION_CRITERIOS_INVALIDOS_ELIMINACION_DIRECTA = "El torneo de tipo Eliminación directa solo puede utilizar los criterios de desempate: Puntuación y Marcador de participante final.";
+	public static final String MENSAJE_EXCEPCION_CRITERIOS_INVALIDOS_ELIMINACION_DIRECTA = "El torneo de tipo Eliminación directa solo puede utilizar los\ncriterios de desempate: Puntuación y Marcador de participante final.";
 
 	/**
 	 * Permite mostrar un mensaje de acuerdo a las constantes declaradas en esta
