@@ -283,12 +283,12 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 		//Ciclo ciclos = listaCiclos.get(torneo.getCicloActual() - 1);
 //		ArrayList<Encuentro> encuentrosParticipante = ciclos.getEncuentroParticipantes();
 		ArrayList<Encuentro> encuentrosParticipante = bde
-				.obtenerEncuentros(bdc.obtenerCiclos(torneo).get(torneo.getCicloActual() - 1));
+				.obtenerEncuentros(bdc.obtenerCiclos(torneo).get(torneo.getCicloActual() - 2));
 		ArrayList<String> criterios = torneo.getCriteriosDesempate().getListaCriteriosSeleccionados();
 		int auxUltimaPosicionSegundaVuelta = 0;
 		System.out.println("entra");
 		System.out.println(encuentrosParticipante);
-		//FIXME
+		//FIXME aqui no entra
 		for (Encuentro encuentro : encuentrosParticipante) {
 			Participante partInicial = participantes.get(encuentro.getIdParticipanteInicial());
 			Participante partFinal = participantes.get(encuentro.getIdParticipanteFinal());
