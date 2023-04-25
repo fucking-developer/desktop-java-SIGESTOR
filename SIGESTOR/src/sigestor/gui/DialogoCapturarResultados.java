@@ -1468,10 +1468,11 @@ public class DialogoCapturarResultados extends JDialog {
 			float puntajeEmpatar) {
 		for (Participante p : participantes) {
 			if (encuentro.getIdParticipanteInicial() == p.getNumeroParticipante()) {
-				if (encuentro.getResultadoEncuentro() == Encuentro.DESCANSO) {
+				/*if (encuentro.getResultadoEncuentro() == Encuentro.DESCANSO) {
 					p.acumularPuntajeAcumuladoParticipante(puntajeGanar);
 					break;
-				} else if (encuentro.getResultadoEncuentro() == Encuentro.GANADOR_INICIAL) {
+				} else */
+				if (encuentro.getResultadoEncuentro() == Encuentro.GANADOR_INICIAL) {
 					p.acumularPuntajeAcumuladoParticipante(puntajeGanar);
 				} else if (encuentro.getResultadoEncuentro() == Encuentro.GANADOR_FINAL) {
 					p.acumularPuntajeAcumuladoParticipante(puntajePerder);

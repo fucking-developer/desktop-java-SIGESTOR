@@ -328,6 +328,7 @@ public class TorneoSuizo extends AlgoritmoTorneo {
 		ArrayList<Participante> participantes = torneo.getListaParticipantes();
 		ArrayList<Encuentro> encuentros = new ArrayList<Encuentro>();
 
+		
 		Participante sinEncuentro = null;
 		for (Participante p : participantes) {
 			if (p.getNombreParticipante()
@@ -340,21 +341,22 @@ public class TorneoSuizo extends AlgoritmoTorneo {
 			participantes.remove(sinEncuentro);
 			participantes.add(sinEncuentro);
 		}
-
 		int num = 1;
 		int pos = 0;
 		while (pos < participantes.size()) {
-			Participante p1 = participantes.get(pos);
-			float puntaje = p1.getPuntajeAcumuladoParticipante();
+			float puntaje = participantes.get(pos).getPuntajeAcumuladoParticipante();
 			int fin = pos + 1;
 			while (fin < participantes.size() && participantes.get(fin).getPuntajeAcumuladoParticipante() == puntaje) {
 				fin++;
 			}
-			int mitad = (fin - pos) / 2;
+			int cont = (fin - pos);
+			int mitad = (cont) / 2;
+			if (cont % 2 != 0) {
+				mitad  = mitad + 1;
+			}
 			for (int j = 0; j < mitad; j++) {
 				encuentros.add(new Encuentro(num, participantes.get(pos).getNumeroParticipante(),
-						participantes.get(pos + mitad).getNumeroParticipante(),
-						this.getTorneo().getFechaInicioTorneo()));
+						participantes.get(pos + mitad).getNumeroParticipante(), this.getTorneo().getFechaInicioTorneo()));
 				bde.insertarEncuentro(encuentros.get(num - 1), ciclo);
 				bdp.actualizarResultadoParticipante(participantes.get(pos), ciclo);
 				bdp.actualizarResultadoParticipante(participantes.get(pos + mitad), ciclo);
@@ -363,7 +365,7 @@ public class TorneoSuizo extends AlgoritmoTorneo {
 			}
 			pos += mitad;
 		}
-		ciclo.setEncuentroParticipantes(encuentros);
+		ciclo.setEncuentroParticipantes(encuentros);	
 	}
 
 	/**

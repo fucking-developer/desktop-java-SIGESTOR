@@ -37,14 +37,16 @@ public class ExcepcionTorneo extends Exception {
 	/**
 	 * Mensaje 2.2.2 del documento de mensajes del sistema.
 	 */
-	public static final String MENSAJE_EXCEPCION_ORGANIZADOR_VACIO = "El campo 'Organizador del torneo' no puede estar vacío.\n"
+	public static final String MENSAJE_EXCEPCION_ORGANIZADOR_VACIO = 
+			"El campo 'Organizador del torneo' no puede estar vacío.\n"
 			+ "Ingrese el nombre de la persona o grupo que organiza el torneo.";
 
 	/**
 	 * Mensaje 2.2.3 del documento de mensajes del sistema.
 	 */
-	public static final String MENSAJE_EXCEPCION_FECHAS_INCOHERENTES = "La fecha inicial del torneo no concuerda con"
-			+ " la fecha final del torneo. \nVerfique que la fecha inicial del torneo sea antes de la fecha final del torneo.";
+	public static final String MENSAJE_EXCEPCION_FECHAS_INCOHERENTES = 
+			"La fecha inicial del torneo no concuerda con la fecha final del torneo.\n"
+			+"Verfique que la fecha inicial del torneo sea antes de la fecha final del torneo.";
 
 	/**
 	 * Permite mostrar un mensaje de acuerdo a las constantes declaradas en esta
