@@ -105,7 +105,7 @@ public class PanelGeneral extends JPanel {
 		String[] arregloTipoTorneo = { "Suizo", "Round Robin" , "Eliminación directa"};
 		panelAux.add(etiquetaTipoTorneo);
 		comboTipoTorneo = new JComboBox<String>(arregloTipoTorneo);
-		comboTipoTorneo.setPreferredSize(new Dimension(130, 30));
+		comboTipoTorneo.setPreferredSize(new Dimension(140, 30));
 		comboTipoTorneo.setToolTipText("Seleccione el tipo de torneo");
 		panelAux.add(comboTipoTorneo);
 
