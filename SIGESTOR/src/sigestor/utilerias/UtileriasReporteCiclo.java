@@ -61,6 +61,8 @@ public class UtileriasReporteCiclo {
 			writerCsv.write("Fecha de fin: ");
 			writerCsv.write(fecha.format(torneo.getFechaFinalTorneo()));
 			writerCsv.endRecord();
+			writerCsv.write(torneo.getDescripcionTorneo());
+			writerCsv.endRecord();
 			writerCsv.write("Núm.");
 			writerCsv.write("Nombre");
 			if (torneo.getDatosPersonalizacion().isExistenciaMarcador()) {
@@ -84,6 +86,7 @@ public class UtileriasReporteCiclo {
 					writerCsv.endRecord();
 				}
 			}
+			
 			writerCsv.endRecord();
 			writerCsv.endRecord();
 			writerCsv.endRecord();

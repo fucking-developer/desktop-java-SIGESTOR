@@ -54,6 +54,8 @@ public class UtileriasReporteResultados {
 			writerCsv.endRecord();
 			writerCsv.write("Fecha de fin: " + f.format(torneo.getFechaFinalTorneo()));
 			writerCsv.endRecord();
+			writerCsv.write(torneo.getDescripcionTorneo());
+			writerCsv.endRecord();
 			writerCsv.write("Tabla de resultados "
 					+ torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MAYUSCULA_SINGULAR) + ": "
 					+ ciclo.getNumeroCiclo());
