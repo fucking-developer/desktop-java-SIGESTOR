@@ -3,6 +3,8 @@ package sigestor.dominio;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import sigestor.bd.BaseDatosCiclo;
+import sigestor.bd.BaseDatosEncuentro;
 import sigestor.bd.BaseDatosParticipante;
 import sigestor.bd.BaseDatosTorneo;
 import sigestor.excepcion.ExcepcionBaseDatos;
@@ -38,8 +40,7 @@ public class TorneoRoundRobin extends AlgoritmoTorneo {
 	 * Inicializa las variables con un valor por defecto y asigna a la variable
 	 * <code>torneo</code> el torneo recibido.
 	 * 
-	 * @param torneo
-	 *            Contiene los datos generales del torneo.
+	 * @param torneo Contiene los datos generales del torneo.
 	 */
 	public TorneoRoundRobin(Torneo torneo) {
 		super(torneo);
@@ -58,8 +59,7 @@ public class TorneoRoundRobin extends AlgoritmoTorneo {
 	/**
 	 * Asigna valor a la variable <code>numeroVueltas</code>.
 	 * 
-	 * @param numeroVueltas
-	 *            Dato que recibe de la personalización del torneo.
+	 * @param numeroVueltas Dato que recibe de la personalización del torneo.
 	 */
 	public void setNumeroVueltas(int numeroVueltas) {
 		this.numeroVueltas = numeroVueltas;
@@ -69,8 +69,7 @@ public class TorneoRoundRobin extends AlgoritmoTorneo {
 	 * Obtiene la cantidad máxima de ciclos del torneo dependiendo del número de
 	 * participantes registrados.
 	 * 
-	 * @param numeroParticipantes
-	 *            Cantidad de participantes inscritos en el torneo.
+	 * @param numeroParticipantes Cantidad de participantes inscritos en el torneo.
 	 * @return El número máximo de ciclos que tendrá el torneo.
 	 */
 	@Override
@@ -84,26 +83,24 @@ public class TorneoRoundRobin extends AlgoritmoTorneo {
 
 	/**
 	 * 
-	 * Crea una instancia de la clase <code>BaseDatosTorneo</code> y llama a su método
-	 * <code>insertarTorneoRoundRobin</code> para insertar datos para un torneo de
-	 * tipo Round Robin.
+	 * Crea una instancia de la clase <code>BaseDatosTorneo</code> y llama a su
+	 * método <code>insertarTorneoRoundRobin</code> para insertar datos para un
+	 * torneo de tipo Round Robin.
 	 * <p>
 	 * 
-	 * @throws ExcepcionBaseDatos
-	 *             Si ocurre un problema con la base de datos.
-	 * @throws ExcepcionBaseDatosTorneo
-	 *             Si ocurre un problema al insertar en la tabla
-	 *             <code>roundRobin</code>.
-	 * @throws ExcepcionBaseDatosEncuentro
-	 *             Si ocurre un problema al insertar en la tabla
-	 *             <code>encuentros</code>.
-	 * @throws ExcepcionBaseDatosCiclo
-	 *             Si ocurre un error al insertar en la tabla <code>ciclos</code>.
-	 * @throws ExcepcionCapturarResultados
-	 *             Si ocurre un error al realizar los encuentros.
+	 * @throws ExcepcionBaseDatos          Si ocurre un problema con la base de
+	 *                                     datos.
+	 * @throws ExcepcionBaseDatosTorneo    Si ocurre un problema al insertar en la
+	 *                                     tabla <code>roundRobin</code>.
+	 * @throws ExcepcionBaseDatosEncuentro Si ocurre un problema al insertar en la
+	 *                                     tabla <code>encuentros</code>.
+	 * @throws ExcepcionBaseDatosCiclo     Si ocurre un error al insertar en la
+	 *                                     tabla <code>ciclos</code>.
+	 * @throws ExcepcionCapturarResultados Si ocurre un error al realizar los
+	 *                                     encuentros.
 	 */
 	public void iniciarTorneo() throws ExcepcionBaseDatos, ExcepcionBaseDatosTorneo, ExcepcionBaseDatosEncuentro,
-			ExcepcionBaseDatosCiclo, ExcepcionCapturarResultados {
+			ExcepcionBaseDatosCiclo, ExcepcionCapturarResultados{
 		BaseDatosTorneo bdt = new BaseDatosTorneo(torneo.getNombreArchivo());
 		bdt.insertarTorneoRoundRobin(this);
 		this.setCiclos(new ArrayList<Ciclo>());
@@ -115,20 +112,19 @@ public class TorneoRoundRobin extends AlgoritmoTorneo {
 	 * Asigna los encuentros que tendrá cada ciclo del torneo entre los
 	 * participantes registrados.
 	 * 
-	 * @throws ExcepcionBaseDatosEncuentro
-	 *             Si ocurre un problema al insertar en la tabla
-	 *             <code>encuentros</code>.
-	 * @throws ExcepcionBaseDatos
-	 *             Si ocurre un problema con la base de datos.
-	 * @throws ExcepcionBaseDatosCiclo
-	 *             Si ocurre un error al insertar en la tabla <code>ciclos</code>.s
-	 * @throws ExcepcionCapturarResultados
-	 *             Si ocurre un error al realizar los encuentros.
-	 * @throws ExcepcionBaseDatosTorneo
-	 *             Si ocurre un error al obtener
+	 * @throws ExcepcionBaseDatosEncuentro Si ocurre un problema al insertar en la
+	 *                                     tabla <code>encuentros</code>.
+	 * @throws ExcepcionBaseDatos          Si ocurre un problema con la base de
+	 *                                     datos.
+	 * @throws ExcepcionBaseDatosCiclo     Si ocurre un error al insertar en la
+	 *                                     tabla <code>ciclos</code>.s
+	 * @throws ExcepcionCapturarResultados Si ocurre un error al realizar los
+	 *                                     encuentros.
+	 * @throws ExcepcionBaseDatosTorneo    Si ocurre un error al obtener
 	 */
 	public void realizarEncuentros() throws ExcepcionBaseDatos, ExcepcionBaseDatosEncuentro, ExcepcionBaseDatosCiclo,
 			ExcepcionCapturarResultados, ExcepcionBaseDatosTorneo {
+		
 		int numeroParticipantes = this.getTorneo().getListaParticipantes().size();
 		int numeroPareos = numeroParticipantes / 2;
 		int contEncuentro = numeroPareos - 1;
@@ -185,18 +181,31 @@ public class TorneoRoundRobin extends AlgoritmoTorneo {
 							visitante = aux1;
 						}
 
+						
 						if (i % 2 != 0) {
-
-							encuentros.add(new Encuentro(identificadorRonda,
-									this.getTorneo().getListaParticipantes().get(local - 1).getNumeroParticipante(),
-									this.getTorneo().getListaParticipantes().get(visitante - 1).getNumeroParticipante(),
-									this.getTorneo().getFechaInicioTorneo()));
-
+							if( local == this.getTorneo().getListaParticipantes().size() && (j % 2 ) == 0) {
+								encuentros.add(new Encuentro(identificadorRonda,
+										this.getTorneo().getListaParticipantes().get(visitante - 1).getNumeroParticipante(),
+										this.getTorneo().getListaParticipantes().get(local - 1).getNumeroParticipante(),
+										this.getTorneo().getFechaInicioTorneo()));
+							}else {
+								encuentros.add(new Encuentro(identificadorRonda,
+										this.getTorneo().getListaParticipantes().get(local - 1).getNumeroParticipante(),
+										this.getTorneo().getListaParticipantes().get(visitante - 1).getNumeroParticipante(),
+										this.getTorneo().getFechaInicioTorneo()));
+							}
 						} else {
-							encuentros.add(new Encuentro(identificadorRonda,
-									this.getTorneo().getListaParticipantes().get(visitante - 1).getNumeroParticipante(),
-									this.getTorneo().getListaParticipantes().get(local - 1).getNumeroParticipante(),
-									this.getTorneo().getFechaInicioTorneo()));
+							if( local == this.getTorneo().getListaParticipantes().size() && (j % 2 ) == 0) {
+								encuentros.add(new Encuentro(identificadorRonda,
+										this.getTorneo().getListaParticipantes().get(local - 1).getNumeroParticipante(),
+										this.getTorneo().getListaParticipantes().get(visitante - 1).getNumeroParticipante(),
+										this.getTorneo().getFechaInicioTorneo()));
+							}else {
+								encuentros.add(new Encuentro(identificadorRonda,
+										this.getTorneo().getListaParticipantes().get(visitante - 1).getNumeroParticipante(),
+										this.getTorneo().getListaParticipantes().get(local - 1).getNumeroParticipante(),
+										this.getTorneo().getFechaInicioTorneo()));
+							}
 						}
 						identificadorRonda++;
 					}
@@ -229,17 +238,14 @@ public class TorneoRoundRobin extends AlgoritmoTorneo {
 	}
 
 	/**
-	 * Intercambia las posiciones de los 2 jugadores empatados, si el ganador está una
-	 * posición abajo del jugador con quien empate, de lo contrario no realiza
+	 * Intercambia las posiciones de los 2 jugadores empatados, si el ganador está
+	 * una posición abajo del jugador con quien empate, de lo contrario no realiza
 	 * ningún movimiento.
 	 * 
-	 * @param numeroP1
-	 *            Primer participante empatado.
-	 * @param numP2
-	 *            Segundo participante empatado.
-	 * @param numPGanador
-	 *            Participante que obtuvo más puntaje con el criterio de
-	 *            desempate aplicado.
+	 * @param numeroP1    Primer participante empatado.
+	 * @param numP2       Segundo participante empatado.
+	 * @param numPGanador Participante que obtuvo más puntaje con el criterio de
+	 *                    desempate aplicado.
 	 * @return Lista de participantes ordenada.
 	 */
 	private ArrayList<Participante> intercambiarPosiciones(int numeroP1, int numP2, int numPGanador) {
@@ -401,16 +407,17 @@ public class TorneoRoundRobin extends AlgoritmoTorneo {
 	 * Le asigna un lugar a un participante después de la aplicación de los
 	 * desempates.
 	 * 
-	 * @param participantes
-	 *            Contiene los datos generales del participante.
-	 * @throws ExcepcionBaseDatos
-	 *             Lanza la excepción si ocurre un error al actualizar el lugar del
-	 *             participante en la tabla <code>participante</code> de la base de
-	 *             datos.
-	 * @throws ExcepcionBaseDatosParticipante
-	 *             Lanza la excepción si ocurre un error al actualizar el lugar del
-	 *             participante en la tabla <code>participante</code> de la base de
-	 *             datos.
+	 * @param participantes Contiene los datos generales del participante.
+	 * @throws ExcepcionBaseDatos             Lanza la excepción si ocurre un error
+	 *                                        al actualizar el lugar del
+	 *                                        participante en la tabla
+	 *                                        <code>participante</code> de la base
+	 *                                        de datos.
+	 * @throws ExcepcionBaseDatosParticipante Lanza la excepción si ocurre un error
+	 *                                        al actualizar el lugar del
+	 *                                        participante en la tabla
+	 *                                        <code>participante</code> de la base
+	 *                                        de datos.
 	 */
 
 	private void posicionarParticipante(ArrayList<Participante> participantes)
