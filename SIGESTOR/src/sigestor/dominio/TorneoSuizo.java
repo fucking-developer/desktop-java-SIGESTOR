@@ -262,7 +262,7 @@ public class TorneoSuizo extends AlgoritmoTorneo {
 	 *             Si ocurre un problema al actualizar un participante en la tabla
 	 *             <code>participantes</code>.
 	 */
-	public void encararParticipantesPrimerCiclo(Ciclo ciclo) throws ExcepcionCapturarResultados, ExcepcionBaseDatos,
+	private void encararParticipantesPrimerCiclo(Ciclo ciclo) throws ExcepcionCapturarResultados, ExcepcionBaseDatos,
 			ExcepcionBaseDatosEncuentro, ExcepcionBaseDatosParticipante {
 		BaseDatosEncuentro bde = new BaseDatosEncuentro(torneo.getNombreArchivo());
 		BaseDatosParticipante bdp = new BaseDatosParticipante(torneo.getNombreArchivo());
@@ -320,7 +320,7 @@ public class TorneoSuizo extends AlgoritmoTorneo {
 	 *             Si ocurre un problema al actualizar un participante en la tabla
 	 *             <code>participantes</code>.
 	 */
-	public void encararParticipantesCiclosPosteriores(Ciclo ciclo) throws ExcepcionCapturarResultados,
+	private void encararParticipantesCiclosPosteriores(Ciclo ciclo) throws ExcepcionCapturarResultados,
 			ExcepcionBaseDatos, ExcepcionBaseDatosEncuentro, ExcepcionBaseDatosParticipante {
 
 		BaseDatosEncuentro bde = new BaseDatosEncuentro(torneo.getNombreArchivo());

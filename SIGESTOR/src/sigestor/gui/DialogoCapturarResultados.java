@@ -34,6 +34,7 @@ import sigestor.dominio.Encuentro;
 import sigestor.dominio.Participante;
 import sigestor.dominio.Personalizacion;
 import sigestor.dominio.Torneo;
+import sigestor.dominio.TorneoEliminacionDirecta;
 import sigestor.excepcion.ExcepcionBaseDatos;
 import sigestor.excepcion.ExcepcionBaseDatosCiclo;
 import sigestor.excepcion.ExcepcionBaseDatosEncuentro;
@@ -1227,6 +1228,7 @@ public class DialogoCapturarResultados extends JDialog {
 		JOptionPane.showMessageDialog(null, "Los resultados se han guardado exitosamente.", "Capturar resultados",
 				JOptionPane.INFORMATION_MESSAGE);
 	}
+	
 
 	/**
 	 * Elimina el ciclo y los encuentros que están en él, tambien actualiza el
