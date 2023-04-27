@@ -191,7 +191,7 @@ public class BaseDatosParticipante extends BaseDatos {
 		try {
 			realizarConexion();
 			ArrayList<Participante> listaParticipante = new ArrayList<Participante>();
-			ResultSet retorno = realizarConsulta("SELECT * FROM participante WHERE lugarParticipante = -1");
+			ResultSet retorno = realizarConsulta("SELECT * FROM participante WHERE lugarParticipante = 1");
 			while (retorno.next()) {
 				Participante participante = new Participante();
 				participante.setNumeroParticipante(retorno.getInt(1));
