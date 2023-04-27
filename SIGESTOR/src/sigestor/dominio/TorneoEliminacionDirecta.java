@@ -54,10 +54,10 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 	}
 
 	/**
-	 * obtiene el tipo de Eliminación Directa
+	 * establece el tipo de Eliminación Directa
 	 * 
 	 * @param true
-	 *            = EliminaciÃ³nDirecta simple false = EliminaciónDirecta doble
+	 *            = EliminaciónDirecta simple false = EliminaciónDirecta doble
 	 */
 
 	public void setTipoEliminacion(boolean tipoEliminacion) {
@@ -407,7 +407,6 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 	 */
 	private void encararParticipantesCiclosPosteriores(Ciclo ciclo) throws ExcepcionCapturarResultados,
 			ExcepcionBaseDatos, ExcepcionBaseDatosEncuentro, ExcepcionBaseDatosParticipante, ExcepcionBaseDatosCiclo, ExcepcionBaseDatosTorneo {
-
 		/*
 		BaseDatosParticipante bdp = new BaseDatosParticipante(torneo.getNombreArchivo());
 		ArrayList<Participante> participantes = torneo.getListaParticipantes();
@@ -465,9 +464,23 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 				
 			}
 		}
-		ciclo.setEncuentroParticipantes(encuentros);
+
+		ciclo.setEncuentroParticipantes(encuentros);*/
 		
-		*/
+		/*
+		int tamaño = bde.obtenerEncuentros(new Ciclo(this.getTorneo(), this.getTorneo().getCicloActual() - 1)).size() / 2;
+		int ronda = 1;
+
+		for (int i = 0; i < tamaño; i++) {
+			encuentros.add(new Encuentro(ronda, this.getTorneo().getListaParticipantes().get(i).getNumeroParticipante(),
+					this.getTorneo().getListaParticipantes().get(i + 1).getNumeroParticipante(),
+					this.getTorneo().getFechaInicioTorneo()));
+			bde.insertarEncuentro(encuentros.get(ronda - 1), ciclo);
+			bdp.actualizarResultadoParticipante(participantes.get(i), ciclo);
+			bdp.actualizarResultadoParticipante(participantes.get(i + 1), ciclo);
+			ronda++;
+		}
+		ciclo.setEncuentroParticipantes(encuentros);*/
 		
 		
 		BaseDatosEncuentro bde = new BaseDatosEncuentro(torneo.getNombreArchivo());
@@ -490,11 +503,11 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 		//FIXME aqui no entra
 		for (Encuentro encuentro : encuentrosParticipante) {
 			System.out.println(encuentro);
-			System.out.print("id participante inicial: " + encuentro.getIdParticipanteInicial());
-			System.out.print("id participante final: " + encuentro.getIdParticipanteFinal());
-			Participante partInicial = participantes.get(encuentro.getIdParticipanteInicial());
+			System.out.print("id participante inicial: " + (encuentro.getIdParticipanteInicial()-1));
+			System.out.print("id participante final: " + (encuentro.getIdParticipanteFinal()-1));
+			Participante partInicial = participantes.get((encuentro.getIdParticipanteInicial()-1));
 			System.out.println("Participante incial: " + partInicial + " puntaje acumulado: " + partInicial.getPuntajeAcumuladoParticipante());
-			Participante partFinal = participantes.get(encuentro.getIdParticipanteFinal());
+			Participante partFinal = participantes.get((encuentro.getIdParticipanteFinal()-1));
 			System.out.println("Participante final: " + partFinal + " puntaje acumulado: " + partFinal.getPuntajeAcumuladoParticipante());
 			if (encuentro.getResultadoEncuentro() == Encuentro.GANADOR_INICIAL || partInicial.getPuntajeAcumuladoParticipante() > partFinal.getPuntajeAcumuladoParticipante()) {
 				//FIXME eliminar
@@ -570,7 +583,8 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 		System.out.println("Participante totales: " + participantes);
 		System.out.println("Participante que siguen: " + participantesCiclo);
 
-		if (esSimple) {
+		if (!esSimple) {
+			System.out.println("Simpleeeeee");
 			int mitad = participantesCiclo.size() / 2;
 			ArrayList<Encuentro> encuentros = new ArrayList<Encuentro>();
 			for (int i = 1; i <= mitad; i++) {
@@ -590,6 +604,7 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 			
 
 		} else {
+			System.out.println("Dobleeeeee aqui jony");
 			int mitad = (participantes.size() / 2);
 			ArrayList<Encuentro> encuentros = new ArrayList<Encuentro>();
 			for (int i = 1; i <= mitad; i++) {
@@ -616,7 +631,6 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 			}
 			ciclo.setEncuentroParticipantes(encuentros);
 		}
-		 
 	}
 
 	/**
