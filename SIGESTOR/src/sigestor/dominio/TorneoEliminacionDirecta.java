@@ -606,16 +606,16 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 			ArrayList<Encuentro> encuentros = new ArrayList<Encuentro>();
 			for (int i = 1; i <= mitad; i++) {
 				encuentros.add(new Encuentro(i, participantesCiclo.get(i - 1).getNumeroParticipante(),
-						participantesCiclo.get((i - 1) + mitad).getNumeroParticipante(),
+						participantesCiclo.get(participantesCiclo.size()-i).getNumeroParticipante(),
 						this.getTorneo().getFechaInicioTorneo()));
 				bde.insertarEncuentro(encuentros.get((i) - 1), ciclo);
 				bdp.actualizarResultadoParticipante(participantesCiclo.get(i - 1), ciclo);
-				bdp.actualizarResultadoParticipante(participantesCiclo.get((i - 1) + mitad), ciclo);
+				bdp.actualizarResultadoParticipante(participantesCiclo.get(participantesCiclo.size()-i), ciclo);
 				System.out.println("Encuentro numero: " + i);
 				System.out.println(
 						"Participante inicial que jugará: " + participantesCiclo.get(i - 1).getNumeroParticipante());
 				System.out.println("Participante final que jugará: "
-						+ participantesCiclo.get((i - 1) + mitad).getNumeroParticipante());
+						+ participantesCiclo.get(participantesCiclo.size()-i).getNumeroParticipante());
 
 			}
 			System.out.println("Ciclo guardado");
