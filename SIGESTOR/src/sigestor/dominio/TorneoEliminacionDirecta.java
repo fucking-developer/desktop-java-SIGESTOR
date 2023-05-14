@@ -485,11 +485,12 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 		BaseDatosEncuentro bde = new BaseDatosEncuentro(torneo.getNombreArchivo());
 		BaseDatosParticipante bdp = new BaseDatosParticipante(torneo.getNombreArchivo());
 		BaseDatosCiclo bdc = new BaseDatosCiclo(torneo.getNombreArchivo());
+		
 		ArrayList<Participante> participantes = torneo.getListaParticipantes();
 		ArrayList<Participante> participantesCiclo = new ArrayList<Participante>();
 		ArrayList<Encuentro> encuentrosParticipante = bde
 				.obtenerEncuentros(bdc.obtenerCiclos(torneo).get(torneo.getCicloActual() - 2));
-		ArrayList<String> criterios = torneo.getCriteriosDesempate().getListaCriteriosSeleccionados();
+	//	ArrayList<String> criterios = torneo.getCriteriosDesempate().getListaCriteriosSeleccionados();
 
 		int auxUltimaPosicionSegundaVuelta = 0;
 		System.out.println("participantes");
@@ -500,27 +501,31 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 		// FIXME aqui no entra
 		for (Encuentro encuentro : encuentrosParticipante) {
 			System.out.println(encuentro);
-			System.out.print("id participante inicial: " + (encuentro.getIdParticipanteInicial() - 1));
-			System.out.print("id participante final: " + (encuentro.getIdParticipanteFinal() - 1));
+			System.out.println("id participante inicial: " + (encuentro.getIdParticipanteInicial() - 1));
+			System.out.println("id participante final: " + (encuentro.getIdParticipanteFinal() - 1));
+			//------------------------------------------------------------------------------------------------
 			Participante partInicial = participantes.get((encuentro.getIdParticipanteInicial() - 1));
 			System.out.println("Participante incial: " + partInicial + " puntaje acumulado: "
 					+ partInicial.getPuntajeAcumuladoParticipante());
 			Participante partFinal = participantes.get((encuentro.getIdParticipanteFinal() - 1));
 			System.out.println("Participante final: " + partFinal + " puntaje acumulado: "
 					+ partFinal.getPuntajeAcumuladoParticipante());
+			//---------------------------------------------------------------------------------------------------------
 			if (encuentro.getResultadoEncuentro() == Encuentro.GANADOR_INICIAL
 					|| partInicial.getPuntajeAcumuladoParticipante() > partFinal.getPuntajeAcumuladoParticipante()) {
 				// FIXME eliminar
-				System.out.println("Id de participante descalificado: " + (encuentro.getIdParticipanteFinal()));
+				System.out.println("Id de participante descalificado: " + (encuentro.getIdParticipanteFinal()-1));
 				partFinal.setLugarParticipante(100);
+				bdp.actualizarLugarParticipante(partFinal, torneo);
 			} else if (encuentro.getResultadoEncuentro() == Encuentro.GANADOR_FINAL
 					|| partInicial.getPuntajeAcumuladoParticipante() < partFinal.getPuntajeAcumuladoParticipante()) {
 				// FIXME eliminar
-				System.out.println("Id de participante descalificado: " + (encuentro.getIdParticipanteInicial()));
+				System.out.println("Id de participante descalificado: " + (encuentro.getIdParticipanteInicial()-1));
 				partInicial.setLugarParticipante(100);
+				bdp.actualizarLugarParticipante(partFinal, torneo);
 			} else if (encuentro.getResultadoEncuentro() == Encuentro.EMPATE
 					|| partInicial.getPuntajeAcumuladoParticipante() == partFinal.getPuntajeAcumuladoParticipante()) {
-				cicloromper: {
+			/*	cicloromper: {
 					for (String criterio : criterios) {
 						Desempate desempate = new DesempatePuntuacion();
 						Participante participantePerdedor = new Participante();
@@ -578,12 +583,15 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 						}
 
 					}
-				}
+				}*/
 
 			}
 		}
+		participantes = torneo.getListaParticipantes();
 		for (Participante p : participantes) {
+			System.out.println("participante: " + p + " lugar: " + p.getLugarParticipante());
 			if (p.getLugarParticipante() != 100) {
+				System.out.println("agregado");
 				participantesCiclo.add(p);
 			}
 		}
