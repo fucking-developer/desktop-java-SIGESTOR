@@ -801,7 +801,7 @@ public class DialogoCiclo extends JDialog {
 			
   
 			int tamaño = listaEncuentros.size();
-			if(ventanaPrincipal.getTorneoActual().getTipoTorneo().equals("Eliminación directa") && (ciclo.getNumeroCiclo() % 2) == 0 ) {
+			if(ventanaPrincipal.getTorneoActual().getTipoTorneo().equals("Eliminación directa") ) {
 				tamaño = tamaño/2;
 				System.out.println("ciclo: " + tamaño);
 			}
