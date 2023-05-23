@@ -613,9 +613,9 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 				bdp.actualizarResultadoParticipante(participantesCiclo.get(participantesCiclo.size()-i), ciclo);
 				System.out.println("Encuentro numero: " + i);
 				System.out.println(
-						"Participante inicial que jugará: " + participantesCiclo.get(i - 1).getNumeroParticipante());
+						"Participante inicial que jugará: " + participantesCiclo.get(i - 1).getNumeroParticipante() + " nombre: " + participantesCiclo.get(i - 1).getNombreParticipante());
 				System.out.println("Participante final que jugará: "
-						+ participantesCiclo.get(participantesCiclo.size()-i).getNumeroParticipante());
+						+ participantesCiclo.get(participantesCiclo.size()-i).getNumeroParticipante() + " nombre: " + participantesCiclo.get(participantesCiclo.size()-i).getNombreParticipante());
 
 			}
 			System.out.println("Ciclo guardado");
