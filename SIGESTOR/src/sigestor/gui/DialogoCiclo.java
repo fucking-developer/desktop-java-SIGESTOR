@@ -853,6 +853,7 @@ public class DialogoCiclo extends JDialog {
 					fechaEncuentro[i].setDate(listaEncuentros.get(i).getFechaEncuentro());
 				}
 			} else {
+
 				System.out.println("tamaño= " + tamaño);
 				System.out.println("lista de encuentros: " + listaEncuentros);
 				for (int i = 0; i < tamaño; i++) {
