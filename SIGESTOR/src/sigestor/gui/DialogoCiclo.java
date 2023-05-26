@@ -236,20 +236,11 @@ public class DialogoCiclo extends JDialog {
 	private VentanaPrincipal ventanaPrincipal;
 
 	/**
-	 * Devuelve el número de ciclos.
-	 * 
-	 * @return numeroPartidas.
-	 */
-	public int getNumeroPartidas() {
-		return numeroPartidas;
-	}
-
-	/**
 	 * Devuelve el ciclo seleccionado.
 	 * 
 	 * @return cicloSelecconado.
 	 */
-	public int getCicloSeleccionado() {
+	private int getCicloSeleccionado() {
 		return cicloSeleccionado;
 	}
 
@@ -260,8 +251,33 @@ public class DialogoCiclo extends JDialog {
 	 *            Recibe un numero entero del cicloo
 	 *            <code>cicloSeleeccionado</code>.
 	 */
-	public void setCicloSeleccionado(int cicloSeleccionado) {
+	private void setCicloSeleccionado(int cicloSeleccionado) {
 		this.cicloSeleccionado = cicloSeleccionado;
+	}
+
+	// FIXME documentar
+	private void iniciarValoresTablaEncuentros() {
+		numeroPartidas = this.torneo.getAlgoritmoTorneo().getCiclos().get(this.torneo.getCicloActual() - 1)
+				.getEncuentroParticipantes().size();
+
+		float sumar = 0;
+		for (Participante l : this.torneo.getListaParticipantes())
+			sumar += l.getPuntajeAcumuladoParticipante();
+		if (sumar > 0) {
+			if (!Participante.isPuntajeAcumulado())
+				Participante.setPuntajeAcumulado(true);
+			Collections.sort(this.torneo.getListaParticipantes());
+		}
+
+		listaParticipantes = torneo.getListaParticipantes();
+		listaCiclos = torneo.getAlgoritmoTorneo().getCiclos();
+
+		etiquetaNumeroInicial = new JLabel[numeroPartidas];
+		etiquetaParticipanteInicial = new JLabel[numeroPartidas];
+		encararVS = new JLabel[numeroPartidas];
+		etiquetaNumeroFinal = new JLabel[numeroPartidas];
+		etiquetaParticipanteFinal = new JLabel[numeroPartidas];
+		fechaEncuentro = new JDateChooser[numeroPartidas];
 	}
 
 	/**
@@ -283,26 +299,28 @@ public class DialogoCiclo extends JDialog {
 		});
 		this.ventanaPrincipal = principal;
 		torneo = principal.getTorneoActual();
-
-		numeroPartidas = this.torneo.getAlgoritmoTorneo().getCiclos().get(this.torneo.getCicloActual() - 1)
-				.getEncuentroParticipantes().size();
-		float sumar = 0;
-		for (Participante l : this.torneo.getListaParticipantes())
-			sumar += l.getPuntajeAcumuladoParticipante();
-		if (sumar > 0) {
-			if (!Participante.isPuntajeAcumulado())
-				Participante.setPuntajeAcumulado(true);
-			Collections.sort(this.torneo.getListaParticipantes());
-		}
-		listaParticipantes = torneo.getListaParticipantes();
-		listaCiclos = torneo.getAlgoritmoTorneo().getCiclos();
-
-		etiquetaNumeroInicial = new JLabel[numeroPartidas];
-		etiquetaParticipanteInicial = new JLabel[numeroPartidas];
-		encararVS = new JLabel[numeroPartidas];
-		etiquetaNumeroFinal = new JLabel[numeroPartidas];
-		etiquetaParticipanteFinal = new JLabel[numeroPartidas];
-		fechaEncuentro = new JDateChooser[numeroPartidas];
+		iniciarValoresTablaEncuentros();
+		/*
+		 * numeroPartidas =
+		 * this.torneo.getAlgoritmoTorneo().getCiclos().get(this.torneo.getCicloActual()
+		 * - 1) .getEncuentroParticipantes().size();
+		 */
+		/*
+		 * float sumar = 0; for (Participante l : this.torneo.getListaParticipantes())
+		 * sumar += l.getPuntajeAcumuladoParticipante(); if (sumar > 0) { if
+		 * (!Participante.isPuntajeAcumulado()) Participante.setPuntajeAcumulado(true);
+		 * Collections.sort(this.torneo.getListaParticipantes()); }
+		 */
+		/*
+		 * listaParticipantes = torneo.getListaParticipantes(); listaCiclos =
+		 * torneo.getAlgoritmoTorneo().getCiclos();
+		 * 
+		 * etiquetaNumeroInicial = new JLabel[numeroPartidas];
+		 * etiquetaParticipanteInicial = new JLabel[numeroPartidas]; encararVS = new
+		 * JLabel[numeroPartidas]; etiquetaNumeroFinal = new JLabel[numeroPartidas];
+		 * etiquetaParticipanteFinal = new JLabel[numeroPartidas]; fechaEncuentro = new
+		 * JDateChooser[numeroPartidas];
+		 */
 
 		JPanel panelNorte = new JPanel(null);
 		panelNorte.setBounds(0, 0, this.getWidth(), this.getHeight() - 80);
@@ -854,12 +872,12 @@ public class DialogoCiclo extends JDialog {
 				}
 			} else {
 
+				// System.out.println("numero de partidas: " + numeroPartidas);
 				System.out.println("tamaño= " + tamaño);
 				System.out.println("lista de encuentros: " + listaEncuentros);
 				for (int i = 0; i < tamaño; i++) {
 					System.out.println("i = " + i);
 
-					
 					etiquetaNumeroInicial[i].setText(String.valueOf(listaEncuentros.get(i).getIdParticipanteInicial()));
 					System.out
 							.println("id participante inicial = " + listaEncuentros.get(i).getIdParticipanteInicial());
@@ -869,7 +887,7 @@ public class DialogoCiclo extends JDialog {
 
 					for (Participante p : torneo.getListaParticipantes()) {
 						System.out.println("participante dentro del ciclo: " + p);
-						
+
 						if (p.getNumeroParticipante() == listaEncuentros.get(i).getIdParticipanteInicial()) {
 							etiquetaParticipanteInicial[i].setText(p.getNombreParticipante());
 							System.out.println("Nombre participante inicial= " + p.getNombreParticipante());
@@ -881,6 +899,8 @@ public class DialogoCiclo extends JDialog {
 					}
 
 				}
+				iniciarValoresTablaEncuentros();
+				crearTablaEncuentros();
 
 			}
 		}
