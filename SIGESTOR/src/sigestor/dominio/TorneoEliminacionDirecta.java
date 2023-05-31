@@ -305,23 +305,31 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 		int auxUltimaPosicionSegundaVuelta = 0;
 		// día 13/05/2023 me dedicaré a revisar el algoritmos para los torneo simples
 		// 06:04 p.m.-------------------------------------------------------------
+		// día 31/05/2023 me quiero lanzar de un puente :c 01:27 a.m.
+	
 		if (esSimple) {
 			if (!esPotenciaDeDos(totalParticipantes)) {
+				System.out.println(participantes);
+				System.out.println("Total de participantes: "+ totalParticipantes);
+				System.out.println("Numero de ciclos: " + calcularNumeroCiclos(totalParticipantes));
+				
 				descansosPrimeraVuelta = (int) (Math.pow(2, calcularNumeroCiclos(totalParticipantes)))
 						- totalParticipantes;
 
 			}
 			int numeroDeEncuentrosSimple = ((participantes.size() - descansosPrimeraVuelta) / 2)
 					+ descansosPrimeraVuelta;
+			System.out.println("Numero de encuentros: "+ numeroDeEncuentrosSimple);
+			System.out.println("Numero de descansos = " + descansosPrimeraVuelta);
 			ArrayList<Encuentro> encuentros = new ArrayList<Encuentro>();
 			for (int i = 1; i <= numeroDeEncuentrosSimple; i++) {
-				if (!(descansosPrimeraVuelta > 0)) {
-
+				if (!(descansosPrimeraVuelta >0)) {
+						System.out.println("i = " + i);
 					encuentros.add(new Encuentro(auxUltimaPosicion + 1,
 							participantes.get(i - 1).getNumeroParticipante(),
 							participantes.get((participantes.size() - 1) - auxUltimaPosicion).getNumeroParticipante(),
 							this.getTorneo().getFechaInicioTorneo()));
-
+						System.out.println(encuentros);
 					/*bdp.actualizarResultadoParticipante=
 					 * realizarAccion("UPDATE participante SET marcadorFavor = " +
 					 * participante.getMarcadorFavor() + ", marcadorContra = " +
