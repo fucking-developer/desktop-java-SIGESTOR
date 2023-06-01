@@ -467,7 +467,6 @@ public class PanelAdministrarParticipantes extends JPanel {
 			panelAux = new JPanel();
 			panelAux.add(spinner);
 			contenido.add(panelAux);
-			// ESTRA 2
 			if (np == 0) {
 				if (!campoNombreParticipante.getText().equals("")) {
 					int seleccion = JOptionPane.showOptionDialog(null, contenido, "Modificar participante",
@@ -556,11 +555,13 @@ public class PanelAdministrarParticipantes extends JPanel {
 			}
 		}
 
-		if (listaDeParticipantes.size() % 2 != 0) {
-			Participante p = new Participante(listaDeParticipantes.size() + 1, this.ventanaPrincipal.getTorneoActual()
-					.getDatosPersonalizacion().getNombreParticipanteSinEncuentro(), 0.0f);
-			p.setPuntajeAcumuladoParticipante(-1.0f);
-			listaDeParticipantes.add(p);
+		if (!ventanaPrincipal.getTorneoActual().getTipoTorneo().equals("Eliminación directa")) {
+			if (listaDeParticipantes.size() % 2 != 0 && listaDeParticipantes.size() > 2) {
+				Participante p = new Participante(listaDeParticipantes.size() + 1, this.ventanaPrincipal
+						.getTorneoActual().getDatosPersonalizacion().getNombreParticipanteSinEncuentro(), 0.0f);
+				p.setPuntajeAcumuladoParticipante(-1.0f);
+				listaDeParticipantes.add(p);
+			}
 		}
 		Collections.sort(listaDeParticipantes);
 		ventanaPrincipal.getTorneoActual().setListaParticipantes(listaDeParticipantes);
@@ -596,6 +597,9 @@ public class PanelAdministrarParticipantes extends JPanel {
 		int valor = dialogo.showOpenDialog(this);
 		if (valor == JFileChooser.APPROVE_OPTION) {
 			File archivo = dialogo.getSelectedFile();
+			if (!archivo.equals(null) && !archivo.getName().toUpperCase().endsWith(".CSV")) {
+				archivo = new File(archivo.getAbsolutePath() + ".CSV");
+			}
 			if (archivo.exists() && archivo.getName().toUpperCase().endsWith(".CSV")) {
 				try {
 					ArrayList<Participante> participantes = UtileriasListaParticipantes

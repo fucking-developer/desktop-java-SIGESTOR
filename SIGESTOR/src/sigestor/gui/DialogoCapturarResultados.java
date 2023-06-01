@@ -34,6 +34,7 @@ import sigestor.dominio.Encuentro;
 import sigestor.dominio.Participante;
 import sigestor.dominio.Personalizacion;
 import sigestor.dominio.Torneo;
+import sigestor.dominio.TorneoEliminacionDirecta;
 import sigestor.excepcion.ExcepcionBaseDatos;
 import sigestor.excepcion.ExcepcionBaseDatosCiclo;
 import sigestor.excepcion.ExcepcionBaseDatosEncuentro;
@@ -1227,6 +1228,7 @@ public class DialogoCapturarResultados extends JDialog {
 		JOptionPane.showMessageDialog(null, "Los resultados se han guardado exitosamente.", "Capturar resultados",
 				JOptionPane.INFORMATION_MESSAGE);
 	}
+	
 
 	/**
 	 * Elimina el ciclo y los encuentros que están en él, tambien actualiza el
@@ -1468,10 +1470,11 @@ public class DialogoCapturarResultados extends JDialog {
 			float puntajeEmpatar) {
 		for (Participante p : participantes) {
 			if (encuentro.getIdParticipanteInicial() == p.getNumeroParticipante()) {
-				if (encuentro.getResultadoEncuentro() == Encuentro.DESCANSO) {
+				/*if (encuentro.getResultadoEncuentro() == Encuentro.DESCANSO) {
 					p.acumularPuntajeAcumuladoParticipante(puntajeGanar);
 					break;
-				} else if (encuentro.getResultadoEncuentro() == Encuentro.GANADOR_INICIAL) {
+				} else */
+				if (encuentro.getResultadoEncuentro() == Encuentro.GANADOR_INICIAL) {
 					p.acumularPuntajeAcumuladoParticipante(puntajeGanar);
 				} else if (encuentro.getResultadoEncuentro() == Encuentro.GANADOR_FINAL) {
 					p.acumularPuntajeAcumuladoParticipante(puntajePerder);

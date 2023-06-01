@@ -437,7 +437,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		this.setSize(Toolkit.getDefaultToolkit().getScreenSize().width,
 				Toolkit.getDefaultToolkit().getScreenSize().height);
 		this.setLocationRelativeTo(null);
-
+		
 		this.setResizable(false);
 
 		this.setVisible(true);

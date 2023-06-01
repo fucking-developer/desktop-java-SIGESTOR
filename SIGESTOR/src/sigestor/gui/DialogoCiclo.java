@@ -236,20 +236,11 @@ public class DialogoCiclo extends JDialog {
 	private VentanaPrincipal ventanaPrincipal;
 
 	/**
-	 * Devuelve el número de ciclos.
-	 * 
-	 * @return numeroPartidas.
-	 */
-	public int getNumeroPartidas() {
-		return numeroPartidas;
-	}
-
-	/**
 	 * Devuelve el ciclo seleccionado.
 	 * 
 	 * @return cicloSelecconado.
 	 */
-	public int getCicloSeleccionado() {
+	private int getCicloSeleccionado() {
 		return cicloSeleccionado;
 	}
 
@@ -260,8 +251,33 @@ public class DialogoCiclo extends JDialog {
 	 *            Recibe un numero entero del cicloo
 	 *            <code>cicloSeleeccionado</code>.
 	 */
-	public void setCicloSeleccionado(int cicloSeleccionado) {
+	private void setCicloSeleccionado(int cicloSeleccionado) {
 		this.cicloSeleccionado = cicloSeleccionado;
+	}
+
+	// FIXME documentar
+	private void iniciarValoresTablaEncuentros() {
+		numeroPartidas = this.torneo.getAlgoritmoTorneo().getCiclos().get(this.torneo.getCicloActual() - 1)
+				.getEncuentroParticipantes().size();
+
+		float sumar = 0;
+		for (Participante l : this.torneo.getListaParticipantes())
+			sumar += l.getPuntajeAcumuladoParticipante();
+		if (sumar > 0) {
+			if (!Participante.isPuntajeAcumulado())
+				Participante.setPuntajeAcumulado(true);
+			Collections.sort(this.torneo.getListaParticipantes());
+		}
+
+		listaParticipantes = torneo.getListaParticipantes();
+		listaCiclos = torneo.getAlgoritmoTorneo().getCiclos();
+
+		etiquetaNumeroInicial = new JLabel[numeroPartidas];
+		etiquetaParticipanteInicial = new JLabel[numeroPartidas];
+		encararVS = new JLabel[numeroPartidas];
+		etiquetaNumeroFinal = new JLabel[numeroPartidas];
+		etiquetaParticipanteFinal = new JLabel[numeroPartidas];
+		fechaEncuentro = new JDateChooser[numeroPartidas];
 	}
 
 	/**
@@ -283,26 +299,28 @@ public class DialogoCiclo extends JDialog {
 		});
 		this.ventanaPrincipal = principal;
 		torneo = principal.getTorneoActual();
-
-		numeroPartidas = this.torneo.getAlgoritmoTorneo().getCiclos().get(this.torneo.getCicloActual() - 1)
-				.getEncuentroParticipantes().size();
-		float sumar = 0;
-		for (Participante l : this.torneo.getListaParticipantes())
-			sumar += l.getPuntajeAcumuladoParticipante();
-		if (sumar > 0) {
-			if (!Participante.isPuntajeAcumulado())
-				Participante.setPuntajeAcumulado(true);
-			Collections.sort(this.torneo.getListaParticipantes());
-		}
-		listaParticipantes = torneo.getListaParticipantes();
-		listaCiclos = torneo.getAlgoritmoTorneo().getCiclos();
-
-		etiquetaNumeroInicial = new JLabel[numeroPartidas];
-		etiquetaParticipanteInicial = new JLabel[numeroPartidas];
-		encararVS = new JLabel[numeroPartidas];
-		etiquetaNumeroFinal = new JLabel[numeroPartidas];
-		etiquetaParticipanteFinal = new JLabel[numeroPartidas];
-		fechaEncuentro = new JDateChooser[numeroPartidas];
+		iniciarValoresTablaEncuentros();
+		/*
+		 * numeroPartidas =
+		 * this.torneo.getAlgoritmoTorneo().getCiclos().get(this.torneo.getCicloActual()
+		 * - 1) .getEncuentroParticipantes().size();
+		 */
+		/*
+		 * float sumar = 0; for (Participante l : this.torneo.getListaParticipantes())
+		 * sumar += l.getPuntajeAcumuladoParticipante(); if (sumar > 0) { if
+		 * (!Participante.isPuntajeAcumulado()) Participante.setPuntajeAcumulado(true);
+		 * Collections.sort(this.torneo.getListaParticipantes()); }
+		 */
+		/*
+		 * listaParticipantes = torneo.getListaParticipantes(); listaCiclos =
+		 * torneo.getAlgoritmoTorneo().getCiclos();
+		 * 
+		 * etiquetaNumeroInicial = new JLabel[numeroPartidas];
+		 * etiquetaParticipanteInicial = new JLabel[numeroPartidas]; encararVS = new
+		 * JLabel[numeroPartidas]; etiquetaNumeroFinal = new JLabel[numeroPartidas];
+		 * etiquetaParticipanteFinal = new JLabel[numeroPartidas]; fechaEncuentro = new
+		 * JDateChooser[numeroPartidas];
+		 */
 
 		JPanel panelNorte = new JPanel(null);
 		panelNorte.setBounds(0, 0, this.getWidth(), this.getHeight() - 80);
@@ -556,11 +574,13 @@ public class DialogoCiclo extends JDialog {
 	 * nuevamente.
 	 */
 	private void actualizarCombo() {
+
 		comboSeleccionarCiclo.removeAllItems();
 		for (Ciclo ciclos : listaCiclos) {
 			comboSeleccionarCiclo.addItem(ciclos);
 		}
 		this.comboSeleccionarCiclo.setSelectedIndex(torneo.getCicloActual() - 1);
+
 	}
 
 	/**
@@ -780,6 +800,7 @@ public class DialogoCiclo extends JDialog {
 	private void accionSeleccionarCiclo() {
 
 		setCicloSeleccionado(comboSeleccionarCiclo.getSelectedIndex() + 1);
+
 		if (getCicloSeleccionado() == torneo.getCicloActual()) {
 			etiquetaCicloActual2
 					.setText(torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MAYUSCULA_SINGULAR) + " "
@@ -789,25 +810,12 @@ public class DialogoCiclo extends JDialog {
 					.setText(torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MAYUSCULA_SINGULAR) + " "
 							+ getCicloSeleccionado());
 		}
+
 		if (comboSeleccionarCiclo.getSelectedIndex() >= 0 && torneo.getCicloActual() > 0) {
 			Ciclo ciclo = listaCiclos.get(this.getCicloSeleccionado() - 1);
 			ArrayList<Encuentro> listaEncuentros = ciclo.getEncuentroParticipantes();
-			for (int i = 0; i < listaEncuentros.size(); i++) {
-				for (Participante p : torneo.getListaParticipantes()) {
-					if (p.getNumeroParticipante() == this
-							.obtenerParticipante(listaEncuentros.get(i).getIdParticipanteFinal())
-							.getNumeroParticipante()
-							&& this.obtenerParticipante(listaEncuentros.get(i).getIdParticipanteFinal())
-									.getNombreParticipante().compareToIgnoreCase(this.torneo.getDatosPersonalizacion()
-											.getNombreParticipanteSinEncuentro()) == 0) {
-						etiquetaNumeroInicial[i]
-								.setText(String.valueOf(listaEncuentros.get(i).getIdParticipanteInicial()));
-						etiquetaParticipanteInicial[i]
-								.setText(this.obtenerParticipante(listaEncuentros.get(i).getIdParticipanteInicial())
-										.getNombreParticipante() + " - "
-										+ this.torneo.getDatosPersonalizacion().getNombreParticipanteSinEncuentro());
-						this.desactivarColumnasTabla(i);
 
+<<<<<<< HEAD
 					} else if (p.getNumeroParticipante() == this
 							.obtenerParticipante(listaEncuentros.get(i).getIdParticipanteInicial())
 							.getNumeroParticipante()
@@ -825,20 +833,97 @@ public class DialogoCiclo extends JDialog {
 						etiquetaNumeroInicial[i]
 								.setText(String.valueOf(listaEncuentros.get(i).getIdParticipanteInicial()));
 						etiquetaNumeroFinal[i].setText(String.valueOf(listaEncuentros.get(i).getIdParticipanteFinal()));
+=======
+			int tamaño = listaEncuentros.size();
+			if (!ventanaPrincipal.getTorneoActual().getTipoTorneo().equals("Eliminación directa")) {
+
+				for (int i = 0; i < tamaño; i++) {
+
+					for (Participante p : torneo.getListaParticipantes()) {
+						// si el participante p es igual al participante final del encuentro
+						if (p.getNumeroParticipante() == this
+								.obtenerParticipante(listaEncuentros.get(i).getIdParticipanteFinal())
+								.getNumeroParticipante()
+								&& this.obtenerParticipante(listaEncuentros.get(i).getIdParticipanteFinal())
+										.getNombreParticipante().compareToIgnoreCase(this.torneo
+												.getDatosPersonalizacion().getNombreParticipanteSinEncuentro()) == 0) {
+
+							etiquetaNumeroInicial[i]
+									.setText(String.valueOf(listaEncuentros.get(i).getIdParticipanteInicial()));
+							etiquetaParticipanteInicial[i].setText(this
+									.obtenerParticipante(listaEncuentros.get(i).getIdParticipanteInicial())
+									.getNombreParticipante() + " - "
+									+ this.torneo.getDatosPersonalizacion().getNombreParticipanteSinEncuentro());
+							this.desactivarColumnasTabla(i);
+
+						} else if (p.getNumeroParticipante() == this
+								.obtenerParticipante(listaEncuentros.get(i).getIdParticipanteInicial())
+								.getNumeroParticipante()
+								&& this.obtenerParticipante(listaEncuentros.get(i).getIdParticipanteInicial())
+										.getNombreParticipante().compareToIgnoreCase(this.torneo
+												.getDatosPersonalizacion().getNombreParticipanteSinEncuentro()) == 0) {
+
+							etiquetaNumeroInicial[i]
+									.setText(String.valueOf(listaEncuentros.get(i).getIdParticipanteFinal()));
+							etiquetaParticipanteInicial[i].setText(this
+									.obtenerParticipante(listaEncuentros.get(i).getIdParticipanteFinal())
+									.getNombreParticipante() + " - "
+									+ this.torneo.getDatosPersonalizacion().getNombreParticipanteSinEncuentro());
+							this.desactivarColumnasTabla(i);
+						} else {
+
+							etiquetaNumeroInicial[i]
+									.setText(String.valueOf(listaEncuentros.get(i).getIdParticipanteInicial()));
+
+							etiquetaNumeroFinal[i]
+									.setText(String.valueOf(listaEncuentros.get(i).getIdParticipanteFinal()));
+
+							if (p.getNumeroParticipante() == listaEncuentros.get(i).getIdParticipanteInicial()) {
+								etiquetaParticipanteInicial[i].setText(p.getNombreParticipante());
+							}
+							if (p.getNumeroParticipante() == listaEncuentros.get(i).getIdParticipanteFinal()) {
+								etiquetaParticipanteFinal[i].setText(p.getNombreParticipante());
+							}
+						}
+
+					}
+					fechaEncuentro[i].setDate(listaEncuentros.get(i).getFechaEncuentro());
+				}
+			} else {
+
+				// System.out.println("numero de partidas: " + numeroPartidas);
+				System.out.println("tamaño= " + tamaño);
+				System.out.println("lista de encuentros: " + listaEncuentros);
+				for (int i = 0; i < tamaño; i++) {
+					System.out.println("i = " + i);
+
+					etiquetaNumeroInicial[i].setText(String.valueOf(listaEncuentros.get(i).getIdParticipanteInicial()));
+					System.out
+							.println("id participante inicial = " + listaEncuentros.get(i).getIdParticipanteInicial());
+
+					etiquetaNumeroFinal[i].setText(String.valueOf(listaEncuentros.get(i).getIdParticipanteFinal()));
+					System.out.println("id participante final = " + listaEncuentros.get(i).getIdParticipanteFinal());
+
+					for (Participante p : torneo.getListaParticipantes()) {
+						System.out.println("participante dentro del ciclo: " + p);
+
+>>>>>>> b7c7e5c0d556bf73684a9930900c45317aa28f85
 						if (p.getNumeroParticipante() == listaEncuentros.get(i).getIdParticipanteInicial()) {
 							etiquetaParticipanteInicial[i].setText(p.getNombreParticipante());
+							System.out.println("Nombre participante inicial= " + p.getNombreParticipante());
 						}
 						if (p.getNumeroParticipante() == listaEncuentros.get(i).getIdParticipanteFinal()) {
 							etiquetaParticipanteFinal[i].setText(p.getNombreParticipante());
+							System.out.println("Nombre participante final= " + p.getNombreParticipante());
 						}
 					}
 
 				}
-				fechaEncuentro[i].setDate(listaEncuentros.get(i).getFechaEncuentro());
+				iniciarValoresTablaEncuentros();
+				crearTablaEncuentros();
+
 			}
-
 		}
-
 	}
 
 	/**
@@ -879,6 +964,7 @@ public class DialogoCiclo extends JDialog {
 		} else if (this.torneo.getTipoTorneo().equals("Eliminación directa")) {
 			TorneoEliminacionDirecta ted = new TorneoEliminacionDirecta(torneo);
 			if (ted.verificarEncuentros()) {
+				ted.desempatarParticipantes();
 				try {
 					ted.realizarEncuentros();
 				} catch (ExcepcionBaseDatos e) {
@@ -920,10 +1006,12 @@ public class DialogoCiclo extends JDialog {
 						"Encuentros", JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
+
 		actualizarCombo();
 		activarDesactivarBotonHacer();
 		etiquetaCicloActual.setText(torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MAYUSCULA_SINGULAR)
 				+ " actual: " + torneo.getCicloActual());
+
 	}
 
 	/**

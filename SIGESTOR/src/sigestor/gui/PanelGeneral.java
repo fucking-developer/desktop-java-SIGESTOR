@@ -105,7 +105,7 @@ public class PanelGeneral extends JPanel {
 		String[] arregloTipoTorneo = { "Suizo", "Round Robin" , "Eliminación directa"};
 		panelAux.add(etiquetaTipoTorneo);
 		comboTipoTorneo = new JComboBox<String>(arregloTipoTorneo);
-		comboTipoTorneo.setPreferredSize(new Dimension(130, 30));
+		comboTipoTorneo.setPreferredSize(new Dimension(150, 30));
 		comboTipoTorneo.setToolTipText("Seleccione el tipo de torneo");
 		panelAux.add(comboTipoTorneo);
 
@@ -189,6 +189,7 @@ public class PanelGeneral extends JPanel {
 		JScrollPane paraDes = new JScrollPane(campoDescripcion);
 		campoDescripcion.setLineWrap(true);
 		campoDescripcion.setToolTipText("Escriba una breve descripción del torneo, este campo es opcional");
+		campoDescripcion.setWrapStyleWord(true);
 		panelAux3.add(paraDes);
 
 		panelAux2.add(panelAux3);
@@ -198,7 +199,7 @@ public class PanelGeneral extends JPanel {
 		etiquetaTipoTorneo.setLabelFor(comboTipoTorneo);
 		etiquetaNombreTorneo.setDisplayedMnemonic('N');
 		etiquetaNombreTorneo.setLabelFor(campoNombreTorneo);
-		etiquetaFechaFinalTorneo.setDisplayedMnemonicIndex(7);
+		etiquetaFechaFinalTorneo.setDisplayedMnemonic('F');
 		etiquetaFechaFinalTorneo.setLabelFor(fechaTorneoFin);
 		etiquetaNombreOrganizadorTorneo.setDisplayedMnemonic('O');
 		etiquetaNombreOrganizadorTorneo.setLabelFor(campoOrganizador);

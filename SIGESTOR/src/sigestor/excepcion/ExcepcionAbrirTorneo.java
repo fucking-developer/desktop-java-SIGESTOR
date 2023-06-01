@@ -29,13 +29,15 @@ public class ExcepcionAbrirTorneo extends Exception {
 	/**
 	 * Mensaje 1.1.1 del documento de mensajes del sistema.
 	 */
-	public static final String MENSAJE_EXCEPCION_ARCHIVO_NO_EXISTENTE = "El sistema no encontró el archivo.\n"
-			+ "Compruebe el nombre de archivo e intente de nuevo.";
+	public static final String MENSAJE_EXCEPCION_ARCHIVO_NO_EXISTENTE = "El sistema no encontró el archivo."
+			+ "\nCompruebe el nombre de archivo e intente de nuevo.";
 
 	/**
 	 * Mensaje 1.1.2 del documento de mensajes del sistema.
 	 */
-	public static final String MENSAJE_EXCEPCION_ARCHIVO_INVALIDO = "El archivo seleccionado no pertenece al sistema, intente seleccionando otro archivo.";
+	public static final String MENSAJE_EXCEPCION_ARCHIVO_INVALIDO = 
+			"El archivo seleccionado no pertenece al sistema,"
+				+"\nintente seleccionando otro archivo.";
 
 	/**
 	 * Permite mostrar un mensaje de acuerdo a las constantes declaradas en esta

@@ -66,7 +66,6 @@ public class BaseDatosEncuentro extends BaseDatos {
 		String cadenaFechaDelEncuentro = formato.format(dateFechaDelEncuentro);
 
 		realizarConexion();
-		// FIXME inserté fechaEncuentro
 		int valor = realizarAccion(
 				"INSERT INTO encuentro (numeroEncuentro, idParticipanteInicial, idParticipanteFinal, numeroCiclo, resultado, fechaDelEncuentro) VALUES ("
 						+ encuentro.getNumeroEncuentro() + "," + encuentro.getIdParticipanteInicial() + ","
