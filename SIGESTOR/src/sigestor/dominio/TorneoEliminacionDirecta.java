@@ -498,8 +498,12 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 		ArrayList<Participante> participantesCiclo = new ArrayList<Participante>();
 		ArrayList<Encuentro> encuentrosParticipante = bde
 				.obtenerEncuentros(bdc.obtenerCiclos(torneo).get(torneo.getCicloActual() - 2));
+<<<<<<< HEAD
+		ArrayList<String> criterios = torneo.getCriteriosDesempate().getListaCriteriosSeleccionados();
+=======
 	//	ArrayList<String> criterios = torneo.getCriteriosDesempate().getListaCriteriosSeleccionados();
 
+>>>>>>> b7c7e5c0d556bf73684a9930900c45317aa28f85
 		int auxUltimaPosicionSegundaVuelta = 0;
 		System.out.println("participantes");
 		Collections.sort(participantes);
