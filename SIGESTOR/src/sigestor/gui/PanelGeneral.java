@@ -199,7 +199,7 @@ public class PanelGeneral extends JPanel {
 		etiquetaTipoTorneo.setLabelFor(comboTipoTorneo);
 		etiquetaNombreTorneo.setDisplayedMnemonic('N');
 		etiquetaNombreTorneo.setLabelFor(campoNombreTorneo);
-		etiquetaFechaFinalTorneo.setDisplayedMnemonicIndex(7);
+		etiquetaFechaFinalTorneo.setDisplayedMnemonic('F');
 		etiquetaFechaFinalTorneo.setLabelFor(fechaTorneoFin);
 		etiquetaNombreOrganizadorTorneo.setDisplayedMnemonic('O');
 		etiquetaNombreOrganizadorTorneo.setLabelFor(campoOrganizador);
