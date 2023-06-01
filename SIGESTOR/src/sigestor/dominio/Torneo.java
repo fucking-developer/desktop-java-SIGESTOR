@@ -506,7 +506,7 @@ public class Torneo {
 		}
 		if (tipoTorneo.equals("Round Robin")) {
 			for (String criterio : criteriosDesempate.getListaCriteriosSeleccionados()) {
-				if (criterio.equals("Bucholtz")) {
+				if (criterio.equals("Buchholz")) {
 					throw new ExcepcionTorneo(ExcepcionCriteriosDesempate.MENSAJE_EXCEPCION_CRITERIOS_TIPO_TORNEO);
 				}
 			}

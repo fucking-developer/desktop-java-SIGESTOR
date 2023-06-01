@@ -815,7 +815,7 @@ public class DialogoCiclo extends JDialog {
 									.getNombreParticipante().compareToIgnoreCase(this.torneo.getDatosPersonalizacion()
 											.getNombreParticipanteSinEncuentro()) == 0) {
 						etiquetaNumeroInicial[i]
-								.setText(String.valueOf(listaEncuentros.get(i).getIdParticipanteFinal()));
+								.setText(String.valueOf(listaEncuentros.get(i).getIdParticipanteInicial()));
 						etiquetaParticipanteInicial[i]
 								.setText(this.obtenerParticipante(listaEncuentros.get(i).getIdParticipanteFinal())
 										.getNombreParticipante() + " - "
