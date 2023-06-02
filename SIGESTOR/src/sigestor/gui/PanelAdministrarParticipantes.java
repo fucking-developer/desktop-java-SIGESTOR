@@ -489,7 +489,7 @@ public class PanelAdministrarParticipantes extends JPanel {
 				
 					JOptionPane.showMessageDialog(null, "El participante "
 							+ listaDeParticipantes.get(listaParticipantes.getSelectedIndex()).getNombreParticipante()
-							+ " ha sido actualizado exitosamente");
+							+ " ha sido actualizado exitosamente","Nombre participante", JOptionPane.INFORMATION_MESSAGE);
 
 				}
 			}
