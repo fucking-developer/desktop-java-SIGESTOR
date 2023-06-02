@@ -818,6 +818,7 @@ public class DialogoCiclo extends JDialog {
 			Ciclo ciclo = listaCiclos.get(this.getCicloSeleccionado() - 1);
 			ArrayList<Encuentro> listaEncuentros = ciclo.getEncuentroParticipantes();
 
+
 			int tamaño = listaEncuentros.size();
 			if (!ventanaPrincipal.getTorneoActual().getTipoTorneo().equals("Eliminación directa")) {
 
@@ -890,6 +891,7 @@ public class DialogoCiclo extends JDialog {
 
 					for (Participante p : torneo.getListaParticipantes()) {
 						System.out.println("participante dentro del ciclo: " + p);
+
 
 						if (p.getNumeroParticipante() == listaEncuentros.get(i).getIdParticipanteInicial()) {
 							etiquetaParticipanteInicial[i].setText(p.getNombreParticipante());

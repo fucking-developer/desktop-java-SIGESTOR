@@ -504,8 +504,8 @@ public class PanelAdministrarParticipantes extends JPanel {
 	private void accionEliminarParticipante() {
 		if (listaParticipantes.getSelectedValue() != null) {
 			int seleccion = JOptionPane.showOptionDialog(null,
-					"Está seguro de que desea eliminar al participante "
-							+ listaDeParticipantes.get(listaParticipantes.getSelectedIndex()).getNombreParticipante(),
+					"¿Está seguro de que desea eliminar al participante "
+							+ listaDeParticipantes.get(listaParticipantes.getSelectedIndex()).getNombreParticipante() + "?",
 					"Eliminar participantes", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null,
 					null);
 			if (seleccion == 0) {
@@ -555,11 +555,13 @@ public class PanelAdministrarParticipantes extends JPanel {
 			}
 		}
 
-		if (listaDeParticipantes.size() % 2 != 0 && listaDeParticipantes.size() > 2) {
-			Participante p = new Participante(listaDeParticipantes.size() + 1, this.ventanaPrincipal.getTorneoActual()
-					.getDatosPersonalizacion().getNombreParticipanteSinEncuentro(), 0.0f);
-			p.setPuntajeAcumuladoParticipante(-1.0f);
-			listaDeParticipantes.add(p);
+		if (!ventanaPrincipal.getTorneoActual().getTipoTorneo().equals("Eliminación directa")) {
+			if (listaDeParticipantes.size() % 2 != 0 && listaDeParticipantes.size() > 2) {
+				Participante p = new Participante(listaDeParticipantes.size() + 1, this.ventanaPrincipal
+						.getTorneoActual().getDatosPersonalizacion().getNombreParticipanteSinEncuentro(), 0.0f);
+				p.setPuntajeAcumuladoParticipante(-1.0f);
+				listaDeParticipantes.add(p);
+			}
 		}
 		
 		for(int i=0; i<listaDeParticipantes.size(); i++) {
