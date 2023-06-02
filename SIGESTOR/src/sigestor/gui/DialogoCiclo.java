@@ -889,6 +889,10 @@ public class DialogoCiclo extends JDialog {
 					for (Participante p : torneo.getListaParticipantes()) {
 						System.out.println("participante dentro del ciclo: " + p);
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> ca73eb4a45f59ac9dc24a0c6754255db97b1e23d
 						if (p.getNumeroParticipante() == listaEncuentros.get(i).getIdParticipanteInicial()) {
 							etiquetaParticipanteInicial[i].setText(p.getNombreParticipante());
 							System.out.println("Nombre participante inicial= " + p.getNombreParticipante());

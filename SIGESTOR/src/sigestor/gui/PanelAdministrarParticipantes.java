@@ -508,8 +508,8 @@ public class PanelAdministrarParticipantes extends JPanel {
 	private void accionEliminarParticipante() {
 		if (listaParticipantes.getSelectedValue() != null) {
 			int seleccion = JOptionPane.showOptionDialog(null,
-					"Está seguro de que desea eliminar al participante "
-							+ listaDeParticipantes.get(listaParticipantes.getSelectedIndex()).getNombreParticipante(),
+					"¿Está seguro de que desea eliminar al participante "
+							+ listaDeParticipantes.get(listaParticipantes.getSelectedIndex()).getNombreParticipante() + "?",
 					"Eliminar participantes", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null,
 					null);
 			if (seleccion == 0) {
