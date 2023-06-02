@@ -601,7 +601,7 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 								participantesCiclo.get(i - 1).getNumeroParticipante(),
 								this.getTorneo().getFechaInicioTorneo()));
 				auxUltimaPosicionSegundaVuelta++;
-				bde.insertarEncuentro(encuentros.get((auxUltimaPosicionSegundaVuelta)), ciclo);
+				bde.insertarEncuentro(encuentros.get((auxUltimaPosicionSegundaVuelta-1)), ciclo);
 				bdp.actualizarResultadoParticipante(participantes.get((i - 1)), ciclo);
 				bdp.actualizarResultadoParticipante(participantesCiclo.get(participantesCiclo.size() - i), ciclo);
 			}
