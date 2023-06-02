@@ -30,7 +30,7 @@ public abstract class Desempate {
 	 * @param listaParticipantes Recibe la lista de participantes del torneo.
 	 * @param encuentrosTotales  Recibe la lista de encuentros totales jugados en el
 	 *                           torneo.
-	 * @param torneo 
+	 * @param torneo Recibe los datos del torneo. 
 	 * @return Regresa el objeto <code>Participante</code> que es el participante
 	 *         con puntaje de desempate más alto. <code>null</code> en caso de no
 	 *         poderlos desempatar.

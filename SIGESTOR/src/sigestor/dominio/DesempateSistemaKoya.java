@@ -61,6 +61,7 @@ public class DesempateSistemaKoya extends Desempate {
 	 *            Recibe la lista de encuentros del participante a evaluar.
 	 * @param listaParticipantes
 	 *            Recibe la lista de participantes del torneo.
+	 * @param torneo Recibe los datos del torneo.
 	 * @return Regresa el puntaje de desempate Koya obtenido.
 	 */
 	private float obtenerKoyaParticipante(int numeroParticipante, ArrayList<Encuentro> encuentrosParticipante,

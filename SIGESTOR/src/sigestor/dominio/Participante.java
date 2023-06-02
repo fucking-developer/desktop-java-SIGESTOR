@@ -71,7 +71,9 @@ public class Participante implements Comparable<Participante> {
 	 */
 	private static boolean puntaje;
 
-	//FIXME falta documentar
+	/**
+	 * Para validar el puntaje acumulado.
+	 */
 	private static boolean puntajeAcumulado = false;
 
 	/**
@@ -88,7 +90,6 @@ public class Participante implements Comparable<Participante> {
 
 	/**
 	 * Permite crear un nuevo participante.
-	 * 
 	 */
 	public Participante() {
 		setNumeroParticipante(0);
@@ -100,14 +101,26 @@ public class Participante implements Comparable<Participante> {
 		setLugarParticipante(0);
 	}
 
+	/**
+	 * Devuelve el valor de la variable <code>puntajeAcumulado</code>.
+	 * 
+	 * @return Regresa <tt>true</tt> si se habilito la opcion por puntaje acumulado,
+	 *         regresa <tt>false</tt> si no se selecciono.
+	 */
 	public static boolean isPuntajeAcumulado() {
 		return puntajeAcumulado;
 	}
 
-	
+	/**
+	 * Asigna el valor de la bandera a la variable <code>puntajeAcumulado</code>.
+	 * 
+	 * @param puntajeAcumulado Recibe el valor de la bandera que se le asigna al
+	 *                         puntaje acumulado.
+	 */
 	public static void setPuntajeAcumulado(boolean puntajeAcumulado) {
 		Participante.puntajeAcumulado = puntajeAcumulado;
 	}
+
 	/**
 	 * Devuelve el lugar que se le asignó al participante.
 	 * 
@@ -417,6 +430,13 @@ public class Participante implements Comparable<Participante> {
 		}
 	}
 
+	/**
+	 * Encargado de obtener la posición de un participante por el puntaje. 
+	 * 
+	 * @param participante Recibe un participante
+	 * 
+	 * @return Regresa <tt><0</tt> si el puntaje es menor, devuelve <tt>=0</tt> si son iguales, devuelve  <tt>>0</tt> si es mayor.
+	 */
 	private int ordenPuntaje(Participante participante) {
 		if (participante.getPuntajeParticipante() < getPuntajeParticipante()) {
 			return -1;
@@ -431,6 +451,13 @@ public class Participante implements Comparable<Participante> {
 		}
 	}
 
+	/**
+	 * Encargado de obtener la posición lexicográfica de un participante.
+	 * 
+	 * @param participante Recibe un participante.
+	 * 
+	 * @return Regresa <tt><0</tt> si la cadena es primero lexicográficamente, devuelve <tt>=0</tt> si son iguales, devuelve  <tt>>0</tt> si la cadena va despues lexicográficamente.
+	 */
 	private int ordenarAlfabetico(Participante participante) {
 		String original1 = this.getNombreParticipante();
 		String cadenaNormalize1 = Normalizer.normalize(original1, Normalizer.Form.NFD);

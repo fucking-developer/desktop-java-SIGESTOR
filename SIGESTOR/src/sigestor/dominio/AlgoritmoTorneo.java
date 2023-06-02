@@ -100,8 +100,10 @@ public abstract class AlgoritmoTorneo {
 	 *                                     datos.
 	 * @throws ExcepcionBaseDatosCiclo     Si ocurre un error al insertar en la
 	 *                                     tabla <code>ciclos</code>.s
-	 * @throws ExcepcionCapturarResultados
-	 * @throws ExcepcionBaseDatosTorneo
+	 * @throws ExcepcionCapturarResultados Si ocurre un error al capturar los
+	 *                                     resultados
+	 * @throws ExcepcionBaseDatosTorneo    Si ocurre un error en la base de datos
+	 *                                     del torneo
 	 */
 	public abstract void realizarEncuentros() throws ExcepcionBaseDatos, ExcepcionBaseDatosEncuentro,
 			ExcepcionBaseDatosCiclo, ExcepcionCapturarResultados, ExcepcionBaseDatosTorneo;
@@ -152,8 +154,7 @@ public abstract class AlgoritmoTorneo {
 	 *                            en el archivo CSV.
 	 */
 	public void generarReporteFinal(File archivo) throws ExcepcionUtilerias {
-		UtileriasReporteResultadosFinales.escribirArchivoCsvReporteResultadosFinales(archivo.getPath(),
-				torneo);
+		UtileriasReporteResultadosFinales.escribirArchivoCsvReporteResultadosFinales(archivo.getPath(), torneo);
 	}
 
 	/**

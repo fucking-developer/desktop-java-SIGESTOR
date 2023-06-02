@@ -248,7 +248,7 @@ public class BaseDatosTorneo extends BaseDatos {
 	 */
 	public void actualizarCicloActual(Torneo torneo) throws ExcepcionBaseDatos, ExcepcionBaseDatosTorneo {
 		realizarConexion();
-		int filasAfectadas = realizarAccion("UPDATE datosGenerales SET" + " cicloActual = " + torneo.getCicloActual());
+		int filasAfectadas = realizarAccion("UPDATE datosGenerales SET cicloActual = " + torneo.getCicloActual());
 		cerrarConexion();
 		if (filasAfectadas != 1) {
 			throw new ExcepcionBaseDatosTorneo(ExcepcionBaseDatosTorneo.MENSAJE_EXCEPCION_ACTUALIZA_CICLO_ACTUAL_PARTE_1

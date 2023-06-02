@@ -430,8 +430,7 @@ public class DialogoAdministarTorneo extends JDialog {
 					JOptionPane.showMessageDialog(null,
 							"Sus datos del torneo " + file.getName().replaceAll(".torn", "")
 									+ " han sido guardados exitosamente",
-							"Guardar Torneo", JOptionPane.INFORMATION_MESSAGE);
-					
+									"Guardar Torneo", JOptionPane.INFORMATION_MESSAGE);
 					ventanaPrincipal.getTorneoActual().recuperarTorneo();
 					dispose();
 				} catch (ExcepcionBaseDatos e) {

@@ -47,7 +47,6 @@ public class BaseDatosParticipante extends BaseDatos {
 	 */
 	public void insertarParticipante(ArrayList<Participante> arrayList)
 			throws ExcepcionBaseDatos, ExcepcionBaseDatosParticipante {
-
 		for (Participante p : arrayList) {
 			realizarConexion();
 			int filasAfectadas = realizarAccion("INSERT INTO participante VALUES (" + p.getNumeroParticipante() + ",'"
@@ -186,33 +185,6 @@ public class BaseDatosParticipante extends BaseDatos {
 		}
 	}
 
-	
-	public ArrayList<Participante> obtenerParticipanteLugar() throws ExcepcionBaseDatos, ExcepcionBaseDatosParticipante {
-		try {
-			realizarConexion();
-			ArrayList<Participante> listaParticipante = new ArrayList<Participante>();
-			ResultSet retorno = realizarConsulta("SELECT * FROM participante WHERE lugarParticipante = 1");
-			while (retorno.next()) {
-				Participante participante = new Participante();
-				participante.setNumeroParticipante(retorno.getInt(1));
-				participante.setNombreParticipante(retorno.getString(2));
-				participante.setPuntajeParticipante(retorno.getFloat(3));
-				participante.setPuntajeAcumuladoParticipante(retorno.getFloat(4));
-				participante.setMarcadorFavor(retorno.getInt(5));
-				participante.setMarcadorContra(retorno.getInt(6));
-				participante.setLugarParticipante(retorno.getInt(7));
-
-				listaParticipante.add(participante);
-			}
-			cerrarConexion();
-			return listaParticipante;
-		} catch (SQLException e) {
-			throw new ExcepcionBaseDatosParticipante(
-					ExcepcionBaseDatosParticipante.MENSAJE_EXCEPCION_OBTIENE_PARTICIPANTE
-							+ ExcepcionBaseDatosParticipante.MENSAJE_EXCEPCION_OBTIENE_PARTICIPANTE);
-		}
-	}
-	
 	/**
 	 * Cancela el avance del participante de la base de datos.
 	 * 
@@ -239,6 +211,45 @@ public class BaseDatosParticipante extends BaseDatos {
 						ExcepcionBaseDatosParticipante.MENSAJE_EXCEPCION_INSERTA_PARTICIPANTE
 								+ ExcepcionBaseDatosParticipante.MENSAJE_EXCEPCION_SOLUCION);
 			}
+		}
+	}
+
+	/**
+	 * Obtiene el participantes que quedo en primer lugar.
+	 * 
+	 * @return Regresa un lista de tipo <code>Participante</code> la cual contiene
+	 *         los participantes.
+	 * 
+	 * @throws ExcepcionBaseDatos             Lanza la excepción sí no se pudo
+	 *                                        realizar la conexión.
+	 * 
+	 * @throws ExcepcionBaseDatosParticipante Lanza la excepción si ocurre un error
+	 *                                        al obtener los datos de los participantes.
+	 */
+	public ArrayList<Participante> obtenerParticipanteLugar()
+			throws ExcepcionBaseDatos, ExcepcionBaseDatosParticipante {
+		try {
+			realizarConexion();
+			ArrayList<Participante> listaParticipante = new ArrayList<Participante>();
+			ResultSet retorno = realizarConsulta("SELECT * FROM participante WHERE lugarParticipante = 1");
+			while (retorno.next()) {
+				Participante participante = new Participante();
+				participante.setNumeroParticipante(retorno.getInt(1));
+				participante.setNombreParticipante(retorno.getString(2));
+				participante.setPuntajeParticipante(retorno.getFloat(3));
+				participante.setPuntajeAcumuladoParticipante(retorno.getFloat(4));
+				participante.setMarcadorFavor(retorno.getInt(5));
+				participante.setMarcadorContra(retorno.getInt(6));
+				participante.setLugarParticipante(retorno.getInt(7));
+
+				listaParticipante.add(participante);
+			}
+			cerrarConexion();
+			return listaParticipante;
+		} catch (SQLException e) {
+			throw new ExcepcionBaseDatosParticipante(
+					ExcepcionBaseDatosParticipante.MENSAJE_EXCEPCION_OBTIENE_PARTICIPANTE
+							+ ExcepcionBaseDatosParticipante.MENSAJE_EXCEPCION_OBTIENE_PARTICIPANTE);
 		}
 	}
 }

@@ -178,7 +178,7 @@ public class Encuentro {
 	 *            Recibe el marcador a favor del participante final.
 	 * @param resultadoEncuentro
 	 *            Recibe el resultado del encuentro.
-	 * @param fechaDelEncuentro
+	 * @param fechaEncuentro 
 	 *            Recibe la fecha del encuentro.
 	 * @throws ExcepcionCapturarResultados
 	 *             Si ocurre un error al inicializar las variables con los valores

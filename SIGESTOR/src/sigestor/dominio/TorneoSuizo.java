@@ -67,6 +67,7 @@ public class TorneoSuizo extends AlgoritmoTorneo {
 				BaseDatosCiclo bdc = new BaseDatosCiclo(torneo.getNombreArchivo());
 
 				Ciclo ciclo = new Ciclo(torneo, torneo.getCicloActual());
+				
 				bdc.insertarCiclo(ciclo);
 				if (torneo.getCicloActual() > 1) {
 					encararParticipantesCiclosPosteriores(ciclo);
@@ -322,13 +323,10 @@ public class TorneoSuizo extends AlgoritmoTorneo {
 	 */
 	private void encararParticipantesCiclosPosteriores(Ciclo ciclo) throws ExcepcionCapturarResultados,
 			ExcepcionBaseDatos, ExcepcionBaseDatosEncuentro, ExcepcionBaseDatosParticipante {
-
 		BaseDatosEncuentro bde = new BaseDatosEncuentro(torneo.getNombreArchivo());
 		BaseDatosParticipante bdp = new BaseDatosParticipante(torneo.getNombreArchivo());
 		ArrayList<Participante> participantes = torneo.getListaParticipantes();
 		ArrayList<Encuentro> encuentros = new ArrayList<Encuentro>();
-
-		
 		Participante sinEncuentro = null;
 		for (Participante p : participantes) {
 			if (p.getNombreParticipante()

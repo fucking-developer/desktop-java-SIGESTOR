@@ -255,7 +255,10 @@ public class DialogoCiclo extends JDialog {
 		this.cicloSeleccionado = cicloSeleccionado;
 	}
 
-	// FIXME documentar
+	
+	/**
+	 * Encargado de inicializar la tabla de encuentros.
+	 */
 	private void iniciarValoresTablaEncuentros() {
 		numeroPartidas = this.torneo.getAlgoritmoTorneo().getCiclos().get(this.torneo.getCicloActual() - 1)
 				.getEncuentroParticipantes().size();
