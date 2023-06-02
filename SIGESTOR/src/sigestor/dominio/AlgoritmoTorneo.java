@@ -86,14 +86,14 @@ public abstract class AlgoritmoTorneo {
 		setCiclos(null);
 		setDesempates(null);
 		setNumeroCiclos(0);
-		if(torneo.getTipoTorneo()=="Eliminación directa") {
+		/*if(torneo.getTipoTorneo()=="Eliminación directa") {
 			setTipoEliminacion(torneo.getAlgoritmoTorneo().esSimple);
-		}
+		}*/
 	}
 
 	/**
 	 * Obtiene la cantidad máxima de ciclos del torneo dependiendo del número de
-	 * participantes registrados.
+	 * participantes registrados.s
 	 * 
 	 * @param numeroParticipantes Recibe la cantidad de participantes inscritos en
 	 *                            el torneo.
