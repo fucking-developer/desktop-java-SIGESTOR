@@ -815,25 +815,7 @@ public class DialogoCiclo extends JDialog {
 			Ciclo ciclo = listaCiclos.get(this.getCicloSeleccionado() - 1);
 			ArrayList<Encuentro> listaEncuentros = ciclo.getEncuentroParticipantes();
 
-<<<<<<< HEAD
-					} else if (p.getNumeroParticipante() == this
-							.obtenerParticipante(listaEncuentros.get(i).getIdParticipanteInicial())
-							.getNumeroParticipante()
-							&& this.obtenerParticipante(listaEncuentros.get(i).getIdParticipanteInicial())
-									.getNombreParticipante().compareToIgnoreCase(this.torneo.getDatosPersonalizacion()
-											.getNombreParticipanteSinEncuentro()) == 0) {
-						etiquetaNumeroInicial[i]
-								.setText(String.valueOf(listaEncuentros.get(i).getIdParticipanteInicial()));
-						etiquetaParticipanteInicial[i]
-								.setText(this.obtenerParticipante(listaEncuentros.get(i).getIdParticipanteFinal())
-										.getNombreParticipante() + " - "
-										+ this.torneo.getDatosPersonalizacion().getNombreParticipanteSinEncuentro());
-						this.desactivarColumnasTabla(i);
-					} else {
-						etiquetaNumeroInicial[i]
-								.setText(String.valueOf(listaEncuentros.get(i).getIdParticipanteInicial()));
-						etiquetaNumeroFinal[i].setText(String.valueOf(listaEncuentros.get(i).getIdParticipanteFinal()));
-=======
+
 			int tamaño = listaEncuentros.size();
 			if (!ventanaPrincipal.getTorneoActual().getTipoTorneo().equals("Eliminación directa")) {
 
@@ -907,7 +889,6 @@ public class DialogoCiclo extends JDialog {
 					for (Participante p : torneo.getListaParticipantes()) {
 						System.out.println("participante dentro del ciclo: " + p);
 
->>>>>>> b7c7e5c0d556bf73684a9930900c45317aa28f85
 						if (p.getNumeroParticipante() == listaEncuentros.get(i).getIdParticipanteInicial()) {
 							etiquetaParticipanteInicial[i].setText(p.getNombreParticipante());
 							System.out.println("Nombre participante inicial= " + p.getNombreParticipante());
@@ -965,6 +946,7 @@ public class DialogoCiclo extends JDialog {
 			TorneoEliminacionDirecta ted = new TorneoEliminacionDirecta(torneo);
 			if (ted.verificarEncuentros()) {
 				ted.desempatarParticipantes();
+				
 				try {
 					ted.realizarEncuentros();
 				} catch (ExcepcionBaseDatos e) {

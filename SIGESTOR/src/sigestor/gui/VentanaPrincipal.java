@@ -366,7 +366,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		menuTorneoRoundRobin.addSeparator();
 		menuTorneoRoundRobin.add(submenuResultadosFinalesRoundRobin);
 		/*-------------------------------------------------------------*/
-		menuTorneoEliminacionDirecta = new JMenu("Torneo Eliminacion Directa");
+		menuTorneoEliminacionDirecta = new JMenu("Torneo Eliminacion directa");
 		menuTorneoEliminacionDirecta.setIcon(new ImageIcon(getClass().getResource("/imagenes/eliminaciondirecta.png")));
 		menuTorneoEliminacionDirecta.setEnabled(false);
 		menuTorneoEliminacionDirecta.setMnemonic(KeyEvent.VK_D);
@@ -437,7 +437,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		this.setSize(Toolkit.getDefaultToolkit().getScreenSize().width,
 				Toolkit.getDefaultToolkit().getScreenSize().height);
 		this.setLocationRelativeTo(null);
-		
+
 		this.setResizable(false);
 
 		this.setVisible(true);
