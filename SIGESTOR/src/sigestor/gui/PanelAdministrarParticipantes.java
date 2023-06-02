@@ -413,7 +413,7 @@ public class PanelAdministrarParticipantes extends JPanel {
 				}
 
 				JOptionPane.showMessageDialog(null,
-						"El participante " + participante.getNombreParticipante() + " ha sido agregado exitosamente");
+						"El participante " + participante.getNombreParticipante() + " ha sido agregado exitosamente", "Nuevo participante", JOptionPane.INFORMATION_MESSAGE);
 			} else {
 				JOptionPane.showMessageDialog(null,
 						"El campo 'nombre del participante' no puede estar vacío.\n"
