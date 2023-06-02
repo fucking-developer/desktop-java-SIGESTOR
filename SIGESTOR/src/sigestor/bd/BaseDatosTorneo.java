@@ -133,7 +133,7 @@ public class BaseDatosTorneo extends BaseDatos {
 	/**
 	 * Obtiene los datos generales del torneo.
 	 * 
-	 * @return regresa un objeto de tipo torneo con los datos generales
+	 * @return Regresa un objeto de tipo torneo con los datos generales
 	 * @throws ExcepcionBaseDatos
 	 *             Lanza la excepción si no se pudo realizar la conexión.
 	 * @throws ExcepcionBaseDatosTorneo

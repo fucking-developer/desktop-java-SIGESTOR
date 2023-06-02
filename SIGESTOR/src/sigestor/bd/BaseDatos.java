@@ -22,7 +22,7 @@ import sigestor.excepcion.ExcepcionBaseDatos;
  * de datos.</li>
  * </ul>
  * 
- * @version 20/04/2022
+ * @version 02/06/2023
  * 
  * @author Ricky Didier Peralta Reyes
  * @author Uriel Romeo Cruz Cortes
@@ -30,6 +30,7 @@ import sigestor.excepcion.ExcepcionBaseDatos;
  * @author Beatriz Andrea Jiménez Ríos
  * @author Victor Triste Pérez
  */
+
 public class BaseDatos {
 	/**
 	 * Conexión a la base de datos.
@@ -74,8 +75,8 @@ public class BaseDatos {
 	 * Permite realizar una conexión a la base de datos.
 	 * 
 	 * @throws ExcepcionBaseDatos
-	 *             Lanza la excepción sí ocurre un error al cargar el
-	 *             controlador de SQLite o sí ocurre un error al conectarse a la
+	 *             Lanza la excepción si ocurre un error al cargar el
+	 *             controlador de SQLite o si ocurre un error al conectarse a la
 	 *             base de datos.
 	 */
 	protected void realizarConexion() throws ExcepcionBaseDatos {
@@ -94,7 +95,7 @@ public class BaseDatos {
 	 * Permite cerrar la conexión a la base de datos.
 	 * 
 	 * @throws ExcepcionBaseDatos
-	 *             Lanza la excepción sí ocurre un error al cerrar la conexión a
+	 *             Lanza la excepción si ocurre un error al cerrar la conexión a
 	 *             la base de datos.
 	 */
 	protected void cerrarConexion() throws ExcepcionBaseDatos {
@@ -112,7 +113,7 @@ public class BaseDatos {
 	 *            La consulta SQL que se desea realizar a la base de datos.
 	 * @return Regresa un objeto con el resultado de la consulta SQL.
 	 * @throws ExcepcionBaseDatos
-	 *             Lanza la excepción sí ocurre un error al realizar una
+	 *             Lanza la excepción si ocurre un error al realizar una
 	 *             consulta a la base de datos.
 	 */
 	protected ResultSet realizarConsulta(String consulta) throws ExcepcionBaseDatos {
@@ -132,7 +133,7 @@ public class BaseDatos {
 	 *            La instrucción SQL que se va a ejecutar.
 	 * @return Regresa el número de filas afectadas por la instrucción.
 	 * @throws ExcepcionBaseDatos
-	 *             Lanza la excepción sí ocurre un error al realizar una acción
+	 *             Lanza la excepción si ocurre un error al realizar una acción
 	 *             a la base de datos.
 	 */
 	protected int realizarAccion(String instruccion) throws ExcepcionBaseDatos {
@@ -154,7 +155,7 @@ public class BaseDatos {
 	 * 
 	 * @return Regresa una lista con el nombre de las tablas.
 	 * @throws ExcepcionBaseDatos
-	 *             Lanza la excepción sí ocurre un error al obtener las tablas.
+	 *             Lanza la excepción si ocurre un error al obtener las tablas.
 	 */
 	protected ArrayList<String> obtenerTablas() throws ExcepcionBaseDatos {
 		ArrayList<String> nombreTablas = new ArrayList<String>();
