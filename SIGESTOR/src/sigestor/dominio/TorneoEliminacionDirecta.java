@@ -36,12 +36,7 @@ import sigestor.excepcion.ExcepcionCapturarResultados;
  */
 public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 
-	/**
-	 * Sirve para determinar que tipo de torneo de Eliminación Directa se va a
-	 * efectuar true = Eliminación simple o directa false = eliminación doble
-	 */
-	private boolean esSimple;
-
+	
 	/**
 	 * Inicializa las variables con un valor por defecto y asigna a la variable
 	 * <code>torneo</code> el torneo recibido.
@@ -52,25 +47,6 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 		super(torneo);
 	}
 
-	/**
-	 * Establece el tipo de Eliminación Directa
-	 * 
-	 * @param tipoEliminacion Recibe <tt>true</tt> si el tipo de eliminación directa
-	 *                        es simple, <tt>false</tt> si es doble.
-	 */
-	public void setTipoEliminacion(boolean tipoEliminacion) {
-		this.esSimple = tipoEliminacion;
-	}
-
-	/**
-	 * Encargado de obtener el tipo de eliminación directa.
-	 * 
-	 * @return Regresa <tt>true</tt> si el tipo es simple, <tt>false</tt> si es
-	 *         doble.
-	 */
-	public boolean getTipoEliminacion() {
-		return esSimple;
-	}
 
 	/**
 	 * Obtiene la cantidad máxima de ciclos del torneo según el algoritmo general
@@ -81,7 +57,7 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 	 */
 	@Override
 	public int calcularNumeroCiclos(int numeroParticipantes) {
-		if (esSimple) {
+		if (torneo.getAlgoritmoTorneo().getTipoEliminacion()) {
 			return (int) (Math.ceil(Math.log(numeroParticipantes) / Math.log(2)));
 		} else {
 			return ((int) (Math.ceil(Math.log(numeroParticipantes) / Math.log(2)))) * 2;
@@ -262,7 +238,7 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 		// 06:04 p.m.-------------------------------------------------------------
 		// día 31/05/2023 me quiero lanzar de un puente :c 01:27 a.m.
 
-		if (esSimple) {
+		if (torneo.getAlgoritmoTorneo().getTipoEliminacion()) {
 			if (!esPotenciaDeDos(totalParticipantes)) {
 				System.out.println(participantes);
 				System.out.println("Total de participantes: " + totalParticipantes);
@@ -481,7 +457,7 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 			System.out.println("Participante final: " + partFinal + " puntaje acumulado: "
 					+ partFinal.getPuntajeAcumuladoParticipante());
 			// ---------------------------------------------------------------------------------------------------------
-			if (esSimple) {
+			if (torneo.getAlgoritmoTorneo().getTipoEliminacion()) {
 				if (encuentro.getResultadoEncuentro() == Encuentro.GANADOR_INICIAL || partInicial
 						.getPuntajeAcumuladoParticipante() > partFinal.getPuntajeAcumuladoParticipante()) {
 					// FIXME eliminar
@@ -581,7 +557,7 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 		System.out.println("Participante totales: " + participantes);
 		System.out.println("Participante que siguen: " + participantesCiclo);
 
-		if (esSimple) {
+		if (torneo.getAlgoritmoTorneo().getTipoEliminacion()) {
 			System.out.println("Simpleeeeee");
 			int mitad = participantesCiclo.size() / 2;
 			ArrayList<Encuentro> encuentros = new ArrayList<Encuentro>();
