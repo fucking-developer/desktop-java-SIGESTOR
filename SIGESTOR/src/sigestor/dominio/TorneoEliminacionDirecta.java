@@ -313,7 +313,7 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 				descansosSegundaVuelta = descansosPrimeraVuelta;
 
 			}
-			int numeroDeEncuentrosDoble = ((participantes.size() - descansosPrimeraVuelta) / 2)
+			int numeroDeEncuentrosDoble = ((participantes.size() - descansosPrimeraVuelta)/2)
 					+ descansosPrimeraVuelta;
 
 			ArrayList<Encuentro> encuentros = new ArrayList<Encuentro>();
@@ -324,12 +324,13 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 							participantes.get(i - 1).getNumeroParticipante(),
 							participantes.get((participantes.size() - 1) - auxUltimaPosicion).getNumeroParticipante(),
 							this.getTorneo().getFechaInicioTorneo()));
-					auxUltimaPosicion++;
-					auxUltimaPosicionSegundaVuelta++;
-					bde.insertarEncuentro(encuentros.get((auxUltimaPosicionSegundaVuelta) - 1), ciclo);
+					
 					bdp.actualizarResultadoParticipante(participantes.get((i - 1)), ciclo);
 					bdp.actualizarResultadoParticipante(
 							participantes.get((participantes.size() - 1) - auxUltimaPosicionSegundaVuelta), ciclo);
+					auxUltimaPosicion++;
+					auxUltimaPosicionSegundaVuelta++;
+					bde.insertarEncuentro(encuentros.get((auxUltimaPosicionSegundaVuelta) - 1), ciclo);
 				} else {
 					descansosPrimeraVuelta--;
 				}
@@ -342,12 +343,13 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 					encuentros.add(new Encuentro(auxUltimaPosicionSegundaVuelta + 1,
 							participantes.get((participantes.size() - 1) - auxUltimaPosicion).getNumeroParticipante(),
 							participantes.get(i - 1).getNumeroParticipante(), this.getTorneo().getFechaInicioTorneo()));
-					auxUltimaPosicion++;
-					auxUltimaPosicionSegundaVuelta++;
-					bde.insertarEncuentro(encuentros.get((auxUltimaPosicionSegundaVuelta) - 1), ciclo);
+					
 					bdp.actualizarResultadoParticipante(participantes.get((i - 1)), ciclo);
 					bdp.actualizarResultadoParticipante(
 							participantes.get((participantes.size() - 1) - auxUltimaPosicion), ciclo);
+					auxUltimaPosicion++;
+					auxUltimaPosicionSegundaVuelta++;
+					bde.insertarEncuentro(encuentros.get((auxUltimaPosicionSegundaVuelta) - 1), ciclo);
 				} else {
 					descansosSegundaVuelta--;
 				}
@@ -577,7 +579,7 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 		System.out.println("Participante totales: " + participantes);
 		System.out.println("Participante que siguen: " + participantesCiclo);
 
-		if (!esSimple) {
+		if (esSimple) {
 			System.out.println("Simpleeeeee");
 			int mitad = participantesCiclo.size() / 2;
 			ArrayList<Encuentro> encuentros = new ArrayList<Encuentro>();
