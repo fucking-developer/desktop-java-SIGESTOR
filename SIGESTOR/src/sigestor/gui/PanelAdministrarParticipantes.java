@@ -416,8 +416,8 @@ public class PanelAdministrarParticipantes extends JPanel {
 						"El participante " + participante.getNombreParticipante() + " ha sido agregado exitosamente", "Nuevo participante", JOptionPane.INFORMATION_MESSAGE);
 			} else {
 				JOptionPane.showMessageDialog(null,
-						"El campo 'nombre del participante' no puede estar vacío.\n"
-								+ "Ingrese un nombre para el participante.\n" + "Ejemplo: Pedro Cortes, Pumas",
+						"El campo 'Nombre del participante' no puede estar vacío.\n"
+								+ "Ingrese un nombre para el participante.\n" + "Ejemplo: Pedro Cortes",
 						"Nombre participante", JOptionPane.ERROR_MESSAGE);
 			}
 
@@ -490,7 +490,7 @@ public class PanelAdministrarParticipantes extends JPanel {
 					JOptionPane.showMessageDialog(null, "El participante "
 							+ listaDeParticipantes.get(listaParticipantes.getSelectedIndex()).getNombreParticipante()
 							+ " ha sido actualizado exitosamente");
-					
+
 				}
 			}
 		}

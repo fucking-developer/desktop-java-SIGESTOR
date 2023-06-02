@@ -892,7 +892,6 @@ public class DialogoCiclo extends JDialog {
 					for (Participante p : torneo.getListaParticipantes()) {
 						System.out.println("participante dentro del ciclo: " + p);
 
-
 						if (p.getNumeroParticipante() == listaEncuentros.get(i).getIdParticipanteInicial()) {
 							etiquetaParticipanteInicial[i].setText(p.getNombreParticipante());
 							System.out.println("Nombre participante inicial= " + p.getNombreParticipante());
@@ -950,6 +949,7 @@ public class DialogoCiclo extends JDialog {
 			TorneoEliminacionDirecta ted = new TorneoEliminacionDirecta(torneo);
 			if (ted.verificarEncuentros()) {
 				ted.desempatarParticipantes();
+				
 				try {
 					ted.realizarEncuentros();
 				} catch (ExcepcionBaseDatos e) {
