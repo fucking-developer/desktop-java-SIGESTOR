@@ -27,6 +27,7 @@ public class DesempatePuntuacion extends Desempate {
 	 *            Recibe la lista de participantes del torneo.
 	 * @param encuentrosTotales
 	 *            Recibe la lista de encuentros totales jugados en el torneo.
+	 * @param torneo Recibe los datos del torneo.
 	 * @return Regresa el objeto <code>Participante</code> con puntaje de desempate
 	 *         más bajo. <code>null</code> en caso de no poderlos desempatar.
 	 */

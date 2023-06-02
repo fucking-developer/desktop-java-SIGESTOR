@@ -17,7 +17,7 @@ import sigestor.excepcion.ExcepcionCapturarResultados;
 /**
  * Sirve para manejar la base de datos de <code>Encuentro</code>.
  * 
- * @version 17/03/2023
+ * @version 02/03/2023
  * 
  * @author Jonathan Eduardo Ibarra Martínez
  * @author Francisco Samuel Reyes Cortes
@@ -53,9 +53,9 @@ public class BaseDatosEncuentro extends BaseDatos {
 	 *            Recibe el objeto <code>Ciclo</code> que contiene los datos de un
 	 *            ciclo.
 	 * @throws ExcepcionBaseDatos
-	 *             Lanza la excepción sí ocurre un error en <code>BaseDatos</code>.
+	 *             Lanza la excepción si ocurre un error en <code>BaseDatos</code>.
 	 * @throws ExcepcionBaseDatosEncuentro
-	 *             Lanza la excepción sí ocurre un error en
+	 *             Lanza la excepción si ocurre un error en
 	 *             <code>BaseDatosEncuentro</code>.
 	 */
 	public void insertarEncuentro(Encuentro encuentro, Ciclo ciclo)
@@ -90,9 +90,9 @@ public class BaseDatosEncuentro extends BaseDatos {
 	 *            Recibe el objeto <code>Ciclo</code> que contiene los datos de un
 	 *            ciclo.
 	 * @throws ExcepcionBaseDatos
-	 *             Lanza la excepción sí ocurre un error en <code>BaseDatos</code>.
+	 *             Lanza la excepción si ocurre un error en <code>BaseDatos</code>.
 	 * @throws ExcepcionBaseDatosEncuentro
-	 *             Lanza la excepción sí ocurre un error en
+	 *             Lanza la excepción si ocurre un error en
 	 *             <code>BaseDatosEncuentro</code>.
 	 */
 	public void actualizarEncuentro(Encuentro encuentro, Ciclo ciclo)
@@ -123,9 +123,9 @@ public class BaseDatosEncuentro extends BaseDatos {
 	 *            Recibe el objeto <code>Ciclo</code> que contiene los datos de un
 	 *            ciclo.
 	 * @throws ExcepcionBaseDatos
-	 *             Lanza la excepción sí ocurre un error en <code>BaseDatos</code>.
+	 *             Lanza la excepción si ocurre un error en <code>BaseDatos</code>.
 	 * @throws ExcepcionBaseDatosEncuentro
-	 *             Lanza la excepción sí ocurre un error en
+	 *             Lanza la excepción si ocurre un error en
 	 *             <code>BaseDatosEncuentro</code>.
 	 */
 	public void actualizarFechaEncuentro(Encuentro encuentro, Ciclo ciclo)
@@ -158,9 +158,9 @@ public class BaseDatosEncuentro extends BaseDatos {
 	 *            Recibe el objeto <code>Ciclo</code> que contiene los datos de un
 	 *            ciclo.
 	 * @throws ExcepcionBaseDatos
-	 *             Lanza la excepción sí ocurre un error en <code>BaseDatos</code>.
+	 *             Lanza la excepción si ocurre un error en <code>BaseDatos</code>.
 	 * @throws ExcepcionBaseDatosEncuentro
-	 *             Lanza la excepción sí ocurre un error al eliminar un encuentro en
+	 *             Lanza la excepción si ocurre un error al eliminar un encuentro en
 	 *             la tabla <code>encuentro</code>.
 	 */
 	public void eliminarEncuentro(Encuentro encuentro, Ciclo ciclo)
@@ -184,7 +184,7 @@ public class BaseDatosEncuentro extends BaseDatos {
 	 *            ciclo.
 	 * @return Regresa la lista de encuentros de un cilo.
 	 * @throws ExcepcionBaseDatos
-	 *             Lanza la excepción sí ocurre un error en <code>BaseDatos</code>.
+	 *             Lanza la excepción si ocurre un error en <code>BaseDatos</code>.
 	 * @throws ExcepcionCapturarResultados
 	 *             Lanza la excepción si ocurre un error al crear el objeto
 	 *             <code>Encuentro</code>.
@@ -220,7 +220,7 @@ public class BaseDatosEncuentro extends BaseDatos {
 	/**
 	 * Cuenta el número de resultos sin capturar.
 	 * 
-	 * @return <tt>true</tt> sí verifica que no exista resultados sin capturar,
+	 * @return <tt>true</tt> si verifica que no exista resultados sin capturar,
 	 *         <tt>false</tt> en caso de que existan resultados sin capturar.
 	 */
 	public boolean verificarResultados() {
@@ -247,9 +247,9 @@ public class BaseDatosEncuentro extends BaseDatos {
 	 * Para eliminar los encuentros del torneo.
 	 * 
 	 * @throws ExcepcionBaseDatos
-	 *             Lanza la excepción sí ocurre un error en <code>BaseDatos</code>.
+	 *             Lanza la excepción si ocurre un error en <code>BaseDatos</code>.
 	 * @throws ExcepcionBaseDatosEncuentro
-	 *             Lanza la excepción sí ocurre un error al eliminar los registros
+	 *             Lanza la excepción si ocurre un error al eliminar los registros
 	 *             de la tabla <code>encuentro</code>.
 	 */
 	public void eliminarEncuentros() throws ExcepcionBaseDatos, ExcepcionBaseDatosEncuentro {

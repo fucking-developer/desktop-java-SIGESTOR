@@ -1,7 +1,6 @@
 package sigestor.gui;
 
 import java.awt.BorderLayout;
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -15,26 +14,20 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.text.DateFormat;
-
 import java.util.ArrayList;
-
 import java.util.Collections;
 import java.util.Date;
-
 import javax.swing.*;
 import javax.swing.border.Border;
-
 import sigestor.bd.BaseDatosCiclo;
 import sigestor.bd.BaseDatosEncuentro;
 import sigestor.bd.BaseDatosParticipante;
 import sigestor.bd.BaseDatosTorneo;
-
 import sigestor.dominio.Ciclo;
 import sigestor.dominio.Encuentro;
 import sigestor.dominio.Participante;
 import sigestor.dominio.Personalizacion;
 import sigestor.dominio.Torneo;
-import sigestor.dominio.TorneoEliminacionDirecta;
 import sigestor.excepcion.ExcepcionBaseDatos;
 import sigestor.excepcion.ExcepcionBaseDatosCiclo;
 import sigestor.excepcion.ExcepcionBaseDatosEncuentro;
@@ -1470,10 +1463,6 @@ public class DialogoCapturarResultados extends JDialog {
 			float puntajeEmpatar) {
 		for (Participante p : participantes) {
 			if (encuentro.getIdParticipanteInicial() == p.getNumeroParticipante()) {
-				/*if (encuentro.getResultadoEncuentro() == Encuentro.DESCANSO) {
-					p.acumularPuntajeAcumuladoParticipante(puntajeGanar);
-					break;
-				} else */
 				if (encuentro.getResultadoEncuentro() == Encuentro.GANADOR_INICIAL) {
 					p.acumularPuntajeAcumuladoParticipante(puntajeGanar);
 				} else if (encuentro.getResultadoEncuentro() == Encuentro.GANADOR_FINAL) {

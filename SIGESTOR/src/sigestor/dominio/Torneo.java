@@ -545,7 +545,9 @@ public class Torneo {
 	public void recuperarTorneo()
             throws ExcepcionBaseDatos, ExcepcionBaseDatosTorneo, ExcepcionBaseDatosCriteriosDesempate,
             ExcepcionBaseDatosParticipante, ExcepcionCapturarResultados, ExcepcionBaseDatosPersonalizacion {
-        BaseDatosTorneo baseDatosTorneo = new BaseDatosTorneo(this.nombreArchivo);
+        
+		
+		BaseDatosTorneo baseDatosTorneo = new BaseDatosTorneo(this.nombreArchivo);
         BaseDatosCriteriosDesempate baseDatosCriterios = new BaseDatosCriteriosDesempate(this.nombreArchivo);
         BaseDatosPersonalizacion baseDatosPersonalizacion = new BaseDatosPersonalizacion(this.nombreArchivo);
         BaseDatosParticipante baseDatosParticipantes = new BaseDatosParticipante(this.nombreArchivo);
@@ -609,14 +611,17 @@ public class Torneo {
 	 */
 	public void guardarTorneo() throws ExcepcionBaseDatos, ExcepcionBaseDatosTorneo,
 			ExcepcionBaseDatosCriteriosDesempate, ExcepcionBaseDatosPersonalizacion, ExcepcionBaseDatosParticipante {
+		
 		BaseDatosTorneo baseDatosTorneo = new BaseDatosTorneo(this.nombreArchivo);
 		BaseDatosCriteriosDesempate baseDatosCriterios = new BaseDatosCriteriosDesempate(this.nombreArchivo);
 		BaseDatosPersonalizacion baseDatosPersonalizacion = new BaseDatosPersonalizacion(this.nombreArchivo);
 		BaseDatosParticipante baseDatosParticipante = new BaseDatosParticipante(this.nombreArchivo);
+		
 		baseDatosTorneo.insertarDatosGenerales(this);
 		baseDatosCriterios.insertarCriteriosDesempate(this.criteriosDesempate);
 		baseDatosPersonalizacion.insertarPersonalizacion(this.datosPersonalizacion);
 		baseDatosParticipante.insertarParticipante(this.listaParticipantes);
+	
 	}
 
 	/**
@@ -644,6 +649,7 @@ public class Torneo {
 		BaseDatosCriteriosDesempate baseDatosCriterios = new BaseDatosCriteriosDesempate(this.nombreArchivo);
 		BaseDatosPersonalizacion baseDatosPersonalizacion = new BaseDatosPersonalizacion(this.nombreArchivo);
 		BaseDatosParticipante baseDatosParticipante = new BaseDatosParticipante(this.nombreArchivo);
+		
 		baseDatosTorneo.actualizarDatosGenerales(this);
 		baseDatosCriterios.eliminarCriteriosDesempate();
 		baseDatosCriterios.insertarCriteriosDesempate(this.getCriteriosDesempate());
@@ -684,19 +690,16 @@ public class Torneo {
 			ExcepcionCapturarResultados, ExcepcionBaseDatosPersonalizacion {
 		setCicloActual(0);
 		BaseDatosParticipante participantes = new BaseDatosParticipante(this.nombreArchivo);
-		participantes.cancelarAvanceParticipante(this.listaParticipantes);
 		BaseDatosCiclo bdc = new BaseDatosCiclo(this.nombreArchivo);
 		BaseDatosEncuentro bde = new BaseDatosEncuentro(this.nombreArchivo);
 		BaseDatosTorneo bdt = new BaseDatosTorneo(this.nombreArchivo);
-
+		participantes.cancelarAvanceParticipante(this.listaParticipantes);
 		bdc.eliminarCiclos();
 		bde.eliminarEncuentros();
 		bdt.actualizarCicloActual(this);
 		bdt.eliminarTorneoRoundRobin();
 		bdt.eliminarTorneoSuizo();
 		bdt.eliminarTorneoEliminacionDirecta();
-
 		recuperarTorneo();
-
 	}
 }

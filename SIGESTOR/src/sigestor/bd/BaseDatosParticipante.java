@@ -11,7 +11,7 @@ import sigestor.excepcion.*;
  * Sirve para insertar, actualizar, eliminar, actualizar lugar y resultado del
  * participante de la base de datos.
  * 
- * @version 12/06/2022
+ * @version 02/06/2023
  * 
  * @author Ricky Didier Peralta Reyes
  * @author Uriel Romeo Cruz Cortes
@@ -37,7 +37,7 @@ public class BaseDatosParticipante extends BaseDatos {
 	 * Inserta los datos del participante a la base de datos.
 	 * 
 	 * @param arrayList Contiene los datos del participante.
-	 * @throws ExcepcionBaseDatos             Lanza la excepción sí no se pudo
+	 * @throws ExcepcionBaseDatos             Lanza la excepción si no se pudo
 	 *                                        realizar la conexión.
 	 * @throws ExcepcionBaseDatosParticipante Lanza la excepción si no se pudieron
 	 *                                        insertar los datos a la tabla
@@ -47,7 +47,6 @@ public class BaseDatosParticipante extends BaseDatos {
 	 */
 	public void insertarParticipante(ArrayList<Participante> arrayList)
 			throws ExcepcionBaseDatos, ExcepcionBaseDatosParticipante {
-
 		for (Participante p : arrayList) {
 			realizarConexion();
 			int filasAfectadas = realizarAccion("INSERT INTO participante VALUES (" + p.getNumeroParticipante() + ",'"
@@ -66,7 +65,7 @@ public class BaseDatosParticipante extends BaseDatos {
 	/**
 	 * Elimina el participante guardado en la base de datos.
 	 * 
-	 * @throws ExcepcionBaseDatos             Lanza la excepción sí no se pudo
+	 * @throws ExcepcionBaseDatos             Lanza la excepción si no se pudo
 	 *                                        realizar la conexión.
 	 * @throws ExcepcionBaseDatosParticipante Lanza la excepción si ocurre un error
 	 *                                        al eliminar los datos en la tabla
@@ -91,7 +90,7 @@ public class BaseDatosParticipante extends BaseDatos {
 	 * 
 	 * @param participante Contiene los datos generales del participante.
 	 * @param torneo       Contiene los datos generales del torneo.
-	 * @throws ExcepcionBaseDatos             Lanza la excepción sí no se pudo
+	 * @throws ExcepcionBaseDatos             Lanza la excepción si no se pudo
 	 *                                        realizar la conexión.
 	 * @throws ExcepcionBaseDatosParticipante Lanza la excepción si ocurre un error
 	 *                                        al actualizar el lugar del
@@ -120,7 +119,7 @@ public class BaseDatosParticipante extends BaseDatos {
 	 * 
 	 * @param participante Contiene los datos generales del participante.
 	 * @param ciclo        Contiene el ciclo actual.
-	 * @throws ExcepcionBaseDatos             Lanza la excepción sí no se pudo
+	 * @throws ExcepcionBaseDatos             Lanza la excepción si no se pudo
 	 *                                        realizar la conexión.
 	 * @throws ExcepcionBaseDatosParticipante Lanza la excepción si ocurre un error
 	 *                                        al actualizar el lugar del
@@ -151,7 +150,7 @@ public class BaseDatosParticipante extends BaseDatos {
 	 * Obtiene la lista del nombre de los participantes del torneo.
 	 * 
 	 * @return Regresa una lista con los nombres de los participantes.
-	 * @throws ExcepcionBaseDatos             Lanza la excepción sí no se pudo
+	 * @throws ExcepcionBaseDatos             Lanza la excepción si no se pudo
 	 *                                        realizar la conexión.
 	 * @throws ExcepcionBaseDatosParticipante Lanza la excepción si ocurre un error
 	 *                                        al obtener al participante en la tabla
@@ -186,8 +185,49 @@ public class BaseDatosParticipante extends BaseDatos {
 		}
 	}
 
-	
-	public ArrayList<Participante> obtenerParticipanteLugar() throws ExcepcionBaseDatos, ExcepcionBaseDatosParticipante {
+	/**
+	 * Cancela el avance del participante de la base de datos.
+	 * 
+	 * @param arrayList Recibe un arreglo que contiene los datos del participante.
+	 * @throws ExcepcionBaseDatos             Lanza la excepción si no se pudo
+	 *                                        realizar la conexión.
+	 * @throws ExcepcionBaseDatosParticipante Lanza la excepción si ocurre un error
+	 *                                        al cancelar el avance del participante
+	 *                                        en la tabla <code>participante</code>
+	 *                                        de la base de datos.
+	 */
+	public void cancelarAvanceParticipante(ArrayList<Participante> arrayList)
+			throws ExcepcionBaseDatos, ExcepcionBaseDatosParticipante {
+		for (Participante p : arrayList) {
+			realizarConexion();
+
+			int filasAfectadas = realizarAccion("UPDATE participante SET marcadorFavor = " + 0 + ", marcadorContra = "
+					+ 0 + ", puntajeAcumuladoParticipante = " + 0 + ", lugarParticipante = " + 0
+					+ " WHERE numeroParticipante = " + p.getNumeroParticipante());
+
+			cerrarConexion();
+			if (filasAfectadas != 1) {
+				throw new ExcepcionBaseDatosParticipante(
+						ExcepcionBaseDatosParticipante.MENSAJE_EXCEPCION_INSERTA_PARTICIPANTE
+								+ ExcepcionBaseDatosParticipante.MENSAJE_EXCEPCION_SOLUCION);
+			}
+		}
+	}
+
+	/**
+	 * Obtiene el participantes que quedo en primer lugar.
+	 * 
+	 * @return Regresa un lista de tipo <code>Participante</code> la cual contiene
+	 *         los participantes.
+	 * 
+	 * @throws ExcepcionBaseDatos             Lanza la excepción si no se pudo
+	 *                                        realizar la conexión.
+	 * 
+	 * @throws ExcepcionBaseDatosParticipante Lanza la excepción si ocurre un error
+	 *                                        al obtener los datos de los participantes.
+	 */
+	public ArrayList<Participante> obtenerParticipanteLugar()
+			throws ExcepcionBaseDatos, ExcepcionBaseDatosParticipante {
 		try {
 			realizarConexion();
 			ArrayList<Participante> listaParticipante = new ArrayList<Participante>();
@@ -210,35 +250,6 @@ public class BaseDatosParticipante extends BaseDatos {
 			throw new ExcepcionBaseDatosParticipante(
 					ExcepcionBaseDatosParticipante.MENSAJE_EXCEPCION_OBTIENE_PARTICIPANTE
 							+ ExcepcionBaseDatosParticipante.MENSAJE_EXCEPCION_OBTIENE_PARTICIPANTE);
-		}
-	}
-	
-	/**
-	 * Cancela el avance del participante de la base de datos.
-	 * 
-	 * @param arrayList Recibe un arreglo que contiene los datos del participante.
-	 * @throws ExcepcionBaseDatos             Lanza la excepción sí no se pudo
-	 *                                        realizar la conexión.
-	 * @throws ExcepcionBaseDatosParticipante Lanza la excepción si ocurre un error
-	 *                                        al cancelar el avance del participante
-	 *                                        en la tabla <code>participante</code>
-	 *                                        de la base de datos.
-	 */
-	public void cancelarAvanceParticipante(ArrayList<Participante> arrayList)
-			throws ExcepcionBaseDatos, ExcepcionBaseDatosParticipante {
-		for (Participante p : arrayList) {
-			realizarConexion();
-
-			int filasAfectadas = realizarAccion("UPDATE participante SET marcadorFavor = " + 0 + ", marcadorContra = "
-					+ 0 + ", puntajeAcumuladoParticipante = " + 0 + ", lugarParticipante = " + 0
-					+ " WHERE numeroParticipante = " + p.getNumeroParticipante());
-
-			cerrarConexion();
-			if (filasAfectadas != 1) {
-				throw new ExcepcionBaseDatosParticipante(
-						ExcepcionBaseDatosParticipante.MENSAJE_EXCEPCION_INSERTA_PARTICIPANTE
-								+ ExcepcionBaseDatosParticipante.MENSAJE_EXCEPCION_SOLUCION);
-			}
 		}
 	}
 }

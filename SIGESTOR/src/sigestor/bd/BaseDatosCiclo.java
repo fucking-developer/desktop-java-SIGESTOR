@@ -16,7 +16,8 @@ import sigestor.excepcion.ExcepcionCapturarResultados;
 /**
  * Sirve para manejar la base de datos de <code>Ciclo</code>.
  * 
- * @version 24/05/2022
+ * 
+ * @version 02/06/2023
  * 
  * @author Jonathan Eduardo Ibarra Martínez
  * @author Francisco Samuel Reyes Cortes
@@ -71,9 +72,9 @@ public class BaseDatosCiclo extends BaseDatos {
 	 *            Recibe el objeto <code>Ciclo</code> que contiene los datos de un
 	 *            ciclo.
 	 * @throws ExcepcionBaseDatos
-	 *             Lanza la excepción sí ocurre un error en <code>BaseDatos</code>.
+	 *             Lanza la excepción si ocurre un error en <code>BaseDatos</code>.
 	 * @throws ExcepcionBaseDatosCiclo
-	 *             Lanza la excepción sí ocurre un error
+	 *             Lanza la excepción si ocurre un error
 	 */
 	public void eliminarCiclo(Ciclo ciclo) throws ExcepcionBaseDatos, ExcepcionBaseDatosCiclo {
 		realizarConexion();
@@ -94,7 +95,7 @@ public class BaseDatosCiclo extends BaseDatos {
 	 *            torneo.
 	 * @return Regresa la lista de ciclos.
 	 * @throws ExcepcionBaseDatos
-	 *             Lanza la excepción sí ocurre un error en <code>BaseDatos</code>.
+	 *             Lanza la excepción si ocurre un error en <code>BaseDatos</code>.
 	 * @throws ExcepcionCapturarResultados
 	 *             Lanza la excepción si ocurre un error al crear el objeto
 	 *             <code>Encuentro</code>.
@@ -124,9 +125,9 @@ public class BaseDatosCiclo extends BaseDatos {
 	 * Para eliminar los ciclos del torneo que se encuentras en la base de datos.
 	 * 
 	 * @throws ExcepcionBaseDatos
-	 *             Lanza la excepción sí ocurre un error en <code>BaseDatos</code>.
+	 *             Lanza la excepción si ocurre un error en <code>BaseDatos</code>.
 	 * @throws ExcepcionBaseDatosCiclo
-	 *             Lanza la excepción sí ocurre un erroral eliminar un registro de
+	 *             Lanza la excepción si ocurre un erroral eliminar un registro de
 	 *             la tabla <code>ciclo</code>.
 	 */
 	public void eliminarCiclos() throws ExcepcionBaseDatos, ExcepcionBaseDatosCiclo {

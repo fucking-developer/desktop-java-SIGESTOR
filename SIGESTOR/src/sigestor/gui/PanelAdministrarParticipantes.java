@@ -130,6 +130,7 @@ public class PanelAdministrarParticipantes extends JPanel {
 	 * Referencia a la clase <code>VentanaPrincipal</code>
 	 */
 	private VentanaPrincipal ventanaPrincipal;
+	
 
 	/**
 	 * Constructor que consiste en mostrar en pantalla el
@@ -351,7 +352,7 @@ public class PanelAdministrarParticipantes extends JPanel {
 
 		botonModificar.setToolTipText("Permite modificar los datos de un participante de la lista");
 		botonEliminar.setToolTipText("Permite eliminar a un participante de la lista");
-		/////
+		
 	}
 
 	/**
@@ -394,7 +395,7 @@ public class PanelAdministrarParticipantes extends JPanel {
 		contenido.add(panelAux);
 
 		if (np == 0) {
-			if (!campoNombreParticipante.getText().equals("")) {
+			if (!campoNombreParticipante.getText().trim().isEmpty()) {
 				int seleccion = JOptionPane.showOptionDialog(null, contenido, "Nuevo participante",
 						JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 				Participante participante;
@@ -412,8 +413,7 @@ public class PanelAdministrarParticipantes extends JPanel {
 				}
 
 				JOptionPane.showMessageDialog(null,
-						"El participante " + participante.getNombreParticipante() + " ha sido agregado exitosamente",
-						"Nuevo participante", JOptionPane.INFORMATION_MESSAGE);
+						"El participante " + participante.getNombreParticipante() + " ha sido agregado exitosamente", "Nuevo participante", JOptionPane.INFORMATION_MESSAGE);
 			} else {
 				JOptionPane.showMessageDialog(null,
 						"El campo 'Nombre del participante' no puede estar vacío.\n"
@@ -435,13 +435,12 @@ public class PanelAdministrarParticipantes extends JPanel {
 			JPanel contenido = new JPanel();
 			JPanel contenidoParticipante = new JPanel();
 			JPanel panelAux = new JPanel();
-
 			contenido.setLayout(new BoxLayout(contenido, BoxLayout.Y_AXIS));
-
 			contenidoParticipante.setLayout(new BoxLayout(contenidoParticipante, BoxLayout.Y_AXIS));
 
 			JLabel texto = new JLabel("Ingrese el nuevo nombre para el participante "
-					+ listaDeParticipantes.get(listaParticipantes.getSelectedIndex()).getNombreParticipante() + " :");
+						+ listaDeParticipantes.get(listaParticipantes.getSelectedIndex()).getNombreParticipante() + " :");	
+		
 			panelAux.add(texto);
 			contenidoParticipante.add(panelAux);
 
@@ -469,7 +468,7 @@ public class PanelAdministrarParticipantes extends JPanel {
 			panelAux.add(spinner);
 			contenido.add(panelAux);
 			if (np == 0) {
-				if (!campoNombreParticipante.getText().equals("")) {
+				if (!campoNombreParticipante.getText().trim().isEmpty()) {
 					int seleccion = JOptionPane.showOptionDialog(null, contenido, "Modificar participante",
 							JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 					Participante participante;
@@ -477,23 +476,20 @@ public class PanelAdministrarParticipantes extends JPanel {
 					if (seleccion == 0) {
 						Float puntajeParticipante = (float) spinner.getValue();
 						participante = new Participante(
-								this.listaDeParticipantes.get(listaParticipantes.getSelectedIndex())
-										.getNumeroParticipante(),
+								this.listaDeParticipantes.get(listaParticipantes.getSelectedIndex()).getNumeroParticipante(),
 								campoNombreParticipante.getText(), puntajeParticipante);
 					} else {
 						participante = new Participante(
-								this.listaDeParticipantes.get(listaParticipantes.getSelectedIndex())
-										.getNumeroParticipante(),
-								campoNombreParticipante.getText(), listaDeParticipantes
-										.get(listaParticipantes.getSelectedIndex()).getPuntajeParticipante());
+								this.listaDeParticipantes.get(listaParticipantes.getSelectedIndex()).getNumeroParticipante(),
+								campoNombreParticipante.getText(), listaDeParticipantes.get(listaParticipantes.getSelectedIndex()).getPuntajeParticipante());
 					}
-					model.setElementAt(participante.toString(), listaParticipantes.getSelectedIndex());
+					
+					model.setElementAt(participante.toString(), listaParticipantes.getSelectedIndex());	
 					listaDeParticipantes.set(listaParticipantes.getSelectedIndex(), participante);
-					JOptionPane.showMessageDialog(null,
-							"El participante " + listaDeParticipantes.get(listaParticipantes.getSelectedIndex())
-									.getNombreParticipante() + " ha sido actualizado exitosamente",
-							"Modificar participante", JOptionPane.INFORMATION_MESSAGE);
-					Collections.sort(listaDeParticipantes);
+				
+					JOptionPane.showMessageDialog(null, "El participante "
+							+ listaDeParticipantes.get(listaParticipantes.getSelectedIndex()).getNombreParticipante()
+							+ " ha sido actualizado exitosamente");
 
 				}
 			}
@@ -516,7 +512,6 @@ public class PanelAdministrarParticipantes extends JPanel {
 				listaDeParticipantes.remove(listaParticipantes.getSelectedIndex());
 				model.remove(listaParticipantes.getSelectedIndex());
 			}
-
 		}
 	}
 
@@ -526,13 +521,15 @@ public class PanelAdministrarParticipantes extends JPanel {
 	private void inicializarParticipantes() {
 		if (ventanaPrincipal.getTorneoActual() != null) {
 			for (int i = 0; i < ventanaPrincipal.getTorneoActual().getListaParticipantes().size(); i++) {
+				
 				if (ventanaPrincipal.getTorneoActual().getListaParticipantes().get(i).getNombreParticipante()
 						.compareToIgnoreCase(ventanaPrincipal.getTorneoActual().getDatosPersonalizacion()
 								.getNombreParticipanteSinEncuentro()) != 0) {
 					model.addElement(ventanaPrincipal.getTorneoActual().getListaParticipantes().get(i).toString());
-					listaDeParticipantes = ventanaPrincipal.getTorneoActual().getListaParticipantes();
+					//listaDeParticipantes = ventanaPrincipal.getTorneoActual().getListaParticipantes();
+					listaDeParticipantes.add(ventanaPrincipal.getTorneoActual().getListaParticipantes().get(i));
+					
 				}
-
 			}
 		}
 
@@ -549,10 +546,11 @@ public class PanelAdministrarParticipantes extends JPanel {
 		}
 		Participante.setPuntaje(this.checkPuntaje.isSelected());
 		Participante.setOrden(ordenacion);
+		
 		for (int i = 0; i < listaDeParticipantes.size() - 1; i++) {
 			if (listaDeParticipantes.get(i).getNombreParticipante().compareToIgnoreCase(this.ventanaPrincipal
 					.getTorneoActual().getDatosPersonalizacion().getNombreParticipanteSinEncuentro()) == 0) {
-				/// model.remove(i);
+				//model.remove(i);
 				listaDeParticipantes.remove(listaDeParticipantes.get(i));
 			}
 		}
@@ -565,6 +563,11 @@ public class PanelAdministrarParticipantes extends JPanel {
 				listaDeParticipantes.add(p);
 			}
 		}
+		
+		for(int i=0; i<listaDeParticipantes.size(); i++) {
+			listaDeParticipantes.get(i).setNumeroParticipante(i+1);
+		}
+		
 		Collections.sort(listaDeParticipantes);
 		ventanaPrincipal.getTorneoActual().setListaParticipantes(listaDeParticipantes);
 	}
@@ -604,13 +607,13 @@ public class PanelAdministrarParticipantes extends JPanel {
 			}
 			if (archivo.exists() && archivo.getName().toUpperCase().endsWith(".CSV")) {
 				try {
-					ArrayList<Participante> participantes = UtileriasListaParticipantes
-							.leerListaParticipantes(archivo.getAbsolutePath());
+					ArrayList<Participante> participantes = UtileriasListaParticipantes.leerListaParticipantes(archivo.getAbsolutePath());
 					for (Participante p : participantes) {
 						Participante participante = new Participante((model.size() + 1), p.getNombreParticipante(),
 								p.getPuntajeParticipante());
 						model.addElement(participante.toString());
-						listaDeParticipantes.add(participante);
+						listaDeParticipantes.add(participante);	
+						listaParticipantes.setPreferredSize(new Dimension(50, listaDeParticipantes.size()*18));
 					}
 				} catch (ExcepcionUtilerias e) {
 					JOptionPane.showMessageDialog(null, e.getMessage(), "Error al abrir el archivo",

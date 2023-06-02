@@ -133,7 +133,7 @@ public class BaseDatosTorneo extends BaseDatos {
 	/**
 	 * Obtiene los datos generales del torneo.
 	 * 
-	 * @return regresa un objeto de tipo torneo con los datos generales
+	 * @return Regresa un objeto de tipo torneo con los datos generales
 	 * @throws ExcepcionBaseDatos
 	 *             Lanza la excepción si no se pudo realizar la conexión.
 	 * @throws ExcepcionBaseDatosTorneo
@@ -248,7 +248,7 @@ public class BaseDatosTorneo extends BaseDatos {
 	 */
 	public void actualizarCicloActual(Torneo torneo) throws ExcepcionBaseDatos, ExcepcionBaseDatosTorneo {
 		realizarConexion();
-		int filasAfectadas = realizarAccion("UPDATE datosGenerales SET" + " cicloActual = " + torneo.getCicloActual());
+		int filasAfectadas = realizarAccion("UPDATE datosGenerales SET cicloActual = " + torneo.getCicloActual());
 		cerrarConexion();
 		if (filasAfectadas != 1) {
 			throw new ExcepcionBaseDatosTorneo(ExcepcionBaseDatosTorneo.MENSAJE_EXCEPCION_ACTUALIZA_CICLO_ACTUAL_PARTE_1

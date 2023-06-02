@@ -58,7 +58,7 @@ public class ExcepcionCriteriosDesempate extends Exception {
 	 * Mensaje 2.3.1 del documento de mensajes del sistema.
 	 */
 	public static final String MENSAJE_EXCEPCION_CRITERIOS_TIPO_TORNEO = 
-			"El desempate Bucholtz no puede ser utilizado en el torneo de tipo Round Robin."
+			"El desempate Buchholz no puede ser utilizado en el torneo de tipo Round Robin."
 			+ "\nSeleccione otro criterio de desempate.";
 
 	/**

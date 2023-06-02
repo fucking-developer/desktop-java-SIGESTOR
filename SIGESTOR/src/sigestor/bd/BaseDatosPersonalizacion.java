@@ -10,7 +10,7 @@ import sigestor.excepcion.*;
  * Sirve para insertar y actualizar los datos de personalización en la base de
  * datos.
  * 
- * @version 12/06/2022
+ * @version 02/06/2023
  * 
  * @author Ricky Didier Peralta Reyes
  * @author Uriel Romeo Cruz Cortes
@@ -33,7 +33,7 @@ public class BaseDatosPersonalizacion extends BaseDatos {
 	 * Inserta los datos de personalización a la base de datos.
 	 * 
 	 * @param personalizacion Contiene los datos de personalización.
-	 * @throws ExcepcionBaseDatos                Lanza la excepción sí no se pudo
+	 * @throws ExcepcionBaseDatos                Lanza la excepción si no se pudo
 	 *                                           realizar la conexión.
 	 * @throws ExcepcionBaseDatosPersonalizacion Lanza la excepción si no se
 	 *                                           pudieron insertar los datos a la
@@ -71,9 +71,9 @@ public class BaseDatosPersonalizacion extends BaseDatos {
 	 * Actualiza los datos de personalización guardados en la base de datos.
 	 * 
 	 * @param personalizacion Contiene los datos de personalización.
-	 * @throws ExcepcionBaseDatos                Lanza la excepción sí no se pudo
+	 * @throws ExcepcionBaseDatos                Lanza la excepción si no se pudo
 	 *                                           realizar la conexión.
-	 * @throws ExcepcionBaseDatosPersonalizacion Lanza la excepción sí no se pudo
+	 * @throws ExcepcionBaseDatosPersonalizacion Lanza la excepción si no se pudo
 	 *                                           actualizar los datos de la tabla
 	 *                                           <code>personalizacion</code> de la
 	 *                                           base de datos.
@@ -112,7 +112,7 @@ public class BaseDatosPersonalizacion extends BaseDatos {
 	 * Obtiene de la base de datos los datos de personalización del torneo.
 	 * 
 	 * @return regresa un objeto de tipo <code>Personalizacion.</code>
-	 * @throws ExcepcionBaseDatos                Lanza la excepción sí no se pudo
+	 * @throws ExcepcionBaseDatos                Lanza la excepción si no se pudo
 	 *                                           realizar la conexión.
 	 * @throws ExcepcionBaseDatosPersonalizacion Lanza la excepción si ocurre un
 	 *                                           error al obtener los datos de

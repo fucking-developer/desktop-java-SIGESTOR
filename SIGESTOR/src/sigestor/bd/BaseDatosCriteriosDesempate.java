@@ -12,7 +12,7 @@ import sigestor.excepcion.ExcepcionBaseDatosCriteriosDesempate;
  * Sirve para insertar y actualizar los datos de la tabla
  * <code>criteriosDeDesempate</code> en la base de datos.
  * 
- * @version 12/06/2022
+ * @version 02/06/2023
  * 
  * @author Ricky Didier Peralta Reyes
  * @author Uriel Romeo Cruz Cortes
@@ -87,7 +87,7 @@ public class BaseDatosCriteriosDesempate extends BaseDatos {
 	 * 
 	 * @return Regresa un objeto de tipo <code>CriteriosDesempate</code>
 	 * @throws ExcepcionBaseDatos
-	 *             Lanza la excepción sí no se pudo realizar la conexión.
+	 *             Lanza la excepción si no se pudo realizar la conexión.
 	 * @throws ExcepcionBaseDatosCriteriosDesempate
 	 *             Lanza la excepción si ocurre un error al obtener los
 	 *             criterios de desempate de la tabla
