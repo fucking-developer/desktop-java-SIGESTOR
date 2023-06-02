@@ -825,7 +825,6 @@ public class DialogoCiclo extends JDialog {
 				for (int i = 0; i < tamaño; i++) {
 
 					for (Participante p : torneo.getListaParticipantes()) {
-						// si el participante p es igual al participante final del encuentro
 						if (p.getNumeroParticipante() == this
 								.obtenerParticipante(listaEncuentros.get(i).getIdParticipanteFinal())
 								.getNumeroParticipante()
@@ -876,7 +875,7 @@ public class DialogoCiclo extends JDialog {
 				}
 			} else {
 
-				// System.out.println("numero de partidas: " + numeroPartidas);
+			
 				System.out.println("tamaño= " + tamaño);
 				System.out.println("lista de encuentros: " + listaEncuentros);
 				for (int i = 0; i < tamaño; i++) {
