@@ -81,7 +81,7 @@ public class ExcepcionPersonalizacion extends Exception {
 	 */
 	public static final String MENSAJE_EXCEPCION_PARTICIPANTES_SIN_ENCUENTRO_VACIO = "El campo 'Nombre para participantes sin encuentros' no puede estar vacío.\n"
 			+ "Ingrese el nombre para distinguir que un participante no tendrá encuentro en el ciclo.\n"
-			+ "Ejemplo: \n1.- Descanso" + "2.- Bye";
+			+ "Ejemplo: \n1.- Descanso" + "\n2.- Bye";
 
 	/**
 	 * Mensaje 2.4.7 del documento de mensajes del sistema
