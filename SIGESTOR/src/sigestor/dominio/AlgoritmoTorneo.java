@@ -29,6 +29,7 @@ import sigestor.utilerias.UtileriasReporteResultadosFinales;
  * el torneo.</li>
  * <li><code>ciclos</code> contendrá los ciclos que se generen en el
  * torneo.</li>
+ * <li><code>esSimple</code> determina si el tipo de torneo Eliminación directa es simple(true) o doble(false).</li>
  * <li><code>desempates</code> almacena en una lista los desempates que se
  * eligan en la personalización del torneo.</li>
  * </ul>
@@ -65,6 +66,13 @@ public abstract class AlgoritmoTorneo {
 	 * Valor que se calcula dependiendo de la cantidad de participantes del torneo.
 	 */
 	private int numeroCiclos;
+	
+	/**
+	 * Sirve para determinar que tipo de torneo de Eliminación Directa se va a
+	 * efectuar true = Eliminación simple o directa false = eliminación doble
+	 */
+	private boolean esSimple;
+
 
 	/**
 	 * Inicializa las variables con un valor por defecto y asigna a la variable
@@ -78,11 +86,14 @@ public abstract class AlgoritmoTorneo {
 		setCiclos(null);
 		setDesempates(null);
 		setNumeroCiclos(0);
+		/*if(torneo.getTipoTorneo()=="Eliminación directa") {
+			setTipoEliminacion(torneo.getAlgoritmoTorneo().esSimple);
+		}*/
 	}
 
 	/**
 	 * Obtiene la cantidad máxima de ciclos del torneo dependiendo del número de
-	 * participantes registrados.
+	 * participantes registrados.s
 	 * 
 	 * @param numeroParticipantes Recibe la cantidad de participantes inscritos en
 	 *                            el torneo.
@@ -234,6 +245,26 @@ public abstract class AlgoritmoTorneo {
 		this.numeroCiclos = numeroCiclos;
 	}
 
+	/**
+	 * Establece el tipo de Eliminación Directa
+	 * 
+	 * @param tipoEliminacion Recibe <tt>true</tt> si el tipo de eliminación directa
+	 *                        es simple, <tt>false</tt> si es doble.
+	 */
+	public void setTipoEliminacion(boolean tipoEliminacion) {
+		this.esSimple = tipoEliminacion;
+	}
+
+	/**
+	 * Encargado de obtener el tipo de eliminación directa.
+	 * 
+	 * @return Regresa <tt>true</tt> si el tipo es simple, <tt>false</tt> si es
+	 *         doble.
+	 */
+	public boolean getTipoEliminacion() {
+		return esSimple;
+	}
+	
 	/**
 	 * Actualiza el ciclo actual en la <code>BaseDatosTorneo</code>.
 	 * 
