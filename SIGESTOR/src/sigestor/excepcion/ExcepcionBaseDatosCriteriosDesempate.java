@@ -7,20 +7,24 @@ package sigestor.excepcion;
  * Las características de la clase
  * <code>ExcepcionBaseDatosCriteriosDesempate</code> son:
  * <ul>
- * <li><code>MENSAJE_EXCEPCION_INSERTA_CRITERIOS_DESEMPATE</code> para mostrar
+ * <li><code>MENSAJE_EXCEPCION_INSERTA_CRITERIOS_DESEMPATE</code> Para mostrar
  * la causa del error al no poder guardar los criterios de desempate en la base
  * de datos.</li>
- * <li><code>MENSAJE_EXCEPCION_ELIMINA_CRITERIOS_DESEMPATE</code> para mostrar
+ * <li><code>MENSAJE_EXCEPCION_ELIMINA_CRITERIOS_DESEMPATE</code> Para mostrar
  * la causa del error al no poder modificar los criterios de desempate en la
  * base de datos.</li>
- * <li><code>MENSAJE_EXCEPCION_SOLUCION</code> para mostrar la solución del
+ * <li><code>MENSAJE_EXCEPCION_SOLUCION</code> Para mostrar la solución del
  * error presentado.</li>
+ * <li><code>MENSAJE_EXCEPCION_CONSULTA_DESEMPATE</code> Para mostrar la causa 
+ * del error al no poder consultar los criterios de desempate que se encuentran 
+ * en la base de datos.</li>
  * </ul>
  * 
- * @version 17/04/2022
+ * @version 02/06/2023
  * 
  * @author Beatriz Andrea Jiménez Ríos
  * @author Victor Triste Pérez
+ * @author Erik Vasquez Policarpo
  */
 public class ExcepcionBaseDatosCriteriosDesempate extends Exception {
 
