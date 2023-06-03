@@ -875,29 +875,26 @@ public class DialogoCiclo extends JDialog {
 				}
 			} else {
 
-			
-				System.out.println("tamaño= " + tamaño);
-				System.out.println("lista de encuentros: " + listaEncuentros);
 				for (int i = 0; i < tamaño; i++) {
-					System.out.println("i = " + i);
+					//System.Out.println("i = " + i);
 
 					etiquetaNumeroInicial[i].setText(String.valueOf(listaEncuentros.get(i).getIdParticipanteInicial()));
-					System.out
-							.println("id participante inicial = " + listaEncuentros.get(i).getIdParticipanteInicial());
+					//System.Out
+					//		.println("id participante inicial = " + listaEncuentros.get(i).getIdParticipanteInicial());
 
 					etiquetaNumeroFinal[i].setText(String.valueOf(listaEncuentros.get(i).getIdParticipanteFinal()));
-					System.out.println("id participante final = " + listaEncuentros.get(i).getIdParticipanteFinal());
+					//System.Out.println("id participante final = " + listaEncuentros.get(i).getIdParticipanteFinal());
 
 					for (Participante p : torneo.getListaParticipantes()) {
-						System.out.println("participante dentro del ciclo: " + p);
+						//System.Out.println("participante dentro del ciclo: " + p);
 
 						if (p.getNumeroParticipante() == listaEncuentros.get(i).getIdParticipanteInicial()) {
 							etiquetaParticipanteInicial[i].setText(p.getNombreParticipante());
-							System.out.println("Nombre participante inicial= " + p.getNombreParticipante());
+							//System.Out.println("Nombre participante inicial= " + p.getNombreParticipante());
 						}
 						if (p.getNumeroParticipante() == listaEncuentros.get(i).getIdParticipanteFinal()) {
 							etiquetaParticipanteFinal[i].setText(p.getNombreParticipante());
-							System.out.println("Nombre participante final= " + p.getNombreParticipante());
+							//System.Out.println("Nombre participante final= " + p.getNombreParticipante());
 						}
 					}
 

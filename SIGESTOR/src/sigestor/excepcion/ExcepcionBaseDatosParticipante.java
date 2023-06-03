@@ -6,35 +6,30 @@ package sigestor.excepcion;
  * Las características de la clase <code>ExcepcionBaseDatosParticipante</code>
  * son:
  * <ul>
- * <li><code>MENSAJE_EXCEPCION_INSERTA_PARTICIPANTE</code> para mostrar la causa
+ * <li><code>MENSAJE_EXCEPCION_INSERTA_PARTICIPANTE</code> Para mostrar la causa
  * del error al no poder insertar los datos de un participante en la base de
  * datos.</li>
- * <li><code>MENSAJE_EXCEPCION_ACTUALIZA_PARTICIPANTE</code> para mostrar la
- * causa del error al no poder actualizar los datos de un participante en la
- * base de datos.</li>
- * <li><code>MENSAJE_EXCEPCION_ELIMINA_PARTICIPANTE</code> para mostrar la causa
+ * <li><code>MENSAJE_EXCEPCION_ELIMINA_PARTICIPANTE</code> Para mostrar la causa
  * del error al no poder eliminar los datos de un participante en la base de
  * datos.</li>
- * <li><code>MENSAJE_EXCEPCION_ACTUALIZA_LUGAR_PARTICIPANTE</code> para mostrar
+ * <li><code>MENSAJE_EXCEPCION_ACTUALIZA_LUGAR_PARTICIPANTE</code> Para mostrar
  * la causa del error al no poder actualizar el lugar del participante en la
  * base de datos.</li>
- * <li><code>MENSAJE_EXCEPCION_ACTUALIZA_RESULTADO_PARTICIPANTE</code> para
+ * <li><code>MENSAJE_EXCEPCION_ACTUALIZA_RESULTADO_PARTICIPANTE</code> Para
  * mostrar la causa del error al no poder actualizar el resultado de un
  * participante en la base de datos.</li>
- * <li><code>MENSAJE_EXCEPCION_OBTIENE_PARTICIPANTE</code> para mostrar la causa
+ * <li><code>MENSAJE_EXCEPCION_OBTIENE_PARTICIPANTE</code> Para mostrar la causa
  * del error al no poder obtener los datos de un participante en la base de
  * datos.</li>
- * <li><code>MENSAJE_EXCEPCION_OBTIENE_PUNTAJE</code> para mostrar la causa del
- * error al no poder obtener el puntaje de un participante en la base de
- * datos.</li>
- * <li><code>MENSAJE_EXCEPCION_SOLUCION</code> para mostrar la solución del
+ * <li><code>MENSAJE_EXCEPCION_SOLUCION</code> Para mostrar la solución del
  * error presentado.</li>
  * </ul>
  * 
- * @version 20/04/2022
+ * @version 02/06/2023
  * 
  * @author Beatriz Andrea Jiménez Ríos
  * @author Victor Triste Pérez
+ * @author Erik Vasquez Policarpo
  */
 public class ExcepcionBaseDatosParticipante extends Exception {
 
