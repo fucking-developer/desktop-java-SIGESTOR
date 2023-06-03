@@ -27,6 +27,7 @@ import sigestor.excepcion.ExcepcionCapturarResultados;
  * @author Luis Antonio Ruiz Sierra
  * @author Victor Triste Pérez
  * @author Beatriz Andrea Jiménez Ríos
+ * @author Jennifer Cortés Pérez
  */
 public class BaseDatosCiclo extends BaseDatos {
 
