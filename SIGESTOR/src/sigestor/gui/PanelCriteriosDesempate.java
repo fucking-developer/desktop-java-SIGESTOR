@@ -318,7 +318,7 @@ public class PanelCriteriosDesempate extends JPanel {
 
 	/**
 	 * Permite subir la prioridad de los criterios seleccionados usando
-	 * <code>botonFlechaArriba<code>
+	 * <code>botonFlechaArriba</code>
 	 */
 	private void accionSubirPrioridad() {
 		if ((listaSeleccionados.getSelectedValue() != null)) {
@@ -334,7 +334,7 @@ public class PanelCriteriosDesempate extends JPanel {
 
 	/**
 	 * Permite bajar la prioridad de los criterios seleccionados usando
-	 * <code>botonFlechaAbajo<code>
+	 * <code>botonFlechaAbajo</code>
 	 */
 	private void accionBajarPrioridad() {
 		if ((listaSeleccionados.getSelectedValue() != null)) {

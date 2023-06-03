@@ -16,7 +16,7 @@ import sigestor.excepcion.ExcepcionCapturarResultados;
  * <code>AlgoritmoTorneo</code>.
  * <p>
  * 
- * @version 11/04/2023
+ * @version 02/06/2023
  * 
  * 
  * @author Jennifer Cortés Pérez

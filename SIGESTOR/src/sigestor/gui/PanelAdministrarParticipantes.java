@@ -135,8 +135,7 @@ public class PanelAdministrarParticipantes extends JPanel {
 	 * Constructor que consiste en mostrar en pantalla el
 	 * <code>PanelAdministrarParticipantes</code> con sus respectivos componentes.
 	 * 
-	 * @param principal
-	 *            Referencia a la clase <code>VentanaPrincipal</code>.
+	 * @param principal Referencia a la clase <code>VentanaPrincipal</code>.
 	 * 
 	 */
 	public PanelAdministrarParticipantes(VentanaPrincipal principal) {
@@ -613,28 +612,18 @@ public class PanelAdministrarParticipantes extends JPanel {
 				try {
 					ArrayList<Participante> participantes = UtileriasListaParticipantes
 							.leerListaParticipantes(archivo.getAbsolutePath());
-
-					for (Participante p : participantes) {
-						Participante participante = new Participante((model.size() + 1), p.getNombreParticipante(),
-								p.getPuntajeParticipante());
-						model.addElement(participante.toString());
-						listaDeParticipantes.add(participante);
-						listaParticipantes.setPreferredSize(new Dimension(50, listaDeParticipantes.size() * 18));
-
-						if (participantes.size() > 0) {
-							for (Participante p : participantes) {
-								Participante participante = new Participante((model.size() + 1),
-										p.getNombreParticipante(), p.getPuntajeParticipante());
-								model.addElement(participante.toString());
-								listaDeParticipantes.add(participante);
-								listaParticipantes
-										.setPreferredSize(new Dimension(50, listaDeParticipantes.size() * 18));
-							}
-							JOptionPane.showMessageDialog(null,
-									"Se han importado " + participantes.size() + " participantes exitosamente",
-									"Importar participantes", JOptionPane.INFORMATION_MESSAGE);
+					if (participantes.size() > 0) {
+						for (Participante p : participantes) {
+							Participante participante = new Participante((model.size() + 1), p.getNombreParticipante(),
+									p.getPuntajeParticipante());
+							model.addElement(participante.toString());
+							listaDeParticipantes.add(participante);
+							listaParticipantes.setPreferredSize(new Dimension(50, listaDeParticipantes.size() * 18));
 
 						}
+						JOptionPane.showMessageDialog(null,
+								"Se han importado " + participantes.size() + " participantes exitosamente",
+								"Importar participantes", JOptionPane.INFORMATION_MESSAGE);
 					}
 				} catch (ExcepcionUtilerias e) {
 					JOptionPane.showMessageDialog(null, e.getMessage(), "Error al abrir el archivo",

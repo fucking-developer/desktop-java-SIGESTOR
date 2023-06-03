@@ -435,7 +435,7 @@ public class Participante implements Comparable<Participante> {
 	 * 
 	 * @param participante Recibe un participante
 	 * 
-	 * @return Regresa <tt><0</tt> si el puntaje es menor, devuelve <tt>=0</tt> si son iguales, devuelve  <tt>>0</tt> si es mayor.
+	 * @return Regresa <0 si el puntaje es menor, devuelve =0 si son iguales, devuelve >0 si es mayor.
 	 */
 	private int ordenPuntaje(Participante participante) {
 		if (participante.getPuntajeParticipante() < getPuntajeParticipante()) {
@@ -456,7 +456,7 @@ public class Participante implements Comparable<Participante> {
 	 * 
 	 * @param participante Recibe un participante.
 	 * 
-	 * @return Regresa <tt><0</tt> si la cadena es primero lexicográficamente, devuelve <tt>=0</tt> si son iguales, devuelve  <tt>>0</tt> si la cadena va despues lexicográficamente.
+	 * @return Regresa <0 si la cadena es primero lexicográficamente, devuelve =0 si son iguales, devuelve >0 si la cadena va despues lexicográficamente.
 	 */
 	private int ordenarAlfabetico(Participante participante) {
 		String original1 = this.getNombreParticipante();
