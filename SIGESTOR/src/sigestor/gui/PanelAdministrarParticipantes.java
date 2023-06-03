@@ -65,7 +65,7 @@ import sigestor.utilerias.UtileriasListaParticipantes;
  * <code>VentanaPrincipal</code>.</li>
  * </ul>
  * 
- * @version 02/06/2023
+ * @version articipante 
  * 
  * @author Ricky Didier Peralta Reyes
  * @author Uriel Romeo Cruz Cortes
@@ -619,6 +619,7 @@ public class PanelAdministrarParticipantes extends JPanel {
 							model.addElement(participante.toString());
 							listaDeParticipantes.add(participante);
 							listaParticipantes.setPreferredSize(new Dimension(50, listaDeParticipantes.size() * 18));
+
 
 						}
 						JOptionPane.showMessageDialog(null,
