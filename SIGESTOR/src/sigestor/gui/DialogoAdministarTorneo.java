@@ -72,7 +72,7 @@ import sigestor.excepcion.ExcepcionCapturarResultados;
  * 
  * </ul>
  * 
- * @version 22/03/2023
+ * @version 02/06/2023
  * 
  * @author Ricky Didier Peralta Reyes
  * @author Uriel Romeo Cruz Cortes

@@ -65,7 +65,7 @@ import sigestor.utilerias.UtileriasListaParticipantes;
  * <code>VentanaPrincipal</code>.</li>
  * </ul>
  * 
- * @version 04/04/2023
+ * @version 02/06/2023
  * 
  * @author Ricky Didier Peralta Reyes
  * @author Uriel Romeo Cruz Cortes
@@ -130,7 +130,6 @@ public class PanelAdministrarParticipantes extends JPanel {
 	 * Referencia a la clase <code>VentanaPrincipal</code>
 	 */
 	private VentanaPrincipal ventanaPrincipal;
-	
 
 	/**
 	 * Constructor que consiste en mostrar en pantalla el
@@ -352,7 +351,7 @@ public class PanelAdministrarParticipantes extends JPanel {
 
 		botonModificar.setToolTipText("Permite modificar los datos de un participante de la lista");
 		botonEliminar.setToolTipText("Permite eliminar a un participante de la lista");
-		
+
 	}
 
 	/**
@@ -413,7 +412,8 @@ public class PanelAdministrarParticipantes extends JPanel {
 				}
 
 				JOptionPane.showMessageDialog(null,
-						"El participante " + participante.getNombreParticipante() + " ha sido agregado exitosamente", "Nuevo participante", JOptionPane.INFORMATION_MESSAGE);
+						"El participante " + participante.getNombreParticipante() + " ha sido agregado exitosamente",
+						"Nuevo participante", JOptionPane.INFORMATION_MESSAGE);
 			} else {
 				JOptionPane.showMessageDialog(null,
 						"El campo 'Nombre del participante' no puede estar vacío.\n"
@@ -439,8 +439,8 @@ public class PanelAdministrarParticipantes extends JPanel {
 			contenidoParticipante.setLayout(new BoxLayout(contenidoParticipante, BoxLayout.Y_AXIS));
 
 			JLabel texto = new JLabel("Ingrese el nuevo nombre para el participante "
-						+ listaDeParticipantes.get(listaParticipantes.getSelectedIndex()).getNombreParticipante() + " :");	
-		
+					+ listaDeParticipantes.get(listaParticipantes.getSelectedIndex()).getNombreParticipante() + " :");
+
 			panelAux.add(texto);
 			contenidoParticipante.add(panelAux);
 
@@ -476,20 +476,24 @@ public class PanelAdministrarParticipantes extends JPanel {
 					if (seleccion == 0) {
 						Float puntajeParticipante = (float) spinner.getValue();
 						participante = new Participante(
-								this.listaDeParticipantes.get(listaParticipantes.getSelectedIndex()).getNumeroParticipante(),
+								this.listaDeParticipantes.get(listaParticipantes.getSelectedIndex())
+										.getNumeroParticipante(),
 								campoNombreParticipante.getText(), puntajeParticipante);
 					} else {
 						participante = new Participante(
-								this.listaDeParticipantes.get(listaParticipantes.getSelectedIndex()).getNumeroParticipante(),
-								campoNombreParticipante.getText(), listaDeParticipantes.get(listaParticipantes.getSelectedIndex()).getPuntajeParticipante());
+								this.listaDeParticipantes.get(listaParticipantes.getSelectedIndex())
+										.getNumeroParticipante(),
+								campoNombreParticipante.getText(), listaDeParticipantes
+										.get(listaParticipantes.getSelectedIndex()).getPuntajeParticipante());
 					}
-					
-					model.setElementAt(participante.toString(), listaParticipantes.getSelectedIndex());	
+
+					model.setElementAt(participante.toString(), listaParticipantes.getSelectedIndex());
 					listaDeParticipantes.set(listaParticipantes.getSelectedIndex(), participante);
-				
-					JOptionPane.showMessageDialog(null, "El participante "
-							+ listaDeParticipantes.get(listaParticipantes.getSelectedIndex()).getNombreParticipante()
-							+ " ha sido actualizado exitosamente","Nombre participante", JOptionPane.INFORMATION_MESSAGE);
+
+					JOptionPane.showMessageDialog(null,
+							"El participante " + listaDeParticipantes.get(listaParticipantes.getSelectedIndex())
+									.getNombreParticipante() + " ha sido actualizado exitosamente",
+							"Nombre participante", JOptionPane.INFORMATION_MESSAGE);
 
 				}
 			}
@@ -503,9 +507,8 @@ public class PanelAdministrarParticipantes extends JPanel {
 	 */
 	private void accionEliminarParticipante() {
 		if (listaParticipantes.getSelectedValue() != null) {
-			int seleccion = JOptionPane.showOptionDialog(null,
-					"¿Está seguro de que desea eliminar al participante "
-							+ listaDeParticipantes.get(listaParticipantes.getSelectedIndex()).getNombreParticipante() + "?",
+			int seleccion = JOptionPane.showOptionDialog(null, "¿Está seguro de que desea eliminar al participante "
+					+ listaDeParticipantes.get(listaParticipantes.getSelectedIndex()).getNombreParticipante() + "?",
 					"Eliminar participantes", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null,
 					null);
 			if (seleccion == 0) {
@@ -521,14 +524,15 @@ public class PanelAdministrarParticipantes extends JPanel {
 	private void inicializarParticipantes() {
 		if (ventanaPrincipal.getTorneoActual() != null) {
 			for (int i = 0; i < ventanaPrincipal.getTorneoActual().getListaParticipantes().size(); i++) {
-				
+
 				if (ventanaPrincipal.getTorneoActual().getListaParticipantes().get(i).getNombreParticipante()
 						.compareToIgnoreCase(ventanaPrincipal.getTorneoActual().getDatosPersonalizacion()
 								.getNombreParticipanteSinEncuentro()) != 0) {
 					model.addElement(ventanaPrincipal.getTorneoActual().getListaParticipantes().get(i).toString());
-					//listaDeParticipantes = ventanaPrincipal.getTorneoActual().getListaParticipantes();
+					// listaDeParticipantes =
+					// ventanaPrincipal.getTorneoActual().getListaParticipantes();
 					listaDeParticipantes.add(ventanaPrincipal.getTorneoActual().getListaParticipantes().get(i));
-					
+
 				}
 			}
 		}
@@ -546,11 +550,11 @@ public class PanelAdministrarParticipantes extends JPanel {
 		}
 		Participante.setPuntaje(this.checkPuntaje.isSelected());
 		Participante.setOrden(ordenacion);
-		
+
 		for (int i = 0; i < listaDeParticipantes.size() - 1; i++) {
 			if (listaDeParticipantes.get(i).getNombreParticipante().compareToIgnoreCase(this.ventanaPrincipal
 					.getTorneoActual().getDatosPersonalizacion().getNombreParticipanteSinEncuentro()) == 0) {
-				//model.remove(i);
+				// model.remove(i);
 				listaDeParticipantes.remove(listaDeParticipantes.get(i));
 			}
 		}
@@ -563,11 +567,11 @@ public class PanelAdministrarParticipantes extends JPanel {
 				listaDeParticipantes.add(p);
 			}
 		}
-		
-		for(int i=0; i<listaDeParticipantes.size(); i++) {
-			listaDeParticipantes.get(i).setNumeroParticipante(i+1);
+
+		for (int i = 0; i < listaDeParticipantes.size(); i++) {
+			listaDeParticipantes.get(i).setNumeroParticipante(i + 1);
 		}
-		
+
 		Collections.sort(listaDeParticipantes);
 		ventanaPrincipal.getTorneoActual().setListaParticipantes(listaDeParticipantes);
 	}
@@ -607,14 +611,30 @@ public class PanelAdministrarParticipantes extends JPanel {
 			}
 			if (archivo.exists() && archivo.getName().toUpperCase().endsWith(".CSV")) {
 				try {
-					ArrayList<Participante> participantes = UtileriasListaParticipantes.leerListaParticipantes(archivo.getAbsolutePath());
+					ArrayList<Participante> participantes = UtileriasListaParticipantes
+							.leerListaParticipantes(archivo.getAbsolutePath());
+
 					for (Participante p : participantes) {
 						Participante participante = new Participante((model.size() + 1), p.getNombreParticipante(),
 								p.getPuntajeParticipante());
 						model.addElement(participante.toString());
-						listaDeParticipantes.add(participante);	
-						listaParticipantes.setPreferredSize(new Dimension(50, listaDeParticipantes.size()*18));
-						
+						listaDeParticipantes.add(participante);
+						listaParticipantes.setPreferredSize(new Dimension(50, listaDeParticipantes.size() * 18));
+
+						if (participantes.size() > 0) {
+							for (Participante p : participantes) {
+								Participante participante = new Participante((model.size() + 1),
+										p.getNombreParticipante(), p.getPuntajeParticipante());
+								model.addElement(participante.toString());
+								listaDeParticipantes.add(participante);
+								listaParticipantes
+										.setPreferredSize(new Dimension(50, listaDeParticipantes.size() * 18));
+							}
+							JOptionPane.showMessageDialog(null,
+									"Se han importado " + participantes.size() + " participantes exitosamente",
+									"Importar participantes", JOptionPane.INFORMATION_MESSAGE);
+
+						}
 					}
 				} catch (ExcepcionUtilerias e) {
 					JOptionPane.showMessageDialog(null, e.getMessage(), "Error al abrir el archivo",

@@ -5,16 +5,23 @@ package sigestor.excepcion;
  * <p>
  * Las características de la clase <code>ExcepcionCiclo</code> son:
  * <ul>
- * <li><code>MENSAJE_EXCEPCION_CICLO_INCOMPLETO</code> para mostrar la causa del
+ * <li><code>MENSAJE_EXCEPCION_CICLO_INCOMPLETO_PARTE_1</code> Para mostrar la causa del
+ * error generado por intentar crear nuevos pareos sin haber concluido el ciclo
+ * actual.</li>
+ * <li><code>MENSAJE_EXCEPCION_CICLO_INCOMPLETO_PARTE_2</code> Para mostrar la causa del
+ * error generado por intentar crear nuevos pareos sin haber concluido el ciclo
+ * actual.</li>
+ * <li><code>MENSAJE_EXCEPCION_CICLO_INCOMPLETO_PARTE_3</code> Para mostrar la causa del
  * error generado por intentar crear nuevos pareos sin haber concluido el ciclo
  * actual.</li>
  * </ul>
  * 
- * @version 20/06/2022
+ * @version 02/06/2023
  * 
  * @author Jonathan Eduardo Ibarra Martínez
  * @author Hernán Sesaí Lopéz Aragón
  * @author Francisco Samuel Reyes Cortes
+ * @author Erik Vasquez Policarpo
  */
 public class ExcepcionCiclo extends Exception {
 	

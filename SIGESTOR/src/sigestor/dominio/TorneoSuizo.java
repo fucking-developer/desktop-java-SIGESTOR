@@ -2,6 +2,10 @@ package sigestor.dominio;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.List;
+
 import sigestor.bd.BaseDatosCiclo;
 import sigestor.bd.BaseDatosEncuentro;
 import sigestor.bd.BaseDatosParticipante;
@@ -31,12 +35,13 @@ import sigestor.excepcion.ExcepcionCapturarResultados;
  */
 public class TorneoSuizo extends AlgoritmoTorneo {
 
+	private int posicion = 1;
+
 	/**
 	 * Inicializa las variables con un valor por defecto y asigna a la variable
 	 * <code>torneo</code> el torneo recibido.
 	 * 
-	 * @param torneo
-	 *            Contiene los datos generales del torneo.
+	 * @param torneo Contiene los datos generales del torneo.
 	 */
 	public TorneoSuizo(Torneo torneo) {
 		super(torneo);
@@ -46,8 +51,7 @@ public class TorneoSuizo extends AlgoritmoTorneo {
 	 * Obtiene la cantidad máxima de ciclos del torneo según el algoritmo general
 	 * del sistema suizo.
 	 * 
-	 * @param numeroParticipantes
-	 *            Cantidad de participantes inscritos en el torneo.
+	 * @param numeroParticipantes Cantidad de participantes inscritos en el torneo.
 	 * @return El número máximo de ciclos que tendrá el torneo.
 	 */
 	@Override
@@ -67,7 +71,7 @@ public class TorneoSuizo extends AlgoritmoTorneo {
 				BaseDatosCiclo bdc = new BaseDatosCiclo(torneo.getNombreArchivo());
 
 				Ciclo ciclo = new Ciclo(torneo, torneo.getCicloActual());
-				
+
 				bdc.insertarCiclo(ciclo);
 				if (torneo.getCicloActual() > 1) {
 					encararParticipantesCiclosPosteriores(ciclo);
@@ -219,13 +223,10 @@ public class TorneoSuizo extends AlgoritmoTorneo {
 	 * posición abajo del jugador con quien empató, de lo contrario no realiza
 	 * ningún movimiento.
 	 * 
-	 * @param numeroP1
-	 *            Primer participante empatado.
-	 * @param numP2
-	 *            Segundo participante empatado.
-	 * @param numPGanador
-	 *            El participante que obtuvo más puntaje con el criterio de
-	 *            desempate aplicado.
+	 * @param numeroP1    Primer participante empatado.
+	 * @param numP2       Segundo participante empatado.
+	 * @param numPGanador El participante que obtuvo más puntaje con el criterio de
+	 *                    desempate aplicado.
 	 * @return Lista de participantes ordenada.
 	 */
 	private ArrayList<Participante> intercambiarPosiciones(int numeroP1, int numP2, int numPGanador) {
@@ -250,18 +251,16 @@ public class TorneoSuizo extends AlgoritmoTorneo {
 	/**
 	 * Realiza los encuentros del primer ciclo.
 	 * 
-	 * @param ciclo
-	 *            Ciclo a realizar.
-	 * @throws ExcepcionCapturarResultados
-	 *             Si ocurre un error con el objeto <code>Encuentros</code>.
-	 * @throws ExcepcionBaseDatos
-	 *             Si ocurre un problema con la base de datos.
-	 * @throws ExcepcionBaseDatosEncuentro
-	 *             Si ocurre un problema al insertar en la tabla
-	 *             <code>encuentros</code>.
-	 * @throws ExcepcionBaseDatosParticipante
-	 *             Si ocurre un problema al actualizar un participante en la tabla
-	 *             <code>participantes</code>.
+	 * @param ciclo Ciclo a realizar.
+	 * @throws ExcepcionCapturarResultados    Si ocurre un error con el objeto
+	 *                                        <code>Encuentros</code>.
+	 * @throws ExcepcionBaseDatos             Si ocurre un problema con la base de
+	 *                                        datos.
+	 * @throws ExcepcionBaseDatosEncuentro    Si ocurre un problema al insertar en
+	 *                                        la tabla <code>encuentros</code>.
+	 * @throws ExcepcionBaseDatosParticipante Si ocurre un problema al actualizar un
+	 *                                        participante en la tabla
+	 *                                        <code>participantes</code>.
 	 */
 	private void encararParticipantesPrimerCiclo(Ciclo ciclo) throws ExcepcionCapturarResultados, ExcepcionBaseDatos,
 			ExcepcionBaseDatosEncuentro, ExcepcionBaseDatosParticipante {
@@ -307,19 +306,17 @@ public class TorneoSuizo extends AlgoritmoTorneo {
 	/**
 	 * Realiza los encuentros de un ciclo posterior al primer ciclo.
 	 * 
-	 * @param ciclo
-	 *            Recibe el objeto <code>Ciclo</code> para guardar los encuentros a
-	 *            realizar.
-	 * @throws ExcepcionCapturarResultados
-	 *             Si ocurre un error con el objeto <code>Encuentros</code>.
-	 * @throws ExcepcionBaseDatos
-	 *             Si ocurre un problema con la base de datos.
-	 * @throws ExcepcionBaseDatosEncuentro
-	 *             Si ocurre un problema al insertar en la tabla
-	 *             <code>encuentros</code>.
-	 * @throws ExcepcionBaseDatosParticipante
-	 *             Si ocurre un problema al actualizar un participante en la tabla
-	 *             <code>participantes</code>.
+	 * @param ciclo Recibe el objeto <code>Ciclo</code> para guardar los encuentros
+	 *              a realizar.
+	 * @throws ExcepcionCapturarResultados    Si ocurre un error con el objeto
+	 *                                        <code>Encuentros</code>.
+	 * @throws ExcepcionBaseDatos             Si ocurre un problema con la base de
+	 *                                        datos.
+	 * @throws ExcepcionBaseDatosEncuentro    Si ocurre un problema al insertar en
+	 *                                        la tabla <code>encuentros</code>.
+	 * @throws ExcepcionBaseDatosParticipante Si ocurre un problema al actualizar un
+	 *                                        participante en la tabla
+	 *                                        <code>participantes</code>.
 	 */
 	private void encararParticipantesCiclosPosteriores(Ciclo ciclo) throws ExcepcionCapturarResultados,
 			ExcepcionBaseDatos, ExcepcionBaseDatosEncuentro, ExcepcionBaseDatosParticipante {
@@ -328,7 +325,17 @@ public class TorneoSuizo extends AlgoritmoTorneo {
 		ArrayList<Participante> participantes = torneo.getListaParticipantes();
 		ArrayList<Encuentro> encuentros = new ArrayList<Encuentro>();
 		Participante sinEncuentro = null;
+
+		HashSet<Float> puntajes = new HashSet<>();
+
+		Collections.sort(participantes, new Comparator<Participante>() {
+			public int compare(Participante p1, Participante p2) {
+				return Float.compare(p2.getPuntajeAcumuladoParticipante(), p1.getPuntajeAcumuladoParticipante());
+			}
+		});
+
 		for (Participante p : participantes) {
+			puntajes.add(p.getPuntajeAcumuladoParticipante());
 			if (p.getNombreParticipante()
 					.equalsIgnoreCase(torneo.getDatosPersonalizacion().getNombreParticipanteSinEncuentro())) {
 				sinEncuentro = p;
@@ -337,8 +344,28 @@ public class TorneoSuizo extends AlgoritmoTorneo {
 		}
 		if (sinEncuentro != null) {
 			participantes.remove(sinEncuentro);
+			ArrayList<Participante> ultimosJugadores = new ArrayList<>();
+			List<Float> listaPuntajes = new ArrayList<>(puntajes);
+			Collections.sort(listaPuntajes, new Comparator<Float>() {
+				public int compare(Float f1, Float f2) {
+					return Float.compare(f2, f1);
+				}
+			});
+			for (Participante p : participantes) {
+				if (p.getPuntajeAcumuladoParticipante() == listaPuntajes.get(puntajes.size() - 1)) {
+					ultimosJugadores.add(p);
+				}
+			}
+			for (Participante p : ultimosJugadores) {
+				participantes.remove(p);
+			}
+			Collections.reverse(ultimosJugadores);
+			for (Participante p : ultimosJugadores) {
+				participantes.add(p);
+			}
 			participantes.add(sinEncuentro);
 		}
+
 		int num = 1;
 		int pos = 0;
 		while (pos < participantes.size()) {
@@ -350,20 +377,22 @@ public class TorneoSuizo extends AlgoritmoTorneo {
 			int cont = (fin - pos);
 			int mitad = (cont) / 2;
 			if (cont % 2 != 0) {
-				mitad  = mitad + 1;
+				mitad = mitad + 1;
 			}
 			for (int j = 0; j < mitad; j++) {
 				encuentros.add(new Encuentro(num, participantes.get(pos).getNumeroParticipante(),
-						participantes.get(pos + mitad).getNumeroParticipante(), this.getTorneo().getFechaInicioTorneo()));
+						participantes.get(pos + mitad).getNumeroParticipante(),
+						this.getTorneo().getFechaInicioTorneo()));
 				bde.insertarEncuentro(encuentros.get(num - 1), ciclo);
 				bdp.actualizarResultadoParticipante(participantes.get(pos), ciclo);
 				bdp.actualizarResultadoParticipante(participantes.get(pos + mitad), ciclo);
 				num++;
 				pos++;
+
 			}
 			pos += mitad;
 		}
-		ciclo.setEncuentroParticipantes(encuentros);	
+		ciclo.setEncuentroParticipantes(encuentros);
 	}
 
 	/**
@@ -387,15 +416,14 @@ public class TorneoSuizo extends AlgoritmoTorneo {
 	 * Inicia un torneo suizo e inserta el numero de ciclos en la tabla
 	 * <code>suizo</code>.
 	 * 
-	 * @throws ExcepcionBaseDatos
-	 *             Si ocurre un problema con la base de datos.
-	 * @throws ExcepcionBaseDatosEncuentro
-	 *             Si ocurre un problema al insertar en la
-	 *             tabla<code>encuentros</code>.
-	 * @throws ExcepcionBaseDatosCiclo
-	 *             Si ocurre un error al insertar en la tabla <code>ciclos</code>.
-	 * @throws ExcepcionBaseDatosTorneo
-	 *             Si ocurre un error al insertar en la tabla <code>suizo</code>.
+	 * @throws ExcepcionBaseDatos          Si ocurre un problema con la base de
+	 *                                     datos.
+	 * @throws ExcepcionBaseDatosEncuentro Si ocurre un problema al insertar en la
+	 *                                     tabla<code>encuentros</code>.
+	 * @throws ExcepcionBaseDatosCiclo     Si ocurre un error al insertar en la
+	 *                                     tabla <code>ciclos</code>.
+	 * @throws ExcepcionBaseDatosTorneo    Si ocurre un error al insertar en la
+	 *                                     tabla <code>suizo</code>.
 	 */
 	public void iniciarTorneo()
 			throws ExcepcionBaseDatos, ExcepcionBaseDatosEncuentro, ExcepcionBaseDatosCiclo, ExcepcionBaseDatosTorneo {

@@ -102,7 +102,7 @@ import sigestor.excepcion.ExcepcionCapturarResultados;
  * flechas de los encuentros.</li>
  * </ul>
  * 
- * @version 28/03/2023
+ * @version 02/06/2023
  * 
  * @author Jonathan Eduardo Ibarra Martínez
  * @author Alicia Adriana Clemente Hernandez
@@ -832,7 +832,13 @@ public class DialogoCapturarResultados extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				accionCancelarCiclo();
+				try {
+					accionCancelarCiclo();
+				} catch (ExcepcionBaseDatos e1) {
+					e1.printStackTrace();
+				} catch (ExcepcionBaseDatosParticipante e1) {
+					e1.printStackTrace();
+				}
 			}
 		};
 		accionCancelarCiclo.putValue(Action.MNEMONIC_KEY, KeyEvent.VK_C);
@@ -1147,8 +1153,12 @@ public class DialogoCapturarResultados extends JDialog {
 	 * Permite mostrar mensajes al usuario al presionar el botón
 	 * <code>Cancelar ciclo</code> advirtiendo lo que sucederá al decidir cancelar
 	 * el ciclo del torneo.
+	 * 
+	 * @throws ExcepcionBaseDatosParticipante
+	 *             Verifica si no
+	 * @throws ExcepcionBaseDatos
 	 */
-	private void accionCancelarCiclo() {
+	private void accionCancelarCiclo() throws ExcepcionBaseDatos, ExcepcionBaseDatosParticipante {
 		Object[] opciones = { "Sí", "No" };
 		int respuesta1 = JOptionPane.showOptionDialog(null,
 				"¿Está seguro de cancelar "
@@ -1215,19 +1225,60 @@ public class DialogoCapturarResultados extends JDialog {
 	private void accionGuardar() {
 		estadoModificar = false;
 		deshabilitarTabla();
-
-		actualizarResultadoEncuentros();
-		actualizarParticipantes();
-		JOptionPane.showMessageDialog(null, "Los resultados se han guardado exitosamente.", "Capturar resultados",
-				JOptionPane.INFORMATION_MESSAGE);
+		try {
+			actualizarResultadoEncuentros();
+			actualizarParticipantes();
+			JOptionPane.showMessageDialog(null, "Los resultados se han guardado exitosamente.", "Capturar resultados",
+					JOptionPane.INFORMATION_MESSAGE);
+		} catch (ExcepcionBaseDatos e) {
+			limpiarTabla();
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Capturar resultados", JOptionPane.ERROR_MESSAGE);
+		} catch (ExcepcionBaseDatosEncuentro e) {
+			limpiarTabla();
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Capturar resultados", JOptionPane.ERROR_MESSAGE);
+		} catch (ExcepcionCapturarResultados e) {
+			limpiarTabla();
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Capturar resultados", JOptionPane.ERROR_MESSAGE);
+		} catch (ExcepcionBaseDatosParticipante e) {
+			limpiarTabla();
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Capturar resultados", JOptionPane.ERROR_MESSAGE);
+		}
 	}
-	
 
 	/**
+	 * Permite limpiar el contenido de la tabla de los participantes
+	 */
+
+	private void limpiarTabla() {
+		Ciclo ciclo = null;
+		if (this.torneo.getTipoTorneo().contains("Suizo")) {
+			ciclo = comboSeleccionarCiclo.getItemAt(torneo.getCicloActual() - 1);
+		} else if (this.torneo.getTipoTorneo().contains("Eliminación directa")) {
+			ciclo = comboSeleccionarCiclo.getItemAt(torneo.getCicloActual() - 1);
+		} else {
+			ciclo = comboSeleccionarCiclo.getItemAt(this.comboSeleccionarCiclo.getSelectedIndex());
+		}
+		ArrayList<Encuentro> encuentros = ciclo.getEncuentroParticipantes();
+		for (int i = 0; i < encuentros.size(); i++) {
+			campoMarcadorInicial[i].setText("0");
+			campoMarcadorFinal[i].setText("0");
+		}
+
+	}
+
+	/**
+	 * 
 	 * Elimina el ciclo y los encuentros que están en él, tambien actualiza el
 	 * marcador y el puntaje acumulado de los participantes.
+	 * 
+	 * @throws ExcepcionBaseDatosParticipante
+	 *             Lanza la excepción sí ocurre un error al momento de cargar los
+	 *             datos de la base de datos de los participantes
+	 * @throws ExcepcionBaseDatos
+	 *             Lanza la excepción sí ocurre un error al momento de eliminar los
+	 *             datos.
 	 */
-	private void eliminarCiclo() {
+	private void eliminarCiclo() throws ExcepcionBaseDatos, ExcepcionBaseDatosParticipante {
 		BaseDatosEncuentro bde = new BaseDatosEncuentro(ventanaPrincipal.getTorneoActual().getNombreArchivo());
 		BaseDatosCiclo bdc = new BaseDatosCiclo(ventanaPrincipal.getTorneoActual().getNombreArchivo());
 		ArrayList<Ciclo> ciclos = torneo.getAlgoritmoTorneo().getCiclos();
@@ -1275,9 +1326,15 @@ public class DialogoCapturarResultados extends JDialog {
 			torneo.getAlgoritmoTorneo().setCiclos(ciclos);
 		} else {
 			if (torneo.getCicloActual() != 1) {
-				this.comboSeleccionarCiclo.removeItemAt(torneo.getCicloActual() - 1);
+				// this.comboSeleccionarCiclo.removeItemAt(torneo.getCicloActual() - 1);
 				torneo.setCicloActual(torneo.getCicloActual() - 1);
 				torneo.getAlgoritmoTorneo().setCiclos(ciclos);
+			}
+			if (!this.torneo.getTipoTorneo().equals("Round Robin")) {
+				this.comboSeleccionarCiclo.removeItem(torneo.getCicloActual() - 1);
+				;
+			} else {
+				this.comboSeleccionarCiclo.setSelectedIndex(torneo.getCicloActual() - 1);
 			}
 		}
 		try {
@@ -1307,32 +1364,40 @@ public class DialogoCapturarResultados extends JDialog {
 	/**
 	 * Actualiza los resultados de los participantes en
 	 * <code>BaseDatosParticipante</code>.
+	 * 
+	 * @throws ExcepcionBaseDatosParticipante
+	 *             Lanza la excepción sí ocurre un error al momento de cargar los
+	 *             datos de la base de datos de los participantes
+	 * @throws ExcepcionBaseDatos
+	 *             Lanza la excepción sí ocurre un error al momento de eliminar los
+	 *             datos.
 	 */
-	private void actualizarParticipantes() {
+	private void actualizarParticipantes() throws ExcepcionBaseDatos, ExcepcionBaseDatosParticipante {
 
 		BaseDatosParticipante bdp = new BaseDatosParticipante(ventanaPrincipal.getTorneoActual().getNombreArchivo());
 		Ciclo ciclo = torneo.getAlgoritmoTorneo().getCiclos().get(torneo.getCicloActual() - 1);
 		Collections.sort(this.participantes);
 		for (Participante p : participantes) {
-			try {
-				if (p.getNombreParticipante()
-						.compareToIgnoreCase(personalizacion.getNombreParticipanteSinEncuentro()) == 0) {
-					break;
-				}
-				bdp.actualizarResultadoParticipante(p, ciclo);
-			} catch (ExcepcionBaseDatos e) {
-				JOptionPane.showMessageDialog(null, e.getMessage(), "Capturar resultados", JOptionPane.ERROR_MESSAGE);
-			} catch (ExcepcionBaseDatosParticipante e) {
-				JOptionPane.showMessageDialog(null, e.getMessage(), "Capturar resultados", JOptionPane.ERROR_MESSAGE);
+			if (p.getNombreParticipante()
+					.compareToIgnoreCase(personalizacion.getNombreParticipanteSinEncuentro()) == 0) {
+				break;
 			}
+			bdp.actualizarResultadoParticipante(p, ciclo);
 		}
 	}
 
 	/**
 	 * Actualiza los resultados de los encuentros en la base de datos.
 	 * 
+	 * @throws ExcepcionBaseDatosEncuentro
+	 * @throws ExcepcionBaseDatos
+	 *             Lanza la excepción sí ocurre un error al momento de eliminar los
+	 *             datos.
+	 * @throws ExcepcionCapturarResultados
+	 * 
 	 */
-	private void actualizarResultadoEncuentros() {
+	private void actualizarResultadoEncuentros()
+			throws ExcepcionBaseDatos, ExcepcionBaseDatosEncuentro, ExcepcionCapturarResultados {
 		BaseDatosEncuentro bde = new BaseDatosEncuentro(ventanaPrincipal.getTorneoActual().getNombreArchivo());
 
 		Ciclo ciclo = null;
@@ -1364,16 +1429,13 @@ public class DialogoCapturarResultados extends JDialog {
 				sumarRestarPuntajeAcumuladoParticipante(encuentros.get(i), (-1) * personalizacion.getPuntajeGanar(),
 						(-1) * personalizacion.getPuntajePerder(), (-1) * personalizacion.getPuntajeEmpatar());
 				if (validacionMarcadores) {
+
+					encuentros.get(i).setMarcadorParticipanteInicial(campoMarcadorInicial[i].getText());
+					encuentros.get(i).setMarcadorParticipanteFinal(campoMarcadorFinal[i].getText());
 					sumarRestarMarcadorParticipante(encuentros.get(i),
 							(-1) * (encuentros.get(i).getMarcadorParticipanteInicial()),
 							(-1) * (encuentros.get(i).getMarcadorParticipanteFinal()));
-					try {
-						encuentros.get(i).setMarcadorParticipanteInicial(campoMarcadorInicial[i].getText());
-						encuentros.get(i).setMarcadorParticipanteFinal(campoMarcadorFinal[i].getText());
-					} catch (ExcepcionCapturarResultados e) {
-						JOptionPane.showMessageDialog(null, e.getMessage(), "Capturar resultados",
-								JOptionPane.ERROR_MESSAGE);
-					}
+
 					if (encuentros.get(i).getMarcadorParticipanteInicial() > encuentros.get(i)
 							.getMarcadorParticipanteFinal()) {
 						opcionGanadorInicial[i].setSelected(true);
@@ -1407,14 +1469,7 @@ public class DialogoCapturarResultados extends JDialog {
 				sumarRestarPuntajeAcumuladoParticipante(encuentros.get(i), personalizacion.getPuntajeGanar(),
 						personalizacion.getPuntajePerder(), personalizacion.getPuntajeEmpatar());
 			}
-			try {
-				bde.actualizarEncuentro(encuentros.get(i), ciclo);
-			} catch (ExcepcionBaseDatos e) {
-				JOptionPane.showMessageDialog(null, e.getMessage(), "Capturar resultados", JOptionPane.ERROR_MESSAGE);
-			} catch (ExcepcionBaseDatosEncuentro e) {
-				JOptionPane.showMessageDialog(null, e.getMessage(), "Capturar resultados", JOptionPane.ERROR_MESSAGE);
-			}
-
+			bde.actualizarEncuentro(encuentros.get(i), ciclo);
 		}
 	}
 

@@ -5,18 +5,21 @@ package sigestor.excepcion;
  * <p>
  * Las características de la clase <code>ExcepcionCapturarResultados</code> son:
  * <ul>
- * <li><code>MENSAJE_EXCEPCION_MARCADOR_INCORRECTO</code> para mostrar la causa
+ * <li><code>MENSAJE_EXCEPCION_MARCADOR_INCORRECTO</code> Para mostrar la causa
  * del error al ingresar valores no numéricos en el campo del marcador.</li>
- * <li><code>MENSAJE_EXCEPCION_NUMERO_NEGATIVO</code> para mostrar la causa del
+ * <li><code>MENSAJE_EXCEPCION_NUMERO_NEGATIVO</code> Para mostrar la causa del
  * error al ingresar valores numéricos negativos en el campo del marcador.</li>
+ * <li><code>MENSAJE_EXCEPCION_MARCADOR_VACIO</code> Para mostrar la causa del
+ * error al no ingresar valores numéricos o no numéricos en el campo del marcador.</li>
  * </ul>
  * 
- * @version 20/06/2022
+ * @version 02/06/2023
  * 
  * @author Alicia Adriana Clemente Hernandez
  * @author Luis Fernando de la Cruz López
  * @author Luis Antonio Ruiz Sierra
  * @author Victor Triste Pérez
+ * @author Erik Vasquez Policarpo
  */
 public class ExcepcionCapturarResultados extends Exception {
 	

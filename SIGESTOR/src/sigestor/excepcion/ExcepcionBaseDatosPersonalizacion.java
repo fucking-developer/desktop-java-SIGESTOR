@@ -6,20 +6,27 @@ package sigestor.excepcion;
  * Las características de la clase
  * <code>ExcepcionBaseDatosPersonalizacion</code> son:
  * <ul>
- * <li><code>MENSAJE_EXCEPCION_INSERTA_PERSONALIZACION</code> para mostrar la
+ * <li><code>MENSAJE_EXCEPCION_INSERTA_PERSONALIZACION</code> Para mostrar la
  * causa del error al no poder guardar los datos de personalización en la base
  * de datos.</li>
- * <li><code>MENSAJE_EXCEPCION_ACTUALIZA_PERSONALIZACION</code> para mostrar la
+ * <li><code>MENSAJE_EXCEPCION_CONSULTA_PERSONALIZACION</code> Para mostrar la
+ * causa del error al no poder consultar los datos de personalización en la base
+ * de datos.</li>
+ * <li><code>MENSAJE_EXCEPCION_ACTUALIZA_PERSONALIZACION</code> Para mostrar la
  * causa del error al no poder actualizar los datos de personalización en la
  * base de datos.</li>
- * <li><code>MENSAJE_EXCEPCION_SOLUCION</code> para mostrar la solución del
+ * <li><code>MENSAJE_EXCEPCION_OBTENER_PERSONALIZACION</code> Para mostrar la
+ * causa del error al no poder obtener los datos de personalización en la base
+ * de datos.</li>
+ * <li><code>MENSAJE_EXCEPCION_SOLUCION</code> Para mostrar la solución del
  * error presentado.</li>
  * </ul>
  * 
- * @version 05/06/2022
+ * @version 02/06/2023
  * 
  * @author Beatriz Andrea Jiménez Ríos
  * @author Victor Triste Pérez
+ * @author Erik Vasquez Policarpo
  */
 public class ExcepcionBaseDatosPersonalizacion extends Exception {
 
@@ -44,7 +51,7 @@ public class ExcepcionBaseDatosPersonalizacion extends Exception {
 	 */
 	public static final String MENSAJE_EXCEPCION_ACTUALIZA_PERSONALIZACION = "No se pudieron modificar los datos de personalización";
 	/**
-	 * Primera parte del mensaje que indica que no ha sido posible actualizar los
+	 * Primera parte del mensaje que indica que no ha sido posible obtener los
 	 * datos de personalización en la base de datos.
 	 */
 	public static final String MENSAJE_EXCEPCION_OBTENER_PERSONALIZACION = "No se pudieron obtener los datos de personalización";

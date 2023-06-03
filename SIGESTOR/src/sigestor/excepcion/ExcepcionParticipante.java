@@ -7,10 +7,13 @@ package sigestor.excepcion;
  * <ul>
  * <li><code>MENSAJE_EXCEPCION_NOMBRE_VACIO</code> Para informar que el nombre
  * del participante se encuentra vacío.</li>
+ * <li><code>MENSAJE_LISTA_PARTICIPANTE_INCOMPLETO</code> Para informar que la lista de
+ *  participante se encuentra vacío.</li>
  * </ul>
  * 
- * @version 23/03/2022
+ * @version 02/06/2023
  * 
+ * @author Hernan Sesai Lopez Aragon
  * @author Ricky Didier Peralta Reyes
  * @author Uriel Romeo Cruz Cortes
  * @author Jennifer Cortés Pérez
@@ -25,13 +28,13 @@ public class ExcepcionParticipante extends Exception {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Mensaje 2.1 del documento de mensajes del sistema.
+	 * Mensaje 2.1 referente al documento de mensajes del sistema.
 	 */
 	public static final String MENSAJE_EXCEPCION_NOMBRE_VACIO = "El campo 'Nombre del participante' no puede estar vacío.\n"
 			+ "Ingrese un nombre para el participante.\n" + "Ejemplo: \n1.- Cortés Pedro \n" + "2.- Venenosos";
 
 	/**
-	 * Mensaje 2.4.9 del documento de mensajes del sistema.
+	 * Mensaje 2.4.9 referente al documento de mensajes del sistema.
 	 */
 	public static final String MENSAJE_EXCEPCION_LISTA_PARTICIPANTE_INCOMPLETOS = "Verifique que existan al menos dos participantes para iniciar el torneo.";
 

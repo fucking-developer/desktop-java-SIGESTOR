@@ -5,23 +5,26 @@ package sigestor.excepcion;
  * <p>
  * Las características de la clase <code>ExcepcionBaseDatosEncuentro</code> son:
  * <ul>
- * <li><code>MENSAJE_EXCEPCION_INSERTA_ENCUENTRO</code> para mostrar la causa
+ * <li><code>MENSAJE_EXCEPCION_INSERTA_ENCUENTRO</code> Para mostrar la causa
  * del error al no poder insertar el encuentro en la base de datos.</li>
- * <li><code>MENSAJE_EXCEPCION_ACTUALIZA_ENCUENTRO</code> para mostrar la causa
+ * <li><code>MENSAJE_EXCEPCION_ACTUALIZA_ENCUENTRO</code> Para mostrar la causa
  * del error al no poder actualizar el encuentro en la base de datos.</li>
- * <li><code>MENSAJE_EXCEPCION_ELIMINA_ENCUENTRO</code> para mostrar la causa
+ * <li><code>MENSAJE_EXCEPCION_ELIMINA_ENCUENTRO</code> Para mostrar la causa
  * del error al no poder eliminar el encuentro en la base de datos.</li>
- * <li><code>MENSAJE_EXCEPCION_OBTIENE_ENCUENTRO</code> para mostrar la causa
+ * <li><code>MENSAJE_EXCEPCION_ELIMINA_ENCUENTROS</code> Para mostrar la causa
+ * del error al no poder eliminar los encuentros en la base de datos.</li>
+ * <li><code>MENSAJE_EXCEPCION_OBTIENE_ENCUENTRO</code> Para mostrar la causa
  * del error al no poder obtener el encuentro en la base de datos.</li>
- * <li><code>MENSAJE_EXCEPCION_SOLUCION</code> para mostrar la solución del
+ * <li><code>MENSAJE_EXCEPCION_SOLUCION</code> Para mostrar la solución del
  * error presentado.</li>
  * </ul>
  * 
- * @version 27/03/2023
+ * @version 02/06/2023
  * 
  * @author Beatriz Andrea Jiménez Ríos
  * @author Victor Triste Pérez
  * @author Eder Euclides Dionisio Diaz
+ * @author Erik Vasquez Policarpo
  */
 public class ExcepcionBaseDatosEncuentro extends Exception {
 
