@@ -44,7 +44,7 @@ import java.util.ArrayList;
  * <li><code>serialVersionUID</code> Para el número de versión de la clase.</li>
  * </ul>
  * 
- * @version 11/04/2023
+ * @version 02/06/2023
  * 
  * @author Jonathan Eduardo Ibarra Martinez
  * @author Jennifer Cortés Pérez

@@ -102,7 +102,7 @@ import sigestor.excepcion.ExcepcionCapturarResultados;
  * flechas de los encuentros.</li>
  * </ul>
  * 
- * @version 28/03/2023
+ * @version 02/06/2023
  * 
  * @author Jonathan Eduardo Ibarra Martínez
  * @author Alicia Adriana Clemente Hernandez
@@ -301,8 +301,9 @@ public class DialogoCapturarResultados extends JDialog {
 	/**
 	 * Constructor en el que se inicializa el diálogo. .
 	 * 
-	 * @param principal Recibe un objeto de tipo ventanaPrincipal el cual contiene
-	 *                  el objeto de tipo torneo.
+	 * @param principal
+	 *            Recibe un objeto de tipo ventanaPrincipal el cual contiene el
+	 *            objeto de tipo torneo.
 	 */
 	public DialogoCapturarResultados(VentanaPrincipal principal) {
 		super(principal, "Capturar resultados");
@@ -945,7 +946,8 @@ public class DialogoCapturarResultados extends JDialog {
 	/**
 	 * Obtiene toda la información almacena en un ciclo.
 	 * 
-	 * @param listaEncuentros Recibe la lista de los encuentros de un ciclo.
+	 * @param listaEncuentros
+	 *            Recibe la lista de los encuentros de un ciclo.
 	 */
 	private void obtenerResultadosCiclo(ArrayList<Encuentro> listaEncuentros) {
 		for (int i = 0; i < listaEncuentros.size(); i++) {
@@ -1010,7 +1012,8 @@ public class DialogoCapturarResultados extends JDialog {
 	/**
 	 * Desactiva las columnas de la tabla.
 	 * 
-	 * @param i Posicion de la fila de la tabla.
+	 * @param i
+	 *            Posicion de la fila de la tabla.
 	 */
 	private void desactivarColumnasTabla(int i) {
 		etiquetaNumeroFinal[i].setText("");
@@ -1032,7 +1035,8 @@ public class DialogoCapturarResultados extends JDialog {
 	/**
 	 * Obtiene al participante registrado en el torneo.
 	 * 
-	 * @param numeroParticipante Identificador unico del participante.
+	 * @param numeroParticipante
+	 *            Identificador unico del participante.
 	 * @return Retorna al participante.
 	 */
 	private Participante obtenerParticipante(int numeroParticipante) {
@@ -1050,8 +1054,9 @@ public class DialogoCapturarResultados extends JDialog {
 	 * Permite obtener los datos generales del torneo y mostrarlos en la parte
 	 * superior de la pantalla en su respectivo componente.
 	 * 
-	 * @param torneo Recibe el objeto <code>Torneo</code> con la información del
-	 *               torneo.
+	 * @param torneo
+	 *            Recibe el objeto <code>Torneo</code> con la información del
+	 *            torneo.
 	 */
 	private void mostrarDatosGenerales(Torneo torneo) {
 		DateFormat f = DateFormat.getDateInstance(DateFormat.FULL);
@@ -1148,8 +1153,10 @@ public class DialogoCapturarResultados extends JDialog {
 	 * Permite mostrar mensajes al usuario al presionar el botón
 	 * <code>Cancelar ciclo</code> advirtiendo lo que sucederá al decidir cancelar
 	 * el ciclo del torneo.
-	 * @throws ExcepcionBaseDatosParticipante 
-	 * @throws ExcepcionBaseDatos 
+	 * 
+	 * @throws ExcepcionBaseDatosParticipante
+	 *             Verifica si no
+	 * @throws ExcepcionBaseDatos
 	 */
 	private void accionCancelarCiclo() throws ExcepcionBaseDatos, ExcepcionBaseDatosParticipante {
 		Object[] opciones = { "Sí", "No" };
@@ -1260,7 +1267,11 @@ public class DialogoCapturarResultados extends JDialog {
 			JOptionPane.showMessageDialog(null, e.getMessage(), "Capturar resultados", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	
+
+	/**
+	 * Permite limpiar el contenido de la tabla de los participantes
+	 */
+
 	private void limpiarTabla() {
 		Ciclo ciclo = null;
 		if (this.torneo.getTipoTorneo().contains("Suizo")) {
@@ -1279,10 +1290,16 @@ public class DialogoCapturarResultados extends JDialog {
 	}
 
 	/**
+	 * 
 	 * Elimina el ciclo y los encuentros que están en él, tambien actualiza el
 	 * marcador y el puntaje acumulado de los participantes.
-	 * @throws ExcepcionBaseDatosParticipante 
-	 * @throws ExcepcionBaseDatos 
+	 * 
+	 * @throws ExcepcionBaseDatosParticipante
+	 *             Lanza la excepción sí ocurre un error al momento de cargar los
+	 *             datos de la base de datos de los participantes
+	 * @throws ExcepcionBaseDatos
+	 *             Lanza la excepción sí ocurre un error al momento de eliminar los
+	 *             datos.
 	 */
 	private void eliminarCiclo() throws ExcepcionBaseDatos, ExcepcionBaseDatosParticipante {
 		BaseDatosEncuentro bde = new BaseDatosEncuentro(ventanaPrincipal.getTorneoActual().getNombreArchivo());
@@ -1370,8 +1387,13 @@ public class DialogoCapturarResultados extends JDialog {
 	/**
 	 * Actualiza los resultados de los participantes en
 	 * <code>BaseDatosParticipante</code>.
-	 * @throws ExcepcionBaseDatosParticipante 
-	 * @throws ExcepcionBaseDatos 
+	 * 
+	 * @throws ExcepcionBaseDatosParticipante
+	 *             Lanza la excepción sí ocurre un error al momento de cargar los
+	 *             datos de la base de datos de los participantes
+	 * @throws ExcepcionBaseDatos
+	 *             Lanza la excepción sí ocurre un error al momento de eliminar los
+	 *             datos.
 	 */
 	private void actualizarParticipantes() throws ExcepcionBaseDatos, ExcepcionBaseDatosParticipante {
 
@@ -1379,11 +1401,11 @@ public class DialogoCapturarResultados extends JDialog {
 		Ciclo ciclo = torneo.getAlgoritmoTorneo().getCiclos().get(torneo.getCicloActual() - 1);
 		Collections.sort(this.participantes);
 		for (Participante p : participantes) {
-				if (p.getNombreParticipante()
-						.compareToIgnoreCase(personalizacion.getNombreParticipanteSinEncuentro()) == 0) {
-					break;
-				}
-				bdp.actualizarResultadoParticipante(p, ciclo);
+			if (p.getNombreParticipante()
+					.compareToIgnoreCase(personalizacion.getNombreParticipanteSinEncuentro()) == 0) {
+				break;
+			}
+			bdp.actualizarResultadoParticipante(p, ciclo);
 		}
 	}
 
@@ -1392,6 +1414,8 @@ public class DialogoCapturarResultados extends JDialog {
 	 * 
 	 * @throws ExcepcionBaseDatosEncuentro
 	 * @throws ExcepcionBaseDatos
+	 *             Lanza la excepción sí ocurre un error al momento de eliminar los
+	 *             datos.
 	 * @throws ExcepcionCapturarResultados
 	 * 
 	 */
@@ -1428,7 +1452,7 @@ public class DialogoCapturarResultados extends JDialog {
 				sumarRestarPuntajeAcumuladoParticipante(encuentros.get(i), (-1) * personalizacion.getPuntajeGanar(),
 						(-1) * personalizacion.getPuntajePerder(), (-1) * personalizacion.getPuntajeEmpatar());
 				if (validacionMarcadores) {
-					
+
 					encuentros.get(i).setMarcadorParticipanteInicial(campoMarcadorInicial[i].getText());
 					encuentros.get(i).setMarcadorParticipanteFinal(campoMarcadorFinal[i].getText());
 					sumarRestarMarcadorParticipante(encuentros.get(i),
@@ -1476,12 +1500,13 @@ public class DialogoCapturarResultados extends JDialog {
 	 * Actualiza el marcador a favor y el marcador en contra de los participantes de
 	 * un encuentro.
 	 * 
-	 * @param encuentro                   Recible el objeto <code>Encuentro</code>
-	 *                                    que contiene los datos un encuentro.
-	 * @param marcadorParticipanteInicial Recibe el marcador del participante
-	 *                                    inicial.
-	 * @param marcadorParticipanteFinal   Recibe el marcador obtenido del
-	 *                                    participante final.
+	 * @param encuentro
+	 *            Recible el objeto <code>Encuentro</code> que contiene los datos un
+	 *            encuentro.
+	 * @param marcadorParticipanteInicial
+	 *            Recibe el marcador del participante inicial.
+	 * @param marcadorParticipanteFinal
+	 *            Recibe el marcador obtenido del participante final.
 	 */
 	private void sumarRestarMarcadorParticipante(Encuentro encuentro, int marcadorParticipanteInicial,
 			int marcadorParticipanteFinal) {
@@ -1502,11 +1527,15 @@ public class DialogoCapturarResultados extends JDialog {
 	/**
 	 * Actualiza el puntaje acumulado del participante .
 	 * 
-	 * @param encuentro      Recible el objeto <code>Encuentro</code> que contiene
-	 *                       los datos del encuentro.
-	 * @param puntajeGanar   Recibe el valor del puntaje ganador.
-	 * @param puntajePerder  Recibe el valor del puntaje perdedor.
-	 * @param puntajeEmpatar Recibe el valor del puntaje empate.
+	 * @param encuentro
+	 *            Recible el objeto <code>Encuentro</code> que contiene los datos
+	 *            del encuentro.
+	 * @param puntajeGanar
+	 *            Recibe el valor del puntaje ganador.
+	 * @param puntajePerder
+	 *            Recibe el valor del puntaje perdedor.
+	 * @param puntajeEmpatar
+	 *            Recibe el valor del puntaje empate.
 	 */
 	private void sumarRestarPuntajeAcumuladoParticipante(Encuentro encuentro, float puntajeGanar, float puntajePerder,
 			float puntajeEmpatar) {

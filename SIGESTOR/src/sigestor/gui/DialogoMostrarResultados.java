@@ -84,7 +84,7 @@ import java.util.Date;
  * flechas de los encuentros.</li>
  * </ul>
  * 
- * @version 10/04/2023
+ * @version 02/06/2023
  * 
  * @author Jonathan Eduardo Ibarra Martínez
  * @author Alicia Adriana Clemente Hernandez
