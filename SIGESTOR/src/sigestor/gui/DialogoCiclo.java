@@ -985,8 +985,8 @@ public class DialogoCiclo extends JDialog {
 				this.torneo.getAlgoritmoTorneo().actualizarCiclo(this.torneo.getNombreArchivo());
 				this.setCicloSeleccionado(this.torneo.getCicloActual() + 1);
 				JOptionPane.showMessageDialog(null,
-						"El(la) " + torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MAYUSCULA_SINGULAR)
-								+ " se ha realizado exitosamente.",
+						"Se ha pasado a la siguiente " + torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MAYUSCULA_SINGULAR)
+								+ ".",
 						"Encuentros", JOptionPane.INFORMATION_MESSAGE);
 			}
 		}

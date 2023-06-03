@@ -138,7 +138,7 @@ public class ExcepcionBaseDatosTorneo extends Exception {
 	 * Primera parte del mensaje que indica que no ha sido posible consultar los
 	 * datos del torneo en la base de datos.
 	 */
-	public static final String MENSAJE_EXCEPCION_CONSULTA_TORNEO = "No se pudo consultar los datos del torneo ";
+	public static final String MENSAJE_EXCEPCION_CONSULTA_TORNEO = "El archivo seleccionado no pertenece al sistema";
 
 	/**
 	 * Primera parte del mensaje que indica que no ha sido posible obtener el número
@@ -162,8 +162,9 @@ public class ExcepcionBaseDatosTorneo extends Exception {
 	/**
 	 * Mensaje que indica la solución del error presentado.
 	 */
-	public static final String MENSAJE_EXCEPCION_SOLUCION = ".\nIntente de nuevo, si el error persiste contacte con soporte técnico.";
+	public static final String MENSAJE_EXCEPCION_SOLUCION = ".\nIntente seleccionando otro archivo, si el error persiste contacte con soporte técnico.";
 
+	
 	/**
 	 * Permite mostrar un mensaje de acuerdo a las constantes declaradas en esta
 	 * clase.
