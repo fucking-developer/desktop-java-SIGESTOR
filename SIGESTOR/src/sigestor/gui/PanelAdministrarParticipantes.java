@@ -614,6 +614,7 @@ public class PanelAdministrarParticipantes extends JPanel {
 						model.addElement(participante.toString());
 						listaDeParticipantes.add(participante);	
 						listaParticipantes.setPreferredSize(new Dimension(50, listaDeParticipantes.size()*18));
+						
 					}
 				} catch (ExcepcionUtilerias e) {
 					JOptionPane.showMessageDialog(null, e.getMessage(), "Error al abrir el archivo",
