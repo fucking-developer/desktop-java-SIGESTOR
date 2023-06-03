@@ -13,7 +13,7 @@ package sigestor.excepcion;
  * fecha inicial del torneo no concuerda con la fecha final del torneo.</li>
  * </ul>
  * 
- * @version 23/03/2022
+ * @version 02/06/2023
  * 
  * @author Ricky Didier Peralta Reyes
  * @author Uriel Romeo Cruz Cortes
@@ -29,20 +29,20 @@ public class ExcepcionTorneo extends Exception {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Mensaje 2.2.1 del documento de mensajes del sistema.
+	 * Mensaje 2.2.1 referente al documento de mensajes del sistema.
 	 */
 	public static final String MENSAJE_EXCEPCION_NOMBRE_VACIO = "El campo 'Nombre del torneo' no puede estar vacío.\n"
 			+ "Ingrese un nombre para el torneo.";
 
 	/**
-	 * Mensaje 2.2.2 del documento de mensajes del sistema.
+	 * Mensaje 2.2.2 referente al documento de mensajes del sistema.
 	 */
 	public static final String MENSAJE_EXCEPCION_ORGANIZADOR_VACIO = 
 			"El campo 'Organizador del torneo' no puede estar vacío.\n"
 			+ "Ingrese el nombre de la persona o grupo que organiza el torneo.";
 
 	/**
-	 * Mensaje 2.2.3 del documento de mensajes del sistema.
+	 * Mensaje 2.2.3 referente al documento de mensajes del sistema.
 	 */
 	public static final String MENSAJE_EXCEPCION_FECHAS_INCOHERENTES = 
 			"La fecha inicial del torneo no concuerda con la fecha final del torneo.\n"
