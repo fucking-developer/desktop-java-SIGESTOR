@@ -65,7 +65,7 @@ import sigestor.utilerias.UtileriasListaParticipantes;
  * <code>VentanaPrincipal</code>.</li>
  * </ul>
  * 
- * @version 02/06/2023
+ * @version articipante 
  * 
  * @author Ricky Didier Peralta Reyes
  * @author Uriel Romeo Cruz Cortes
@@ -614,16 +614,11 @@ public class PanelAdministrarParticipantes extends JPanel {
 					ArrayList<Participante> participantes = UtileriasListaParticipantes
 							.leerListaParticipantes(archivo.getAbsolutePath());
 
-					for (Participante p : participantes) {
-						Participante participante = new Participante((model.size() + 1), p.getNombreParticipante(),
-								p.getPuntajeParticipante());
-						model.addElement(participante.toString());
-						listaDeParticipantes.add(participante);
-						listaParticipantes.setPreferredSize(new Dimension(50, listaDeParticipantes.size() * 18));
+
 
 						if (participantes.size() > 0) {
 							for (Participante p : participantes) {
-								Participante participante = new Participante((model.size() + 1),
+								Participante participante= new Participante((model.size() + 1),
 										p.getNombreParticipante(), p.getPuntajeParticipante());
 								model.addElement(participante.toString());
 								listaDeParticipantes.add(participante);
