@@ -15,8 +15,9 @@ package sigestor.excepcion;
  * archivo CSV no cumple el formato.</li>
  * </ul>
  * 
- * @version 24/03/2023
+ * @version 02/06/2023
  * 
+ * @author Hernan Sesai Lopez Aragon
  * @author Jonathan Eduardo Ibarra Martínez
  * @author Alicia Adriana Clemente Hernandez
  * @author Luis Fernando de la Cruz López
@@ -33,7 +34,7 @@ public class ExcepcionUtilerias extends Exception {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Mensaje 6.2 del documento de mensajes del sistema.
+	 * Mensaje 6.2 referente al documento de mensajes del sistema.
 	 */
 	public static final String MENSAJE_EXCEPCION_GENERAR_ARCHIVO_CSV = "El sistema no pudo generar el archivo CSV "
 			+ "\n debido a un error de escritura de datos.";

@@ -10,7 +10,7 @@ package sigestor.excepcion;
  * los resultados de los ciclos del torneo.</li>
  * </ul>
  * 
- * @version 20/06/2022
+ * @version 02/06/2023
  * 
  * @author Jonathan Eduardo Ibarra Martínez
  * @author Hernán Sesaí Lopéz Aragón
@@ -24,7 +24,7 @@ public class ExcepcionResultadosFinales extends Exception {
 	 */
 	private static final long serialVersionUID = 1L;
 	/**
-	 * Mensaje 6.1 del documento de mensajes del sistema.
+	 * Mensaje 6.1 referente al documento de mensajes del sistema.
 	 */
 	public static final String MENSAJE_EXCEPCION_RESULTADOS_FINALES_INCOMPLETOS = "No se pueden mostrar los resultados finales"
 			+ "\nya que no se ha terminado de capturar ";
