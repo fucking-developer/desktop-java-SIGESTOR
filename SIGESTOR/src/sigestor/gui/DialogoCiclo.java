@@ -926,13 +926,9 @@ public class DialogoCiclo extends JDialog {
 				} catch (ExcepcionBaseDatosCiclo e) {
 					JOptionPane.showMessageDialog(null, e.getMessage(), "Ciclos", JOptionPane.ERROR_MESSAGE);
 				}
-				/*JOptionPane.showMessageDialog(null,
+				JOptionPane.showMessageDialog(null,
 						"El(la) " + torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MAYUSCULA_SINGULAR)
 								+ " se ha realizado exitosamente.",
-						"Encuentros", JOptionPane.INFORMATION_MESSAGE);*/
-				JOptionPane.showMessageDialog(null,
-						torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MAYUSCULA_SINGULAR)
-								+ " " + torneo.getCicloActual() + " se ha realizado exitosamente.",
 						"Encuentros", JOptionPane.INFORMATION_MESSAGE);
 			} else {
 				JOptionPane.showMessageDialog(null,
@@ -963,13 +959,9 @@ public class DialogoCiclo extends JDialog {
 				} catch (ExcepcionCapturarResultados e) {
 					JOptionPane.showMessageDialog(null, e.getMessage(), "Ciclos", JOptionPane.ERROR_MESSAGE);
 				}
-				/*JOptionPane.showMessageDialog(null,
+				JOptionPane.showMessageDialog(null,
 						"El(la) " + torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MAYUSCULA_SINGULAR)
 								+ " se ha realizado exitosamente.",
-						"Encuentros", JOptionPane.INFORMATION_MESSAGE);*/
-				JOptionPane.showMessageDialog(null,
-						torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MAYUSCULA_SINGULAR)
-								+ " " + torneo.getCicloActual() + " se ha realizado exitosamente.",
 						"Encuentros", JOptionPane.INFORMATION_MESSAGE);
 			} else {
 				JOptionPane.showMessageDialog(null,
