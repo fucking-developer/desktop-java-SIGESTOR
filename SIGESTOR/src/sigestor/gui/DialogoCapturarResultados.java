@@ -1170,23 +1170,46 @@ public class DialogoCapturarResultados extends JDialog {
 						.substring(6),
 				JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[1]);
 		if (respuesta1 == JOptionPane.YES_OPTION) {
-			int respuesta2 = JOptionPane.showOptionDialog(null,
-					"Si se cancela se perderán todos los resultados \n incluyendo "
-							+ torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MINUSCULA_SINGULAR) + "."
-							+ "\n ¿Está realmente seguro de cancelar "
-							+ torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MINUSCULA_SINGULAR) + "?",
-					"Cancelar" + torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MINUSCULA_SINGULAR)
-							.substring(6),
-					JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, opciones, opciones[1]);
-			if (respuesta2 == JOptionPane.YES_OPTION) {
-				JOptionPane.showMessageDialog(null,
-						"" + "El(la)"
-								+ torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MINUSCULA_SINGULAR)
-										.substring(6)
-								+ " se ha cancelado.",
+			int respuesta2 = JOptionPane.NO_OPTION;
+			if(!ventanaPrincipal.getTorneoActual().getTipoTorneo().equals("Round Robin")) {
+				respuesta2= JOptionPane.showOptionDialog(null,
+						"Si se cancela se perderán todos los resultados \n incluyendo "
+								+ torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MINUSCULA_SINGULAR) + "."
+								+ "\n ¿Está realmente seguro de cancelar "
+								+ torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MINUSCULA_SINGULAR) + "?",
 						"Cancelar" + torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MINUSCULA_SINGULAR)
 								.substring(6),
-						JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, opciones, opciones[1]);
+			}else {
+				respuesta2= JOptionPane.showOptionDialog(null,
+						"Si se cancela "
+								+ torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MINUSCULA_SINGULAR) + " actual se perderán todos los resultados."
+								+ "\n ¿Está realmente seguro de cancelar "
+								+ torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MINUSCULA_SINGULAR) + "?",
+						"Cancelar" + torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MINUSCULA_SINGULAR)
+								.substring(6),
+						JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, opciones, opciones[1]);
+			}
+			
+			if (respuesta2 == JOptionPane.YES_OPTION) {
+				
+				if(!ventanaPrincipal.getTorneoActual().getTipoTorneo().equals("Round Robin")) {
+					JOptionPane.showMessageDialog(null,
+							"" + "El(la)"
+									+ torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MINUSCULA_SINGULAR)
+											.substring(6)
+									+ " se ha cancelado.",
+							"Cancelar" + torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MINUSCULA_SINGULAR)
+									.substring(6),
+							JOptionPane.INFORMATION_MESSAGE);
+				}else {
+					JOptionPane.showMessageDialog(null,
+							"Se ha vuelto a el(la)"+ torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MINUSCULA_SINGULAR).substring(6)+ " anterior.",
+							"Cancelar" + torneo.getDatosPersonalizacion().getNombreCiclo(Personalizacion.MINUSCULA_SINGULAR)
+									.substring(6),
+							JOptionPane.INFORMATION_MESSAGE);
+				}
+				
 				eliminarCiclo();
 			}
 		}

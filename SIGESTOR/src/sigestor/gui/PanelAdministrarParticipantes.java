@@ -65,7 +65,7 @@ import sigestor.utilerias.UtileriasListaParticipantes;
  * <code>VentanaPrincipal</code>.</li>
  * </ul>
  * 
- * @version articipante 
+ * @version articipante
  * 
  * @author Ricky Didier Peralta Reyes
  * @author Uriel Romeo Cruz Cortes
@@ -613,23 +613,22 @@ public class PanelAdministrarParticipantes extends JPanel {
 				try {
 					ArrayList<Participante> participantes = UtileriasListaParticipantes
 							.leerListaParticipantes(archivo.getAbsolutePath());
-
-
-
-						if (participantes.size() > 0) {
-							for (Participante p : participantes) {
-								Participante participante= new Participante((model.size() + 1),
-										p.getNombreParticipante(), p.getPuntajeParticipante());
-								model.addElement(participante.toString());
-								listaDeParticipantes.add(participante);
-								listaParticipantes
-										.setPreferredSize(new Dimension(50, listaDeParticipantes.size() * 18));
-							}
+					if (participantes.size() > 0) {
+						for (Participante p : participantes) {
+							Participante participante = new Participante((model.size() + 1), p.getNombreParticipante(),
+									p.getPuntajeParticipante());
+							model.addElement(participante.toString());
+							listaDeParticipantes.add(participante);
+							listaParticipantes.setPreferredSize(new Dimension(50, listaDeParticipantes.size() * 18));
 							JOptionPane.showMessageDialog(null,
 									"Se han importado " + participantes.size() + " participantes exitosamente",
 									"Importar participantes", JOptionPane.INFORMATION_MESSAGE);
 
-						}	
+						}
+						JOptionPane.showMessageDialog(null,
+								"Se han importado " + participantes.size() + " participantes exitosamente",
+								"Importar participantes", JOptionPane.INFORMATION_MESSAGE);
+					}
 				} catch (ExcepcionUtilerias e) {
 					JOptionPane.showMessageDialog(null, e.getMessage(), "Error al abrir el archivo",
 							JOptionPane.ERROR_MESSAGE);

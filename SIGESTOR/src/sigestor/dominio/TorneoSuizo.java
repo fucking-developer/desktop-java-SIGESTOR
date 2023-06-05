@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
-
 import sigestor.bd.BaseDatosCiclo;
 import sigestor.bd.BaseDatosEncuentro;
 import sigestor.bd.BaseDatosParticipante;
@@ -23,7 +22,7 @@ import sigestor.excepcion.ExcepcionCapturarResultados;
  * desempatar jugadores y realizar reportes. <code>AlgoritmoTorneo</code>.
  * <p>
  * 
- * @version 09/04/2023
+ * @version 02/06/2023
  * 
  * @author Jonathan Eduardo Ibarra Martínez
  * @author Alicia Adriana Clemente Hernandez
@@ -34,8 +33,6 @@ import sigestor.excepcion.ExcepcionCapturarResultados;
  * @see AlgoritmoTorneo
  */
 public class TorneoSuizo extends AlgoritmoTorneo {
-
-	private int posicion = 1;
 
 	/**
 	 * Inicializa las variables con un valor por defecto y asigna a la variable

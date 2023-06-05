@@ -611,6 +611,8 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 			submenuAdministrarTorneo.setEnabled(true);
 			submenuIniciarTorneo.setEnabled(true);
 			submenuCancelarTorneo.setEnabled(false);
+			submenuAbrirTorneo.setEnabled(false);
+			submenuCrearTorneo.setEnabled(false);
 		}
 	}
 

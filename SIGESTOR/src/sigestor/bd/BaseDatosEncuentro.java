@@ -28,6 +28,7 @@ import sigestor.excepcion.ExcepcionCapturarResultados;
  * @author Victor Triste Pérez
  * @author Beatriz Andrea Jiménez Ríos
  * @author Eder Euclides Dionisio Diaz
+ * @author Jennifer Cortés Pérez
  */
 public class BaseDatosEncuentro extends BaseDatos {
 
