@@ -1155,8 +1155,11 @@ public class DialogoCapturarResultados extends JDialog {
 	 * el ciclo del torneo.
 	 * 
 	 * @throws ExcepcionBaseDatosParticipante
-	 *             Verifica si no
+	 *             Lanza la excepción sí ocurre un error al momento de cargar los
+	 *             datos de la base de datos de los participantes
 	 * @throws ExcepcionBaseDatos
+	 *             Lanza la excepción sí ocurre un error al momento de eliminar los
+	 *             datos.
 	 */
 	private void accionCancelarCiclo() throws ExcepcionBaseDatos, ExcepcionBaseDatosParticipante {
 		Object[] opciones = { "Sí", "No" };

@@ -629,8 +629,7 @@ public class PanelAdministrarParticipantes extends JPanel {
 									"Se han importado " + participantes.size() + " participantes exitosamente",
 									"Importar participantes", JOptionPane.INFORMATION_MESSAGE);
 
-						}
-					}
+						}	
 				} catch (ExcepcionUtilerias e) {
 					JOptionPane.showMessageDialog(null, e.getMessage(), "Error al abrir el archivo",
 							JOptionPane.ERROR_MESSAGE);

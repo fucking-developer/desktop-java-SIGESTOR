@@ -48,7 +48,7 @@ import javax.swing.SpinnerNumberModel;
  * <code>VentanaPrincipal</code>.</li>
  * 
  * </ul>
- * @version 25/05/2022
+ * @version 02/06/2023
  * 
  * @author Ricky Didier Peralta Reyes
  * @author Uriel Romeo Cruz Cortes

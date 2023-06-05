@@ -36,7 +36,7 @@ import com.toedter.calendar.JDateChooser;
  * <li><code>principal</code>Para obtener el torneo actual</li>
  * </ul>
  * 
- * @version 24/04/2022
+ * @version 02/06/2023
  * 
  * @author Beatriz Andrea Jimenez Rios
  * @author Uriel Romeo Cruz Cortes

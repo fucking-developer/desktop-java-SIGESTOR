@@ -47,7 +47,7 @@ import sigestor.dominio.CriteriosDesempate;
  * <li><code>principal</code>Para obtener el torneo actual</li>
  * </ul>
  * 
- * @version 17/03/2023
+ * @version 03/02/2023
  * 
  * @author Beatriz Andrea Jimenez Rios
  * @author Uriel Romeo Cruz Cortes
