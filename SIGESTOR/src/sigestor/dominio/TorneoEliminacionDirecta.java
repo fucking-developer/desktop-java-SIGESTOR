@@ -532,11 +532,11 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 		} else {
 			// System.out.println("Dobleeeeee aqui jony");
 			int mitad = (participantesCiclo.size() / 2);
-			int auxUltimaPosicionSegundaVuelta = 0;
+		//	int auxUltimaPosicionSegundaVuelta = 0;
 			ArrayList<Encuentro> encuentros = new ArrayList<Encuentro>();
 			for (int i = 1; i <= mitad; i++) {
 
-				if (participantesCiclo.get(i - 1).getLugarParticipante() == 50) {
+				if (participantesCiclo.get(participantesCiclo.size() - i).getLugarParticipante() == 50) {
 					encuentros.add(new Encuentro(i,
 							participantesCiclo.get(participantesCiclo.size() - i).getNumeroParticipante(),
 							participantesCiclo.get(i - 1).getNumeroParticipante(),
@@ -547,7 +547,7 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 							this.getTorneo().getFechaInicioTorneo()));
 				}
 
-				auxUltimaPosicionSegundaVuelta++;
+			//	auxUltimaPosicionSegundaVuelta++;
 				bde.insertarEncuentro(encuentros.get((i) - 1), ciclo);
 				bdp.actualizarResultadoParticipante(participantesCiclo.get((i - 1)), ciclo);
 				bdp.actualizarResultadoParticipante(participantesCiclo.get(participantesCiclo.size() - i), ciclo);
