@@ -620,9 +620,6 @@ public class PanelAdministrarParticipantes extends JPanel {
 							model.addElement(participante.toString());
 							listaDeParticipantes.add(participante);
 							listaParticipantes.setPreferredSize(new Dimension(50, listaDeParticipantes.size() * 18));
-							JOptionPane.showMessageDialog(null,
-									"Se han importado " + participantes.size() + " participantes exitosamente",
-									"Importar participantes", JOptionPane.INFORMATION_MESSAGE);
 
 						}
 						JOptionPane.showMessageDialog(null,
