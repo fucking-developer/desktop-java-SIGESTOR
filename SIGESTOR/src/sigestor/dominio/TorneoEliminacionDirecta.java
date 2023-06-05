@@ -571,7 +571,7 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 		// System.Out.println("Participante que siguen: " + participantesCiclo);
 
 		if (torneo.getAlgoritmoTorneo().getTipoEliminacion()) {
-			System.out.println("Simpleeeeee");
+			//System.out.println("Simpleeeeee");
 			int mitad = participantesCiclo.size() / 2;
 			ArrayList<Encuentro> encuentros = new ArrayList<Encuentro>();
 			for (int i = 1; i <= mitad; i++) {
@@ -597,7 +597,7 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 			ciclo.setEncuentroParticipantes(encuentros);
 
 		} else {
-			System.out.println("Dobleeeeee aqui jony");
+			//System.out.println("Dobleeeeee aqui jony");
 			int mitad = (participantesCiclo.size() / 2);
 			int auxUltimaPosicionSegundaVuelta = 0;
 			ArrayList<Encuentro> encuentros = new ArrayList<Encuentro>();
