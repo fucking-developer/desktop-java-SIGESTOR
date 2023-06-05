@@ -56,7 +56,7 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 	 */
 	@Override
 	public int calcularNumeroCiclos(int numeroParticipantes) {
-		if (torneo.getAlgoritmoTorneo().getTipoEliminacion()) {
+		if (this.getTipoEliminacion()) {
 			return (int) (Math.ceil(Math.log(numeroParticipantes) / Math.log(2)));
 		} else {
 			return ((int) (Math.ceil(Math.log(numeroParticipantes) / Math.log(2)))) * 2;
