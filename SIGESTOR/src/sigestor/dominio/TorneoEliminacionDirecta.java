@@ -19,14 +19,7 @@ import sigestor.excepcion.ExcepcionCapturarResultados;
  * directa, los encuentros según el sistema Eliminación directa, desempatar
  * jugadores y realizar reportes.
  * 
- * <p>
- * Las caracteristicas de la clase son:
- * <ul>
- * <li><code>esSimple</code> determina si el tipo de torneo es simple o
- * doble.</li>
- * </ul>
- * 
- * @version 02/06/2023
+ * @version 05/06/2023
  * 
  * @author German Luis Cruz Martinez.
  * @author Eder Euclides Dionisio Diaz.
@@ -41,7 +34,8 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 	 * Inicializa las variables con un valor por defecto y asigna a la variable
 	 * <code>torneo</code> el torneo recibido.
 	 * 
-	 * @param torneo Contiene los datos generales del torneo.
+	 * @param torneo
+	 *            Contiene los datos generales del torneo.
 	 */
 	public TorneoEliminacionDirecta(Torneo torneo) {
 		super(torneo);
@@ -51,7 +45,8 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 	 * Obtiene la cantidad máxima de ciclos del torneo según el algoritmo general
 	 * del sistema Eliminación Directa.
 	 * 
-	 * @param numeroParticipantes Cantidad de participantes inscritos en el torneo.
+	 * @param numeroParticipantes
+	 *            Cantidad de participantes inscritos en el torneo.
 	 * @return El número máximo de ciclos que tendrá el torneo.
 	 */
 	@Override
@@ -68,17 +63,21 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 	 * del siguiente ciclo una vez terminado el ciclo anterior. //FIXME agregar
 	 * documentación
 	 * 
-	 * @throws ExcepcionBaseDatos          Lanza la excepción si ocurre un error al
-	 *                                     realizar las conexiones de base de datos.
-	 * @throws ExcepcionBaseDatosEncuentro Lanza la excepción si ocurre un error al
-	 *                                     obtener u agregar los encuentros.
-	 * @throws ExcepcionBaseDatosCiclo     Lanza la excepción si ocurre un error al
-	 *                                     obtener u agregar los ciclo.
+	 * @throws ExcepcionBaseDatos
+	 *             Lanza la excepción si ocurre un error al realizar las conexiones
+	 *             de base de datos.
+	 * @throws ExcepcionBaseDatosEncuentro
+	 *             Lanza la excepción si ocurre un error al obtener u agregar los
+	 *             encuentros.
+	 * @throws ExcepcionBaseDatosCiclo
+	 *             Lanza la excepción si ocurre un error al obtener u agregar los
+	 *             ciclo.
 	 * 
-	 * @throws ExcepcionBaseDatosTorneo    Lanza la excepción si ocurre un error al
-	 *                                     obtener los datos del torneo.
-	 * @throws ExcepcionCapturarResultados Lanza la excepción si ocurre un error al
-	 *                                     capturar los resultados.
+	 * @throws ExcepcionBaseDatosTorneo
+	 *             Lanza la excepción si ocurre un error al obtener los datos del
+	 *             torneo.
+	 * @throws ExcepcionCapturarResultados
+	 *             Lanza la excepción si ocurre un error al capturar los resultados.
 	 */
 	public void realizarEncuentros() throws ExcepcionBaseDatos, ExcepcionBaseDatosEncuentro, ExcepcionBaseDatosCiclo,
 			ExcepcionBaseDatosTorneo, ExcepcionCapturarResultados {
@@ -110,10 +109,13 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 	 * una posición abajo del jugador con quien empate, de lo contrario no realiza
 	 * ningún movimiento.
 	 * 
-	 * @param numeroP1    Primer participante empatado.
-	 * @param numP2       Segundo participante empatado.
-	 * @param numPGanador Participante que obtuvo más puntaje con el criterio de
-	 *                    desempate aplicado.
+	 * @param numeroP1
+	 *            Primer participante empatado.
+	 * @param numP2
+	 *            Segundo participante empatado.
+	 * @param numPGanador
+	 *            Participante que obtuvo más puntaje con el criterio de desempate
+	 *            aplicado.
 	 * @return Lista de participantes ordenada.
 	 */
 	/*
@@ -214,16 +216,18 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 	/**
 	 * Realiza los encuentros del primer ciclo.
 	 * 
-	 * @param ciclo Ciclo a realizar.
-	 * @throws ExcepcionCapturarResultados    Si ocurre un error con el objeto
-	 *                                        <code>Encuentros</code>.
-	 * @throws ExcepcionBaseDatos             Si ocurre un problema con la base de
-	 *                                        datos.
-	 * @throws ExcepcionBaseDatosEncuentro    Si ocurre un problema al insertar en
-	 *                                        la tabla <code>encuentros</code>.
-	 * @throws ExcepcionBaseDatosParticipante Si ocurre un problema al actualizar un
-	 *                                        participante en la tabla
-	 *                                        <code>participantes</code>.
+	 * @param ciclo
+	 *            Ciclo a realizar.
+	 * @throws ExcepcionCapturarResultados
+	 *             Si ocurre un error con el objeto <code>Encuentros</code>.
+	 * @throws ExcepcionBaseDatos
+	 *             Si ocurre un problema con la base de datos.
+	 * @throws ExcepcionBaseDatosEncuentro
+	 *             Si ocurre un problema al insertar en la tabla
+	 *             <code>encuentros</code>.
+	 * @throws ExcepcionBaseDatosParticipante
+	 *             Si ocurre un problema al actualizar un participante en la tabla
+	 *             <code>participantes</code>.
 	 */
 	private void encararParticipantesPrimerCiclo(Ciclo ciclo) throws ExcepcionCapturarResultados, ExcepcionBaseDatos,
 			ExcepcionBaseDatosEncuentro, ExcepcionBaseDatosParticipante {
@@ -316,24 +320,24 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 
 			}
 			auxUltimaPosicion = 0;
-			for (int i = 1; i <= numeroDeEncuentrosDoble; i++) {
-				if (!(descansosSegundaVuelta > 0)) {
-
-					encuentros.add(new Encuentro(auxUltimaPosicionSegundaVuelta + 1,
-							participantes.get((participantes.size() - 1) - auxUltimaPosicion).getNumeroParticipante(),
-							participantes.get(i - 1).getNumeroParticipante(), this.getTorneo().getFechaInicioTorneo()));
-
-					bdp.actualizarResultadoParticipante(participantes.get((i - 1)), ciclo);
-					bdp.actualizarResultadoParticipante(
-							participantes.get((participantes.size() - 1) - auxUltimaPosicion), ciclo);
-					auxUltimaPosicion++;
-					auxUltimaPosicionSegundaVuelta++;
-					bde.insertarEncuentro(encuentros.get((auxUltimaPosicionSegundaVuelta) - 1), ciclo);
-				} else {
-					descansosSegundaVuelta--;
-				}
-
-			}
+			/*
+			 * for (int i = 1; i <= numeroDeEncuentrosDoble; i++) { if
+			 * (!(descansosSegundaVuelta > 0)) {
+			 * 
+			 * encuentros.add(new Encuentro(auxUltimaPosicionSegundaVuelta + 1,
+			 * participantes.get((participantes.size() - 1) -
+			 * auxUltimaPosicion).getNumeroParticipante(), participantes.get(i -
+			 * 1).getNumeroParticipante(), this.getTorneo().getFechaInicioTorneo()));
+			 * 
+			 * bdp.actualizarResultadoParticipante(participantes.get((i - 1)), ciclo);
+			 * bdp.actualizarResultadoParticipante( participantes.get((participantes.size()
+			 * - 1) - auxUltimaPosicion), ciclo); auxUltimaPosicion++;
+			 * auxUltimaPosicionSegundaVuelta++;
+			 * bde.insertarEncuentro(encuentros.get((auxUltimaPosicionSegundaVuelta) - 1),
+			 * ciclo); } else { descansosSegundaVuelta--; }
+			 * 
+			 * }
+			 */
 			ciclo.setEncuentroParticipantes(encuentros);
 		}
 
@@ -342,92 +346,27 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 	/**
 	 * Realiza los encuentros de un ciclo posterior al primer ciclo.
 	 * 
-	 * @param ciclo Recibe el objeto <code>Ciclo</code> para guardar los encuentros
-	 *              a realizar.
-	 * @throws ExcepcionCapturarResultados    Si ocurre un error con el objeto
-	 *                                        <code>Encuentros</code>.
-	 * @throws ExcepcionBaseDatos             Si ocurre un problema con la base de
-	 *                                        datos.
-	 * @throws ExcepcionBaseDatosEncuentro    Si ocurre un problema al insertar en
-	 *                                        la tabla <code>encuentros</code>.
-	 * @throws ExcepcionBaseDatosParticipante Si ocurre un problema al actualizar un
-	 *                                        participante en la tabla
-	 *                                        <code>participantes</code>.
-	 * @throws ExcepcionBaseDatosCiclo        Si ocurre un problema al insertar en
-	 *                                        la tabla <code>ciclo</code>
-	 * @throws ExcepcionBaseDatosTorneo       Si ocurre un problema en la base de
-	 *                                        datos torneo.
+	 * @param ciclo
+	 *            Recibe el objeto <code>Ciclo</code> para guardar los encuentros a
+	 *            realizar.
+	 * @throws ExcepcionCapturarResultados
+	 *             Si ocurre un error con el objeto <code>Encuentros</code>.
+	 * @throws ExcepcionBaseDatos
+	 *             Si ocurre un problema con la base de datos.
+	 * @throws ExcepcionBaseDatosEncuentro
+	 *             Si ocurre un problema al insertar en la tabla
+	 *             <code>encuentros</code>.
+	 * @throws ExcepcionBaseDatosParticipante
+	 *             Si ocurre un problema al actualizar un participante en la tabla
+	 *             <code>participantes</code>.
+	 * @throws ExcepcionBaseDatosCiclo
+	 *             Si ocurre un problema al insertar en la tabla <code>ciclo</code>
+	 * @throws ExcepcionBaseDatosTorneo
+	 *             Si ocurre un problema en la base de datos torneo.
 	 */
 	private void encararParticipantesCiclosPosteriores(Ciclo ciclo)
 			throws ExcepcionCapturarResultados, ExcepcionBaseDatos, ExcepcionBaseDatosEncuentro,
 			ExcepcionBaseDatosParticipante, ExcepcionBaseDatosCiclo, ExcepcionBaseDatosTorneo {
-		/*
-		 * BaseDatosParticipante bdp = new
-		 * BaseDatosParticipante(torneo.getNombreArchivo()); ArrayList<Participante>
-		 * participantes = torneo.getListaParticipantes(); BaseDatosEncuentro bde = new
-		 * BaseDatosEncuentro(torneo.getNombreArchivo()); ArrayList<Encuentro>
-		 * encuentros = bde.obtenerEncuentros(new Ciclo(this.getTorneo(),
-		 * this.getTorneo().getCicloActual() - 1));
-		 * 
-		 * 
-		 * for (Encuentro e : encuentros) { for (Participante p : participantes) { if
-		 * (e.getResultadoEncuentro() == Encuentro.GANADOR_INICIAL) { if
-		 * (p.getNumeroParticipante() == e.getIdParticipanteInicial()) {
-		 * p.setLugarParticipante(1); bdp.actualizarLugarParticipante(p, torneo); } }
-		 * else if (e.getResultadoEncuentro() == Encuentro.GANADOR_FINAL) { if
-		 * (p.getNumeroParticipante() == e.getIdParticipanteFinal()) {
-		 * p.setLugarParticipante(1); bdp.actualizarLugarParticipante(p, torneo); } }
-		 * else if (e.getResultadoEncuentro() == Encuentro.DESCANSO) { if
-		 * ((p.getNumeroParticipante() == e.getIdParticipanteInicial() ||
-		 * p.getNumeroParticipante() == e .getIdParticipanteFinal() &&
-		 * !p.getNombreParticipante().equalsIgnoreCase(
-		 * this.getTorneo().getDatosPersonalizacion().getNombreParticipanteSinEncuentro(
-		 * )))) { p.setLugarParticipante(1); bdp.actualizarLugarParticipante(p, torneo);
-		 * }
-		 * 
-		 * }
-		 * 
-		 * } }
-		 * 
-		 * 
-		 * ArrayList<Participante> participantesLugar = bdp.obtenerParticipanteLugar();
-		 * for(Participante p: participantesLugar) { //System.Out.println(p); }
-		 * 
-		 * for (int i=0; i<participantesLugar.size()/2; i++) { for(int j=0;
-		 * j<participantesLugar.size(); j = j + 2) {
-		 * 
-		 * encuentros.add(new Encuentro(i+1,
-		 * participantesLugar.get(j).getNumeroParticipante(), participantesLugar.get(j +
-		 * 1).getNumeroParticipante(), this.getTorneo().getFechaInicioTorneo()));
-		 * 
-		 * 
-		 * //System.Out.println(i+1 + " -> "+
-		 * participantesLugar.get(j).getNumeroParticipante() + " VS "+
-		 * participantesLugar.get(j + 1).getNumeroParticipante());
-		 * 
-		 * 
-		 * bde.insertarEncuentro(encuentros.get(i+1), ciclo);
-		 * bdp.actualizarResultadoParticipante(participantesLugar.get(j), ciclo);
-		 * bdp.actualizarResultadoParticipante(participantesLugar.get(j + 1), ciclo);
-		 * 
-		 * } }
-		 * 
-		 * ciclo.setEncuentroParticipantes(encuentros);
-		 */
-
-		/*
-		 * int tamaño = bde.obtenerEncuentros(new Ciclo(this.getTorneo(),
-		 * this.getTorneo().getCicloActual() - 1)).size() / 2; int ronda = 1;
-		 * 
-		 * for (int i = 0; i < tamaño; i++) { encuentros.add(new Encuentro(ronda,
-		 * this.getTorneo().getListaParticipantes().get(i).getNumeroParticipante(),
-		 * this.getTorneo().getListaParticipantes().get(i + 1).getNumeroParticipante(),
-		 * this.getTorneo().getFechaInicioTorneo()));
-		 * bde.insertarEncuentro(encuentros.get(ronda - 1), ciclo);
-		 * bdp.actualizarResultadoParticipante(participantes.get(i), ciclo);
-		 * bdp.actualizarResultadoParticipante(participantes.get(i + 1), ciclo);
-		 * ronda++; } ciclo.setEncuentroParticipantes(encuentros);
-		 */
 
 		BaseDatosEncuentro bde = new BaseDatosEncuentro(torneo.getNombreArchivo());
 		BaseDatosParticipante bdp = new BaseDatosParticipante(torneo.getNombreArchivo());
@@ -437,12 +376,6 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 		ArrayList<Participante> participantesCiclo = new ArrayList<Participante>();
 		ArrayList<Encuentro> encuentrosParticipante = bde
 				.obtenerEncuentros(bdc.obtenerCiclos(torneo).get(torneo.getCicloActual() - 2));
-
-		// ArrayList<String> criterios =
-		// torneo.getCriteriosDesempate().getListaCriteriosSeleccionados();
-
-		// ArrayList<String> criterios =
-		// torneo.getCriteriosDesempate().getListaCriteriosSeleccionados();
 
 		// System.Out.println("participantes");
 		Collections.sort(participantes);
@@ -571,7 +504,7 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 		// System.Out.println("Participante que siguen: " + participantesCiclo);
 
 		if (torneo.getAlgoritmoTorneo().getTipoEliminacion()) {
-			//System.out.println("Simpleeeeee");
+			// System.out.println("Simpleeeeee");
 			int mitad = participantesCiclo.size() / 2;
 			ArrayList<Encuentro> encuentros = new ArrayList<Encuentro>();
 			for (int i = 1; i <= mitad; i++) {
@@ -597,30 +530,42 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 			ciclo.setEncuentroParticipantes(encuentros);
 
 		} else {
-			//System.out.println("Dobleeeeee aqui jony");
+			// System.out.println("Dobleeeeee aqui jony");
 			int mitad = (participantesCiclo.size() / 2);
 			int auxUltimaPosicionSegundaVuelta = 0;
 			ArrayList<Encuentro> encuentros = new ArrayList<Encuentro>();
 			for (int i = 1; i <= mitad; i++) {
-				encuentros.add(new Encuentro(i, participantesCiclo.get(i - 1).getNumeroParticipante(),
-						participantesCiclo.get(participantesCiclo.size() - i).getNumeroParticipante(),
-						this.getTorneo().getFechaInicioTorneo()));
+
+				if (participantesCiclo.get(i - 1).getLugarParticipante() == 50) {
+					encuentros.add(new Encuentro(i,
+							participantesCiclo.get(participantesCiclo.size() - i).getNumeroParticipante(),
+							participantesCiclo.get(i - 1).getNumeroParticipante(),
+							this.getTorneo().getFechaInicioTorneo()));
+				} else {
+					encuentros.add(new Encuentro(i, participantesCiclo.get(i - 1).getNumeroParticipante(),
+							participantesCiclo.get(participantesCiclo.size() - i).getNumeroParticipante(),
+							this.getTorneo().getFechaInicioTorneo()));
+				}
+
 				auxUltimaPosicionSegundaVuelta++;
 				bde.insertarEncuentro(encuentros.get((i) - 1), ciclo);
 				bdp.actualizarResultadoParticipante(participantesCiclo.get((i - 1)), ciclo);
 				bdp.actualizarResultadoParticipante(participantesCiclo.get(participantesCiclo.size() - i), ciclo);
 			}
 
-			for (int i = 1; i <= mitad; i++) {
-				encuentros.add(new Encuentro(auxUltimaPosicionSegundaVuelta + 1,
-						participantesCiclo.get(participantesCiclo.size() - i).getNumeroParticipante(),
-						participantesCiclo.get(i - 1).getNumeroParticipante(),
-						this.getTorneo().getFechaInicioTorneo()));
-				auxUltimaPosicionSegundaVuelta++;
-				bde.insertarEncuentro(encuentros.get((auxUltimaPosicionSegundaVuelta - 1)), ciclo);
-				bdp.actualizarResultadoParticipante(participantes.get((i - 1)), ciclo);
-				bdp.actualizarResultadoParticipante(participantesCiclo.get(participantesCiclo.size() - i), ciclo);
-			}
+			/*
+			 * for (int i = 1; i <= mitad; i++) { encuentros.add(new
+			 * Encuentro(auxUltimaPosicionSegundaVuelta + 1,
+			 * participantesCiclo.get(participantesCiclo.size() -
+			 * i).getNumeroParticipante(), participantesCiclo.get(i -
+			 * 1).getNumeroParticipante(), this.getTorneo().getFechaInicioTorneo()));
+			 * auxUltimaPosicionSegundaVuelta++;
+			 * bde.insertarEncuentro(encuentros.get((auxUltimaPosicionSegundaVuelta - 1)),
+			 * ciclo); bdp.actualizarResultadoParticipante(participantes.get((i - 1)),
+			 * ciclo);
+			 * bdp.actualizarResultadoParticipante(participantesCiclo.get(participantesCiclo
+			 * .size() - i), ciclo); }
+			 */
 			ciclo.setEncuentroParticipantes(encuentros);
 		}
 	}
@@ -628,7 +573,8 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 	/**
 	 * Calcula por medio de recursividad si el número dado es potencia de dos
 	 * 
-	 * @param numero numero a evaluar si es potencia de dos.
+	 * @param numero
+	 *            numero a evaluar si es potencia de dos.
 	 * 
 	 * @return True si el número es potencia de dos, False si no es potencia de dos
 	 * 
@@ -666,15 +612,17 @@ public class TorneoEliminacionDirecta extends AlgoritmoTorneo {
 	 * Inicia un torneo Eliminación Directa e inserta el numero de ciclos en la
 	 * tabla <code>suizo</code>.
 	 * 
-	 * @throws ExcepcionBaseDatos          Si ocurre un problema con la base de
-	 *                                     datos.
-	 * @throws ExcepcionBaseDatosEncuentro Si ocurre un problema al insertar en la
-	 *                                     tabla <code>encuentros</code>.
-	 * @throws ExcepcionBaseDatosCiclo     Si ocurre un error al insertar en la
-	 *                                     tabla <code>ciclos</code>.
-	 * @throws ExcepcionCapturarResultados si ocurre un error al generar los
-	 *                                     encuentros.
-	 * @throws ExcepcionBaseDatosTorneo    si ocurre un error con el torneo.
+	 * @throws ExcepcionBaseDatos
+	 *             Si ocurre un problema con la base de datos.
+	 * @throws ExcepcionBaseDatosEncuentro
+	 *             Si ocurre un problema al insertar en la tabla
+	 *             <code>encuentros</code>.
+	 * @throws ExcepcionBaseDatosCiclo
+	 *             Si ocurre un error al insertar en la tabla <code>ciclos</code>.
+	 * @throws ExcepcionCapturarResultados
+	 *             si ocurre un error al generar los encuentros.
+	 * @throws ExcepcionBaseDatosTorneo
+	 *             si ocurre un error con el torneo.
 	 */
 	public void iniciarTorneo() throws ExcepcionBaseDatos, ExcepcionBaseDatosEncuentro, ExcepcionBaseDatosCiclo,
 			ExcepcionCapturarResultados, ExcepcionBaseDatosTorneo {

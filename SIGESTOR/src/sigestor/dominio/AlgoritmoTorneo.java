@@ -34,7 +34,7 @@ import sigestor.utilerias.UtileriasReporteResultadosFinales;
  * eligan en la personalización del torneo.</li>
  * </ul>
  * 
- * @version 10/04/2023
+ * @version 05/06/2023
  * 
  * @author Alicia Adriana Clemente Hernandez
  * @author Luis Fernando de la Cruz López
@@ -43,6 +43,7 @@ import sigestor.utilerias.UtileriasReporteResultadosFinales;
  * @author Jonathan Eduardo Ibarra Martinez
  * @author Hernan Sesai Lopez Aragon
  * @author Francisco Samuel Reyes Cortes
+ * @author Eder Euclides Dionisio Diaz
  */
 public abstract class AlgoritmoTorneo {
 
